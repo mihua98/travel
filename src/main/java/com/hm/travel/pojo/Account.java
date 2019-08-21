@@ -12,5 +12,13 @@ public class Account {
 
     private UserInfo userInfo;
 
+    public Account(){
+
+    }
+    public Account(Integer id,String accountNumber,String password){
+        this.id=id;
+        this.accountNumber=accountNumber;
+        this.password=password;
+    }
 
 }
