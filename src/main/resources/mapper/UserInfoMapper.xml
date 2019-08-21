@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hm.travel.mapper.UserInfoMapper">
+    <update id="updateUserInfo" parameterType="com.hm.travel.pojo.UserInfo">
+        update userInfo
+        <set>
+            <if test="userNickName !=null and userNickName != &quot;&quot;">
+                user_nick_name = #{userNickName}
+            </if>
+            <if test="userPhoneNum !=null and userPhoneNum != &quot;&quot;">
+                user_phone_num = #{userPhoneNum}
+            </if>
+            <if test="userName !=null and userName != &quot;&quot;">
+                user_name = #{userName}
+            </if>
+            <if test="userImageName !=null and userImageName != &quot;&quot;">
+                user_image_name = #{userImageName}
+            </if>
+            <if test="userSex !=null and userSex != &quot;&quot;">
+                user_sex = #{userSex}
+            </if>
+            <if test="userAge !=null">
+                user_age = #{userAge}
+            </if>
+            <if test="userEmail !=null and userEmail != &quot;&quot;">
+                user_email = #{userEmail}
+            </if>
+        </set>
+    </update>
+
+    <insert id="addUser" parameterType="com.hm.travel.mapper.UserInfoMapper">
+        insert into userInfo(user_name,user_sex,user_age,user_email,user_nick_name,user_phone_num,user_image_name)
+        values(#{userName},#{userSex},#{userAge},#{userEmail},#{userNickName},#{userPhoneNum},#{userImageName})
+    </insert>
+</mapper>
