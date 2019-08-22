@@ -34,9 +34,10 @@ public class UserController {
     @RequestMapping("/improveUserInfo")
     @ResponseBody
     public String improveUserInfo(UserInfo user,HttpServletRequest request) {
-         userService.addUser(user);
-        UserInfo userInfo = userService.seleceUserByName(user.getUserName());
         Account account = accountService.selectAccountById((int) request.getSession().getAttribute("ACCOUNTID"));
+        user.setUserEmail(account.getEmail());
+        userService.addUser(user);
+        UserInfo userInfo = userService.seleceUserByName(user.getUserName());
        if(null != userInfo){
            account.setUserInfo(userInfo);
            int i = accountService.improveAccount(account);
@@ -52,7 +53,7 @@ public class UserController {
     }
 
     /**
-     * 创建账号
+     * 用户注册账号
      * @param account 表单提交的Account
      * @return 受影响行数
      */
@@ -60,8 +61,9 @@ public class UserController {
     public String CreateAccount(Account account) {
         int i = accountService.addAccount(account);
         if (i > 0) {
-            return "redirect:/login.html";
+            return "redirect:/all-admin-login.html";
         } else {
+            //TODO !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
             return "redirect:/registered.html";
         }
     }
@@ -79,7 +81,7 @@ public class UserController {
         if (null != account1) {
             Integer account1Id = account1.getId();
             request.getSession().setAttribute("ACCOUNTID",account1Id);
-            return "index";
+            return "all-admin-index";
         }else{
             return "redirect:/404.html";
         }
