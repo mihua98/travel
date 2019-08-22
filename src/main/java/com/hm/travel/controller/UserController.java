@@ -8,7 +8,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
@@ -67,7 +66,7 @@ public class UserController {
         System.out.println(userName);
         UserInfo userInfo = userService.seleceUserLikeName(userName);
         map.put("userInfo",userInfo);
-        return "likeSelectUser";
+        return "adminPage/likeSelectUser";
     }
 
     /**
@@ -81,7 +80,7 @@ public class UserController {
 
         UserInfo userInfo = userService.selectUserById(id);
         map.put("userInfo",userInfo);
-        return "improveUserInfo";
+        return "adminPage/improveUserInfo";
     }
 
     /**
@@ -109,7 +108,7 @@ public class UserController {
     public String selectUserByEmail(HttpServletRequest request, Map<String,Object> map){
         UserInfo userInfo = userService.selectUserByEmail((String) request.getSession().getAttribute("EMAIL"));
         map.put("userInfo",userInfo);
-        return "improveUserInfo";
+        return "adminPage/improveUserInfo";
     }
 
     /**
@@ -144,7 +143,7 @@ public class UserController {
         if (null != account1) {
             String email = account1.getEmail();
             request.getSession().setAttribute("EMAIL",email);
-            return "all-admin-index";
+            return "adminPage/all-admin-index";
         }else{
             // TODO: 2019/8/22 404!!!!!!!!!!!!!!!!!!!
             return "redirect:/404.html";

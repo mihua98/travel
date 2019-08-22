@@ -1,0 +1,44 @@
+<html xmlns:th="http://www.thymeleaf.org">
+<div th:fragment="js">
+
+<script th:src="@{/plugins/jQuery/jquery-2.2.3.min.js}"></script><!-- 重要,不可删 -->
+<script th:src="@{/plugins/jQueryUI/jquery-ui.min.js}"></script>
+<script>
+    $.widget.bridge('uibutton', $.ui.button);
+</script>
+<script th:src="@{/plugins/bootstrap/js/bootstrap.min.js}"></script><!-- bootstrap,不可删 -->
+
+<script th:src="@{/plugins/daterangepicker/moment.min.js}"></script><!-- 日期选取插件 -->
+<script th:src="@{/plugins/daterangepicker/daterangepicker.js}"></script>
+<script th:src="@{/plugins/daterangepicker/daterangepicker.zh-CN.js}"></script>
+<script th:src="@{/plugins/datepicker/bootstrap-datepicker.js}"></script>
+<script th:src="@{/plugins/datepicker/locales/bootstrap-datepicker.zh-CN.js}"></script>
+
+<script th:src="@{/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.all.min.js}"></script><!-- 所见即所得编辑器 -->
+<script th:src="@{/plugins/bootstrap-wysihtml5/bootstrap-wysihtml5.zh-CN.js}"></script>
+
+<script th:src="@{/plugins/slimScroll/jquery.slimscroll.min.js}"></script><!--滚动条插件-->
+<script th:src="@{/plugins/iCheck/icheck.min.js}"></script><!-- 单选样式及颜色 -->
+<script th:src="@{/plugins/adminLTE/js/app.min.js}"></script><!-- 重要,不可删 -->
+
+<script th:src="@{/plugins/treeTable/jquery.treetable.js}"></script><!-- 树形表格插件 -->
+<script th:src="@{/plugins/select2/select2.full.min.js}"></script><!-- 下拉框插件 -->
+
+
+<script th:src="@{/plugins/bootstrap-markdown/js/bootstrap-markdown.js}"></script><!-- Markdown编辑器 -->
+<script th:src="@{/plugins/bootstrap-markdown/locale/bootstrap-markdown.zh.js}"></script>
+<script th:src="@{/plugins/bootstrap-markdown/js/markdown.js}"></script>
+<script th:src="@{/plugins/bootstrap-markdown/js/to-markdown.js}"></script>
+
+<script th:src="@{/plugins/ckeditor/ckeditor.js}"></script><!-- 富文本编辑器插件,写游记用 -->
+
+<script th:src="@{/plugins/input-mask/jquery.inputmask.js}"></script><!-- 格式化输入 -->
+<script th:src="@{/plugins/input-mask/jquery.inputmask.date.extensions.js}"></script>
+<script th:src="@{/plugins/input-mask/jquery.inputmask.extensions.js}"></script>
+
+<script th:src="@{/plugins/datatables/jquery.dataTables.min.js}"></script><!-- 数据表格插件 -->
+<script th:src="@{/plugins/datatables/dataTables.bootstrap.min.js}"></script>
+
+<script th:src="@{/plugins/bootstrap-slider/bootstrap-slider.js}"></script><!-- 基于Bootstrap水平滑动插件 -->
+
+</div>
