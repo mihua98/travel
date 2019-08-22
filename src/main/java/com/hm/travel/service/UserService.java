@@ -11,6 +11,16 @@ import java.util.List;
  * @date 2019/8/21 9:13
  */
 public interface UserService {
+
+    UserInfo selectUserByEmail(String email);
+
+    /**
+     * 根据姓名查询用户
+     * @param userName
+     * @return 该用户
+     */
+    UserInfo seleceUserLikeName(String userName);
+
     /**
      * 添加用户
      *
