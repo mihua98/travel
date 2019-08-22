@@ -27,19 +27,28 @@ public class UserController {
 
 
     /**
-     * 注册用户
+     * 完善用户信息
      * @param user 表单提交的User
      * @return 受影响行数
      */
-    @RequestMapping("/registered")
-    public String registeredUser(UserInfo user) {
-        int i = userService.addUser(user);
-        System.out.println(i);
-        if (i > 0) {
-            return "redirect:/createAccount.html";
-        } else {
-            return "redirect:/registered.html";
-        }
+    @RequestMapping("/improveUserInfo")
+    @ResponseBody
+    public String improveUserInfo(UserInfo user,HttpServletRequest request) {
+         userService.addUser(user);
+        UserInfo userInfo = userService.seleceUserByName(user.getUserName());
+        Account account = accountService.selectAccountById((int) request.getSession().getAttribute("ACCOUNTID"));
+       if(null != userInfo){
+           account.setUserInfo(userInfo);
+           int i = accountService.improveAccount(account);
+           if(i>0){
+               return "成功";
+           }else{
+               return "保存至账号信息时失败";
+           }
+       }else{
+           return "没有取到用户信息";
+       }
+
     }
 
     /**
@@ -60,17 +69,16 @@ public class UserController {
     /**
      * 普通用户登录
      * @param account 表单提交的账号信息
-     * @param request request对象,用于获取Session,将登录成功的用户存入Session域中
+     * @param request request对象,用于获取Session,将登录成功的用户账号ID存入Session域中
      * @return 数据库中查询该账号,为null即没查到,反之验证通过
      */
     @RequestMapping("/login")
     public String login(Account account, HttpServletRequest request) {
-        System.out.println(account);
         Account account1 = accountService.selectAccount(account);
         System.out.println("反回对象"+account1);
-        if (null != account) {
-            UserInfo user = userService.selectUserById(account1.getUserInfo().getId());
-            request.getSession().setAttribute("USER",user);
+        if (null != account1) {
+            Integer account1Id = account1.getId();
+            request.getSession().setAttribute("ACCOUNTID",account1Id);
             return "index";
         }else{
             return "redirect:/404.html";

@@ -20,6 +20,12 @@ public interface AccountMapper {
      */
     Account selectAccount(Account account);
 
+    /**
+     * 根据账号ID查询账号信息
+     * @param id
+     * @return
+     */
+    Account selectAccountById(Integer id);
 
     /**
      * 添加用户账号
@@ -33,12 +39,18 @@ public interface AccountMapper {
     /**
      * 用户更改密码
      *
-     * @param password 新密码
+     * @param account 账号
      * @return 受影响行数
      */
-    @Update("update account set password = #{password}")
-    int updateAccount(String password);
+    @Update("update account set password = #{password} where id = #{id}")
+    int updateAccount(Account account);
 
+    /**
+     * 完善账号信息,即更改UserInfoId字段
+     * @param account 账号
+     * @return 受影响行数
+     */
+    int improveAccount(Account account);
     /**
      * 删除账号根据ID
      *

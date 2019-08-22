@@ -24,6 +24,13 @@ public interface UserInfoMapper {
     UserInfo selectUserById(Integer id);
 
     /**
+     * 根据姓名查询用户
+     * @param userName
+     * @return 该用户
+     */
+    @Select("select * from userInfo where user_name = #{userName}")
+    UserInfo seleceUserByName(String userName);
+    /**
      * 查询所有用户
      *
      * @return 用户集合

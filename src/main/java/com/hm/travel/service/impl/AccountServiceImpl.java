@@ -14,6 +14,17 @@ import org.springframework.stereotype.Service;
 public class AccountServiceImpl implements AccountService {
    @Autowired
    private AccountMapper accountMapper;
+
+    @Override
+    public Account selectAccountById(Integer id) {
+        return accountMapper.selectAccountById(id);
+    }
+
+    @Override
+    public int improveAccount(Account account) {
+        return accountMapper.improveAccount(account);
+    }
+
     @Override
     public Account selectAccount(Account account) {
         System.out.println("impl:"+account);
@@ -26,8 +37,8 @@ public class AccountServiceImpl implements AccountService {
     }
 
     @Override
-    public int updateAccount(String password) {
-        return accountMapper.updateAccount(password);
+    public int updateAccount(Account account) {
+        return accountMapper.updateAccount(account);
     }
 
     @Override
