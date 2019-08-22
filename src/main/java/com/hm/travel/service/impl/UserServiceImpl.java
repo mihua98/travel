@@ -24,6 +24,11 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    public UserInfo seleceUserByName(String userName) {
+        return userInfoMapper.seleceUserByName(userName);
+    }
+
+    @Override
     public UserInfo selectUserById(Integer id) {
         return userInfoMapper.selectUserById(id);
     }

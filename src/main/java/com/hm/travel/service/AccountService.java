@@ -8,6 +8,20 @@ import com.hm.travel.pojo.Account;
  * @date 2019/8/21 13:47
  */
 public interface AccountService {
+
+    /**
+     * 根据账号ID查询账号信息
+     * @param id
+     * @return
+     */
+    Account selectAccountById(Integer id);
+
+    /**
+     * 完善账号信息,即更改UserInfoId字段
+     * @param account 账号
+     * @return 受影响行数
+     */
+    int improveAccount(Account account);
     /**
      * * 查询用户账号密码是否正确,
      * @return 返回account不为null即正确
@@ -25,11 +39,11 @@ public interface AccountService {
 
     /**
      * 用户更改密码
-     * @param password      新密码
+     * @param account 账号
      * @return 受影响行数
      */
 
-    int updateAccount(String password);
+    int updateAccount(Account account);
 
     /**
      * 删除账号根据ID

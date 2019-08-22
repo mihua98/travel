@@ -2,6 +2,7 @@ package com.hm.travel.service;
 
 
 import com.hm.travel.pojo.UserInfo;
+import org.apache.ibatis.annotations.Select;
 
 import java.util.List;
 
@@ -18,6 +19,12 @@ public interface UserService {
      */
     int addUser(UserInfo userInfo);
 
+    /**
+     * 根据姓名查询用户
+     * @param userName
+     * @return 该用户
+     */
+    UserInfo seleceUserByName(String userName);
     /**
      * 根据ID查询用户信息
      *
