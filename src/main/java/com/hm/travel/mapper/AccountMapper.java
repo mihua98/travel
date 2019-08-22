@@ -34,7 +34,7 @@ public interface AccountMapper {
      * @return 受影响行数
      */
     @Insert("insert account(account_number,password,email)" +
-             " values(#{accountNumber},#{password}),#{email}")
+             " values(#{accountNumber},#{password},#{email})")
     int addAccount(Account account);
 
     /**

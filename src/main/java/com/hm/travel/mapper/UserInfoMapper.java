@@ -16,7 +16,6 @@ import java.util.List;
 public interface UserInfoMapper {
     /**
      * 根据ID查询用户信息
-     *
      * @param id 用户ID
      * @return 用户
      */
@@ -30,6 +29,17 @@ public interface UserInfoMapper {
      */
     @Select("select * from userInfo where user_name = #{userName}")
     UserInfo seleceUserByName(String userName);
+
+    @Select("select * from userInfo where email = #{email}")
+     UserInfo selectUserByEmail(String email);
+
+    /**
+     * 根据姓名查询用户
+     * @param userName
+     * @return 该用户
+     */
+    @Select("select * from userInfo where user_name like '%#{userName}%'")
+    UserInfo seleceUserLikeName(String userName);
     /**
      * 查询所有用户
      *

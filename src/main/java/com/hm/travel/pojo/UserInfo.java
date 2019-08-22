@@ -18,6 +18,6 @@ public class UserInfo {
 
     private Integer userAge;
 
-    private String userEmail;
+    private String email;
 
     }

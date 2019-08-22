@@ -5,7 +5,8 @@
     <title>createAccount</title>
 </head>
 <body>
-    <form action="/user/improveUserInfo" method="post">
+    <form action="/user/updateUser" method="post">
+        <p>ID:<input type="hidden"  name="id" value="${userInfo.id}"></p>
         <p>姓名:<input type="text" name="userName"></p>
         <p>性别:<input type="text" name="userSex"></p>
         <p>年龄:<input type="text" name="userAge"></p>
