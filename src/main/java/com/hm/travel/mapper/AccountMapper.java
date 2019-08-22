@@ -18,10 +18,8 @@ public interface AccountMapper {
      *
      * @return 返回account不为null即正确
      */
-    @Select("select id,account_number,password,userInfo_id " +
-            "from account where account_number = #{accountNumber} " +
-            "and password = #{password}")
     Account selectAccount(Account account);
+
 
     /**
      * 添加用户账号
