@@ -33,7 +33,7 @@ public interface AccountMapper {
      * @param account
      * @return 受影响行数
      */
-    @Insert("insert account(account_number,password,email)" +
+    @Insert("insert into account(account_number,password,email)" +
              " values(#{accountNumber},#{password},#{email})")
     int addAccount(Account account);
 

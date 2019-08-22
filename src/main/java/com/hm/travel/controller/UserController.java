@@ -8,7 +8,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
@@ -107,7 +106,7 @@ public class UserController {
      */
     @RequestMapping("/UserUpdate")
     public String selectUserByEmail(HttpServletRequest request, Map<String,Object> map){
-        UserInfo userInfo = userService.selectUserByEmail((String) request.getSession().getAttribute("EMAIL"));
+        UserInfo userInfo = userService.selectUserByEmail( ((Account)request.getSession().getAttribute("ACCOUNT")).getEmail());
         map.put("userInfo",userInfo);
         return "improveUserInfo";
     }
@@ -142,8 +141,8 @@ public class UserController {
         Account account1 = accountService.selectAccount(account);
         System.out.println("反回对象"+account1);
         if (null != account1) {
-            String email = account1.getEmail();
-            request.getSession().setAttribute("EMAIL",email);
+
+            request.getSession().setAttribute("ACCOUNT",account1);
             return "all-admin-index";
         }else{
             // TODO: 2019/8/22 404!!!!!!!!!!!!!!!!!!!
