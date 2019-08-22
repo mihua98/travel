@@ -12,5 +12,12 @@ public class Admin {
 
     private AdminInfo adminInfo;
 
+    public Admin() {
+    }
 
+    public Admin(Integer id, String accountNumber, String password) {
+        this.id = id;
+        this.accountNumber = accountNumber;
+        this.password = password;
+    }
 }
