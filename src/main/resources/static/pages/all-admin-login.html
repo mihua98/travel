@@ -28,7 +28,7 @@
     <div class="login-logo">
 
 
-        <b>数据</b>旅游后台管理系统
+        <b>旅游</b>后台管理系统
 
 
     </div>
@@ -36,13 +36,13 @@
     <div class="login-box-body">
         <p class="login-box-msg">登录系统</p>
 
-        <form action="#" method="get">
+        <form action="/user/login" method="post">
             <div class="form-group has-feedback">
-                <input type="email" class="form-control" placeholder="Email">
+                <input type="text" class="form-control" name="accountNumber" placeholder="用户名">
                 <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
             </div>
             <div class="form-group has-feedback">
-                <input type="password" class="form-control" placeholder="密码">
+                <input type="password" class="form-control" name="password" placeholder="密码">
                 <span class="glyphicon glyphicon-lock form-control-feedback"></span>
             </div>
             <div class="row">
@@ -61,7 +61,7 @@
 
 
         <a href="#">忘记密码</a><br>
-        <a href="#" class="text-center">新用户注册</a>
+        <a href="all-admin-register.html" class="text-center">新用户注册</a>
 
     </div>
     <!-- /.login-box-body -->

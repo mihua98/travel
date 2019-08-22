@@ -28,6 +28,7 @@ public class UserController {
 
     /**
      * 注册用户
+     *
      * @param user 表单提交的User
      * @return 受影响行数
      */
@@ -44,6 +45,7 @@ public class UserController {
 
     /**
      * 创建账号
+     *
      * @param account 表单提交的Account
      * @return 受影响行数
      */
@@ -59,20 +61,21 @@ public class UserController {
 
     /**
      * 普通用户登录
+     *
      * @param account 表单提交的账号信息
      * @param request request对象,用于获取Session,将登录成功的用户存入Session域中
-     * @return 数据库中查询该账号,为null即没查到,反之验证通过
+     * @return 数据库中查询该账号, 为null即没查到, 反之验证通过
      */
     @RequestMapping("/login")
     public String login(Account account, HttpServletRequest request) {
         System.out.println(account);
         Account account1 = accountService.selectAccount(account);
-        System.out.println("反回对象"+account1);
+        System.out.println("反回对象" + account1);
         if (null != account) {
             UserInfo user = userService.selectUserById(account1.getUserInfo().getId());
-            request.getSession().setAttribute("USER",user);
-            return "index";
-        }else{
+            request.getSession().setAttribute("USER", user);
+            return "all-admin-index";
+        } else {
             return "redirect:/404.html";
         }
     }
