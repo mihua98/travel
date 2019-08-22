@@ -10,7 +10,6 @@ public class Admin {
 
     private String password;
 
-    private AdminInfo adminInfo;
 
     public Admin() {
     }

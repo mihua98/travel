@@ -141,8 +141,7 @@ public class UserController {
         Account account1 = accountService.selectAccount(account);
         System.out.println("反回对象"+account1);
         if (null != account1) {
-            String email = account1.getEmail();
-            request.getSession().setAttribute("EMAIL",email);
+            request.getSession().setAttribute("ACCOUNT",account1);
             return "adminPage/all-admin-index";
         }else{
             // TODO: 2019/8/22 404!!!!!!!!!!!!!!!!!!!
