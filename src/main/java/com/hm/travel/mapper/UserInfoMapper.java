@@ -23,23 +23,35 @@ public interface UserInfoMapper {
     UserInfo selectUserById(Integer id);
 
     /**
-     * 根据姓名查询用户
+     * 查询用户总数
+     * @return
+     */
+    @Select("select count(1) from account ")
+    int getUserInfoNum();
+
+    /**
+     * 根据精确姓名查询用户
      * @param userName
      * @return 该用户
      */
     @Select("select * from userInfo where user_name = #{userName}")
     UserInfo seleceUserByName(String userName);
 
+    /**
+     * 根据email查询
+     * @param email
+     * @return
+     */
     @Select("select * from userInfo where email = #{email}")
      UserInfo selectUserByEmail(String email);
 
     /**
-     * 根据姓名查询用户
+     * 根据姓名模糊查询用户
      * @param userName
      * @return 该用户
      */
     @Select("select * from userInfo where user_name like '%#{userName}%'")
-    UserInfo seleceUserLikeName(String userName);
+    List<UserInfo> seleceUserLikeName(String userName);
     /**
      * 查询所有用户
      *

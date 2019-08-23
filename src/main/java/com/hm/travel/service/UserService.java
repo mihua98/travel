@@ -12,6 +12,12 @@ import java.util.List;
  */
 public interface UserService {
 
+    /**
+     * 查询用户总数
+     * @return
+     */
+    int getUserInfoNum();
+
     UserInfo selectUserByEmail(String email);
 
     /**
@@ -19,7 +25,7 @@ public interface UserService {
      * @param userName
      * @return 该用户
      */
-    UserInfo seleceUserLikeName(String userName);
+    List<UserInfo> seleceUserLikeName(String userName);
 
     /**
      * 添加用户
