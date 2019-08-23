@@ -1,5 +1,7 @@
 package com.hm.travel.controller;
 
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import com.hm.travel.pojo.Account;
 import com.hm.travel.pojo.UserInfo;
 import com.hm.travel.service.AccountService;
@@ -12,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
+import java.io.IOException;
 import java.util.List;
 import java.util.Map;
 
@@ -36,8 +39,12 @@ public class UserController {
      */
     @RequestMapping("/getUserList")
     @ResponseBody
-    public List<UserInfo> getAllUser(){
-       return userService.getAllUser();
+    public PageInfo<UserInfo> getAllUser(@RequestParam(value = "start", defaultValue = "0") int start,
+                                         @RequestParam(value = "size", defaultValue = "7") int size) throws IOException {
+        PageHelper.startPage(start, size, "id desc");
+        List<UserInfo> list = userService.getAllUser();
+        PageInfo<UserInfo> page = new PageInfo<>(list);
+        return page;
     }
 
     /**
@@ -56,9 +63,9 @@ public class UserController {
      * @param id 用户ID
      * @return
      */
-    @RequestMapping("/delete/{id}")
+    @RequestMapping("/deleteById")
     @ResponseBody
-    public String deleteUserById(@PathVariable Integer id){
+    public String deleteUserById(@RequestParam("id") Integer id) {
         int i = userService.deleteUserById(id);
         if(i>0){
             return "删除成功";
@@ -90,7 +97,7 @@ public class UserController {
      */
     @RequestMapping("/selectUserById")
     @ResponseBody
-    public UserInfo selectUserById(@RequestParam("id") Integer id){
+    public UserInfo selectUserById(@RequestParam("id") Integer id) {
         UserInfo userInfo = userService.selectUserById(id);
         return userInfo;
     }
@@ -177,5 +184,16 @@ public class UserController {
             // TODO: 2019/8/22 404!!!!!!!!!!!!!!!!!!!
             return "redirect:/404.html";
         }
+    }
+
+    /**
+     * 跳转到用户列表页面
+     *
+     * @return
+     */
+    @RequestMapping("/userListPage")
+    public String userListPage() {
+        System.out.println("跳转页面");
+        return "adminPage/userListPage";
     }
 }
