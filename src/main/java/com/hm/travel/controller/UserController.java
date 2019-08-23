@@ -66,7 +66,7 @@ public class UserController {
         System.out.println(userName);
         UserInfo userInfo = userService.seleceUserLikeName(userName);
         map.put("userInfo",userInfo);
-        return "adminPage/likeSelectUser";
+        return "userPage/likeSelectUser";
     }
 
     /**
@@ -80,7 +80,7 @@ public class UserController {
 
         UserInfo userInfo = userService.selectUserById(id);
         map.put("userInfo",userInfo);
-        return "adminPage/improveUserInfo";
+        return "userPage/improveUserInfo";
     }
 
     /**
@@ -108,7 +108,7 @@ public class UserController {
     public String selectUserByEmail(HttpServletRequest request, Map<String,Object> map){
         UserInfo userInfo = userService.selectUserByEmail(((Account) request.getSession().getAttribute("ACCOUNT")).getEmail());
         map.put("userInfo",userInfo);
-        return "adminPage/improveUserInfo";
+        return "userPage/improveUserInfo";
     }
 
     /**
@@ -123,10 +123,11 @@ public class UserController {
         int j = userService.addUser(userInfo);
         System.out.println(j);
         if (i > 0) {
+            // TODO: 2019/8/23 页面 页面 页面
             return "redirect:/pages/all-admin-login.html";
         } else {
             //TODO !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-            return "redirect:/plugins/registered.html";
+            return "redirect:/registered.html";
         }
     }
 
@@ -142,7 +143,7 @@ public class UserController {
         System.out.println("反回对象"+account1);
         if (null != account1) {
             request.getSession().setAttribute("ACCOUNT",account1);
-            return "adminPage/all-admin-index";
+            return "userPage/all-admin-index";
         }else{
             // TODO: 2019/8/22 404!!!!!!!!!!!!!!!!!!!
             return "redirect:/404.html";
