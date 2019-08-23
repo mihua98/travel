@@ -49,7 +49,7 @@ public interface HotleMapper {
      * @param hotle
      * @return
      */
-    @Insert("insert into hotle(hotle_Name,hotle_Photo,hotle_Grade,hotle_Start,hotle_Info,city_id) " +
+    @Insert("insert into hotle(hotle_Name,hotle_Photo,hotle_Grade,hotle_Start,hotle_Info,city_id,hotleroom_id) " +
             "values(#{hotleName},#{hotlePhoto},#{hotleGrade},#{hotleStart},#{hotleInfo},#{city.id})")
     int addHotle(Hotle hotle);
 

@@ -40,7 +40,7 @@
     </select>
 
     <update id="improveAccount" parameterType="com.hm.travel.pojo.Account">
-        update account set userInfo_id = #{userInfo.id}
+        update account set userInfo_id = #{userInfo.id} where id = #{id}
     </update>
 
 </mapper>

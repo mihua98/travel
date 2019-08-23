@@ -15,44 +15,27 @@
             <result column="city_Introduce" property="cityIntroduce" />
             <result column="city_Photo" property="cityPhoto" />
         </association>
+        <association property="hotleRoom" javaType="com.hm.travel.pojo.HotleRoom">
+            <result column="id" property="id" />
+            <result column="sigle_Room" property="sigleRoom" />
+            <result column="double_Room" property="doubleRoom" />
+            <result column="business_Room" property="businessRoom" />
+            <result column="couple_Room" property="coupleRoom" />
+            <result column="sigle_Room_Price" property="sigleRoomPrice" />
+            <result column="double_Room_Price" property="doubleRoomPrice" />
+            <result column="business_Room_Price" property="businessRoomPrice" />
+            <result column="couple_Room_Price" property="coupleRoomPrice" />
+        </association>
     </resultMap>
     <select id="getAllHotle" resultMap="hotles">
         select * from hotle
     </select>
 
-    <resultMap id="hotleByName" type="com.hm.travel.pojo.Hotle">
-        <id column="id" property="id" />
-        <result column="hotle_Name" property="hotleName" />
-        <result column="hotle_Photo" property="hotlePhoto" />
-        <result column="hotle_Grade" property="hotleGrade" />
-        <result column="hotle_Start" property="hotleStart" />
-        <result column="hotle_Info" property="hotleInfo" />
-        <association property="city" javaType="com.hm.travel.pojo.City">
-            <result column="id" property="id" />
-            <result column="city_Name" property="cityName" />
-            <result column="city_Introduce" property="cityIntroduce" />
-            <result column="city_Photo" property="cityPhoto" />
-        </association>
-    </resultMap>
-    <select id="selectHotleByLikeName" resultMap="hotleByName">
+    <select id="selectHotleByLikeName" resultMap="hotles">
         select * from hotle where hotle_name like '%#{hotleName}%'
     </select>
 
-    <resultMap id="hotleById" type="com.hm.travel.pojo.Hotle">
-        <id column="id" property="id" />
-        <result column="hotle_Name" property="hotleName" />
-        <result column="hotle_Photo" property="hotlePhoto" />
-        <result column="hotle_Grade" property="hotleGrade" />
-        <result column="hotle_Start" property="hotleStart" />
-        <result column="hotle_Info" property="hotleInfo" />
-        <association property="city" javaType="com.hm.travel.pojo.City">
-            <result column="id" property="id" />
-            <result column="city_Name" property="cityName" />
-            <result column="city_Introduce" property="cityIntroduce" />
-            <result column="city_Photo" property="cityPhoto" />
-        </association>
-    </resultMap>
-    <select id="selectHotleById" resultMap="hotleById">
+    <select id="selectHotleById" resultMap="hotles">
         select * from hotle where id = #{id}
     </select>
 
@@ -72,5 +55,6 @@
                       hotle_Info = #{hotleInfo}
                   </if>
               </set>
+        where id = #{id}
     </update>
 </mapper>

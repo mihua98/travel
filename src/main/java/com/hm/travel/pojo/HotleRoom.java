@@ -22,6 +22,5 @@ public class HotleRoom {
 
     private Integer coupleRoomPrice;
 
-    private Hotle hotle;
 
     }

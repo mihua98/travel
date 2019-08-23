@@ -18,4 +18,6 @@ public class Hotle {
 
     private City city;
 
+    private HotleRoom hotleRoom;
+
     }

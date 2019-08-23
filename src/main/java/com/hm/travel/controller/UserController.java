@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
@@ -39,7 +40,10 @@ public class UserController {
        return userService.getAllUser();
     }
 
-
+    /**
+     * 得到总用户数量
+     * @return
+     */
     @RequestMapping("/getUserInfoNum")
     @ResponseBody
     public int getUserInfoNum(){
@@ -84,12 +88,14 @@ public class UserController {
      * @param id 用户ID
      * @return 用户
      */
-    @RequestMapping("/selectUserById/{id}")
+    @RequestMapping("/selectUserById")
     @ResponseBody
-    public UserInfo selectUserById(@PathVariable Integer id){
+    public UserInfo selectUserById(@RequestParam("id") Integer id){
         UserInfo userInfo = userService.selectUserById(id);
         return userInfo;
     }
+
+
 
     /**
      * 更新修改用户信息
@@ -119,6 +125,20 @@ public class UserController {
 //        UserInfo userInfo = userService.selectUserByEmail(((Account) request.getSession().getAttribute("USER")).getEmail());
 //        return userInfo;
 //    }
+
+    @RequestMapping("/updateUserPassword")
+    @ResponseBody
+    public String updateUserPassword(String password,HttpServletRequest request){
+        UserInfo user = (UserInfo) request.getSession().getAttribute("USER");
+        String email = user.getEmail();
+
+        int i = accountService.updateUserPassword(password, email);
+        if(i>0){
+            return "修改成功";
+        }else{
+            return "修改失败";
+        }
+    }
 
     /**
      * 用户注册账号

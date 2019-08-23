@@ -52,6 +52,15 @@ public interface AccountMapper {
      * @return 受影响行数
      */
     int improveAccount(Account account);
+
+    /**
+     * 用户更改密码
+     * @param password
+     * @param id
+     * @return
+     */
+    @Update("update account set password = #{password} where email = #{email}")
+    int updateUserPassword(String password,String email);
     /**
      * 删除账号根据ID
      *

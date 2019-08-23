@@ -16,6 +16,11 @@ public class AccountServiceImpl implements AccountService {
    private AccountMapper accountMapper;
 
     @Override
+    public int updateUserPassword(String password, String email) {
+        return accountMapper.updateUserPassword(password,email);
+    }
+
+    @Override
     public Account selectAccountById(Integer id) {
         return accountMapper.selectAccountById(id);
     }
