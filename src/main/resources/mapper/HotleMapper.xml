@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hm.travel.mapper.HotleMapper">
+
+    <resultMap id="hotles" type="com.hm.travel.pojo.Hotle">
+            <id column="id" property="id" />
+            <result column="hotle_Name" property="hotleName" />
+            <result column="hotle_Photo" property="hotlePhoto" />
+            <result column="hotle_Grade" property="hotleGrade" />
+            <result column="hotle_Start" property="hotleStart" />
+            <result column="hotle_Info" property="hotleInfo" />
+        <association property="city" javaType="com.hm.travel.pojo.City">
+            <result column="id" property="id" />
+            <result column="city_Name" property="cityName" />
+            <result column="city_Introduce" property="cityIntroduce" />
+            <result column="city_Photo" property="cityPhoto" />
+        </association>
+    </resultMap>
+    <select id="getAllHotle" resultMap="hotles">
+        select * from hotle
+    </select>
+
+    <resultMap id="hotleByName" type="com.hm.travel.pojo.Hotle">
+        <id column="id" property="id" />
+        <result column="hotle_Name" property="hotleName" />
+        <result column="hotle_Photo" property="hotlePhoto" />
+        <result column="hotle_Grade" property="hotleGrade" />
+        <result column="hotle_Start" property="hotleStart" />
+        <result column="hotle_Info" property="hotleInfo" />
+        <association property="city" javaType="com.hm.travel.pojo.City">
+            <result column="id" property="id" />
+            <result column="city_Name" property="cityName" />
+            <result column="city_Introduce" property="cityIntroduce" />
+            <result column="city_Photo" property="cityPhoto" />
+        </association>
+    </resultMap>
+    <select id="selectHotleByLikeName" resultMap="hotleByName">
+        select * from hotle where hotle_name like '%#{hotleName}%'
+    </select>
+
+    <resultMap id="hotleById" type="com.hm.travel.pojo.Hotle">
+        <id column="id" property="id" />
+        <result column="hotle_Name" property="hotleName" />
+        <result column="hotle_Photo" property="hotlePhoto" />
+        <result column="hotle_Grade" property="hotleGrade" />
+        <result column="hotle_Start" property="hotleStart" />
+        <result column="hotle_Info" property="hotleInfo" />
+        <association property="city" javaType="com.hm.travel.pojo.City">
+            <result column="id" property="id" />
+            <result column="city_Name" property="cityName" />
+            <result column="city_Introduce" property="cityIntroduce" />
+            <result column="city_Photo" property="cityPhoto" />
+        </association>
+    </resultMap>
+    <select id="selectHotleById" resultMap="hotleById">
+        select * from hotle where id = #{id}
+    </select>
+
+    <update id="updateHotle" parameterType="com.hm.travel.pojo.Hotle">
+        update hotle
+              <set>
+                  <if test="hotleName !=null and hotleName != &quot;&quot;">
+                      hotle_Name = #{hotleName}
+                  </if>
+                  <if test="hotlePhoto !=null and hotlePhoto != &quot;&quot;">
+                      hotle_Photo = #{hotlePhoto}
+                  </if>
+                  <if test="hotleStart !=null and hotleStart != &quot;&quot;">
+                      hotle_Start = #{hotleStart}
+                  </if>
+                  <if test="hotleInfo !=null and hotleInfo != &quot;&quot;">
+                      hotle_Info = #{hotleInfo}
+                  </if>
+              </set>
+    </update>
+</mapper>

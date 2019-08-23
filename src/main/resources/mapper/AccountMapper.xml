@@ -10,7 +10,7 @@
             <result column="user_name" property="userName" />
             <result column="user_sex" property="userSex" />
             <result column="user_age" property="userAge" />
-            <result column="user_email" property="userEmail" />
+            <result column="user_email" property="email" />
             <result column="user_image_name" property="userImageName" />
             <result column="user_phone_num" property="userPhoneNum" />
             <result column="user_nick_name" property="userNickName" />
@@ -29,7 +29,7 @@
             <result column="user_name" property="userName" />
             <result column="user_sex" property="userSex" />
             <result column="user_age" property="userAge" />
-            <result column="user_email" property="userEmail" />
+            <result column="user_email" property="email" />
             <result column="user_image_name" property="userImageName" />
             <result column="user_phone_num" property="userPhoneNum" />
             <result column="user_nick_name" property="userNickName" />
@@ -42,4 +42,5 @@
     <update id="improveAccount" parameterType="com.hm.travel.pojo.Account">
         update account set userInfo_id = #{userInfo.id}
     </update>
+
 </mapper>

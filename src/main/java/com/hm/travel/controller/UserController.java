@@ -39,6 +39,14 @@ public class UserController {
        return userService.getAllUser();
     }
 
+
+    @RequestMapping("/getUserInfoNum")
+    @ResponseBody
+    public int getUserInfoNum(){
+        int userInfoNum = userService.getUserInfoNum();
+        return userInfoNum;
+    }
+
     /**
      * 根据ID删除用户
      * @param id 用户ID
@@ -62,11 +70,12 @@ public class UserController {
      * @return 用户
      */
     @RequestMapping("/selectUserLikeName")
-    public String selectUserLikeName( String userName,Map<String,Object> map){
+    @ResponseBody
+    public List<UserInfo> selectUserLikeName( String userName){
         System.out.println(userName);
-        UserInfo userInfo = userService.seleceUserLikeName(userName);
-        map.put("userInfo",userInfo);
-        return "userPage/likeSelectUser";
+        List<UserInfo> userInfos = userService.seleceUserLikeName(userName);
+
+        return userInfos;
     }
 
     /**
@@ -76,16 +85,15 @@ public class UserController {
      * @return 用户
      */
     @RequestMapping("/selectUserById/{id}")
-    public String selectUserById(@PathVariable Integer id,Map<String,Object> map){
-
+    @ResponseBody
+    public UserInfo selectUserById(@PathVariable Integer id){
         UserInfo userInfo = userService.selectUserById(id);
-        map.put("userInfo",userInfo);
-        return "userPage/improveUserInfo";
+        return userInfo;
     }
 
     /**
      * 更新修改用户信息
-     * @param userInfo
+     * @param userInfo 用户修改之后表单提交的信息
      * @return
      */
     @RequestMapping("/updateUser")
@@ -99,17 +107,18 @@ public class UserController {
         }
     }
 
-    /**
-     * 用户修改自身信息前查询自身数据库中的数据(即点击修改信息则调用)
-     * @param request
-     * @return 用户修改页面
-     */
-    @RequestMapping("/UserUpdate")
-    public String selectUserByEmail(HttpServletRequest request, Map<String,Object> map){
-        UserInfo userInfo = userService.selectUserByEmail(((Account) request.getSession().getAttribute("ACCOUNT")).getEmail());
-        map.put("userInfo",userInfo);
-        return "userPage/improveUserInfo";
-    }
+//    /**!!!!!!!此方法可以不调用,当前登录的用户的信息已存在Session中 Attribute("USER")
+//     *
+//     * 用户修改自身信息前查询自身数据库中的数据(即点击修改信息则调用)
+//     * @param request
+//     * @return 用户修改前数据库中的信息
+//     */
+//    @RequestMapping("/UserUpdate")
+//    @ResponseBody
+//    public UserInfo selectUserByEmail(HttpServletRequest request){
+//        UserInfo userInfo = userService.selectUserByEmail(((Account) request.getSession().getAttribute("USER")).getEmail());
+//        return userInfo;
+//    }
 
     /**
      * 用户注册账号
@@ -142,7 +151,7 @@ public class UserController {
         Account account1 = accountService.selectAccount(account);
         System.out.println("反回对象"+account1);
         if (null != account1) {
-            request.getSession().setAttribute("ACCOUNT",account1);
+            request.getSession().setAttribute("USER",account1.getUserInfo());
             return "userPage/index";
         }else{
             // TODO: 2019/8/22 404!!!!!!!!!!!!!!!!!!!
