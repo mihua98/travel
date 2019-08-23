@@ -1,6 +1,7 @@
 package com.hm.travel.mapper;
 
 import com.hm.travel.pojo.Hotle;
+import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Select;
 import org.springframework.stereotype.Repository;
@@ -40,11 +41,22 @@ public interface HotleMapper {
      * 修改酒店信息,评分除外
      * @return
      */
-    int updateHotle();
+    int updateHotle(Hotle hotle);
 
 
-
+    /**
+     * 添加酒店
+     * @param hotle
+     * @return
+     */
     @Insert("insert into hotle(hotle_Name,hotle_Photo,hotle_Grade,hotle_Start,hotle_Info,city_id) " +
             "values(#{hotleName},#{hotlePhoto},#{hotleGrade},#{hotleStart},#{hotleInfo},#{city.id})")
     int addHotle(Hotle hotle);
+
+    /**
+     * 根据ID删除酒店
+     * @return
+     */
+    @Delete("delete from hotle where id = #{id}")
+    int delectHotleById(Integer id);
 }
