@@ -106,7 +106,7 @@ public class UserController {
      */
     @RequestMapping("/UserUpdate")
     public String selectUserByEmail(HttpServletRequest request, Map<String,Object> map){
-        UserInfo userInfo = userService.selectUserByEmail((String) request.getSession().getAttribute("EMAIL"));
+        UserInfo userInfo = userService.selectUserByEmail(((Account) request.getSession().getAttribute("ACCOUNT")).getEmail());
         map.put("userInfo",userInfo);
         return "adminPage/improveUserInfo";
     }
