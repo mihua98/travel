@@ -67,9 +67,9 @@ public class UserController {
     @ResponseBody
     public String deleteUserById(@RequestParam("id") Integer id) {
         int i = userService.deleteUserById(id);
-        if(i>0){
+        if (i > 0) {
             return "删除成功";
-        }else{
+        } else {
             return "删除失败";
         }
 
@@ -101,8 +101,6 @@ public class UserController {
         UserInfo userInfo = userService.selectUserById(id);
         return userInfo;
     }
-
-
 
     /**
      * 更新修改用户信息
