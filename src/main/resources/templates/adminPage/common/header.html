@@ -1,6 +1,6 @@
 <html xmlns:th="http://www.thymeleaf.org">
 
-<header th:fragment="header" class="main-header">
+<header th:fragment="header()" class="main-header">
     <!-- Logo -->
     <a th:href="all-admin-index.html" class="logo">
         <!-- mini logo for sidebar mini 50x50 pixels -->
@@ -235,17 +235,14 @@
                 <li class="dropdown user user-menu">
                     <a th:href="all-admin-index.html" class="dropdown-toggle" data-toggle="dropdown">
                         <img th:src="@{/img/user2-160x160.jpg}" class="user-image" alt="User Image">
-                        <span class="hidden-xs">管理员</span>
+                        <span class="hidden-xs">jlz</span>
                     </a>
                     <ul class="dropdown-menu">
                         <!-- User image -->
                         <li class="user-header">
                             <img th:src="@{/img/user2-160x160.jpg}" class="img-circle" alt="User Image">
 
-                            <p>
-                                管理员
-                                <small>最后登录 11:20AM</small>
-                            </p>
+                            <p>jlz</p>
                         </li>
                         <!-- Menu Body
             <li class="user-body">
