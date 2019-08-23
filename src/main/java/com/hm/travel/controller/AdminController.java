@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.List;
-import java.util.Map;
 
 /**
  * @author jlz
@@ -96,7 +95,7 @@ public class AdminController {
         Admin admin1 = adminService.AdminLogin(admin);
         if (null != admin1) {
             request.getSession().setAttribute("ADMIN",admin1);
-            return "all-admin-index";
+            return "adminPage/all-admin-index";
         }else{
             // TODO: 2019/8/22  !!!!!!!!!!!!!!!!!!!!!
             return "redirect:/404.html";

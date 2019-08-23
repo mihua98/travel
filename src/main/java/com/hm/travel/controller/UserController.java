@@ -143,7 +143,7 @@ public class UserController {
         System.out.println("反回对象"+account1);
         if (null != account1) {
             request.getSession().setAttribute("ACCOUNT",account1);
-            return "userPage/all-admin-index";
+            return "userPage/index";
         }else{
             // TODO: 2019/8/22 404!!!!!!!!!!!!!!!!!!!
             return "redirect:/404.html";

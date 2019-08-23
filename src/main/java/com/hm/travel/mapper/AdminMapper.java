@@ -27,7 +27,7 @@ public interface AdminMapper {
      * @param admin
      * @return
      */
-    @Select("select * from admin where admin_number = #{adminNumber} and password = #{password}")
+    @Select("select * from admin where account_number = #{accountNumber} and password = #{password}")
     Admin AdminLogin(Admin admin);
     /**
      * 根据ID删除管理员账号
