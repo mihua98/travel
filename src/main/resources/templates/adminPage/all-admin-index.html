@@ -9,7 +9,7 @@
     <meta name="description" content="旅游管理系统">
     <meta name="keywords" content="旅游管理系统">
     <!-- 导入css文件   -->
-    <head th:replace="common/head::head"></head>
+    <div th:replace="adminPage/common/head::head"></div>
 </head>
 
 <body class="hold-transition skin-purple sidebar-mini">
@@ -17,11 +17,11 @@
 <div class="wrapper">
 
     <!-- 页面头部 -->
-    <div th:replace="common/header::header"></div>
+    <div th:replace="adminPage/common/header::header"></div>
     <!-- 页面头部 /-->
 
     <!-- 导航侧栏 -->
-    <div th:replace="common/side::side"></div>
+    <div th:replace="adminPage/common/side::side"></div>
     <!-- 导航侧栏 /-->
 
     <!-- 内容区域 -->
@@ -348,12 +348,12 @@
     <!-- 内容区域 /-->
 
     <!-- 底部导航 -->
-    <div th:replace="common/footer::footer"></div>
+    <div th:replace="adminPage/common/footer::footer"></div>
     <!-- 底部导航 /-->
 
 </div>
 
-<div th:replace="common/js::js"></div>
+<div th:replace="adminPage/common/js::js"></div>
 
 <script>
     $(document).ready(function () {
