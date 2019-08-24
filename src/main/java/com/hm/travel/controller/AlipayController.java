@@ -64,7 +64,6 @@ public class AlipayController {
         }
 
         //输出
-        response.getWriter().print(result);
-        return "1";
+        return result;
     }
 }
