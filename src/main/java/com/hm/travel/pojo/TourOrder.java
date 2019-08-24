@@ -15,11 +15,9 @@ public class TourOrder {
 
     private Integer tourOrderStatus;
 
-    private Integer tourId;
+    private Tour tour;
 
-    private Integer userinfoId;
-
-    private String userinfoName;
+    private UserInfo userInfo;
 
     private Traveller traveller;
 

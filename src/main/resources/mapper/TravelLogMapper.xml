@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hm.travel.mapper.TravelLogMapper">
+    <resultMap id="Travellog" type="com.hm.travel.pojo.TravelLog">
+        <id column="id" property="id" />
+        <result column="tl_Title" property="tlTitle" />
+        <result column="tl_Summary" property="tlSummary" />
+        <result column="tl_Release_Date" property="tlReleaseDate" />
+        <result column="tl_Key_Word" property="tlKeyWord" />
+        <result column="tl_Click_Count" property="tlClickCount" />
+        <result column="tl_Like_Count" property="tlLikeCount" />
+        <result column="tl_Favorite_Count" property="tlFavoriteCount" />
+        <result column="tl_Status" property="tlStatus" />
+        <result column="tl_Content" property="tlContent" />
+        <association property="userInfo" javaType="com.hm.travel.pojo.UserInfo">
+            <result column="id" property="id" />
+            <result column="user_name" property="userName" />
+            <result column="user_sex" property="userSex" />
+            <result column="user_age" property="userAge" />
+            <result column="user_email" property="email" />
+            <result column="user_image_name" property="userImageName" />
+            <result column="user_phone_num" property="userPhoneNum" />
+            <result column="user_nick_name" property="userNickName" />
+        </association>
+    </resultMap>
+    <select id="getAllTravelLog" resultMap="Travellog">
+          select * from travellog
+    </select>
+
+    <select id="selectTravelLogLikeTitle" resultMap="Travellog">
+        select * from travellog where tl_Title like '%#{tlTitle}%'
+    </select>
+
+    <select id="selectTravellogById" resultMap="Travellog">
+        select * from travellog where id = #{id}
+    </select>
+</mapper>
