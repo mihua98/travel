@@ -10,6 +10,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 public class TestController {
 
+    @RequestMapping("index")
+    public String index(){
+        System.out.println("跳转到首页");
+        return "userPage/index";
+    }
+
     @RequestMapping("list")
     public String list(){
         System.out.println("跳转到景点列表页面");

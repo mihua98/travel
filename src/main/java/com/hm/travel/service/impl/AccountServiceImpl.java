@@ -12,12 +12,12 @@ import org.springframework.stereotype.Service;
  */
 @Service("accountService")
 public class AccountServiceImpl implements AccountService {
-   @Autowired
-   private AccountMapper accountMapper;
+    @Autowired
+    private AccountMapper accountMapper;
 
     @Override
     public int updateUserPassword(String password, String email) {
-        return accountMapper.updateUserPassword(password,email);
+        return accountMapper.updateUserPassword(password, email);
     }
 
     @Override
@@ -32,7 +32,7 @@ public class AccountServiceImpl implements AccountService {
 
     @Override
     public Account selectAccount(Account account) {
-        System.out.println("impl:"+account);
+        System.out.println("impl:" + account);
         return accountMapper.selectAccount(account);
     }
 

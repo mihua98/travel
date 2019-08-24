@@ -19,7 +19,7 @@
     <select id="selectAccount" resultMap="selectAccountAndUser">
         select * from account where account_number = #{accountNumber} and password = #{password}
     </select>
-
+            <!-- TODO 上下id重名了-->
     <resultMap id="selectAccount" type="com.hm.travel.pojo.Account">
         <id column="id" property="id" />
         <result column="account_number" property="accountNumber" />

@@ -35,6 +35,7 @@ public class UserController {
 
     /**
      * 查询所有用户信息
+     *
      * @return 用户集合
      */
     @RequestMapping("/getUserList")
@@ -49,17 +50,19 @@ public class UserController {
 
     /**
      * 得到总用户数量
+     *
      * @return
      */
     @RequestMapping("/getUserInfoNum")
     @ResponseBody
-    public int getUserInfoNum(){
+    public int getUserInfoNum() {
         int userInfoNum = userService.getUserInfoNum();
         return userInfoNum;
     }
 
     /**
      * 根据ID删除用户
+     *
      * @param id 用户ID
      * @return
      */
@@ -77,12 +80,13 @@ public class UserController {
 
     /**
      * 根据姓名模糊查询ID
+     *
      * @param userName 姓名
      * @return 用户
      */
     @RequestMapping("/selectUserLikeName")
     @ResponseBody
-    public List<UserInfo> selectUserLikeName( String userName){
+    public List<UserInfo> selectUserLikeName(String userName) {
         System.out.println(userName);
         List<UserInfo> userInfos = userService.seleceUserLikeName(userName);
 
@@ -92,6 +96,7 @@ public class UserController {
     /**
      * 根据ID查询用户
      * 管理员修改用户信息前查询用户
+     *
      * @param id 用户ID
      * @return 用户
      */
@@ -104,16 +109,17 @@ public class UserController {
 
     /**
      * 更新修改用户信息
+     *
      * @param userInfo 用户修改之后表单提交的信息
      * @return
      */
     @RequestMapping("/updateUser")
     @ResponseBody
-    public String updateUser(UserInfo userInfo){
+    public String updateUser(UserInfo userInfo) {
         int i = userService.updateUserInfo(userInfo);
-        if(i>0){
+        if (i > 0) {
             return "修改成功";
-        }else{
+        } else {
             return "修改失败";
         }
     }
@@ -133,52 +139,55 @@ public class UserController {
 
     @RequestMapping("/updateUserPassword")
     @ResponseBody
-    public String updateUserPassword(String password,HttpServletRequest request){
+    public String updateUserPassword(String password, HttpServletRequest request) {
         UserInfo user = (UserInfo) request.getSession().getAttribute("USER");
         String email = user.getEmail();
 
         int i = accountService.updateUserPassword(password, email);
-        if(i>0){
+        if (i > 0) {
             return "修改成功";
-        }else{
+        } else {
             return "修改失败";
         }
     }
 
     /**
      * 用户注册账号
+     *
      * @param account 表单提交的Account
      * @return 受影响行数
      */
     @RequestMapping("/createAccount")
-    public String CreateAccount(Account account,UserInfo userInfo) {
+    public String CreateAccount(Account account) {
         int i = accountService.addAccount(account);
-        System.out.println(userInfo);
-        int j = userService.addUser(userInfo);
-        System.out.println(j);
+        Account account1 = accountService.selectAccount(account);
+        //这里原来的写法有问题,改了,再把userInfo表的主键自增关了 @author:cmh
+        UserInfo userInfo = new UserInfo();
+        userInfo.setId(account1.getId());
+        userService.addUser(userInfo);
         if (i > 0) {
-            // TODO: 2019/8/23 页面 页面 页面
-            return "redirect:/pages/all-admin-login.html";
+            return "redirect:/login.html";
         } else {
             //TODO !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-            return "redirect:/registered.html";
+            return "redirect:/register.html";
         }
     }
 
     /**
      * 用户登录
+     *
      * @param account 表单提交的账号信息
      * @param request request对象,用于获取Session,将登录成功的用户账号ID存入Session域中
-     * @return 数据库中查询该账号,为null即没查到,反之验证通过
+     * @return 数据库中查询该账号, 为null即没查到, 反之验证通过
      */
     @RequestMapping("/login")
     public String login(Account account, HttpServletRequest request) {
         Account account1 = accountService.selectAccount(account);
-        System.out.println("反回对象"+account1);
+        System.out.println("反回对象" + account1);
         if (null != account1) {
-            request.getSession().setAttribute("USER",account1.getUserInfo());
+            request.getSession().setAttribute("USER", account1.getUserInfo());
             return "userPage/index";
-        }else{
+        } else {
             // TODO: 2019/8/22 404!!!!!!!!!!!!!!!!!!!
             return "redirect:/404.html";
         }
