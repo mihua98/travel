@@ -184,14 +184,5 @@ public class UserController {
         }
     }
 
-    /**
-     * 跳转到用户列表页面
-     *
-     * @return
-     */
-    @RequestMapping("/userListPage")
-    public String userListPage() {
-        System.out.println("跳转页面");
-        return "adminPage/userListPage";
-    }
+
 }
