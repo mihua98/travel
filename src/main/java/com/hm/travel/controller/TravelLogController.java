@@ -1,6 +1,9 @@
 package com.hm.travel.controller;
 
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import com.hm.travel.pojo.TravelLog;
+import com.hm.travel.pojo.UserInfo;
 import com.hm.travel.service.TravelLogService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -8,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import java.io.IOException;
 import java.util.List;
 import java.util.Map;
 
@@ -23,6 +27,19 @@ public class TravelLogController {
 
     @Autowired
     private TravelLogService travelLogService;
+
+
+    /**
+     * 得到总用户数量
+     *
+     * @return
+     */
+    @RequestMapping("/getTravelLogNum")
+    @ResponseBody
+    public int getTravelLogNum() {
+        int travelLogNum = travelLogService.getTravelLogNum();
+        return travelLogNum;
+    }
 
 
     /**
@@ -64,10 +81,15 @@ public class TravelLogController {
      */
     @RequestMapping("/selectTravelLogLikeTitle")
     @ResponseBody
-    public List<TravelLog> selectTravelLogLikeTitle(@RequestParam("tlTitle")String tlTitle){
-        List<TravelLog> travelLogs = travelLogService.selectTravelLogLikeTitle(tlTitle);
-        return travelLogs;
+    public PageInfo<TravelLog> selectTravelLogLikeTitle(@RequestParam(value = "start", defaultValue = "0") int start,
+                                                    @RequestParam(value = "size", defaultValue = "7") int size,
+                                                    @RequestParam("tlTitle")String tlTitle){
+        PageHelper.startPage(start, size, "id desc");
+        List<TravelLog> list = travelLogService.selectTravelLogLikeTitle(tlTitle);
+        PageInfo<TravelLog> page = new PageInfo<>(list);
+        return page;
     }
+
 
     /**
      * 查询所有游记
@@ -75,9 +97,12 @@ public class TravelLogController {
      */
     @RequestMapping("/getAllTravelLog")
     @ResponseBody
-    public List<TravelLog> getAllTravelLog(){
-        List<TravelLog> travelLogs = travelLogService.getAllTravelLog();
-        return travelLogs;
+    public PageInfo<TravelLog> getAllTravelLog(@RequestParam(value = "start", defaultValue = "0") int start,
+                                               @RequestParam(value = "size", defaultValue = "7") int size){
+        PageHelper.startPage(start, size, "id desc");
+        List<TravelLog> list = travelLogService.getAllTravelLog();
+        PageInfo<TravelLog> page = new PageInfo<>(list);
+        return page;
     }
 
     /**

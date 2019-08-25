@@ -18,6 +18,16 @@ public class TravelLogServiceImpl implements TravelLogService {
     private TravelLogMapper travelLogMapper;
 
     /**
+     * 查询游记总数
+     *
+     * @return
+     */
+    @Override
+    public int getTravelLogNum() {
+        return travelLogMapper.getTravelLogNum();
+    }
+
+    /**
      * 根据ID查询游记,即用户查看该游记详情
      *
      * @param id

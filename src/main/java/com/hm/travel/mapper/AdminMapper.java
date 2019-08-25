@@ -15,6 +15,16 @@ import java.util.List;
  */
 @Repository
 public interface AdminMapper {
+
+
+
+    /**
+     * 查询游记总数
+     * @return
+     */
+    @Select("select count(1) from admin ")
+    int getAdminNum();
+
     /**
      * 查询所有管理员账号
      * @return 管理员账号集合

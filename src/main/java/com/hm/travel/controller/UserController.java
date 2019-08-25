@@ -86,11 +86,14 @@ public class UserController {
      */
     @RequestMapping("/selectUserLikeName")
     @ResponseBody
-    public List<UserInfo> selectUserLikeName(String userName) {
+    public PageInfo<UserInfo> selectUserLikeName(@RequestParam(value = "start", defaultValue = "0") int start,
+                                             @RequestParam(value = "size", defaultValue = "7") int size,
+                                             @RequestParam("userName")    String userName) {
         System.out.println(userName);
-        List<UserInfo> userInfos = userService.seleceUserLikeName(userName);
-
-        return userInfos;
+        PageHelper.startPage(start, size, "id desc");
+        List<UserInfo> list = userService.seleceUserLikeName(userName);
+        PageInfo<UserInfo> page = new PageInfo<>(list);
+        return page;
     }
 
     /**
@@ -186,7 +189,8 @@ public class UserController {
         System.out.println("反回对象" + account1);
         if (null != account1) {
             request.getSession().setAttribute("USER", account1.getUserInfo());
-            return "userPage/index";
+          // return "userPage/index";
+            return "adminPage/all-admin-index";
         } else {
             // TODO: 2019/8/22 404!!!!!!!!!!!!!!!!!!!
             return "redirect:/404.html";

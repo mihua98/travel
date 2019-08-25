@@ -15,6 +15,12 @@ import java.util.List;
 public interface AdminService {
 
     /**
+     * 查询游记总数
+     * @return
+     */
+    int getAdminNum();
+
+    /**
      * 管理员登录
      * @param admin
      * @return

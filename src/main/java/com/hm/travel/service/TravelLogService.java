@@ -1,6 +1,7 @@
 package com.hm.travel.service;
 
 import com.hm.travel.pojo.TravelLog;
+import org.apache.ibatis.annotations.Select;
 
 
 import java.util.List;
@@ -12,6 +13,12 @@ import java.util.List;
 public interface TravelLogService {
     //面向用户:新增游记,点击,点赞,收藏,查询所有游记,根据标题模糊查询
     //面向管理员:更改游记状态,查询所有游记,删除游记,根据标题模糊查询
+
+    /**
+     * 查询游记总数
+     * @return
+     */
+    int getTravelLogNum();
 
     /**
      * 根据ID查询游记,即用户查看该游记详情

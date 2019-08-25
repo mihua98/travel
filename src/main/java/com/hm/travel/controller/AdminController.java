@@ -1,11 +1,15 @@
 package com.hm.travel.controller;
 
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import com.hm.travel.pojo.Admin;
+import com.hm.travel.pojo.UserInfo;
 import com.hm.travel.service.AdminService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
@@ -20,6 +24,22 @@ import java.util.List;
 public class AdminController {
     @Autowired
     private AdminService adminService;
+
+
+
+
+    /**
+     * 得到管理员数量
+     *
+     * @return
+     */
+    @RequestMapping("/getAdminNum")
+    @ResponseBody
+    public int getAdminNum() {
+        int adminNum = adminService.getAdminNum();
+        return adminNum;
+    }
+
 
     /**
      * 添加管理员账号
@@ -42,9 +62,12 @@ public class AdminController {
      */
     @RequestMapping("/getAllAdmin")
     @ResponseBody
-    public List<Admin> selectAdmin(){
+    public PageInfo<Admin> selectAdmin(@RequestParam(value = "start", defaultValue = "0") int start,
+                                       @RequestParam(value = "size", defaultValue = "7") int size){
+        PageHelper.startPage(start, size, "id desc");
         List<Admin> admins = adminService.getAllAdmin();
-        return admins;
+        PageInfo<Admin> page = new PageInfo<>(admins);
+        return page;
     }
 
     /**

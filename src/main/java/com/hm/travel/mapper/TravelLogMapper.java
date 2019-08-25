@@ -20,6 +20,14 @@ public interface TravelLogMapper {
     //面向管理员:更改游记状态,查询所有游记,删除游记,根据标题模糊查询
 
 
+
+    /**
+     * 查询游记总数
+     * @return
+     */
+    @Select("select count(1) from travelLog ")
+    int getTravelLogNum();
+
     /**
      * 根据ID查询游记,即用户查看该游记详情
      * @param id
