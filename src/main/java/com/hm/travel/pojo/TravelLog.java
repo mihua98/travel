@@ -26,5 +26,11 @@ public class TravelLog {
     private Integer tlStatus;
     //游记内容
     private String tlContent;
+    //游记照片
+    private String tlPhoto;
+
+    private String tlBgPhoto;
+
+    private String tlCityName;
 
     }

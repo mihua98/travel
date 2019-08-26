@@ -12,6 +12,9 @@
         <result column="tl_Favorite_Count" property="tlFavoriteCount" />
         <result column="tl_Status" property="tlStatus" />
         <result column="tl_Content" property="tlContent" />
+        <result column="tl_photo" property="tlPhoto"/>
+        <result column="tl_bg_photo" property="tlBgPhoto"/>
+        <result column="tl_city_name" property="tlCityName"/>
         <association property="userInfo" javaType="com.hm.travel.pojo.UserInfo">
             <result column="id" property="id" />
             <result column="user_name" property="userName" />
@@ -24,14 +27,18 @@
         </association>
     </resultMap>
     <select id="getAllTravelLog" resultMap="Travellog">
-          select * from travellog
+          select * from travellog t,userInfo u where t.userInfo_id = u.id
     </select>
 
     <select id="selectTravelLogLikeTitle" resultMap="Travellog">
-        select * from travellog where tl_Title like '%#{tlTitle}%'
+        select * from travellog t,userInfo u where t.userInfo_id = u.id and tl_Title like '%#{tlTitle}%'
     </select>
 
     <select id="selectTravellogById" resultMap="Travellog">
-        select * from travellog where id = #{id}
+        select * from travellog t,userInfo u where t.userInfo_id = u.id and t.id = #{id}
+    </select>
+
+    <select id="getIndexTravelLog" resultMap="Travellog">
+        select * from travelLog t,userInfo u where t.userInfo_id = u.id  limit 4
     </select>
 </mapper>

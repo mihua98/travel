@@ -20,6 +20,12 @@ public interface TravelLogMapper {
     //面向管理员:更改游记状态,查询所有游记,删除游记,根据标题模糊查询
 
 
+    /**
+     * 首页展示,查询4条数据
+     * @return 游记集合
+     */
+    List<TravelLog> getIndexTravelLog();
+
 
     /**
      * 查询游记总数
