@@ -60,5 +60,22 @@ public interface ViewService {
      */
     public List<View> searchByWord2(String word);
 
+    /**
+     * 修改景点点击量,每次调用则点击量+1
+     *
+     * @param id 景点ID
+     * @return
+     */
+    int clickCount(Integer id);
+
+    /**
+     * 查询4个最热门的景点
+     */
+    List<View> searchHotView();
+
+    /**
+     * 根据城市id找出3个景点
+     */
+    List<View> searchHotViewByCityId(int id);
 
 }

@@ -76,4 +76,31 @@ public class ViewServiceImpl implements ViewService {
 
         return viewMapper.searchByWord2(word);
     }
+
+    /**
+     * 每次调用，点击数加1
+     * @param id 景点ID
+     * @return
+     */
+    @Override
+    public int clickCount(Integer id) {
+        return viewMapper.cilckCount(id);
+    }
+
+    /**
+     *查询4个热门景点
+     */
+    @Override
+    public List<View> searchHotView() {
+        return viewMapper.searchHotView();
+    }
+    /**
+     * 根据城市id找出3个景点
+     */
+    @Override
+    public List<View> searchHotViewByCityId(int id) {
+        return viewMapper.searchHotViewByCityId(id);
+    }
+
+
 }

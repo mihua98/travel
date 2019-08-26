@@ -97,17 +97,7 @@ public class ViewController {
         return "成功";
     }
 
-    /**
-     * 模糊查询
-     */
-    @ResponseBody
-    @RequestMapping("/searchByWord")
-    public Map searchByWord(@RequestParam("search") String word){
-        List<View> views=viewService.searchByWord(word);
-        Map<String,Object> map=new HashMap<>();
-        map.put("search",views);
-        return  map;
-    }
+
 
     /**
      * 模糊查询2
@@ -126,7 +116,7 @@ public class ViewController {
     /**
      * views分页
      * @param pn
-     * @return
+     * @return view集合
      */
     @ResponseBody
     @RequestMapping("/pageInfoViews")
@@ -142,4 +132,57 @@ public class ViewController {
 
         return page;
     }
+
+    /**
+     * 用户查看景点,该游记点击量+1,转发至景点详情页
+     * @param id 景点id
+     * @param map 将查询到的景点存于map中
+     * @return 景点详情页
+     */
+    @RequestMapping("/selectViewById")
+    public String selectViewById(Integer id, Map<String,Object> map){
+        viewService.clickCount(id);
+        View view=viewService.searchById(id);
+        map.put("view",view);
+        // TODO: 2019/8/24  转发至景点详情页
+        return "userPage/view-detail";
+    }
+
+    /**
+     *根据景点名模糊查询
+     */
+    @ResponseBody
+    @RequestMapping("/searchByWord")
+    public Map searchByWord(@RequestParam("search") String word){
+        List<View> views=viewService.searchByWord(word);
+        Map<String,Object> map=new HashMap<>();
+        map.put("search",views);
+        return  map;
+    }
+
+    /**
+     * 查询4个热门景点
+     */
+
+    @ResponseBody
+    @RequestMapping("/searchHotView")
+    public Map searchHotView(){
+        List<View> views=viewService.searchHotView();
+        Map<String,Object> map=new HashMap<>();
+        map.put("search",views);
+        return map;
+    }
+
+    /**
+     * 根据城市id找出3个景点
+     */
+    @ResponseBody
+    @RequestMapping("/searchHotViewByCityId")
+    public Map searchHotViewByCityId(int id){
+        List<View> views=viewService.searchHotViewByCityId(id);
+        Map<String,Object> map=new HashMap<>();
+        map.put("search",views);
+        return map;
+    }
+
 }

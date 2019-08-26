@@ -12,6 +12,8 @@ public class View {
 
     private String viewImage;
 
+    private int viewClickCount;
+
     private City city;
 
     private Integer cityId;
