@@ -14,5 +14,9 @@ public class View {
 
     private City city;
 
+    private Integer cityId;
+
+
+
 
 }
