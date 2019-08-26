@@ -18,6 +18,16 @@ public class TravelLogServiceImpl implements TravelLogService {
     private TravelLogMapper travelLogMapper;
 
     /**
+     * 首页展示,查询4条数据
+     *
+     * @return 游记集合
+     */
+    @Override
+    public List<TravelLog> getIndexTravelLog() {
+        return travelLogMapper.getIndexTravelLog();
+    }
+
+    /**
      * 查询游记总数
      *
      * @return
