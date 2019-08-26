@@ -12,6 +12,8 @@ public class City {
 
     private String cityPhoto;
 
+    private int cityClickCount;
+
     private View view;
 
     }

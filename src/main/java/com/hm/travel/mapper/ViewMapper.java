@@ -30,4 +30,13 @@ public interface ViewMapper {
 
     //根据id查询view
     public View searchById(int id);
+
+    //修改景点点击量，每次调用点击量加1，id是景点id
+    public int cilckCount(int id);
+
+    //查询最热门的4个景点
+    public List<View> searchHotView();
+
+    //根据城市id查询3个景点
+    public List<View> searchHotViewByCityId(int id);
 }

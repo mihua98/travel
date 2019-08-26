@@ -8,11 +8,13 @@
         <result column="view_Image" property="viewImage" />
         <result column="city_Id" property="cityId" />
         <result column="view_Name" property="viewName" />
+        <result column="view_Click_Count" property="viewClickCount" />
 
         <result column="id" property="city.id" />
         <result column="city_Name" property="city.cityName" />
         <result column="city_Introduce" property="city.cityIntroduce" />
         <result column="city_photo" property="city.cityPhoto" />
+        <result column="city_Click_Count" property="city.cityClickCount" />
     </resultMap>
 
     <delete id="removeViewById" parameterType="int">
@@ -52,4 +54,16 @@
     <select id="searchById" resultType="com.hm.travel.pojo.View">
               select * from view where id=#{id}
     </select>
+
+    <update id="cilckCount" parameterType="int">
+        update view set view_Click_Count = view_Click_Count+1 where id = #{id}
+    </update>
+
+    <select id="searchHotView" resultType="com.hm.travel.pojo.View">
+    select * from (select * from view order by view_Click_Count desc) p limit 4
+    </select>
+
+     <select id="searchHotViewByCityId" resultType="com.hm.travel.pojo.View">
+         select * from (select * from view order by view_Click_Count desc) v where city_id =#{id} limit 3
+     </select>
 </mapper>
