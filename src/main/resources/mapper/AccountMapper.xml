@@ -10,7 +10,7 @@
             <result column="user_name" property="userName" />
             <result column="user_sex" property="userSex" />
             <result column="user_age" property="userAge" />
-            <result column="user_email" property="userEmail" />
+            <result column="user_email" property="email" />
             <result column="user_image_name" property="userImageName" />
             <result column="user_phone_num" property="userPhoneNum" />
             <result column="user_nick_name" property="userNickName" />
@@ -19,7 +19,7 @@
     <select id="selectAccount" resultMap="selectAccountAndUser">
         select * from account where account_number = #{accountNumber} and password = #{password}
     </select>
-
+            <!-- TODO 上下id重名了-->
     <resultMap id="selectAccount" type="com.hm.travel.pojo.Account">
         <id column="id" property="id" />
         <result column="account_number" property="accountNumber" />
@@ -29,7 +29,7 @@
             <result column="user_name" property="userName" />
             <result column="user_sex" property="userSex" />
             <result column="user_age" property="userAge" />
-            <result column="user_email" property="userEmail" />
+            <result column="user_email" property="email" />
             <result column="user_image_name" property="userImageName" />
             <result column="user_phone_num" property="userPhoneNum" />
             <result column="user_nick_name" property="userNickName" />
@@ -40,6 +40,7 @@
     </select>
 
     <update id="improveAccount" parameterType="com.hm.travel.pojo.Account">
-        update account set userInfo_id = #{userInfo.id}
+        update account set userInfo_id = #{userInfo.id} where id = #{id}
     </update>
+
 </mapper>

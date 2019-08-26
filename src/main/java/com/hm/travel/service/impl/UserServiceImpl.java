@@ -19,12 +19,17 @@ public class UserServiceImpl implements UserService {
     private UserInfoMapper userInfoMapper;
 
     @Override
+    public int getUserInfoNum() {
+        return userInfoMapper.getUserInfoNum();
+    }
+
+    @Override
     public UserInfo selectUserByEmail(String email) {
         return userInfoMapper.selectUserByEmail(email);
     }
 
     @Override
-    public UserInfo seleceUserLikeName(String userName) {
+    public List<UserInfo> seleceUserLikeName(String userName) {
         return userInfoMapper.seleceUserLikeName(userName);
     }
 

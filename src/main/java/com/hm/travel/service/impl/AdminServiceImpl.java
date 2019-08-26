@@ -17,6 +17,16 @@ public class AdminServiceImpl implements AdminService {
    @Autowired
     private AdminMapper adminMapper;
 
+    /**
+     * 查询游记总数
+     *
+     * @return
+     */
+    @Override
+    public int getAdminNum() {
+        return adminMapper.getAdminNum();
+    }
+
     @Override
     public Admin AdminLogin(Admin admin) {
         return adminMapper.AdminLogin(admin);

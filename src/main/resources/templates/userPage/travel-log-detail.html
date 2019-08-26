@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>游记详情</title>
+
+    <!-- 网页图标-->
+    <link rel="shortcut icon" th:href="@{/img/favicon.ico}" type="image/x-icon">
+    <!-- BASE CSS -->
+    <link th:href="@{/css/bootstrap.min.css}" rel="stylesheet">
+    <link th:href="@{/css/userStyle.css}" rel="stylesheet">
+    <link th:href="@{/css/vendors.css}" rel="stylesheet">
+
+    <!-- SPECIFIC CSS -->
+    <link th:href="@{/css/travel-log.css}" rel="stylesheet">
+</head>
+
+<body>
+
+<div id="page">
+
+    <!-- 导入顶部 -->
+    <div th:replace="userPage/common/header::header"></div>
+    <!-- /header -->
+
+    <main>
+        <section class="hero_in general">
+            <div class="wrapper">
+                <div class="container">
+                    <h1 class="fadeInUp"><span></span>游记详情</h1>
+                </div>
+            </div>
+        </section>
+        <!--/hero_in-->
+
+        <div class="container margin_60_35">
+            <div class="row">
+                <div class="col-lg-9">
+                    <div class="bloglist singlepost">
+                        <p><img alt="" class="img-fluid" src="img/blog-single.jpg"></p>
+                        <h1>【杭州】江南忆最忆是杭州&不止西湖春夏秋冬&小众打卡攻略</h1>
+                        <div class="postmeta">
+                            <ul>
+                                <li><a href="#"><i class="icon_folder-alt"></i> 杭州</a></li>
+                                <li><a href="#"><i class="icon_clock_alt"></i> 2019.8.24</a></li>
+                                <li><a href="#"><i class="icon_pencil-edit"></i> 蒋良志</a></li>
+                                <li><a href="#"><i class="icon_comment_alt"></i> (14) 个评论</a></li>
+                            </ul>
+                        </div>
+                        <!-- /post meta -->
+
+                        <div class="post-content">
+                            <div class="dropcaps">
+                                <p>这可能是你见过最全的 杭州 游记攻略了。这是大学这几年在杭州走过地方的感悟，其实还有很多包括酒吧打卡等还是没写到。很抱歉，没有 杭州 小 冰岛
+                                    。不过其中提及的小众打卡地和网红打卡地同样不在少数。全篇以西湖，京杭大运河，钱塘江，湘湖为主线，以三大世界遗产，三泉，三西为支线。内附较为详细的 杭州
+                                    博物馆一览以及拍照打卡地详解。</p>
+                            </div>
+
+                            <p>相传天上的玉龙和金凤在银河边的仙岛上找到了一块 白玉 ，他们一起琢磨了许多年， 白玉
+                                就变成了一颗璀璨的明珠，这颗宝珠的珠光照到哪里，哪里的树木就常青，百花就盛开。但是后来这颗宝珠被王母娘娘发现了，王母娘娘就派天兵天将把宝珠抢走，玉龙和金凤赶去索珠，王母不肯，于是就发生了争抢，王母的手一松，明珠就降落到人间，变成了波光粼粼的西湖，玉龙和金凤也随之下凡，变成了玉龙山（即玉皇山）和凤凰山。</p>
+                            <p>相传天上的玉龙和金凤在银河边的仙岛上找到了一块 白玉 ，他们一起琢磨了许多年， 白玉
+                                就变成了一颗璀璨的明珠，这颗宝珠的珠光照到哪里，哪里的树木就常青，百花就盛开。但是后来这颗宝珠被王母娘娘发现了，王母娘娘就派天兵天将把宝珠抢走，玉龙和金凤赶去索珠，王母不肯，于是就发生了争抢，王母的手一松，明珠就降落到人间，变成了波光粼粼的西湖，玉龙和金凤也随之下凡，变成了玉龙山（即玉皇山）和凤凰山。</p>
+                            <p>相传天上的玉龙和金凤在银河边的仙岛上找到了一块 白玉 ，他们一起琢磨了许多年， 白玉
+                                就变成了一颗璀璨的明珠，这颗宝珠的珠光照到哪里，哪里的树木就常青，百花就盛开。但是后来这颗宝珠被王母娘娘发现了，王母娘娘就派天兵天将把宝珠抢走，玉龙和金凤赶去索珠，王母不肯，于是就发生了争抢，王母的手一松，明珠就降落到人间，变成了波光粼粼的西湖，玉龙和金凤也随之下凡，变成了玉龙山（即玉皇山）和凤凰山。</p>
+                        </div>
+                        <!-- /post -->
+                    </div>
+                    <!-- /single-post -->
+
+                    <!--评论区-->
+                    <div id="comments">
+                        <h5>评论</h5>
+                        <ul>
+                            <li>
+                                <div class="avatar">
+                                    <a href="#"><img src="img/avatar1.jpg" alt="">
+                                    </a>
+                                </div>
+                                <div class="comment_right clearfix">
+                                    <div class="comment_info">
+                                        By <a href="#">Anna Smith</a><span>|</span>25/10/2019<span>|</span><a href="#">Reply</a>
+                                    </div>
+                                    <p>
+                                        Nam cursus tellus quis magna porta adipiscing. Donec et eros leo, non
+                                        pellentesque arcu. Curabitur vitae mi
+                                        enim, at vestibulum magna. Cum sociis natoque penatibus et magnis dis parturient
+                                        montes, nascetur ridiculus
+                                        mus. Sed sit amet sem a urna rutrumeger fringilla. Nam vel enim ipsum, et congue
+                                        ante.
+                                    </p>
+                                </div>
+                                <ul class="replied-to">
+                                    <li>
+                                        <div class="avatar">
+                                            <a href="#"><img src="img/avatar2.jpg" alt="">
+                                            </a>
+                                        </div>
+                                        <div class="comment_right clearfix">
+                                            <div class="comment_info">
+                                                By <a href="#">Anna Smith</a><span>|</span>25/10/2019<span>|</span><a
+                                                    href="#">Reply</a>
+                                            </div>
+                                            <p>
+                                                Nam cursus tellus quis magna porta adipiscing. Donec et eros leo, non
+                                                pellentesque arcu. Curabitur vitae
+                                                mi enim, at vestibulum magna. Cum sociis natoque penatibus et magnis dis
+                                                parturient montes, nascetur
+                                                ridiculus mus. Sed sit amet sem a urna rutrumeger fringilla. Nam vel
+                                                enim ipsum, et congue ante.
+                                            </p>
+                                            <p>
+                                                Aenean iaculis sodales dui, non hendrerit lorem rhoncus ut. Pellentesque
+                                                ullamcorper venenatis elit
+                                                idaipiscingi Duis tellus neque, tincidunt eget pulvinar sit amet, rutrum
+                                                nec urna. Suspendisse pretium
+                                                laoreet elit vel ultricies. Maecenas ullamcorper ultricies rhoncus.
+                                                Aliquam erat volutpat.
+                                            </p>
+                                        </div>
+                                        <ul class="replied-to">
+                                            <li>
+                                                <div class="avatar">
+                                                    <a href="#"><img src="img/avatar2.jpg" alt="">
+                                                    </a>
+                                                </div>
+                                                <div class="comment_right clearfix">
+                                                    <div class="comment_info">
+                                                        By <a href="#">Anna
+                                                        Smith</a><span>|</span>25/10/2019<span>|</span><a
+                                                            href="#">Reply</a>
+                                                    </div>
+                                                    <p>
+                                                        Nam cursus tellus quis magna porta adipiscing. Donec et eros
+                                                        leo, non pellentesque arcu. Curabitur
+                                                        vitae mi enim, at vestibulum magna. Cum sociis natoque penatibus
+                                                        et magnis dis parturient montes,
+                                                        nascetur ridiculus mus. Sed sit amet sem a urna rutrumeger
+                                                        fringilla. Nam vel enim ipsum, et congue
+                                                        ante.
+                                                    </p>
+                                                    <p>
+                                                        Aenean iaculis sodales dui, non hendrerit lorem rhoncus ut.
+                                                        Pellentesque ullamcorper venenatis elit
+                                                        idaipiscingi Duis tellus neque, tincidunt eget pulvinar sit
+                                                        amet, rutrum nec urna. Suspendisse pretium
+                                                        laoreet elit vel ultricies. Maecenas ullamcorper ultricies
+                                                        rhoncus. Aliquam erat volutpat.
+                                                    </p>
+                                                </div>
+                                            </li>
+                                        </ul>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li>
+                                <div class="avatar">
+                                    <a href="#"><img src="img/avatar3.jpg" alt="">
+                                    </a>
+                                </div>
+
+                                <div class="comment_right clearfix">
+                                    <div class="comment_info">
+                                        By <a href="#">Anna Smith</a><span>|</span>25/10/2019<span>|</span><a href="#">Reply</a>
+                                    </div>
+                                    <p>
+                                        Cursus tellus quis magna porta adipiscin
+                                    </p>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                    <!--/评论区-->
+                    <hr>
+
+                    <h5>写评论</h5>
+                    <form>
+                        <div class="form-group">
+                            <input type="hidden" name="id" id="id" class="form-control" value="${id}">
+                        </div>
+                        <div class="form-group">
+                            <textarea class="form-control" name="comments" id="comments2" rows="6"
+                                      placeholder="来说几句吧..."></textarea>
+                        </div>
+                        <div class="form-group">
+                            <button type="submit" id="submit2" class="btn_1 rounded add_bottom_30"> 评论</button>
+                        </div>
+                    </form>
+                </div>
+                <!-- /col -->
+
+                <!--右侧列表区-->
+                <aside class="col-lg-3">
+                    <div class="widget">
+                        <form>
+                            <div class="form-group">
+                                <input type="text" name="search" id="search" class="form-control"
+                                       placeholder="搜索游记攻略...">
+                            </div>
+                            <button type="submit" id="submit" class="btn_1 rounded"> 搜索</button>
+                        </form>
+                    </div>
+                    <!-- /widget -->
+                    <div class="widget">
+                        <div class="widget-title">
+                            <h4>相关游记攻略</h4>
+                        </div>
+                        <ul class="comments-list">
+                            <li>
+                                <div class="alignleft">
+                                    <a href="/travelLogDetail"><img src="img/blog-5.jpg" alt=""></a>
+                                </div>
+                                <small>2019.8.24</small>
+                                <h3><a href="/travelLogDetail" title="">【杭州】江南忆最忆是杭州&不止西湖春夏秋冬&小众打卡攻略...</a></h3>
+                            </li>
+                            <li>
+                                <div class="alignleft">
+                                    <a href="/travelLogDetail"><img src="img/blog-6.jpg" alt=""></a>
+                                </div>
+                                <small>2019.8.23</small>
+                                <h3><a href="/travelLogDetail" title="">炎热夏日—长沙游</a></h3>
+                            </li>
+                            <li>
+                                <div class="alignleft">
+                                    <a href="/travelLogDetail"><img src="img/blog-4.jpg" alt=""></a>
+                                </div>
+                                <small>2019.8.22</small>
+                                <h3><a href="/travelLogDetail" title="">这一世一定要相遇的西藏之行</a></h3>
+                            </li>
+                        </ul>
+                    </div>
+                    <!-- /widget -->
+
+                    <div class="widget">
+                        <div class="widget-title">
+                            <h4>热门标签</h4>
+                        </div>
+                        <div class="tags">
+                            <a href="/travelLogList">杭州</a>
+                            <a href="/travelLogList">摄影</a>
+                            <a href="/travelLogList">网红餐厅</a>
+                            <a href="/travelLogList">海滩</a>
+                            <a href="/travelLogList">美食</a>
+                            <a href="/travelLogList">民宿</a>
+                        </div>
+                    </div>
+                    <!-- /widget -->
+                </aside>
+                <!-- /aside -->
+            </div>
+            <!-- /row -->
+        </div>
+        <!-- /container -->
+    </main>
+    <!--/main-->
+
+    <!--导入底部-->
+    <div th:replace="userPage/common/footer::footer"></div>
+    <!--/footer-->
+</div>
+<!-- page -->
+
+<!-- 登录表单 -->
+<div th:replace="userPage/common/loginForm::loginForm"></div>
+<!-- /Sign In Popup -->
+
+<div id="toTop"></div><!-- Back to top button -->
+
+<!-- COMMON SCRIPTS -->
+<script th:src="@{/plugins/jQuery/jquery-2.2.3.min.js}"></script>
+<script th:src="@{/js/common_scripts.js}"></script>
+<script th:src="@{/js/main.js}"></script>
+<script th:src="@{/js/validate.js}"></script>
+
+
+</body>
+</html>

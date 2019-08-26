@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>城市详情</title>
+
+    <!-- 网页图标-->
+    <link rel="shortcut icon" th:href="@{/img/favicon.ico}" type="image/x-icon">
+    <!-- BASE CSS -->
+    <link th:href="@{/css/bootstrap.min.css}" rel="stylesheet">
+    <link th:href="@{/css/userStyle.css}" rel="stylesheet">
+    <link th:href="@{/css/vendors.css}" rel="stylesheet">
+
+    <!-- SPECIFIC CSS -->
+    <link th:href="@{/css/travel-log.css}" rel="stylesheet">
+</head>
+
+<body>
+
+<div id="page">
+
+    <!-- 导入顶部 -->
+    <div th:replace="userPage/common/header::header"></div>
+    <!-- /header -->
+
+    <main>
+        <section class="hero_in general">
+            <div class="wrapper">
+                <div class="container">
+                    <h1 class="fadeInUp"><span></span>城市详情</h1>
+                </div>
+            </div>
+        </section>
+        <!--/hero_in-->
+
+        <div class="container margin_60_35">
+            <div class="row">
+                <div class="col-lg-9">
+                    <!--城市详情区-->
+                    <section id="description">
+                        <h2>详情</h2>
+                        <p>Per consequat adolescens ex, cu nibh commune <strong>temporibus vim</strong>, ad sumo
+                            viris eloquentiam sed. Mea appareat omittantur eloquentiam ad, nam ei quas oportere
+                            democritum. Prima causae admodum id est, ei timeam inimicus sed. Sit an meis aliquam,
+                            cetero inermis vel ut. An sit illum euismod facilisis, tamquam vulputate pertinacia eum
+                            at.</p>
+                        <p>Cum et probo menandri. Officiis consulatu pro et, ne sea sale invidunt, sed ut sint
+                            <strong>blandit</strong> efficiendi. Atomorum explicari eu qui, est enim quaerendum te.
+                            Quo harum viris id. Per ne quando dolore evertitur, pro ad cibo commune.</p>
+                        <div class="row">
+                            <div class="col-lg-6">
+                                <ul class="bullets">
+                                    <li>Dolorem mediocritatem</li>
+                                    <li>Mea appareat</li>
+                                    <li>Prima causae</li>
+                                    <li>Singulis indoctum</li>
+                                </ul>
+                            </div>
+                            <div class="col-lg-6">
+                                <ul class="bullets">
+                                    <li>Timeam inimicus</li>
+                                    <li>Oportere democritum</li>
+                                    <li>Cetero inermis</li>
+                                    <li>Pertinacia eum</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <!-- /row -->
+                        <hr>
+                        <h3>地图</h3>
+                        <div id="map" class="map map_single add_bottom_30"></div>
+                        <!-- End Map -->
+                    </section>
+                    <!-- /section -->
+                </div>
+                <!-- /col -->
+
+                <!--右侧列表区-->
+                <aside class="col-lg-3">
+                    <div class="widget">
+                        <form>
+                            <div class="form-group">
+                                <input type="text" name="search" id="search" class="form-control"
+                                       placeholder="搜索城市...">
+                            </div>
+                            <button type="submit" id="submit" class="btn_1 rounded"> 搜索</button>
+                        </form>
+                    </div>
+                    <!-- /widget -->
+                    <div class="widget">
+                        <div class="widget-title">
+                            <h4>相关景点</h4>
+                        </div>
+                        <ul class="comments-list">
+                            <li>
+                                <div class="alignleft">
+                                    <a href="/viewDetail"><img src="img/blog-5.jpg" alt=""></a>
+                                </div>
+                                <h3><a href="/viewDetail" title="">岳麓山风景名胜区</a></h3>
+                            </li>
+                            <li>
+                                <div class="alignleft">
+                                    <a href="/viewDetail"><img src="img/blog-6.jpg" alt=""></a>
+                                </div>
+                                <h3><a href="/viewDetail" title="">故宫</a></h3>
+                            </li>
+                            <li>
+                                <div class="alignleft">
+                                    <a href="/viewDetail"><img src="img/blog-4.jpg" alt=""></a>
+                                </div>
+                                <h3><a href="/viewDetail" title="">洪崖洞</a></h3>
+                            </li>
+                        </ul>
+                    </div>
+                    <!-- /widget -->
+                </aside>
+                <!-- /aside -->
+            </div>
+        </div>
+        <!-- /container -->
+    </main>
+    <!--/main-->
+
+    <!--导入底部-->
+    <div th:replace="userPage/common/footer::footer"></div>
+    <!--/footer-->
+</div>
+<!-- page -->
+
+<!-- 登录表单 -->
+<div th:replace="userPage/common/loginForm::loginForm"></div>
+<!-- /Sign In Popup -->
+
+<div id="toTop"></div><!-- Back to top button -->
+
+<!-- COMMON SCRIPTS -->
+<script th:src="@{/plugins/jQuery/jquery-2.2.3.min.js}"></script>
+<script th:src="@{/js/common_scripts.js}"></script>
+<script th:src="@{/js/main.js}"></script>
+<script th:src="@{/js/validate.js}"></script>
+
+
+</body>
+</html>
