@@ -5,7 +5,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>景点详情</title>
+    <title>跟团游详情</title>
     <!-- 网页图标-->
     <link rel="shortcut icon" th:href="@{/img/favicon.ico}" type="image/x-icon">
     <!-- BASE CSS -->
@@ -26,7 +26,7 @@
         <section class="hero_in restaurants_detail">
             <div class="wrapper">
                 <div class="container">
-                    <h1 class="fadeInUp"><span></span>景点详细信息页面</h1>
+                    <h1 class="fadeInUp"><span></span>跟团游详细信息页面</h1>
                 </div>
                 <span class="magnific-gallery">
 					<a th:href="@{/img/gallery/restaurant_list_1.jpg}" class="btn_photos" title="Photo title"
@@ -51,9 +51,11 @@
             <div class="container margin_60_35">
                 <div class="row">
                     <div class="col-lg-8">
+
+                        <!--跟团游详情区-->
                         <section id="description">
-                            <h2>详情</h2>
-                            <p>Per consequat adolescens ex, cu nibh commune <strong>temporibus vim</strong>, ad sumo
+                            <h2>昆明大理丽江6日轻奢游</h2>
+                            <p>昆明大理丽江6日轻奢游（国际五星酒店+温泉酒店+敞篷吉普环洱海+VIP私人游船+网红拍照打卡+玉龙雪山大索道+丽水金沙表演+双古城)<strong>temporibus vim</strong>, ad sumo
                                 viris eloquentiam sed. Mea appareat omittantur eloquentiam ad, nam ei quas oportere
                                 democritum. Prima causae admodum id est, ei timeam inimicus sed. Sit an meis aliquam,
                                 cetero inermis vel ut. An sit illum euismod facilisis, tamquam vulputate pertinacia eum
@@ -80,9 +82,6 @@
                                 </div>
                             </div>
                             <!-- /row -->
-                            <hr>
-                            <h3>图片</h3>
-                            <div id="instagram-feed-restaurant" class="clearfix"></div>
                             <hr>
                             <h3>地图</h3>
                             <div id="map" class="map map_single add_bottom_30"></div>
@@ -287,8 +286,8 @@
                     <aside class="col-lg-4" id="sidebar">
                         <div class="box_detail booking">
                             <div class="price">
-                                <span>45元<small>/人</small></span>
-                                <div class="score"><span>Good<em>350个评价</em></span><strong>7.0</strong></div>
+                                <span>2220元<small>/人</small></span>
+                                <div class="score"><span>人气推荐<em>已售350</em></span><strong>9.0</strong></div>
                             </div>
 
                             <div class="form-group" id="input_date">
@@ -380,27 +379,7 @@
 </script>
 
 <!-- INPUT QUANTITY  -->
-<script src="js/input_qty.js"></script>
-
-<!-- INSTAGRAM FEED 图片 -->
-<!-- 	<script>
-		$(window).on('load', function() {
-			"use strict";
-			$.instagramFeed({
-				'username': 'restaurantetanit',
-				'container': "#instagram-feed-restaurant",
-				'display_profile': false,
-				'display_biography': false,
-				'display_gallery': true,
-				'get_raw_json': false,
-				'callback': null,
-				'styling': true,
-				'items': 12,
-				'items_per_row': 6,
-				'margin': 1
-			});
-		});
-	</script> -->
+<script th:src="@{/js/input_qty.js}"></script>
 
 
 </body>

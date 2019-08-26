@@ -43,8 +43,6 @@
                             <label for="all">全部</label>
                             <input type="radio" id="popular" name="listing_filter" value="popular">
                             <label for="popular">热门景点</label>
-                            <input type="radio" id="latest" name="listing_filter" value="latest">
-                            <label for="latest">最新</label>
                         </div>
                     </li>
                 </ul>
@@ -52,6 +50,28 @@
             <!-- /container -->
         </div>
         <!-- /filters -->
+
+        <!--搜索栏-->
+        <div class="search_container">
+            <div class="container">
+                <div class="col-lg-12">
+                    <div class="row no-gutters custom-search-input-2 inner">
+                        <div class="col-lg-10">
+                            <div class="form-group">
+                                <input class="form-control" type="text" placeholder="搜索景点...">
+                                <i class="icon_search"></i>
+                            </div>
+                        </div>
+                        <div class="col-lg-2">
+                            <input type="submit" class="btn_search" value="搜索">
+                        </div>
+                    </div>
+                    <!-- /row -->
+                </div>
+                <!-- /custom-search-input-2 -->
+            </div>
+        </div>
+        <!-- /search_container -->
 
         <!--列表区-->
         <div class="container margin_60_35">
@@ -61,7 +81,7 @@
                     <div class="col-lg-5">
                         <figure>
                             <small>天安门</small>
-                            <a href="detail">
+                            <a href="viewDetail">
                                 <img th:src="@{/img/restaurant_1.jpg}" class="img-fluid" width="800" height="533">
                                 <div class="read_more"><span>更多</span></div>
                             </a>
@@ -70,7 +90,7 @@
                     <div class="col-lg-7">
                         <div class="wrapper">
                             <a href="#0" class="wish_bt"></a><!-- 收藏按钮 -->
-                            <h3><a href="detail">天安门</a></h3>
+                            <h3><a href="viewDetail">天安门</a></h3>
                             <p>Dicam diceret ut ius, no epicuri dissentiet philosophia vix. Id usu zril tacimates
                                 neglegentur. Eam id
                                 legimus torquatos cotidieque, usu decore percipitur definitiones ex, nihil utinam
@@ -217,7 +237,23 @@
             </div>
             <!-- /box_list -->
 
-            <p class="text-center add_top_30"><a href="#0" class="btn_1 rounded">加载更多</a></p>
+            <div class="row">
+                <div class="offset-lg-5 col-lg-3">
+                    <nav aria-label="...">
+                        <ul class="pagination pagination-sm">
+                            <li class="page-item disabled">
+                                <a class="page-link" href="#" tabindex="-1">上一页</a>
+                            </li>
+                            <li class="page-item"><a class="page-link" href="#">1</a></li>
+                            <li class="page-item"><a class="page-link" href="#">2</a></li>
+                            <li class="page-item"><a class="page-link" href="#">3</a></li>
+                            <li class="page-item">
+                                <a class="page-link" href="#">下一页</a>
+                            </li>
+                        </ul>
+                    </nav>
+                </div>
+            </div>
 
         </div>
         <!-- /container -->

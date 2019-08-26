@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>跟团游列表</title>
+
+    <!-- 网页图标-->
+    <link rel="shortcut icon" th:href="@{/img/favicon.ico}" type="image/x-icon">
+    <!-- BASE CSS -->
+    <link th:href="@{/css/bootstrap.min.css}" rel="stylesheet">
+    <link th:href="@{/css/userStyle.css}" rel="stylesheet">
+    <link th:href="@{/css/vendors.css}" rel="stylesheet">
+</head>
+
+<body>
+
+<div id="page">
+
+    <!-- 导入顶部 -->
+    <div th:replace="userPage/common/header::header"></div>
+    <!-- /header -->
+
+    <main>
+
+        <section class="hero_in restaurants">
+            <div class="wrapper">
+                <div class="container">
+                    <h1 class="fadeInUp"><span></span>跟团游列表</h1>
+                </div>
+            </div>
+        </section>
+        <!--/hero_in-->
+
+        <div class="filters_listing sticky_horizontal">
+            <div class="container">
+                <ul class="clearfix">
+                    <li>
+                        <div class="switch-field">
+                            <input type="radio" id="all" name="listing_filter" value="all" checked>
+                            <label for="all">全部</label>
+                            <input type="radio" id="popular" name="listing_filter" value="popular">
+                            <label for="popular">热门线路</label>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+            <!-- /container -->
+        </div>
+        <!-- /filters -->
+
+        <!--搜索栏-->
+        <div class="search_container">
+            <div class="container">
+                <div class="col-lg-12">
+                    <div class="row no-gutters custom-search-input-2 inner">
+                        <div class="col-lg-10">
+                            <div class="form-group">
+                                <input class="form-control" type="text" placeholder="搜索路线...">
+                                <i class="icon_search"></i>
+                            </div>
+                        </div>
+                        <div class="col-lg-2">
+                            <input type="submit" class="btn_search" value="搜索">
+                        </div>
+                    </div>
+                    <!-- /row -->
+                </div>
+                <!-- /custom-search-input-2 -->
+            </div>
+        </div>
+        <!-- /search_container -->
+
+        <!--列表区-->
+        <div class="container margin_60_35">
+
+            <div class="box_list">
+                <div class="row no-gutters">
+                    <div class="col-lg-5">
+                        <figure>
+                            <small>昆明大理丽江6日轻奢游</small>
+                            <a href="tourDetail">
+                                <img th:src="@{/img/restaurant_1.jpg}" class="img-fluid" width="800" height="533">
+                                <div class="read_more"><span>更多</span></div>
+                            </a>
+                        </figure>
+                    </div>
+                    <div class="col-lg-7">
+                        <div class="wrapper">
+                            <a href="#0" class="wish_bt"></a><!-- 收藏按钮 -->
+                            <h3><a href="tourDetail">昆明大理丽江6日轻奢游</a></h3>
+                            <p>昆明大理丽江6日轻奢游（国际五星酒店+温泉酒店+敞篷吉普环洱海+VIP私人游船+网红拍照打卡+玉龙雪山大索道+丽水金沙表演+双古城)</p>
+                            <span class="price">最低 <strong>2220元</strong> /人</span>
+                        </div>
+                        <ul>
+                            <li><i class="ti-eye"></i> 164 次浏览</li>
+                            <li>
+                                <div class="score"><span>人气推荐<em>350 个评价</em></span><strong>8.9</strong></div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <!-- /box_list -->
+
+            <div class="box_list">
+                <div class="row no-gutters">
+                    <div class="col-lg-5">
+                        <figure>
+                            <small>Paris Centre</small>
+                            <a th:href="@{/restaurant-detail.html}"><img th:src="@{/img/restaurant_2.jpg}"
+                                                                         class="img-fluid" alt=""
+                                                                         width="800" height="533">
+                                <div class="read_more"><span>Read more</span></div>
+                            </a>
+                        </figure>
+                    </div>
+                    <div class="col-lg-7">
+                        <div class="wrapper">
+                            <a href="#0" class="wish_bt"></a>
+                            <h3><a th:href="@{/restaurant-detail.html}">Catrine</a></h3>
+                            <p>Dicam diceret ut ius, no epicuri dissentiet philosophia vix. Id usu zril tacimates
+                                neglegentur. Eam id
+                                legimus torquatos cotidieque, usu decore percipitur definitiones ex, nihil utinam
+                                recusabo mel no.</p>
+                            <span class="price">From <strong>$124</strong> /per person</span>
+                        </div>
+                        <ul>
+                            <li><i class="ti-eye"></i> 164 views</li>
+                            <li>
+                                <div class="score"><span>Good<em>350 Reviews</em></span><strong>7.0</strong></div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <!-- /box_list -->
+            <div class="box_list">
+                <div class="row no-gutters">
+                    <div class="col-lg-5">
+                        <figure>
+                            <small>Paris Centre</small>
+                            <a th:href="@{/restaurant-detail.html}"><img th:src="@{/img/restaurant_3.jpg}"
+                                                                         class="img-fluid" alt=""
+                                                                         width="800" height="533">
+                                <div class="read_more"><span>Read more</span></div>
+                            </a>
+                        </figure>
+                    </div>
+                    <div class="col-lg-7">
+                        <div class="wrapper">
+                            <a href="#0" class="wish_bt"></a>
+                            <h3><a th:href="@{/restaurant-detail.html}">Bella Napoli</a></h3>
+                            <p>Dicam diceret ut ius, no epicuri dissentiet philosophia vix. Id usu zril tacimates
+                                neglegentur. Eam id
+                                legimus torquatos cotidieque, usu decore percipitur definitiones ex, nihil utinam
+                                recusabo mel no.</p>
+                            <span class="price">From <strong>$45</strong> /per person</span>
+                        </div>
+                        <ul>
+                            <li><i class="ti-eye"></i> 164 views</li>
+                            <li>
+                                <div class="score"><span>Good<em>350 Reviews</em></span><strong>7.0</strong></div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <!-- /box_list -->
+            <div class="box_list">
+                <div class="row no-gutters">
+                    <div class="col-lg-5">
+                        <figure>
+                            <small>Paris Centre</small>
+                            <a th:href="@{/restaurant-detail.html}"><img th:src="@{/img/restaurant_4.jpg}"
+                                                                         class="img-fluid" alt=""
+                                                                         width="800" height="533">
+                                <div class="read_more"><span>Read more</span></div>
+                            </a>
+                        </figure>
+                    </div>
+                    <div class="col-lg-7">
+                        <div class="wrapper">
+                            <a href="#0" class="wish_bt"></a>
+                            <h3><a th:href="@{/restaurant-detail.html}">Slow Food</a></h3>
+                            <p>Dicam diceret ut ius, no epicuri dissentiet philosophia vix. Id usu zril tacimates
+                                neglegentur. Eam id
+                                legimus torquatos cotidieque, usu decore percipitur definitiones ex, nihil utinam
+                                recusabo mel no.</p>
+                            <span class="price">From <strong>$25</strong> /per person</span>
+                        </div>
+                        <ul>
+                            <li><i class="ti-eye"></i> 164 views</li>
+                            <li>
+                                <div class="score"><span>Superb<em>350 Reviews</em></span><strong>9.0</strong></div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <!-- /box_list -->
+            <div class="box_list">
+                <div class="row no-gutters">
+                    <div class="col-lg-5">
+                        <figure>
+                            <small>Paris Centre</small>
+                            <a th:href="@{/restaurant-detail.html}"><img th:src="@{/img/restaurant_5.jpg}"
+                                                                         class="img-fluid" alt=""
+                                                                         width="800" height="533">
+                                <div class="read_more"><span>Read more</span></div>
+                            </a>
+                        </figure>
+                    </div>
+                    <div class="col-lg-7">
+                        <div class="wrapper">
+                            <a href="#0" class="wish_bt"></a>
+                            <h3><a th:href="@{/restaurant-detail.html}">Andrew Fish</a></h3>
+                            <p>Dicam diceret ut ius, no epicuri dissentiet philosophia vix. Id usu zril tacimates
+                                neglegentur. Eam id
+                                legimus torquatos cotidieque, usu decore percipitur definitiones ex, nihil utinam
+                                recusabo mel no.</p>
+                            <span class="price">From <strong>$65</strong> /per person</span>
+                        </div>
+                        <ul>
+                            <li><i class="ti-eye"></i> 164 views</li>
+                            <li>
+                                <div class="score"><span>Superb<em>350 Reviews</em></span><strong>9.0</strong></div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <!-- /box_list -->
+
+            <div class="row">
+                <div class="offset-lg-5 col-lg-3">
+                    <nav aria-label="...">
+                        <ul class="pagination pagination-sm">
+                            <li class="page-item disabled">
+                                <a class="page-link" href="#" tabindex="-1">上一页</a>
+                            </li>
+                            <li class="page-item"><a class="page-link" href="#">1</a></li>
+                            <li class="page-item"><a class="page-link" href="#">2</a></li>
+                            <li class="page-item"><a class="page-link" href="#">3</a></li>
+                            <li class="page-item">
+                                <a class="page-link" href="#">下一页</a>
+                            </li>
+                        </ul>
+                    </nav>
+                </div>
+            </div>
+
+        </div>
+        <!-- /container -->
+
+    </main>
+    <!--/main-->
+
+    <!--导入底部-->
+    <div th:replace="userPage/common/footer::footer"></div>
+    <!--/footer-->
+
+</div>
+<!-- page -->
+
+<!-- 登录表单 -->
+<div th:replace="userPage/common/loginForm::loginForm"></div>
+<!-- /Sign In Popup -->
+
+<div id="toTop"></div><!-- 回到顶部按钮 -->
+
+<!-- COMMON SCRIPTS -->
+<script th:src="@{/plugins/jQuery/jquery-2.2.3.min.js}"></script>
+<script th:src="@{/js/common_scripts.js}"></script>
+<script th:src="@{/js/main.js}"></script>
+<script th:src="@{/js/validate.js}"></script>
+
+<!-- Map 插件 -->
+<!-- <script src="http://maps.googleapis.com/maps/api/js"></script>
+<script src="js/markerclusterer.js"></script>
+<script src="js/map_restaurants.js"></script>
+<script src="js/infobox.js"></script> -->
+
+
+</body>
+</html>
