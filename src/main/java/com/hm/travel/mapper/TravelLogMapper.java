@@ -21,6 +21,7 @@ public interface TravelLogMapper {
 
 
     /**
+     *
      * 首页展示,查询4条数据
      * @return 游记集合
      */
