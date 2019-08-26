@@ -2,12 +2,12 @@ package com.hm.travel.controller;
 
 
 import org.apache.commons.mail.EmailException;
+import org.apache.commons.mail.HtmlEmail;
 import org.apache.commons.mail.SimpleEmail;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-
 import javax.servlet.http.HttpServletRequest;
 import java.util.UUID;
 
@@ -24,15 +24,20 @@ public class EmailController {
 
     public static void sendEmail(String fromEmail,String toEmail,String subject,String content){
         SimpleEmail email = new SimpleEmail();
+        System.out.println("222222");
         try {
             email.setHostName(SMPT_POST);
             email.setAuthentication(USER_NAME,PASS_WORD);
+            email.setSmtpPort(465);
             email.setFrom(fromEmail);
             email.addTo(toEmail);
             email.setSubject(subject);
             email.setMsg(content);
-            email.send();
+            System.out.println("333");
+            System.out.println(email.send());
+            System.out.println("444");
         } catch (EmailException e) {
+            System.out.println("555");
             e.printStackTrace();
         }
     }
@@ -46,7 +51,7 @@ public class EmailController {
     @RequestMapping("/getVerCode")
     @ResponseBody
     public String sendEmail1(@RequestParam("email") String email, HttpServletRequest request){
-
+        System.out.println("11111111111111111111111");
         String substring = UUID.randomUUID().toString().substring(0, 5).toUpperCase();
         System.out.println(substring);
         request.getSession().setAttribute("VerCode",substring);

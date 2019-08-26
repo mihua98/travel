@@ -17,7 +17,8 @@
         </association>
     </resultMap>
     <select id="selectAccount" resultMap="selectAccountAndUser">
-        select * from account where account_number = #{accountNumber} and password = #{password}
+        select * from account a,userInfo u where a.account_number = #{accountNumber} and a.password = #{password}
+         and a.userInfo_id = u.id
     </select>
             <!-- TODO 上下id重名了-->
     <resultMap id="selectAccount" type="com.hm.travel.pojo.Account">
@@ -36,7 +37,7 @@
         </association>
     </resultMap>
     <select id="selectAccountById" resultMap="selectAccount">
-        select * from account where id = #{id}
+        select * from account a,userInfo u where a.id = #{id} and a.userInfo_id = u.id
     </select>
 
     <update id="improveAccount" parameterType="com.hm.travel.pojo.Account">

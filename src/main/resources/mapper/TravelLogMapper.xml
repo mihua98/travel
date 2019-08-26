@@ -27,7 +27,7 @@
         </association>
     </resultMap>
     <select id="getAllTravelLog" resultMap="Travellog">
-          select * from travellog t,userInfo u where t.userInfo_id = u.id
+          select * from travellog
     </select>
 
     <select id="selectTravelLogLikeTitle" resultMap="Travellog">
