@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.hm.travel.mapper.CityMapper">
+
+    <resultMap type="com.hm.travel.pojo.City" id="myCity">
+        <result column="id" property="id" />
+        <result column="city_Name" property="cityName" />
+        <result column="city_Introduce" property="cityIntroduce" />
+        <result column="city_Photo" property="cityPhoto" />
+
+
+
+        <result column="view_introduce" property="view.viewIntroduce" />
+        <result column="view_image" property="view.viewImage" />
+        <result column="view_name" property="view.viewName" />
+    </resultMap>
+
+    <delete id="removeCityById" parameterType="int">
+                   delete from city where id=#{id}
+         </delete>
+
+    <select id="searchByWord3"  resultMap="myCity">
+         select
+             view.view_name,view.view_image,view.view_introduce,city.city_Name,city.city_Introduce,city.city_photo
+		from view ,city
+		where city_Name like '%${word}%' and view.city_Id=city.id
+
+     </select>
+</mapper>

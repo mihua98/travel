@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.hm.travel.mapper.ViewMapper">
+
+    <resultMap type="com.hm.travel.pojo.View" id="myView">
+        <result column="view_Introduce" property="viewIntroduce" />
+        <result column="view_Image" property="viewImage" />
+        <result column="city_Id" property="cityId" />
+        <result column="view_Name" property="viewName" />
+
+        <result column="id" property="city.id" />
+        <result column="city_Name" property="city.cityName" />
+        <result column="city_Introduce" property="city.cityIntroduce" />
+        <result column="city_photo" property="city.cityPhoto" />
+    </resultMap>
+
+    <delete id="removeViewById" parameterType="int">
+           delete from view where id=#{id}
+     </delete>
+
+    <select id="findViewByName" resultType="com.hm.travel.pojo.View">
+              select * from view where view_Name=#{name}
+    </select>
+
+    <select id="getAllView" resultType="com.hm.travel.pojo.View">
+           select * from view
+    </select>
+
+    <insert id="addView" parameterType="com.hm.travel.pojo.View">
+             insert into view (view_Introduce,view_Image,city_Id,view_Name)values(#{viewIntroduce},#{viewImage},#{cityId},#{viewName})
+    </insert>
+
+    <update id="updateViewById" parameterType="com.hm.travel.pojo.View">
+    update view   set view_Introduce=#{viewIntroduce},view_image=#{viewImage},city_id=#{cityId},view_name =#{viewName}  where id = #{id}
+
+    </update>
+
+
+    <select id="searchByWord" resultType="com.hm.travel.pojo.View" >
+            select * from view where view_Name like '%${word}%'
+     </select>
+
+    <select id="searchByWord2"  resultMap="myView">
+         select
+              view.view_Name,view.view_Image,view.view_Introduce,city.city_Name,city.city_Introduce,city.city_Photo
+		from view ,city
+		where view_Name like '%${word}%' and view.city_Id=city.id
+
+     </select>
+
+    <select id="searchById" resultType="com.hm.travel.pojo.View">
+              select * from view where id=#{id}
+    </select>
+</mapper>

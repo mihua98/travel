@@ -12,4 +12,6 @@ public class City {
 
     private String cityPhoto;
 
+    private View view;
+
     }
