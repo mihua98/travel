@@ -19,7 +19,7 @@ import java.util.UUID;
 public class EmailController {
     private static final String SMPT_POST="smtp.qq.com";
     private static final String USER_NAME="171113323@qq.com";
-    private static final String PASS_WORD="981021lz";
+    private static final String PASS_WORD="tpdrjbbjahihcafc";
 
 
     public static void sendEmail(String fromEmail,String toEmail,String subject,String content){
@@ -28,7 +28,7 @@ public class EmailController {
         try {
             email.setHostName(SMPT_POST);
             email.setAuthentication(USER_NAME,PASS_WORD);
-            email.setSmtpPort(465);
+//            email.setSmtpPort(465);
             email.setFrom(fromEmail);
             email.addTo(toEmail);
             email.setSubject(subject);

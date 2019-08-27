@@ -12,11 +12,11 @@
     <!--</form>-->
     <div id="app">
 
-    邮箱:<input type="email" id="email"><br>
-        <input type="submit" value="发送验证码" ><br>
+    邮箱:<input type="email" id="email" v-model="a"><br>
+        <input type="submit" value="发送验证码" @Click="getCode()"><br>
     验证码:<input type="text"><br>
         <input type="submit" value="提交">
-        <span>{{a}}</span>
+        <span>{{b}}</span>
     </div>
 </body>
 <script src="js/vue.min.js"></script>
@@ -25,27 +25,28 @@
     new Vue({
         el:"#app",
         data:{
-            a:""
+            a:"",
+            b:"",
         },
         methods:{
             getCode:function () {
                var _this = this;
                 axios.get('/getVerCode', {
                     params: {
-                        email: "717227913@qq.com"
+                        email: _this.a
                     }
                 })
                     .then(function (response) {
-                       _this.a=response.date;
+                       _this.b=response.date;
                     })
                     .catch(function (error) {//出现异常则打印
                         console.log(error);
                     })
             }
-        },
-        created:function () {
-            this.getCode();
         }
+        // created:function () {
+        //     this.getCode();
+        // }
     });
 </script>
 </html>
