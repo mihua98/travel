@@ -15,6 +15,19 @@ public interface TravelLogService {
     //面向管理员:更改游记状态,查询所有游记,删除游记,根据标题模糊查询
 
     /**
+     * 游记推荐调用,根据点击量查询前三条游记
+     * @return
+     */
+    List<TravelLog> getHotTravelLog();
+
+    /**
+     * 查询所有游记(包含不可读游记,管理员调用)
+     * @return
+     */
+    List<TravelLog> getAnyTravelLog();
+
+
+    /**
      * 首页展示,查询4条数据
      * @return 游记集合
      */
@@ -58,7 +71,7 @@ public interface TravelLogService {
     List<TravelLog> selectTravelLogLikeTitle(String tlTitle);
 
     /**
-     * 查询所有游记
+     * 查询所有可读游记
      * @return 游记集合
      */
     List<TravelLog> getAllTravelLog();

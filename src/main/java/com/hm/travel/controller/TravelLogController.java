@@ -30,6 +30,18 @@ public class TravelLogController {
 
 
 
+    /**
+     * 游记推荐调用,查询点击量前三的游记
+     * @return 游记集合
+     */
+    @RequestMapping("/HotTravelLog")
+    @ResponseBody
+    public  List<TravelLog> getHotTravelLog(){
+        List<TravelLog> list = travelLogService.getHotTravelLog();
+        return list;
+    }
+
+
 
     /**
      * 首页展示,查询4条数据
@@ -40,7 +52,7 @@ public class TravelLogController {
     public  List<TravelLog> getIndexTravelLog(){
         List<TravelLog> list = travelLogService.getIndexTravelLog();
         return list;
-    };
+    }
 
     /**
      * 得到总用户数量
@@ -63,7 +75,8 @@ public class TravelLogController {
      */
     @RequestMapping("/updateTravelLog")
     @ResponseBody
-    public String updateTravelLog(@RequestParam("id") Integer id,Integer tlStatus){
+    public String updateTravelLog(@RequestParam("id") Integer id,
+                                  @RequestParam("tlStatus") Integer tlStatus){
         int i = travelLogService.updateTravellogStatus(id, tlStatus);
         if(i>0){
             return "更改状态成功";
@@ -103,9 +116,24 @@ public class TravelLogController {
         return page;
     }
 
+    /**
+     * 查询所有游记(包括不可读)   管理员调用!!!!!!!!
+     * @return travelLogs 游记集合
+     */
+    @RequestMapping("/getAnyTravelLog")
+    @ResponseBody
+    public PageInfo<TravelLog> getAnyTravelLog(@RequestParam(value = "start", defaultValue = "0") int start,
+                                               @RequestParam(value = "size", defaultValue = "7") int size){
+        PageHelper.startPage(start, size);
+        List<TravelLog> list = travelLogService.getAnyTravelLog();
+        PageInfo<TravelLog> page = new PageInfo<>(list);
+        return page;
+    }
+
+
 
     /**
-     * 查询所有游记
+     * 查询所有可读游记   用户调用!!!!!!!!
      * @return travelLogs 游记集合
      */
     @RequestMapping("/getAllTravelLog")

@@ -121,7 +121,9 @@ public class UserController {
     @RequestMapping("/updateUser")
     @ResponseBody
     public String updateUser(UserInfo userInfo) {
+        System.out.println(userInfo);
         int i = userService.updateUserInfo(userInfo);
+
         if (i > 0) {
             return "修改成功";
         } else {
