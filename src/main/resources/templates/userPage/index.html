@@ -29,7 +29,7 @@
 
     <main>
 
-        <!--开屏页-->
+        <!--轮播图-->
         <section class="slider">
             <div id="slider" class="flexslider">
                 <ul class="slides">
@@ -128,25 +128,25 @@
                 </div>
             </div>
         </section>
+        <!--/轮播图-->
 
         <!--搜索栏-->
         <div class="search_container">
             <div class="container">
-                <div class="col-lg-12">
+                <form class="col-lg-12" action="/search" method="get">
                     <div class="row no-gutters custom-search-input-2 inner">
                         <div class="col-lg-7">
                             <div class="form-group">
-                                <input class="form-control" type="text" placeholder="搜目的地/攻略/旅行特价">
+                                <input class="form-control" name="search" type="text" placeholder="搜目的地/攻略/旅行特价">
                                 <i class="icon_search"></i>
                             </div>
                         </div>
                         <div class="col-lg-3">
-                            <select class="wide">
-                                <option>全部</option>
-                                <option>跟团游</option>
-                                <option>城市</option>
-                                <option>景点</option>
-                                <option>游记</option>
+                            <select class="wide" name="searchType">
+                                <option selected value="tour">跟团游</option>
+                                <option value="city">城市</option>
+                                <option value="view">景点</option>
+                                <option value="travelLog">游记</option>
                             </select>
                         </div>
                         <div class="col-lg-2">
@@ -154,24 +154,27 @@
                         </div>
                     </div>
                     <!-- /row -->
-                </div>
+                </form>
                 <!-- /custom-search-input-2 -->
             </div>
         </div>
-        <!-- /search_container -->
+        <!-- /搜索栏 -->
 
         <!--旅游线路列表-->
         <div class="container-fluid margin_60_0">
+
             <div class="main_title_2">
                 <span><em></em></span>
                 <h2>热门旅游线路</h2>
                 <p>行程透明省心游</p>
             </div>
+
             <div id="reccomended" class="owl-carousel owl-theme">
+
                 <div class="item">
                     <div class="box_grid">
                         <figure>
-                            <a href="#" class="wish_bt"></a>
+                            <a href="#" class="wish_bt"></a><!-- 收藏 -->
                             <a href="/tourDetail"><img src="img/tour_1.jpg" class="img-fluid" alt="" width="800"
                                                        height="533">
                                 <div class="read_more"><span>查看更多</span></div>
@@ -192,6 +195,7 @@
                     </div>
                 </div>
                 <!-- /item -->
+
                 <div class="item">
                     <div class="box_grid">
                         <figure>
@@ -471,16 +475,16 @@
                     <p>Cum doctus civibus efficiantur in imperdiet deterruisset.</p>
                 </div>
                 <div class="row" >
-                    <div class="col-lg-6" v-for="travelLog in travelLogs">
-                        <a class="box_news" :href="'travelLog/selectTravellogById?id='+travelLog.id">
-                            <figure><img :src="travelLog.tlPhoto" alt="">
+                    <div class="col-lg-6" th:each="travelLog:${travelLogs}">
+                        <a class="box_news" th:href="'travelLog/selectTravellogById?id='+${travelLog.id}">
+                            <figure><img th:src="${travelLog.tlPhoto}" alt="">
                             </figure>
                             <ul>
-                                <li>{{travelLog.userInfo.userName}}</li>
-                                <li>{{travelLog.tlReleaseDate}}</li>
+                                <li th:text="${travelLog.userInfo.userName}"></li>
+                                <li th:text="${travelLog.tlReleaseDate}"></li>
                             </ul>
-                            <h4>{{travelLog.tlTitle}}</h4>
-                            <p>{{travelLog.tlSummary}}</p>
+                            <h4 th:text="${travelLog.tlTitle}"></h4>
+                            <p th:text="${travelLog.tlSummary}"></p>
                         </a>
                     </div>
                     <!--&lt;!&ndash; /box_news &ndash;&gt;-->
@@ -570,10 +574,34 @@
 <script th:src="@{/js/common_scripts.js}"></script>
 <script th:src="@{/js/main.js}"></script>
 <script th:src="@{/js/validate.js}"></script>
-<script th:src="@{/js/vue.min.js}"></script>
-<script th:src="@{/js/axios.min.js}"></script>
 
+<!--<script th:src="@{/js/vue.min.js}"></script>-->
+<!--<script th:src="@{/js/axios.min.js}"></script>-->
 
+<!--<script>-->
+<!--    new Vue({-->
+<!--        el:"#page",-->
+<!--        data:{-->
+<!--            travelLogs:[]-->
+<!--        },-->
+<!--        methods:{-->
+<!--            findTravelLogs:function () {-->
+<!--                var _this = this;-->
+<!--                axios.get('/travelLog/indexTravelLog')-->
+<!--                    .then(function (response) {-->
+<!--                        _this.travelLogs = response.data;-->
+<!--                    })-->
+<!--                    .catch(function (error) {-->
+<!--                        // handle error-->
+<!--                        console.log(error);-->
+<!--                    })-->
+<!--            }-->
+<!--        },-->
+<!--        created:function () {-->
+<!--            this.findTravelLogs();-->
+<!--        },-->
+<!--    });-->
+<!--</script>-->
 
 <!-- FlexSlider -->
 <script defer th:src="@{/js/jquery.flexslider.js}"></script>
@@ -609,29 +637,5 @@
 <script defer th:src="@{/js/weather_home.js}"></script>
 
 </body>
-<script>
-    new Vue({
-        el:"#page",
-        data:{
-            travelLogs:[]
-        },
-        methods:{
-            findTravelLogs:function () {
-                var _this = this;
-                axios.get('/travelLog/indexTravelLog')
-                    .then(function (response) {
-                        _this.travelLogs = response.data;
-                        console.log(response);
-                    })
-                    .catch(function (error) {
-                        // handle error
-                        console.log(error);
-                    })
-            }
-        },
-        created:function () {
-            this.findTravelLogs();
-        },
-    });
-</script>
+
 </html>

@@ -31,7 +31,7 @@
     </select>
 
     <select id="selectTravelLogLikeTitle" resultMap="Travellog">
-        select * from travellog t,userInfo u where t.userInfo_id = u.id and t.tl_status =0 and tl_Title like '%#{tlTitle}%'
+        select * from travellog t,userInfo u where t.userInfo_id = u.id and t.tl_status =0 and tl_Title like CONCAT('%',#{tlTitle},'%')
     </select>
 
     <select id="selectTravellogById" resultMap="Travellog">

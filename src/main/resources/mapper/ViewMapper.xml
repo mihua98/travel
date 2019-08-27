@@ -40,7 +40,7 @@
 
 
     <select id="searchByWord" resultType="com.hm.travel.pojo.View" >
-            select * from view where view_Name like '%${word}%'
+            select * from view where view_Name like concat('%',${word},'%')
      </select>
 
     <select id="searchByWord2"  resultMap="myView">

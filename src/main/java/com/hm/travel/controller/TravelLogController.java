@@ -29,18 +29,19 @@ public class TravelLogController {
     private TravelLogService travelLogService;
 
 
-
-
     /**
      * 首页展示,查询4条数据
+     *
      * @return 游记集合
      */
     @RequestMapping("/indexTravelLog")
     @ResponseBody
-    public  List<TravelLog> getIndexTravelLog(){
+    public List<TravelLog> getIndexTravelLog() {
         List<TravelLog> list = travelLogService.getIndexTravelLog();
         return list;
-    };
+    }
+
+    ;
 
     /**
      * 得到总用户数量
@@ -57,7 +58,8 @@ public class TravelLogController {
 
     /**
      * 更改游记状态  0可读  1 不可读
-     * @param id 游记ID
+     *
+     * @param id       游记ID
      * @param tlStatus 状态码
      * @return
      */
@@ -91,17 +93,18 @@ public class TravelLogController {
     /**
      * 根据标题模糊查询游记
      *
-     * @param tlTitle
+     * @param search
      * @return 游记集合
      */
     @RequestMapping("/selectTravelLogLikeTitle")
     @ResponseBody
-    public PageInfo<TravelLog> selectTravelLogLikeTitle(@RequestParam(value = "start", defaultValue = "0") int start,
-                                                    @RequestParam(value = "size", defaultValue = "4") int size,
-                                                    @RequestParam("tlTitle")String tlTitle){
+    public PageInfo<TravelLog> selectTravelLogLikeTitle(@RequestParam(value = "start", defaultValue = "1") int start,
+                                                        @RequestParam(value = "size", defaultValue = "4") int size,
+                                                        @RequestParam("search") String search) {
         PageHelper.startPage(start, size);
-        List<TravelLog> list = travelLogService.selectTravelLogLikeTitle(tlTitle);
+        List<TravelLog> list = travelLogService.selectTravelLogLikeTitle(search);
         PageInfo<TravelLog> page = new PageInfo<>(list);
+        System.out.println(page);
         return page;
     }
 
@@ -113,8 +116,8 @@ public class TravelLogController {
      */
     @RequestMapping("/getAllTravelLog")
     @ResponseBody
-    public PageInfo<TravelLog> getAllTravelLog(@RequestParam(value = "start", defaultValue = "0") int start,
-                                               @RequestParam(value = "size", defaultValue = "4") int size){
+    public PageInfo<TravelLog> getAllTravelLog(@RequestParam(value = "start", defaultValue = "1") int start,
+                                               @RequestParam(value = "size", defaultValue = "4") int size) {
         PageHelper.startPage(start, size);
         List<TravelLog> list = travelLogService.getAllTravelLog();
         PageInfo<TravelLog> page = new PageInfo<>(list);
@@ -123,14 +126,15 @@ public class TravelLogController {
 
     /**
      * 用户对游记收藏
+     *
      * @param id 被收藏的游记ID
      * @return
      */
     @RequestMapping("/lowerFavoriteCountNum")
     @ResponseBody
-    public String lowerFavoriteCountNum(@RequestParam("id") Integer id){
+    public String lowerFavoriteCountNum(@RequestParam("id") Integer id) {
         int i = travelLogService.lowerFavoriteCountNum(id);
-        if(i>0){
+        if (i > 0) {
             return "取消收藏成功";
         }
         return "取消收藏失败";
@@ -138,14 +142,15 @@ public class TravelLogController {
 
     /**
      * 用户对游记收藏
+     *
      * @param id 被收藏的游记ID
      * @return
      */
     @RequestMapping("/addFavoriteCountNum")
     @ResponseBody
-    public String addFavoriteCountNum(@RequestParam("id") Integer id){
+    public String addFavoriteCountNum(@RequestParam("id") Integer id) {
         int i = travelLogService.addFavoriteCountNum(id);
-        if(i>0){
+        if (i > 0) {
             return "收藏成功";
         }
         return "收藏失败";
@@ -153,15 +158,16 @@ public class TravelLogController {
 
     /**
      * 用户查看游记,该游记点击量+1,转发至游记详情页
-     * @param id 游记id
+     *
+     * @param id  游记id
      * @param map 将查询到的游记存于map中
      * @return 游记详情页
      */
     @RequestMapping("/selectTravellogById")
-    public String selectTravellogById(Integer id, Map<String,Object> map){
+    public String selectTravellogById(Integer id, Map<String, Object> map) {
         travelLogService.clickCount(id);
         TravelLog travelLog = travelLogService.selectTravellogById(id);
-        map.put("travelLog",travelLog);
+        map.put("travelLog", travelLog);
         // TODO: 2019/8/24  转发至游记详情页
         return "userPage/travel-log-detail";
     }
@@ -169,14 +175,15 @@ public class TravelLogController {
 
     /**
      * 用户对游记取消赞
+     *
      * @param id 被取消赞的游记ID
      * @return
      */
     @RequestMapping("/lowerLikeCountNum")
     @ResponseBody
-    public String lowerLikeCountNum(@RequestParam("id") Integer id){
+    public String lowerLikeCountNum(@RequestParam("id") Integer id) {
         int i = travelLogService.lowerLikeCountNum(id);
-        if(i>0){
+        if (i > 0) {
             return "取消赞成功";
         }
         return "取消赞失败";
@@ -184,17 +191,18 @@ public class TravelLogController {
 
     /**
      * 用户对游记点赞
+     *
      * @param id 被点赞的游记ID
      * @return
      */
     @RequestMapping("/addLikeCountNum")
     @ResponseBody
-    public String addLikeCountNum(@RequestParam("id") Integer id){
+    public String addLikeCountNum(@RequestParam("id") Integer id) {
         int i = travelLogService.addLikeCountNum(id);
-        if(i>0){
+        if (i > 0) {
             return "点赞成功";
         }
-             return "点赞失败";
+        return "点赞失败";
     }
 
 

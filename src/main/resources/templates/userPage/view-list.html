@@ -51,6 +51,9 @@
         </div>
         <!-- /filters -->
 
+        <!--其他页面传过来的搜索内容-->
+        <input id="searchView" type="hidden" th:value="${search}">
+
         <!--搜索栏-->
         <div class="search_container">
             <div class="container">
@@ -280,13 +283,54 @@
 <script th:src="@{/js/common_scripts.js}"></script>
 <script th:src="@{/js/main.js}"></script>
 <script th:src="@{/js/validate.js}"></script>
-
-<!-- Map 插件 -->
-<!-- <script src="http://maps.googleapis.com/maps/api/js"></script>
-<script src="js/markerclusterer.js"></script>
-<script src="js/map_restaurants.js"></script>
-<script src="js/infobox.js"></script> -->
-
+<script th:src="@{/js/vue.min.js}"></script>
+<script th:src="@{/js/axios.min.js}"></script>
 
 </body>
+
+<script>
+    new Vue({
+        el: "#page",
+        data: {
+            views: [],
+            pageInfo: {}
+        },
+        methods: {
+            findAll: function (start) {
+                var _this = this;
+                var searchView = $("#searchView").val();
+                console.log(searchView);
+                axios.get('/searchByWord', {// 统一用模糊查询
+                    params: {
+                        start: start,
+                        search:searchView
+                    }
+                })
+                    .then(function (response) {
+                        _this.views = response.data.list;
+                        _this.pageInfo = response.data;
+                        console.log(response);
+                    })
+                    .catch(function (error) {
+                        // handle error
+                        console.log(error);
+                    })
+            },
+            jump: function (page) {//跳转上一页,下一页
+                if ('pre' == page && this.pageInfo.hasPreviousPage)
+                    this.findAll(this.pageInfo.prePage);
+
+                else if ('next' == page && this.pageInfo.hasNextPage)
+                    this.findAll(this.pageInfo.nextPage);
+            },
+            jumpByNumber: function (start) {//跳转到指定页面
+                if (start != this.pageInfo.pageNum)
+                    this.findAll(start);
+            }
+        },
+        created: function () {
+            this.findAll();
+        }
+    });
+</script>
 </html>

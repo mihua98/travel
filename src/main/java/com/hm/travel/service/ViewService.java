@@ -8,6 +8,7 @@ public interface ViewService {
 
     /**
      * 根据id查询view
+     *
      * @param id
      * @return
      */
@@ -15,15 +16,14 @@ public interface ViewService {
 
     /**
      * 根据id删除view
+     *
      * @param id
      */
-    public  void  removeViewById(int id);
-
+    public void removeViewById(int id);
 
 
     /**
      * 通过viewName查询view
-     *
      */
 
     public boolean findViewByName(String name);
@@ -31,6 +31,7 @@ public interface ViewService {
 
     /**
      * 查询所有view
+     *
      * @return
      */
     public List<View> getAllView();
@@ -39,17 +40,18 @@ public interface ViewService {
     /**
      * 新增view
      */
-    public  void  addView(View view);
+    public void addView(View view);
 
 
     /**
      * 修改view
      */
-    public void  updateView(View view);
+    public void updateView(View view);
 
 
     /**
      * 模糊查询
+     *
      * @return
      */
     public List<View> searchByWord(String word);

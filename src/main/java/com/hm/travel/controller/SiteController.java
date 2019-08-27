@@ -1,23 +1,40 @@
 package com.hm.travel.controller;
 
+import com.hm.travel.pojo.TravelLog;
+import com.hm.travel.service.TravelLogService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletRequest;
 import java.io.File;
+import java.util.List;
 import java.util.UUID;
 
 /**
  * 跳转页面
+ *
  * @author: xiaomikasa
  * @date: 2019/8/24
  */
 @Controller
 public class SiteController {
-
+    @Autowired
+    private TravelLogService travelLogService;
+    /**
+     * 跳转到首页,加并载首页数据
+     *
+     * @param model
+     * @return
+     */
     @RequestMapping("index")
-    public String index() {
+    public String index(Model model) {
+        //加载游记
+        List<TravelLog> travelLog = travelLogService.getIndexTravelLog();
+        model.addAttribute("travelLogs",travelLog);
         System.out.println("跳转到首页");
         return "userPage/index";
     }
@@ -47,7 +64,8 @@ public class SiteController {
     }
 
     @RequestMapping("travelLogList")
-    public String travelLogList() {
+    public String travelLogList(Model model, @RequestParam(value = "search", required = false) String search) {
+        model.addAttribute("search", search == null ? "" : search);
         System.out.println("跳转到游记列表页面");
         return "userPage/travel-log";
     }
@@ -74,6 +92,31 @@ public class SiteController {
     public String travelLogEdit() {
         System.out.println("跳转到写游记页面");
         return "userPage/travel-log-edit";
+    }
+
+    /**
+     * 首页搜索跳转
+     *
+     * @param search     搜索内容
+     * @param searchType 搜索类型
+     * @return
+     */
+    @RequestMapping("search")
+    public String search(@RequestParam("search") String search, @RequestParam("searchType") String searchType, Model model) {
+        model.addAttribute("search", search == null ? "" : search);
+        switch (searchType) {
+            case "tour":
+                return "userPage/tour-list";
+            case "city":
+                return "userPage/city-list";
+            case "view":
+                return "userPage/view-list";
+            case "travelLog":
+                return "userPage/travel-log";
+            default:
+                break;
+        }
+        return null;
     }
 
 
@@ -106,7 +149,7 @@ public class SiteController {
 
         //完成文件上传
         upload.transferTo(new File(path, filename));
-
-        return "welcome";
+        //TODO 未完成...
+        return null;
     }
 }

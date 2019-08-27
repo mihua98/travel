@@ -42,7 +42,7 @@ public class UserController {
      */
     @RequestMapping("/getUserList")
     @ResponseBody
-    public PageInfo<UserInfo> getAllUser(@RequestParam(value = "start", defaultValue = "0") int start,
+    public PageInfo<UserInfo> getAllUser(@RequestParam(value = "start", defaultValue = "1") int start,
                                          @RequestParam(value = "size", defaultValue = "7") int size) throws IOException {
         PageHelper.startPage(start, size, "id desc");
         List<UserInfo> list = userService.getAllUser();
@@ -88,7 +88,7 @@ public class UserController {
      */
     @RequestMapping("/selectUserLikeName")
     @ResponseBody
-    public PageInfo<UserInfo> selectUserLikeName(@RequestParam(value = "start", defaultValue = "0") int start,
+    public PageInfo<UserInfo> selectUserLikeName(@RequestParam(value = "start", defaultValue = "1") int start,
                                                  @RequestParam(value = "size", defaultValue = "7") int size,
                                                  @RequestParam("userName") String userName) {
         System.out.println(userName);

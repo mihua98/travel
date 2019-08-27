@@ -51,6 +51,9 @@
         </div>
         <!-- /filters -->
 
+        <!--其他页面传过来的搜索内容-->
+        <input id="searchTour" type="hidden" th:value="${search}">
+
         <!--搜索栏-->
         <div class="search_container">
             <div class="container">
@@ -277,12 +280,8 @@
 <script th:src="@{/js/common_scripts.js}"></script>
 <script th:src="@{/js/main.js}"></script>
 <script th:src="@{/js/validate.js}"></script>
-
-<!-- Map 插件 -->
-<!-- <script src="http://maps.googleapis.com/maps/api/js"></script>
-<script src="js/markerclusterer.js"></script>
-<script src="js/map_restaurants.js"></script>
-<script src="js/infobox.js"></script> -->
+<script th:src="@{/js/vue.min.js}"></script>
+<script th:src="@{/js/axios.min.js}"></script>
 
 
 </body>
