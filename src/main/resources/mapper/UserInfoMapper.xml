@@ -30,7 +30,7 @@
     </update>
 
     <insert id="addUser" parameterType="com.hm.travel.pojo.UserInfo">
-        insert into userInfo(user_name,user_sex,user_age,email,user_nick_name,user_phone_num,user_image_name)
-        values(#{userName},#{userSex},#{userAge},#{email},#{userNickName},#{userPhoneNum},#{userImageName})
+        insert into userInfo(id,user_name,user_sex,user_age,email,user_nick_name,user_phone_num,user_image_name)
+        values(#{id},#{userName},#{userSex},#{userAge},#{email},#{userNickName},#{userPhoneNum},#{userImageName})
     </insert>
 </mapper>

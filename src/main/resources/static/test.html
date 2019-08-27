@@ -5,10 +5,48 @@
     <title>测试页面</title>
 </head>
 <body>
-    <form action="/hotle/addHotle" method="post">
-        名称:<input type="text" name="hotleName"><br>
-        城市id:<input type="text" name="city.id"><br>
+    <!--<form action="/hotle/addHotle" method="post">-->
+        <!--名称:<input type="text" name="hotleName"><br>-->
+        <!--城市id:<input type="text" name="city.id"><br>-->
+        <!--<input type="submit" value="提交">-->
+    <!--</form>-->
+    <div id="app">
+
+    邮箱:<input type="email" id="email" v-model="a"><br>
+        <input type="submit" value="发送验证码" @Click="getCode()"><br>
+    验证码:<input type="text"><br>
         <input type="submit" value="提交">
-    </form>
+        <span>{{b}}</span>
+    </div>
 </body>
+<script src="js/vue.min.js"></script>
+<script src="js/axios.min.js"></script>
+<script>
+    new Vue({
+        el:"#app",
+        data:{
+            a:"",
+            b:"",
+        },
+        methods:{
+            getCode:function () {
+               var _this = this;
+                axios.get('/getVerCode', {
+                    params: {
+                        email: _this.a
+                    }
+                })
+                    .then(function (response) {
+                       _this.b=response.date;
+                    })
+                    .catch(function (error) {//出现异常则打印
+                        console.log(error);
+                    })
+            }
+        }
+        // created:function () {
+        //     this.getCode();
+        // }
+    });
+</script>
 </html>

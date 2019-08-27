@@ -20,12 +20,19 @@ public interface TravelLogMapper {
     //面向管理员:更改游记状态,查询所有游记,删除游记,根据标题模糊查询
 
 
+    /**
+     *
+     * 首页展示,查询4条数据
+     * @return 游记集合
+     */
+    List<TravelLog> getIndexTravelLog();
+
 
     /**
-     * 查询游记总数
+     * 查询可读游记总数
      * @return
      */
-    @Select("select count(1) from travelLog ")
+    @Select("select count(1) from travelLog t where t.tl_status = 0  ")
     int getTravelLogNum();
 
     /**
@@ -75,7 +82,7 @@ public interface TravelLogMapper {
      */
     @Insert("insert into " +
             "travellog(tl_Title,tl_Summary,tl_Key_Word," +
-            "tl_Click_Count,tl_Like_Count,tl_Favorite_Count,userinfo_Id,tl_Status,tl_Content) " +
+            "tl_Click_Count,tl_Like_Count,tl_Favorite_Count,userInfo_Id,tl_Status,tl_Content) " +
             "values(#{tlTitle},#{tlSummary},#{tlKeyWord},#{tlClickCount}," +
             "#{tlLikeCount},#{tlFavoriteCount},#{userInfo.id},#{tlStatus},#{tlContent}) ")
     int addTravelLog(TravelLog travelLog);

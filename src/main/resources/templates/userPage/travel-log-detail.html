@@ -5,6 +5,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <base href="/">
     <title>游记详情</title>
 
     <!-- 网页图标-->
@@ -40,13 +41,13 @@
             <div class="row">
                 <div class="col-lg-9">
                     <div class="bloglist singlepost">
-                        <p><img alt="" class="img-fluid" src="img/blog-single.jpg"></p>
-                        <h1>【杭州】江南忆最忆是杭州&不止西湖春夏秋冬&小众打卡攻略</h1>
+                        <p><img alt="" class="img-fluid"th:src="${travelLog.tlBgPhoto}"></p>
+                        <h1 th:text="${travelLog.tlTitle}"></h1>
                         <div class="postmeta">
                             <ul>
-                                <li><a href="#"><i class="icon_folder-alt"></i> 杭州</a></li>
-                                <li><a href="#"><i class="icon_clock_alt"></i> 2019.8.24</a></li>
-                                <li><a href="#"><i class="icon_pencil-edit"></i> 蒋良志</a></li>
+                                <li><a href="#" th:text="${travelLog.tlCityName}"><i class="icon_folder-alt"></i> 杭州</a></li>
+                                <li><a href="#" th:text="${travelLog.tlReleaseDate}"><i class="icon_clock_alt"></i> 2019.8.24</a></li>
+                                <li><a href="#" th:text="${travelLog.userInfo.userName}"><i class="icon_pencil-edit" ></i> 蒋良志</a></li>
                                 <li><a href="#"><i class="icon_comment_alt"></i> (14) 个评论</a></li>
                             </ul>
                         </div>
@@ -54,17 +55,12 @@
 
                         <div class="post-content">
                             <div class="dropcaps">
-                                <p>这可能是你见过最全的 杭州 游记攻略了。这是大学这几年在杭州走过地方的感悟，其实还有很多包括酒吧打卡等还是没写到。很抱歉，没有 杭州 小 冰岛
+                                <p th:text="${travelLog.tlSummary}">这可能是你见过最全的 杭州 游记攻略了。这是大学这几年在杭州走过地方的感悟，其实还有很多包括酒吧打卡等还是没写到。很抱歉，没有 杭州 小 冰岛
                                     。不过其中提及的小众打卡地和网红打卡地同样不在少数。全篇以西湖，京杭大运河，钱塘江，湘湖为主线，以三大世界遗产，三泉，三西为支线。内附较为详细的 杭州
                                     博物馆一览以及拍照打卡地详解。</p>
                             </div>
 
-                            <p>相传天上的玉龙和金凤在银河边的仙岛上找到了一块 白玉 ，他们一起琢磨了许多年， 白玉
-                                就变成了一颗璀璨的明珠，这颗宝珠的珠光照到哪里，哪里的树木就常青，百花就盛开。但是后来这颗宝珠被王母娘娘发现了，王母娘娘就派天兵天将把宝珠抢走，玉龙和金凤赶去索珠，王母不肯，于是就发生了争抢，王母的手一松，明珠就降落到人间，变成了波光粼粼的西湖，玉龙和金凤也随之下凡，变成了玉龙山（即玉皇山）和凤凰山。</p>
-                            <p>相传天上的玉龙和金凤在银河边的仙岛上找到了一块 白玉 ，他们一起琢磨了许多年， 白玉
-                                就变成了一颗璀璨的明珠，这颗宝珠的珠光照到哪里，哪里的树木就常青，百花就盛开。但是后来这颗宝珠被王母娘娘发现了，王母娘娘就派天兵天将把宝珠抢走，玉龙和金凤赶去索珠，王母不肯，于是就发生了争抢，王母的手一松，明珠就降落到人间，变成了波光粼粼的西湖，玉龙和金凤也随之下凡，变成了玉龙山（即玉皇山）和凤凰山。</p>
-                            <p>相传天上的玉龙和金凤在银河边的仙岛上找到了一块 白玉 ，他们一起琢磨了许多年， 白玉
-                                就变成了一颗璀璨的明珠，这颗宝珠的珠光照到哪里，哪里的树木就常青，百花就盛开。但是后来这颗宝珠被王母娘娘发现了，王母娘娘就派天兵天将把宝珠抢走，玉龙和金凤赶去索珠，王母不肯，于是就发生了争抢，王母的手一松，明珠就降落到人间，变成了波光粼粼的西湖，玉龙和金凤也随之下凡，变成了玉龙山（即玉皇山）和凤凰山。</p>
+                            <div th:utext="${travelLog.tlContent}"></div>
                         </div>
                         <!-- /post -->
                     </div>
@@ -76,7 +72,7 @@
                         <ul>
                             <li>
                                 <div class="avatar">
-                                    <a href="#"><img src="img/avatar1.jpg" alt="">
+                                    <a href="#"><img th:src="@{/img/avatar1.jpg}" alt="">
                                     </a>
                                 </div>
                                 <div class="comment_right clearfix">
@@ -95,7 +91,7 @@
                                 <ul class="replied-to">
                                     <li>
                                         <div class="avatar">
-                                            <a href="#"><img src="img/avatar2.jpg" alt="">
+                                            <a href="#"><img th:src="@{/img/avatar2.jpg}" alt="">
                                             </a>
                                         </div>
                                         <div class="comment_right clearfix">
@@ -123,7 +119,7 @@
                                         <ul class="replied-to">
                                             <li>
                                                 <div class="avatar">
-                                                    <a href="#"><img src="img/avatar2.jpg" alt="">
+                                                    <a href="#"><img th:src="@{/img/avatar2.jpg}" alt="">
                                                     </a>
                                                 </div>
                                                 <div class="comment_right clearfix">
@@ -157,7 +153,7 @@
                             </li>
                             <li>
                                 <div class="avatar">
-                                    <a href="#"><img src="img/avatar3.jpg" alt="">
+                                    <a href="#"><img th:src="@{/img/avatar3.jpg}" alt="">
                                     </a>
                                 </div>
 
@@ -210,21 +206,21 @@
                         <ul class="comments-list">
                             <li>
                                 <div class="alignleft">
-                                    <a href="/travelLogDetail"><img src="img/blog-5.jpg" alt=""></a>
+                                    <a href="/travelLogDetail"><img th:src="@{/img/blog-5.jpg}" alt=""></a>
                                 </div>
                                 <small>2019.8.24</small>
                                 <h3><a href="/travelLogDetail" title="">【杭州】江南忆最忆是杭州&不止西湖春夏秋冬&小众打卡攻略...</a></h3>
                             </li>
                             <li>
                                 <div class="alignleft">
-                                    <a href="/travelLogDetail"><img src="img/blog-6.jpg" alt=""></a>
+                                    <a href="/travelLogDetail"><img th:src="@{/img/blog-6.jpg}" alt=""></a>
                                 </div>
                                 <small>2019.8.23</small>
                                 <h3><a href="/travelLogDetail" title="">炎热夏日—长沙游</a></h3>
                             </li>
                             <li>
                                 <div class="alignleft">
-                                    <a href="/travelLogDetail"><img src="img/blog-4.jpg" alt=""></a>
+                                    <a href="/travelLogDetail"><img th:src="@{/img/blog-4.jpg}" alt=""></a>
                                 </div>
                                 <small>2019.8.22</small>
                                 <h3><a href="/travelLogDetail" title="">这一世一定要相遇的西藏之行</a></h3>
