@@ -23,4 +23,7 @@ public class Tour {
 
     private String tourPhoto;
 
+    private int tourHead;
+
+
    }

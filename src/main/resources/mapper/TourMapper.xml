@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hm.travel.mapper.TourMapper">
+    <resultMap id="tour" type="com.hm.travel.pojo.Tour">
+        <id column="id" property="id" />
+        <result column="tour_Num" property="tourNum"/>
+        <result column="tour_Name" property="tourName"/>
+        <result column="departure_Time" property="departureTime"/>
+        <result column="tour_Price" property="tourPrice"/>
+        <result column="tour_Desc" property="tourDesc"/>
+        <result column="tour_Status" property="tourStatus"/>
+        <result column="tour_Photo" property="tourPhoto"/>
+        <result column="tour_Head" property="tourHead"/>
+    </resultMap>
+
+</mapper>
