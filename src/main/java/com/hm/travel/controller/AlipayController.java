@@ -6,21 +6,66 @@ import com.alipay.api.request.*;
 import com.hm.travel.pojo.TourOrder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.io.UnsupportedEncodingException;
 
 /**
  * @author jlz
  * @date 2019/8/24 19:59
  */
 @Controller
+@RequestMapping("/alipay")
 public class AlipayController {
 
-    @RequestMapping("/alipay")
+
+    /**
+     * 查询订单
+     * @return
+     */
+    @RequestMapping("/query")
     @ResponseBody
-    public String Alipay(TourOrder tourOrder, HttpServletResponse response)throws IOException{
+    public String AlipayQuery(@RequestParam("OrderNum") String orderNum,
+                              @RequestParam("AlipayNum") String alipayNum ) throws UnsupportedEncodingException {
+        //获得初始化的AlipayClient
+        AlipayClient alipayClient = new DefaultAlipayClient(AlipayConfig.gatewayUrl, AlipayConfig.app_id, AlipayConfig.merchant_private_key, "json", AlipayConfig.charset, AlipayConfig.alipay_public_key, AlipayConfig.sign_type);
+
+        //设置请求参数
+        AlipayTradeQueryRequest alipayRequest = new AlipayTradeQueryRequest();
+
+        //商户订单号，商户网站订单系统中唯一订单号
+        String out_trade_no = new String(orderNum.getBytes("ISO-8859-1"),"UTF-8");
+        //支付宝交易号
+        String trade_no = new String(alipayNum.getBytes("ISO-8859-1"),"UTF-8");
+        //请二选一设置
+
+        alipayRequest.setBizContent("{\"out_trade_no\":\""+ out_trade_no +"\","+"\"trade_no\":\""+ trade_no +"\"}");
+
+        //请求
+        String result = null;
+        try {
+            result = alipayClient.execute(alipayRequest).getBody();
+        } catch (AlipayApiException e) {
+            e.printStackTrace();
+        }
+
+        //输出
+       return result;
+    }
+
+
+    /**
+     * 支付,付款
+     * @param tourOrder 订单(订单号,付款金额,订单名称)
+     * @return 付款页面
+     * @throws IOException
+     */
+    @RequestMapping("/pay")
+    @ResponseBody
+    public String Alipay(TourOrder tourOrder)throws IOException{
         //获得初始化的AlipayClient
         AlipayClient alipayClient = new DefaultAlipayClient(AlipayConfig.gatewayUrl, AlipayConfig.app_id, AlipayConfig.merchant_private_key, "json", AlipayConfig.charset, AlipayConfig.alipay_public_key, AlipayConfig.sign_type);
 

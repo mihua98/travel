@@ -261,7 +261,35 @@
 <script th:src="@{/js/common_scripts.js}"></script>
 <script th:src="@{/js/main.js}"></script>
 <script th:src="@{/js/validate.js}"></script>
-
+<script src="js/vue.min.js"></script>
+<script src="js/axios.min.js"></script>
 
 </body>
+<script>
+    new Vue({
+        el:"#page",
+        date:{
+            travelLogs:[],
+            pageInfo:{}
+        },
+        methods:{
+            findAll:function () {
+                var _this = this;
+                axios.get('/travelLog/getAllTravelLog')
+                    .then(function (response) {
+                        _this.travelLogs = response.data.list;
+                        _this.pageInfo = response.data;
+                        console.log(response);
+                    })
+                    .catch(function (error) {
+                        // handle error
+                        console.log(error);
+                    })
+            }
+        },
+        created:function () {
+            this.findAll();
+        }
+    });
+</script>
 </html>

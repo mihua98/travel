@@ -29,6 +29,19 @@ public class TravelLogController {
     private TravelLogService travelLogService;
 
 
+
+
+    /**
+     * 首页展示,查询4条数据
+     * @return 游记集合
+     */
+    @RequestMapping("/indexTravelLog")
+    @ResponseBody
+    public  List<TravelLog> getIndexTravelLog(){
+        List<TravelLog> list = travelLogService.getIndexTravelLog();
+        return list;
+    };
+
     /**
      * 得到总用户数量
      *
@@ -147,7 +160,7 @@ public class TravelLogController {
         TravelLog travelLog = travelLogService.selectTravellogById(id);
         map.put("travelLog",travelLog);
         // TODO: 2019/8/24  转发至游记详情页
-        return null;
+        return "userPage/travel-log-detail";
     }
 
 
