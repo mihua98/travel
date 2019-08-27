@@ -97,7 +97,7 @@ public class TravelLogController {
     @RequestMapping("/selectTravelLogLikeTitle")
     @ResponseBody
     public PageInfo<TravelLog> selectTravelLogLikeTitle(@RequestParam(value = "start", defaultValue = "0") int start,
-                                                    @RequestParam(value = "size", defaultValue = "7") int size,
+                                                    @RequestParam(value = "size", defaultValue = "4") int size,
                                                     @RequestParam("tlTitle")String tlTitle){
         PageHelper.startPage(start, size);
         List<TravelLog> list = travelLogService.selectTravelLogLikeTitle(tlTitle);
@@ -114,7 +114,7 @@ public class TravelLogController {
     @RequestMapping("/getAllTravelLog")
     @ResponseBody
     public PageInfo<TravelLog> getAllTravelLog(@RequestParam(value = "start", defaultValue = "0") int start,
-                                               @RequestParam(value = "size", defaultValue = "7") int size){
+                                               @RequestParam(value = "size", defaultValue = "4") int size){
         PageHelper.startPage(start, size);
         List<TravelLog> list = travelLogService.getAllTravelLog();
         PageInfo<TravelLog> page = new PageInfo<>(list);
