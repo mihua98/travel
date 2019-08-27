@@ -2,6 +2,7 @@ package com.hm.travel.controller;
 
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
+import com.hm.travel.config.MD5Config;
 import com.hm.travel.pojo.Account;
 import com.hm.travel.pojo.UserInfo;
 import com.hm.travel.service.AccountService;
@@ -28,6 +29,7 @@ public class UserController {
 
     @Autowired
     private UserService userService;
+
 
     @Autowired
     private AccountService accountService;
@@ -140,6 +142,12 @@ public class UserController {
 //        return userInfo;
 //    }
 
+    /**
+     * 修改密码
+     * @param password
+     * @param request
+     * @return
+     */
     @RequestMapping("/updateUserPassword")
     @ResponseBody
     public String updateUserPassword(String password, HttpServletRequest request) {
@@ -162,8 +170,11 @@ public class UserController {
      */
     @RequestMapping("/createAccount")
     public String CreateAccount(Account account) {
+        String md5Code = MD5Config.getMD5Code(account.getPassword());
+        account.setPassword(md5Code);
         int i = accountService.addAccount(account);
-        Account account1 = accountService.selectAccount(account);
+        Account account1 = accountService.getAccountId(account);
+        System.out.println(account1);
         //这里原来的写法有问题,改了,再把userInfo表的主键自增关了 @author:cmh
         UserInfo userInfo = new UserInfo();
         userInfo.setId(account1.getId());
@@ -185,6 +196,8 @@ public class UserController {
      */
     @RequestMapping("/login")
     public String login(Account account, HttpServletRequest request) {
+        String md5Code = MD5Config.getMD5Code(account.getPassword());
+        account.setPassword(md5Code);
         Account account1 = accountService.selectAccount(account);
         System.out.println("反回对象" + account1);
         if (null != account1) {

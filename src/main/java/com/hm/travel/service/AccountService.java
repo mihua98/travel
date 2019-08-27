@@ -10,6 +10,14 @@ import com.hm.travel.pojo.Account;
 public interface AccountService {
 
     /**
+     * 注册时查询账号ID
+     * @param account
+     * @return
+     */
+    Account getAccountId(Account account);
+
+
+    /**
      * 用户更改密码
      * @param password
      * @param id

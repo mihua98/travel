@@ -27,11 +27,11 @@
         </association>
     </resultMap>
     <select id="getAllTravelLog" resultMap="Travellog">
-          select * from travellog
+          select * from travellog t, userInfo u where t.userInfo_id = u.id
     </select>
 
     <select id="selectTravelLogLikeTitle" resultMap="Travellog">
-        select * from travellog t,userInfo u where t.userInfo_id = u.id and tl_Title like '%#{tlTitle}%'
+        select * from travellog t,userInfo u where t.userInfo_id = u.id and t.tl_status =0 and tl_Title like '%#{tlTitle}%'
     </select>
 
     <select id="selectTravellogById" resultMap="Travellog">
@@ -39,6 +39,6 @@
     </select>
 
     <select id="getIndexTravelLog" resultMap="Travellog">
-        select * from travelLog t,userInfo u where t.userInfo_id = u.id  limit 4
+        select * from travelLog t,userInfo u where t.userInfo_id = u.id and t.tl_status =0  limit 4
     </select>
 </mapper>

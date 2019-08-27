@@ -20,6 +20,16 @@ public interface AccountMapper {
      */
     Account selectAccount(Account account);
 
+
+    /**
+     * 注册时查询账号ID
+     * @param account
+     * @return
+     */
+    Account getAccountId(Account account);
+
+   // int getAccountId(String accountNumber);
+
     /**
      * 根据账号ID查询账号信息
      * @param id
@@ -33,6 +43,7 @@ public interface AccountMapper {
      * @param account
      * @return 受影响行数
      */
+
     @Insert("insert into account(account_number,password,email)" +
              " values(#{accountNumber},#{password},#{email})")
     int addAccount(Account account);
@@ -54,9 +65,9 @@ public interface AccountMapper {
     int improveAccount(Account account);
 
     /**
-     * 用户更改密码
+     * 用户根据email更改密码
      * @param password
-     * @param id
+     * @param
      * @return
      */
     @Update("update account set password = #{password} where email = #{email}")

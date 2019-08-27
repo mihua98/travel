@@ -97,7 +97,7 @@ public class TravelLogController {
     public PageInfo<TravelLog> selectTravelLogLikeTitle(@RequestParam(value = "start", defaultValue = "0") int start,
                                                     @RequestParam(value = "size", defaultValue = "7") int size,
                                                     @RequestParam("tlTitle")String tlTitle){
-        PageHelper.startPage(start, size, "id desc");
+        PageHelper.startPage(start, size);
         List<TravelLog> list = travelLogService.selectTravelLogLikeTitle(tlTitle);
         PageInfo<TravelLog> page = new PageInfo<>(list);
         return page;
@@ -112,7 +112,7 @@ public class TravelLogController {
     @ResponseBody
     public PageInfo<TravelLog> getAllTravelLog(@RequestParam(value = "start", defaultValue = "0") int start,
                                                @RequestParam(value = "size", defaultValue = "7") int size){
-        PageHelper.startPage(start, size, "id desc");
+        PageHelper.startPage(start, size);
         List<TravelLog> list = travelLogService.getAllTravelLog();
         PageInfo<TravelLog> page = new PageInfo<>(list);
         return page;

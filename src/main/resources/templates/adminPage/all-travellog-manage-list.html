@@ -100,7 +100,7 @@
                             </thead>
                             <tbody>
 
-                            <tr v-for="(tl,index) in travelLogs">
+                            <tr v-for="((tl,index) in travelLogList">
                                 <td><input name="ids" type="checkbox"></td>
                                 <td>{{tl.id}}</td>
                                 <td>{{tl.tlTitle}}</td>
@@ -112,10 +112,10 @@
                                 <td>{{tl.tlFavoriteCount}}</td>
                                 <td>{{tl.tlStatus}}</td>
                                 <td>
-                                    <button @click="findById(u.id)" type="button" class="btn bg-olive btn-xs"
+                                    <button @click="findById(tl.id)" type="button" class="btn bg-olive btn-xs"
                                             data-toggle="modal" data-target="#myModal">编辑
                                     </button>
-                                    <button @click="deleteById(u.id,index)" type="button" class="btn btn-danger btn-xs">
+                                    <button @click="deleteById(tl.id,index)" type="button" class="btn btn-danger btn-xs">
                                         删除
                                     </button>
                                 </td>
@@ -300,39 +300,9 @@
 
 <script>
     var dataVue = {
-        travelLog: {
-            id: "",
-            tlTitle: "",
-            tlReleaseDate: "",
-            tlKeyWord: "",
-            tlClickCount: "",
-            tlLikeCount: "",
-            tlFavoriteCount: "",
-            userInfo: "",
-            tlStatus:""
-        },
-        travelLogList: [{
-            id: "",
-            tlTitle: "",
-            tlReleaseDate: "",
-            tlKeyWord: "",
-            tlClickCount: "",
-            tlLikeCount: "",
-            tlFavoriteCount: "",
-            userInfo: "",
-            tlStatus:""
-        }],
-        pageInfo: {
-            // pageNum: "",//当前页
-            // pageSize: "",//每页的数量
-            // size: "",//当前页的数量
-            // pages: "",//总页数
-            // prePage: "",//前一页
-            // nextPage: "",//下一页
-            // navigatepageNums: [],//所有导航页号
-            // hasPreviousPage: "",//是否有前一页
-            // hasNextPage: ""//是否有下一页
-        }
+        travelLog: {},
+        travelLogList: [],
+        pageInfo: {}
     };
     new Vue({
         el: "#app",
@@ -353,6 +323,20 @@
                         _this.pageInfo = response.data;
                     })
                     .catch(function (error) {//出现异常则打印
+                        console.log(error);
+                    })
+            },
+            findById: function (tlId) {
+                var _this = this;
+                axios.get('travelLog/selectTravelLogLikeTitle', {
+                    params: {//这是get请求参数的写法
+                        id: tlId
+                    }
+                })
+                    .then(function (response) {
+                        _this.travelLog = response.data;
+                    })
+                    .catch(function (error) {
                         console.log(error);
                     })
             },

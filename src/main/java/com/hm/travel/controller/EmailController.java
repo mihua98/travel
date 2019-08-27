@@ -1,6 +1,7 @@
 package com.hm.travel.controller;
 
 
+import com.hm.travel.config.EmailConfig;
 import org.apache.commons.mail.EmailException;
 import org.apache.commons.mail.HtmlEmail;
 import org.apache.commons.mail.SimpleEmail;
@@ -17,30 +18,7 @@ import java.util.UUID;
  */
 @Controller
 public class EmailController {
-    private static final String SMPT_POST="smtp.qq.com";
-    private static final String USER_NAME="171113323@qq.com";
-    private static final String PASS_WORD="tpdrjbbjahihcafc";
 
-
-    public static void sendEmail(String fromEmail,String toEmail,String subject,String content){
-        SimpleEmail email = new SimpleEmail();
-        System.out.println("222222");
-        try {
-            email.setHostName(SMPT_POST);
-            email.setAuthentication(USER_NAME,PASS_WORD);
-//            email.setSmtpPort(465);
-            email.setFrom(fromEmail);
-            email.addTo(toEmail);
-            email.setSubject(subject);
-            email.setMsg(content);
-            System.out.println("333");
-            System.out.println(email.send());
-            System.out.println("444");
-        } catch (EmailException e) {
-            System.out.println("555");
-            e.printStackTrace();
-        }
-    }
 
     /**
      * 向用户邮箱发送验证码
@@ -55,7 +33,7 @@ public class EmailController {
         String substring = UUID.randomUUID().toString().substring(0, 5).toUpperCase();
         System.out.println(substring);
         request.getSession().setAttribute("VerCode",substring);
-        sendEmail(USER_NAME,email,"您的验证码为",substring);
+       EmailConfig.sendEmail(email,"您的验证码为",substring);
         return "1";
     }
 
