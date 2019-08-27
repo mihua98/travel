@@ -9,10 +9,7 @@ import com.hm.travel.service.AccountService;
 import com.hm.travel.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -120,7 +117,8 @@ public class UserController {
      */
     @RequestMapping("/updateUser")
     @ResponseBody
-    public String updateUser(UserInfo userInfo) {
+    public String updateUser(@RequestBody UserInfo userInfo) {
+        System.out.println(userInfo);
         int i = userService.updateUserInfo(userInfo);
         if (i > 0) {
             return "修改成功";

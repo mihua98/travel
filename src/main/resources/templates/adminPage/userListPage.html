@@ -380,8 +380,9 @@
             },
             update: function () {//更新
                 var _this = this;
-                axios.post('user/updateUser', _this.user)//这是post请求参数的写法
-                    .then(function () {//无返回值,所以无response
+                axios.post('user/updateUser',_this.user)//这是post请求参数的写法
+                    .then(function (response) {
+                        alert(response.data);
                         _this.findAll(_this.pageInfo.pageNum);
                     })
                     .catch(function (error) {
