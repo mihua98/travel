@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.util.List;
 import java.util.Map;
@@ -87,8 +88,8 @@ public class UserController {
     @RequestMapping("/selectUserLikeName")
     @ResponseBody
     public PageInfo<UserInfo> selectUserLikeName(@RequestParam(value = "start", defaultValue = "0") int start,
-                                             @RequestParam(value = "size", defaultValue = "7") int size,
-                                             @RequestParam("userName")    String userName) {
+                                                 @RequestParam(value = "size", defaultValue = "7") int size,
+                                                 @RequestParam("userName") String userName) {
         System.out.println(userName);
         PageHelper.startPage(start, size, "id desc");
         List<UserInfo> list = userService.seleceUserLikeName(userName);
@@ -165,6 +166,7 @@ public class UserController {
         int i = accountService.addAccount(account);
         Account account1 = accountService.selectAccount(account);
         //这里原来的写法有问题,改了,再把userInfo表的主键自增关了 @author:cmh
+        System.out.println(account1);
         UserInfo userInfo = new UserInfo();
         userInfo.setId(account1.getId());
         userService.addUser(userInfo);
@@ -188,13 +190,24 @@ public class UserController {
         Account account1 = accountService.selectAccount(account);
         System.out.println("反回对象" + account1);
         if (null != account1) {
-            request.getSession().setAttribute("USER", account1.getUserInfo());
-          // return "userPage/index";
-            return "adminPage/all-admin-index";
+            request.getSession().setAttribute("user", account1.getUserInfo());
+            return "userPage/index";
         } else {
             // TODO: 2019/8/22 404!!!!!!!!!!!!!!!!!!!
             return "redirect:/404.html";
         }
+    }
+
+    /**
+     * 用户注销
+     *
+     * @param session
+     * @return
+     */
+    @RequestMapping("/logout")
+    public String logout(HttpSession session) {
+        session.removeAttribute("user");
+        return "redirect:/login.html";
     }
 
 

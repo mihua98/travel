@@ -77,7 +77,7 @@ public interface TravelLogMapper {
             "travellog(tl_Title,tl_Summary,tl_Key_Word," +
             "tl_Click_Count,tl_Like_Count,tl_Favorite_Count,userinfo_Id,tl_Status,tl_Content) " +
             "values(#{tlTitle},#{tlSummary},#{tlKeyWord},#{tlClickCount}," +
-            "#{tlLikeCount},#{tlFavoriteCount},#{userinfoId},#{tlStatus},#{tlContent}) ")
+            "#{tlLikeCount},#{tlFavoriteCount},#{userInfo.id},#{tlStatus},#{tlContent}) ")
     int addTravelLog(TravelLog travelLog);
 
 

@@ -6,6 +6,8 @@ import org.springframework.context.annotation.Bean;
 import java.util.Properties;
 
 /**
+ * 分页配置
+ *
  * @author: xiaomikasa
  * @date: 2019/8/23
  */
