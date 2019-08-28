@@ -27,4 +27,13 @@ public interface CityMapper {
 
     //查询最热门的六个城市
     public List<City> searchHotCity();
+
+    //根据id查询city
+    public City searchById(int id);
+
+    //新增city
+    public void addCity(City city);
+
+    //根据id修改数据
+    public void updateCityById(City city);
 }

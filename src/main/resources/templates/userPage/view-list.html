@@ -76,13 +76,13 @@
         <!--列表区-->
         <div class="container margin_60_35">
 
-            <div class="box_list">
+            <div class="box_list" v-for="view in Views">
                 <div class="row no-gutters">
                     <div class="col-lg-5">
                         <figure>
-                            <small>天安门</small>
-                            <a href="viewDetail">
-                                <img th:src="@{/img/restaurant_1.jpg}" class="img-fluid" width="800" height="533">
+                            <small>{{view.viewName}}</small>
+                            <a :href="'selectViewById?id='+view.id">
+                                <img :src="view.viewImage" class="img-fluid" width="800" height="533">
                                 <div class="read_more"><span>更多</span></div>
                             </a>
                         </figure>
@@ -90,15 +90,12 @@
                     <div class="col-lg-7">
                         <div class="wrapper">
                             <a href="#0" class="wish_bt"></a><!-- 收藏按钮 -->
-                            <h3><a href="viewDetail">天安门</a></h3>
-                            <p>Dicam diceret ut ius, no epicuri dissentiet philosophia vix. Id usu zril tacimates
-                                neglegentur. Eam id
-                                legimus torquatos cotidieque, usu decore percipitur definitiones ex, nihil utinam
-                                recusabo mel no.</p>
-                            <span class="price">最低 <strong>54元</strong> /人</span>
+                            <h3><a href="viewDetail">{{view.viewName}}</a></h3>
+                            <p>{{view.viewIntroduce}}</p>
+
                         </div>
                         <ul>
-                            <li><i class="ti-eye"></i> 164 次浏览</li>
+                            <li><i class="ti-eye"></i>{{view.viewClickCount}}</li>
                             <li>
                                 <div class="score"><span>热门景点<em>350 个评价</em></span><strong>8.9</strong></div>
                             </li>
@@ -108,7 +105,7 @@
             </div>
             <!-- /box_list -->
 
-            <div class="box_list">
+           <!-- <div class="box_list">
                 <div class="row no-gutters">
                     <div class="col-lg-5">
                         <figure>
@@ -139,7 +136,7 @@
                     </div>
                 </div>
             </div>
-            <!-- /box_list -->
+            &lt;!&ndash; /box_list &ndash;&gt;
             <div class="box_list">
                 <div class="row no-gutters">
                     <div class="col-lg-5">
@@ -171,7 +168,7 @@
                     </div>
                 </div>
             </div>
-            <!-- /box_list -->
+            &lt;!&ndash; /box_list &ndash;&gt;
             <div class="box_list">
                 <div class="row no-gutters">
                     <div class="col-lg-5">
@@ -203,7 +200,7 @@
                     </div>
                 </div>
             </div>
-            <!-- /box_list -->
+            &lt;!&ndash; /box_list &ndash;&gt;
             <div class="box_list">
                 <div class="row no-gutters">
                     <div class="col-lg-5">
@@ -234,7 +231,7 @@
                         </ul>
                     </div>
                 </div>
-            </div>
+            </div>-->
             <!-- /box_list -->
 
             <div class="row">
@@ -279,6 +276,8 @@
 <script th:src="@{/js/common_scripts.js}"></script>
 <script th:src="@{/js/main.js}"></script>
 <script th:src="@{/js/validate.js}"></script>
+<script th:src="@{/js/vue.min.js}"></script>
+<script th:src="@{/js/axios.min.js}"></script>
 
 <!-- Map 插件 -->
 <!-- <script src="http://maps.googleapis.com/maps/api/js"></script>
@@ -288,4 +287,35 @@
 
 
 </body>
+<script>
+    new Vue({
+        el:"#page",
+        data:{
+            Views:[],
+            pageInfo:{}
+        },
+
+        methods:{
+            findView:function () {
+                var _this = this;
+                axios.get('/pageInfoViews')
+                    .then(function (response) {
+                        _this.Views = response.data.list;
+                        _this.pageInfo=response.data;
+                        console.log(response);
+                    })
+                    .catch(function (error) {
+                        // handle error
+                        console.log(error);
+                    })
+            }
+        },
+
+        created:function (){
+
+            this.findView();
+        },
+    });
+
+</script>
 </html>

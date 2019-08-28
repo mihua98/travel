@@ -20,6 +20,18 @@ public class CityController {
           @Autowired
       private CityService cityService;
 
+    /**
+     * 根据id查询城市
+     * @param id
+     * @return
+     */
+    @ResponseBody
+    @RequestMapping("/getCity/{id}")
+    public  City sesrchById(@PathVariable("id") int id){
+        City city=cityService.searchById(id);
+        return city;
+    }
+
      @ResponseBody
     @RequestMapping("/delete")
     public  String removeCityById(@RequestParam("delete") int id){
@@ -50,7 +62,7 @@ public class CityController {
     public PageInfo getpageInfoViews(
             @RequestParam(value="pn",defaultValue="1") Integer pn) {
 
-        PageHelper.startPage(pn, 2);
+        PageHelper.startPage(pn, 5);
 
         List<City> citys = cityService.getAllCity();
 
@@ -68,7 +80,7 @@ public class CityController {
      */
 
     @RequestMapping("/selectCityById")
-    public String selectCityById(Integer id, Map<String,Object> map){
+    public String selectCityById(@RequestParam("id") int id, Map<String,Object> map){
         cityService.clickCount(id);
         City city=cityService.getCityById(id);
         map.put("city",city);
@@ -97,11 +109,45 @@ public class CityController {
      */
      @ResponseBody
     @RequestMapping("/searchHotCity")
-     public Map searchHotCity(){
+     public List searchHotCity(){
          List<City> citys=cityService.searchHotCity();
-         Map<String,Object> map=new HashMap<>();
-         map.put("search",citys);
-         return map;
+        /* Map<String,Object> map=new HashMap<>();
+         map.put("search",citys);*/
+         return citys;
      }
+
+    /**
+     * 跳转到城市列表页面
+     *
+     * @return
+     */
+    @RequestMapping("/cityListPage")
+    public String cityListPage() {
+        System.out.println("跳转页面");
+        return "adminPage/cityListPage";
+    }
+
+    /**
+     * 添加city
+     * @return
+     */
+    @ResponseBody
+    @RequestMapping("/addCity")
+    public String addCity(City city){
+        System.out.println(city);
+        cityService.addCity(city);
+        return "成功";
+    }
+
+    /**
+     * 修改city
+     * @return
+     */
+    @ResponseBody
+    @RequestMapping("/updateCity/{Id}")
+    public  String updateCity(City city){
+        cityService.updateCity(city);
+        return "成功";
+    }
 
 }

@@ -7,10 +7,7 @@ import com.hm.travel.pojo.View;
 import com.hm.travel.service.ViewService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
 import java.util.List;
@@ -123,7 +120,7 @@ public class ViewController {
     public PageInfo getpageInfoViews(
             @RequestParam(value="pn",defaultValue="1") Integer pn) {
 
-        PageHelper.startPage(pn, 2);
+        PageHelper.startPage(pn, 5);
 
         List<View> views = viewService.getAllView();
 
@@ -166,11 +163,11 @@ public class ViewController {
 
     @ResponseBody
     @RequestMapping("/searchHotView")
-    public Map searchHotView(){
+    public List searchHotView(){
         List<View> views=viewService.searchHotView();
-        Map<String,Object> map=new HashMap<>();
-        map.put("search",views);
-        return map;
+        /*Map<String,Object> map=new HashMap<>();
+        map.put("search",views);*/
+        return views;
     }
 
     /**
@@ -178,11 +175,40 @@ public class ViewController {
      */
     @ResponseBody
     @RequestMapping("/searchHotViewByCityId")
-    public Map searchHotViewByCityId(int id){
+    public Map searchHotViewByCityId(@RequestParam("id") int id){
         List<View> views=viewService.searchHotViewByCityId(id);
+        System.out.println(views);
         Map<String,Object> map=new HashMap<>();
         map.put("search",views);
         return map;
     }
+
+    /**
+     * 测试
+     * @param id
+     * @return
+     */
+    @ResponseBody
+    @RequestMapping(value = "/searchHotViewByCityId2" ,method = RequestMethod.POST)
+    public Map searchHotViewByCityId2(Integer id){
+        List<View> views=viewService.searchHotViewByCityId(id);
+        System.out.println(views);
+        Map<String,Object> map=new HashMap<>();
+        map.put("search",views);
+        return map;
+    }
+
+    /**
+     * 跳转到景点列表页面
+     *
+     * @return
+     */
+    @RequestMapping("/viewListPage")
+    public String viewListPage() {
+        System.out.println("跳转页面");
+        return "adminPage/viewListPage";
+    }
+
+
 
 }

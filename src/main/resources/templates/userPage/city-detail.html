@@ -37,12 +37,13 @@
         <!--/hero_in-->
 
         <div class="container margin_60_35">
+            <input type="hidden"  id="cityId" th:value="${city.id}"/>
             <div class="row">
                 <div class="col-lg-9">
                     <!--城市详情区-->
                     <section id="description">
-                        <h2>详情</h2>
-                        <p>Per consequat adolescens ex, cu nibh commune <strong>temporibus vim</strong>, ad sumo
+                        <h2><img alt="" class="img-fluid"th:src="${city.cityPhoto}"></h2>
+                        <p th:text="${city.cityIntroduce}">Per consequat adolescens ex, cu nibh commune <strong>temporibus vim</strong>, ad sumo
                             viris eloquentiam sed. Mea appareat omittantur eloquentiam ad, nam ei quas oportere
                             democritum. Prima causae admodum id est, ei timeam inimicus sed. Sit an meis aliquam,
                             cetero inermis vel ut. An sit illum euismod facilisis, tamquam vulputate pertinacia eum
@@ -94,14 +95,14 @@
                         <div class="widget-title">
                             <h4>相关景点</h4>
                         </div>
-                        <ul class="comments-list">
+                        <ul class="comments-list" v-for="view in Views">
                             <li>
                                 <div class="alignleft">
-                                    <a href="/viewDetail"><img src="img/blog-5.jpg" alt=""></a>
+                                    <a href="/viewDetail"><img :src="view.viewImage" alt=""></a>
                                 </div>
-                                <h3><a href="/viewDetail" title="">岳麓山风景名胜区</a></h3>
+                                <h3><a href="/viewDetail" title="">{{view.viewName}}</a></h3>
                             </li>
-                            <li>
+                           <!-- <li>
                                 <div class="alignleft">
                                     <a href="/viewDetail"><img src="img/blog-6.jpg" alt=""></a>
                                 </div>
@@ -112,7 +113,7 @@
                                     <a href="/viewDetail"><img src="img/blog-4.jpg" alt=""></a>
                                 </div>
                                 <h3><a href="/viewDetail" title="">洪崖洞</a></h3>
-                            </li>
+                            </li>-->
                         </ul>
                     </div>
                     <!-- /widget -->
@@ -141,7 +142,51 @@
 <script th:src="@{/js/common_scripts.js}"></script>
 <script th:src="@{/js/main.js}"></script>
 <script th:src="@{/js/validate.js}"></script>
+<script th:src="@{/js/vue.min.js}"></script>
+<script th:src="@{/js/axios.min.js}"></script>
+
+
+<
+<script>
+    new Vue({
+        el:"#page",
+        data:{
+            Views:[]
+
+        },
+
+        methods:{
+
+            findHotView:function () {
+                var _this = this;
+                var cid = $("#cityId").val();
+                axios.get('/searchHotViewByCityId',{
+                    param:{
+                        id:cid
+                    }
+                })
+                    .then(function (response) {
+                        _this.Views = response.data;
+
+                        console.log(response);
+                    })
+                    .catch(function (error) {
+                        // handle error
+                        console.log(error);
+                    })
+            }
+        },
+
+        created:function (){
+
+            this.findHotView();
+        },
+    });
+
+</script>
 
 
 </body>
+
+
 </html>

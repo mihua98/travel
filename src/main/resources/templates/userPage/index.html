@@ -33,14 +33,14 @@
         <section class="slider">
             <div id="slider" class="flexslider">
                 <ul class="slides">
-                    <li>
+                    <li v-foe>
                         <img src="img/flex_slides/slide_1.jpg" alt="">
                         <div class="meta">
                             <h3>曼谷，一个永远不会一成不变的城市</h3>
                             <div class="info">
                                 <p><strong>22</strong> 景点 - <strong>150</strong> 游记</p>
                             </div>
-                            <a href="/cityDetail" class="btn_1">查看更多</a>
+                            <a href="/selectCityById?id=1" class="btn_1">查看更多</a>
                         </div>
                     </li>
                     <li>
@@ -89,7 +89,7 @@
             <div id="carousel_slider_wp">
                 <div id="carousel_slider" class="flexslider">
                     <ul class="slides">
-                        <li>
+                        <li >
                             <img src="img/flex_slides/slide_1_thumb.jpg" alt="">
                             <div class="caption">
                                 <h3>曼谷 <span>泰国</span></h3>
@@ -329,24 +329,28 @@
                 <div class="main_title_3">
                     <span><em></em></span>
                     <h2>热门城市</h2>
-                    <p>Cum doctus civibus efficiantur in imperdiet deterruisset.</p>
+                    <p>你想要的这里全都有</p>
                 </div>
-                <div class="row">
-                    <div class="col-xl-3 col-lg-6 col-md-6">
-                        <a href="/cityDetail" class="grid_item">
+
+              <div class="row">
+                <div class="col-xl-3 col-lg-6 col-md-6" v-for="city in travelCity">
+
+                        <a class="grid_item" :href="'selectCityById?id='+city.id" >
                             <figure>
-                                <div class="score"><strong>8.9</strong></div>
-                                <img src="img/hotel_1.jpg" class="img-fluid" alt="">
+                                <div class="score"><strong>{{city.cityClickCount}}</strong></div>
+                                <figure><img :src="city.cityPhoto" class="img-fluid" alt="">
+                                    </figure>
                                 <div class="info">
                                     <div class="cat_star"><i class="icon_star"></i><i class="icon_star"></i><i
                                             class="icon_star"></i><i class="icon_star"></i></div>
-                                    <h3>长沙</h3>
+                                    <h3>{{city.cityName}}</h3>
                                 </div>
                             </figure>
                         </a>
-                    </div>
+                   </div>
+                </div>
                     <!-- /grid_item -->
-                    <div class="col-xl-3 col-lg-6 col-md-6">
+                   <!-- <div class="col-xl-3 col-lg-6 col-md-6">
                         <a href="/cityDetail" class="grid_item">
                             <figure>
                                 <div class="score"><strong>7.9</strong></div>
@@ -359,7 +363,7 @@
                             </figure>
                         </a>
                     </div>
-                    <!-- /grid_item -->
+                    &lt;!&ndash; /grid_item &ndash;&gt;
                     <div class="col-xl-3 col-lg-6 col-md-6">
                         <a href="/cityDetail" class="grid_item">
                             <figure>
@@ -373,7 +377,7 @@
                             </figure>
                         </a>
                     </div>
-                    <!-- /grid_item -->
+                    &lt;!&ndash; /grid_item &ndash;&gt;
                     <div class="col-xl-3 col-lg-6 col-md-6">
                         <a href="/cityDetail" class="grid_item">
                             <figure>
@@ -386,9 +390,9 @@
                                 </div>
                             </figure>
                         </a>
-                    </div>
+                    </div>-->
                     <!-- /grid_item -->
-                </div>
+
                 <!-- /row -->
                 <a href="/cityList"><strong>查看更多 <i class="arrow_carrot-right"></i></strong></a>
             </section>
@@ -402,20 +406,20 @@
                     <p>Cum doctus civibus efficiantur in imperdiet deterruisset.</p>
                 </div>
                 <div class="row">
-                    <div class="col-xl-3 col-lg-6 col-md-6">
-                        <a href="/viewDetail" class="grid_item">
+                    <div class="col-xl-3 col-lg-6 col-md-6" v-for="view in Views">
+                        <a class="grid_item" :href="'selectViewById?id='+view.id" >
                             <figure>
-                                <div class="score"><strong>8.5</strong></div>
-                                <img src="http://b2-q.mafengwo.net/s11/M00/5E/72/wKgBEFsx6MuAV_WGABHEAuTGhzs37.jpeg?imageMogr2%2Fthumbnail%2F%21690x370r%2Fgravity%2FCenter%2Fcrop%2F%21690x370%2Fquality%2F100"
+                                <div class="score"><strong>{{view.viewClickCount}}</strong></div>
+                                <img :src="view.viewImage"
                                      class="img-fluid" alt="">
                                 <div class="info">
-                                    <h3>岳麓山风景名胜区</h3>
+                                    <h3>{{view.viewName}}</h3>
                                 </div>
                             </figure>
                         </a>
                     </div>
-                    <!-- /grid_item -->
-                    <div class="col-xl-3 col-lg-6 col-md-6">
+                   <!-- /grid_item -->
+                    <!--<div class="col-xl-3 col-lg-6 col-md-6">
                         <a href="/viewDetail" class="grid_item">
                             <figure>
                                 <div class="score"><strong>7.9</strong></div>
@@ -427,7 +431,7 @@
                             </figure>
                         </a>
                     </div>
-                    <!-- /grid_item -->
+                    &lt;!&ndash; /grid_item &ndash;&gt;
                     <div class="col-xl-3 col-lg-6 col-md-6">
                         <a href="/viewDetail" class="grid_item">
                             <figure>
@@ -440,7 +444,7 @@
                             </figure>
                         </a>
                     </div>
-                    <!-- /grid_item -->
+                    &lt;!&ndash; /grid_item &ndash;&gt;
                     <div class="col-xl-3 col-lg-6 col-md-6">
                         <a href="/viewDetail" class="grid_item">
                             <figure>
@@ -452,7 +456,7 @@
                                 </div>
                             </figure>
                         </a>
-                    </div>
+                    </div>-->
                     <!-- /grid_item -->
                 </div>
                 <!-- /row -->
@@ -613,8 +617,12 @@
     new Vue({
         el:"#page",
         data:{
-            travelLogs:[]
+            travelLogs:[],
+            travelCity:[],
+            Views:[]
         },
+
+
         methods:{
             findTravelLogs:function () {
                 var _this = this;
@@ -627,11 +635,41 @@
                         // handle error
                         console.log(error);
                     })
+            },
+            findViews:function () {
+                var _this = this;
+                axios.get('/searchHotView')
+                    .then(function (response) {
+                        _this.Views = response.data;
+                        console.log(response);
+                    })
+                    .catch(function (error) {
+                        // handle error
+                        console.log(error);
+                    })
+            },
+
+            findCitys:function () {
+                var _this = this;
+                axios.get('/searchHotCity')
+                    .then(function (response) {
+                        _this.travelCity = response.data;
+                        console.log(response);
+                    })
+                    .catch(function (error) {
+                        // handle error
+                        console.log(error);
+                    })
             }
         },
-        created:function () {
+
+        created:function (){
+            this.findViews();
+            this.findCitys();
             this.findTravelLogs();
         },
     });
+
+
 </script>
 </html>
