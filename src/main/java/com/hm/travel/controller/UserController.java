@@ -2,18 +2,17 @@ package com.hm.travel.controller;
 
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
+import com.hm.travel.config.MD5Config;
 import com.hm.travel.pojo.Account;
 import com.hm.travel.pojo.UserInfo;
 import com.hm.travel.service.AccountService;
 import com.hm.travel.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.util.List;
 import java.util.Map;
@@ -40,8 +39,8 @@ public class UserController {
      */
     @RequestMapping("/getUserList")
     @ResponseBody
-    public PageInfo<UserInfo> getAllUser(@RequestParam(value = "start", defaultValue = "0") int start,
-                                         @RequestParam(value = "size", defaultValue = "7") int size) throws IOException {
+    public PageInfo<UserInfo> getAllUser(@RequestParam(value = "start", defaultValue = "1") int start,
+                                         @RequestParam(value = "size", defaultValue = "4") int size) throws IOException {
         PageHelper.startPage(start, size, "id desc");
         List<UserInfo> list = userService.getAllUser();
         PageInfo<UserInfo> page = new PageInfo<>(list);
@@ -86,8 +85,8 @@ public class UserController {
      */
     @RequestMapping("/selectUserLikeName")
     @ResponseBody
-    public PageInfo<UserInfo> selectUserLikeName(@RequestParam(value = "start", defaultValue = "0") int start,
-                                             @RequestParam(value = "size", defaultValue = "7") int size,
+    public PageInfo<UserInfo> selectUserLikeName(@RequestParam(value = "start", defaultValue = "1") int start,
+                                             @RequestParam(value = "size", defaultValue = "4") int size,
                                              @RequestParam("userName")    String userName) {
         System.out.println(userName);
         PageHelper.startPage(start, size, "id desc");
@@ -118,7 +117,8 @@ public class UserController {
      */
     @RequestMapping("/updateUser")
     @ResponseBody
-    public String updateUser(UserInfo userInfo) {
+    public String updateUser(@RequestBody UserInfo userInfo) {
+        System.out.println(userInfo);
         int i = userService.updateUserInfo(userInfo);
         if (i > 0) {
             return "修改成功";
@@ -140,10 +140,16 @@ public class UserController {
 //        return userInfo;
 //    }
 
+    /**
+     * 修改密码
+     * @param password
+     * @param request
+     * @return
+     */
     @RequestMapping("/updateUserPassword")
     @ResponseBody
     public String updateUserPassword(String password, HttpServletRequest request) {
-        UserInfo user = (UserInfo) request.getSession().getAttribute("USER");
+        UserInfo user = (UserInfo) request.getSession().getAttribute("user");
         String email = user.getEmail();
 
         int i = accountService.updateUserPassword(password, email);
@@ -162,8 +168,11 @@ public class UserController {
      */
     @RequestMapping("/createAccount")
     public String CreateAccount(Account account) {
+        String md5Code = MD5Config.getMD5Code(account.getPassword());
+        account.setPassword(md5Code);
         int i = accountService.addAccount(account);
-        Account account1 = accountService.selectAccount(account);
+        Account account1 = accountService.getAccountId(account);
+        System.out.println(account1);
         //这里原来的写法有问题,改了,再把userInfo表的主键自增关了 @author:cmh
         UserInfo userInfo = new UserInfo();
         userInfo.setId(account1.getId());
@@ -185,16 +194,29 @@ public class UserController {
      */
     @RequestMapping("/login")
     public String login(Account account, HttpServletRequest request) {
+        String md5Code = MD5Config.getMD5Code(account.getPassword());
+        account.setPassword(md5Code);
         Account account1 = accountService.selectAccount(account);
         System.out.println("反回对象" + account1);
         if (null != account1) {
-            request.getSession().setAttribute("USER", account1.getUserInfo());
-           return "userPage/index";
-           // return "adminPage/all-admin-index";
+            request.getSession().setAttribute("user", account1.getUserInfo());
+            return "userPage/index";
         } else {
             // TODO: 2019/8/22 404!!!!!!!!!!!!!!!!!!!
             return "redirect:/404.html";
         }
+    }
+
+    /**
+     * 用户注销
+     *
+     * @param session
+     * @return
+     */
+    @RequestMapping("/logout")
+    public String logout(HttpSession session) {
+        session.removeAttribute("user");
+        return "redirect:/login.html";
     }
 
 

@@ -4,17 +4,17 @@
 <mapper namespace="com.hm.travel.mapper.ViewMapper">
 
     <resultMap type="com.hm.travel.pojo.View" id="myView">
-        <result column="view_Introduce" property="viewIntroduce" />
-        <result column="view_Image" property="viewImage" />
-        <result column="city_Id" property="cityId" />
-        <result column="view_Name" property="viewName" />
-        <result column="view_Click_Count" property="viewClickCount" />
+        <result column="view_Introduce" property="viewIntroduce"/>
+        <result column="view_Image" property="viewImage"/>
+        <result column="city_Id" property="cityId"/>
+        <result column="view_Name" property="viewName"/>
+        <result column="view_Click_Count" property="viewClickCount"/>
 
-        <result column="id" property="city.id" />
-        <result column="city_Name" property="city.cityName" />
-        <result column="city_Introduce" property="city.cityIntroduce" />
-        <result column="city_photo" property="city.cityPhoto" />
-        <result column="city_Click_Count" property="city.cityClickCount" />
+        <result column="id" property="city.id"/>
+        <result column="city_Name" property="city.cityName"/>
+        <result column="city_Introduce" property="city.cityIntroduce"/>
+        <result column="city_photo" property="city.cityPhoto"/>
+        <result column="city_Click_Count" property="city.cityClickCount"/>
     </resultMap>
 
     <delete id="removeViewById" parameterType="int">
@@ -34,20 +34,20 @@
     </insert>
 
     <update id="updateViewById" parameterType="com.hm.travel.pojo.View">
-    update view   set view_Introduce=#{viewIntroduce},view_image=#{viewImage},city_id=#{cityId},view_name =#{viewName}  where id = #{id}
+    update view  set view_Introduce=#{viewIntroduce},view_image=#{viewImage},city_id=#{cityId},view_name =#{viewName}  where id = #{id}
 
     </update>
 
 
-    <select id="searchByWord" resultType="com.hm.travel.pojo.View" >
-            select * from view where view_Name like '%${word}%'
+    <select id="searchByWord" resultType="com.hm.travel.pojo.View">
+            select * from view where view_Name like concat('%',#{word},'%')
      </select>
 
-    <select id="searchByWord2"  resultMap="myView">
+    <select id="searchByWord2" resultMap="myView">
          select
               view.view_Name,view.view_Image,view.view_Introduce,city.city_Name,city.city_Introduce,city.city_Photo
 		from view ,city
-		where view_Name like '%${word}%' and view.city_Id=city.id
+		where view_Name like concat('%',#{word},'%') and view.city_Id=city.id
 
      </select>
 
@@ -63,7 +63,7 @@
     select * from (select * from view order by view_Click_Count desc) p limit 4
     </select>
 
-     <select id="searchHotViewByCityId" resultType="com.hm.travel.pojo.View">
+    <select id="searchHotViewByCityId" resultType="com.hm.travel.pojo.View">
          select * from (select * from view order by view_Click_Count desc) v where city_id =#{id} limit 3
      </select>
 </mapper>

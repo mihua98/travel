@@ -7,6 +7,7 @@ import com.hm.travel.pojo.View;
 import com.hm.travel.service.ViewService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
@@ -15,42 +16,44 @@ import java.util.Map;
 
 @Controller
 public class ViewController {
-       @Autowired
+    @Autowired
     ViewService viewService;
 
-       @ResponseBody
-       @RequestMapping("/getView/{id}")
-       public  View sesrchById(@PathVariable("id") int id){
-           View view=viewService.searchById(id);
-           return view;
-       }
+    @ResponseBody
+    @RequestMapping("/getView/{id}")
+    public View sesrchById(@PathVariable("id") int id) {
+        View view = viewService.searchById(id);
+        return view;
+    }
 
     /**
      * 删除view
+     *
      * @param id
      * @return
      */
     @ResponseBody
     @RequestMapping("/deleteView/{ids}")
-    public String removeViewById(@PathVariable("ids") int id){
+    public String removeViewById(@PathVariable("ids") int id) {
         System.out.println(id);
         viewService.removeViewById(id);
-        return  "success";
+        return "success";
     }
 
     /**
-     *  通过名字查找view,用来校验
+     * 通过名字查找view,用来校验
+     *
      * @param name
      * @return
      */
     @ResponseBody
     @RequestMapping("/checkView")
-    public  String checkViewByName(@RequestParam("check") String name){
-        boolean b=viewService.findViewByName(name);
-        if(b==true){
+    public String checkViewByName(@RequestParam("check") String name) {
+        boolean b = viewService.findViewByName(name);
+        if (b == true) {
             System.out.println(b);
             return "可以";
-        }else{
+        } else {
             System.out.println(b);
             return "不可以";
         }
@@ -59,25 +62,27 @@ public class ViewController {
 
     /**
      * 获得所有view
+     *
      * @return
      */
     @ResponseBody
     @RequestMapping("/getAllView")
-    public Map getAllView(){
-        List<View> views =viewService.getAllView();
+    public Map getAllView() {
+        List<View> views = viewService.getAllView();
         System.out.println(views);
-        Map<String,Object> map=new HashMap<>();
-        map.put("views",views);
+        Map<String, Object> map = new HashMap<>();
+        map.put("views", views);
         return map;
     }
 
     /**
      * 添加view
+     *
      * @return
      */
     @ResponseBody
     @RequestMapping("/addView")
-    public String addView(View view){
+    public String addView(View view) {
         System.out.println(view);
         viewService.addView(view);
         return "成功";
@@ -85,15 +90,15 @@ public class ViewController {
 
     /**
      * 修改view
+     *
      * @return
      */
     @ResponseBody
     @RequestMapping("/update/{Id}")
-    public  String updateView(View view){
+    public String updateView(View view) {
         viewService.updateView(view);
         return "成功";
     }
-
 
 
     /**
@@ -101,24 +106,25 @@ public class ViewController {
      */
     @ResponseBody
     @RequestMapping("/searchByWord2")
-    public Map searchByWord2(@RequestParam("search") String word){
+    public Map searchByWord2(@RequestParam("search") String word) {
 
-        List<View> o=viewService.searchByWord2(word);
-        Map<String,Object> map=new HashMap<>();
-        map.put("search",o);
-        return  map;
+        List<View> o = viewService.searchByWord2(word);
+        Map<String, Object> map = new HashMap<>();
+        map.put("search", o);
+        return map;
     }
 
 
     /**
      * views分页
+     *
      * @param pn
      * @return view集合
      */
     @ResponseBody
     @RequestMapping("/pageInfoViews")
     public PageInfo getpageInfoViews(
-            @RequestParam(value="pn",defaultValue="1") Integer pn) {
+            @RequestParam(value = "pn", defaultValue = "1") Integer pn) {
 
         PageHelper.startPage(pn, 5);
 
@@ -132,29 +138,32 @@ public class ViewController {
 
     /**
      * 用户查看景点,该游记点击量+1,转发至景点详情页
-     * @param id 景点id
-     * @param map 将查询到的景点存于map中
+     *
+     * @param id    景点id
+     * @param model 将查询到的景点存于model中
      * @return 景点详情页
      */
     @RequestMapping("/selectViewById")
-    public String selectViewById(Integer id, Map<String,Object> map){
+    public String selectViewById(@RequestParam("id") Integer id, Model model) {
         viewService.clickCount(id);
-        View view=viewService.searchById(id);
-        map.put("view",view);
-        // TODO: 2019/8/24  转发至景点详情页
+        View view = viewService.searchById(id);
+        model.addAttribute("view", view);
         return "userPage/view-detail";
     }
 
     /**
-     *根据景点名模糊查询
+     * 根据景点名模糊查询
+     * 用PageHelper封装
      */
     @ResponseBody
     @RequestMapping("/searchByWord")
-    public Map searchByWord(@RequestParam("search") String word){
-        List<View> views=viewService.searchByWord(word);
-        Map<String,Object> map=new HashMap<>();
-        map.put("search",views);
-        return  map;
+    public PageInfo<View> searchByWord(@RequestParam(value = "start", defaultValue = "1") int start,
+                                       @RequestParam(value = "size", defaultValue = "4") int size,
+                                       @RequestParam("search") String search) {
+        PageHelper.startPage(start, size);
+        List<View> list = viewService.searchByWord(search);
+        PageInfo<View> page = new PageInfo<>(list);
+        return page;
     }
 
     /**
@@ -163,11 +172,11 @@ public class ViewController {
 
     @ResponseBody
     @RequestMapping("/searchHotView")
-    public List searchHotView(){
-        List<View> views=viewService.searchHotView();
-        /*Map<String,Object> map=new HashMap<>();
-        map.put("search",views);*/
-        return views;
+    public Map searchHotView() {
+        List<View> views = viewService.searchHotView();
+        Map<String, Object> map = new HashMap<>();
+        map.put("search", views);
+        return map;
     }
 
     /**
@@ -175,26 +184,10 @@ public class ViewController {
      */
     @ResponseBody
     @RequestMapping("/searchHotViewByCityId")
-    public Map searchHotViewByCityId(@RequestParam("id") int id){
-        List<View> views=viewService.searchHotViewByCityId(id);
-        System.out.println(views);
-        Map<String,Object> map=new HashMap<>();
-        map.put("search",views);
-        return map;
-    }
-
-    /**
-     * 测试
-     * @param id
-     * @return
-     */
-    @ResponseBody
-    @RequestMapping(value = "/searchHotViewByCityId2" ,method = RequestMethod.POST)
-    public Map searchHotViewByCityId2(Integer id){
-        List<View> views=viewService.searchHotViewByCityId(id);
-        System.out.println(views);
-        Map<String,Object> map=new HashMap<>();
-        map.put("search",views);
+    public Map searchHotViewByCityId(int id) {
+        List<View> views = viewService.searchHotViewByCityId(id);
+        Map<String, Object> map = new HashMap<>();
+        map.put("search", views);
         return map;
     }
 
@@ -208,7 +201,6 @@ public class ViewController {
         System.out.println("跳转页面");
         return "adminPage/viewListPage";
     }
-
 
 
 }

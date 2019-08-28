@@ -18,6 +18,26 @@ public class TravelLogServiceImpl implements TravelLogService {
     private TravelLogMapper travelLogMapper;
 
     /**
+     * 游记推荐调用,根据点击量查询前三条游记
+     *
+     * @return
+     */
+    @Override
+    public List<TravelLog> getHotTravelLog() {
+        return travelLogMapper.getHotTravelLog();
+    }
+
+    /**
+     * 查询所有游记(包含不可读游记,管理员调用)
+     *
+     * @return
+     */
+    @Override
+    public List<TravelLog> getAnyTravelLog() {
+        return travelLogMapper.getAnyTravelLog();
+    }
+
+    /**
      * 首页展示,查询4条数据
      *
      * @return 游记集合
@@ -56,8 +76,8 @@ public class TravelLogServiceImpl implements TravelLogService {
      * @return
      */
     @Override
-    public int updateTravellogStatus(Integer id, Integer tlStatus) {
-        return travelLogMapper.updateTravellogStatus(id, tlStatus);
+    public int updateTravellogStatus(TravelLog travelLog) {
+        return travelLogMapper.updateTravellogStatus(travelLog);
     }
 
     /**
@@ -83,7 +103,7 @@ public class TravelLogServiceImpl implements TravelLogService {
     }
 
     /**
-     * 查询所有游记
+     * 查询所有可读游记
      *
      * @return 游记集合
      */

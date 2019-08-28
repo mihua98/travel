@@ -5,32 +5,32 @@
         update userInfo
         <set>
             <if test="userNickName !=null and userNickName != &quot;&quot;">
-                user_nick_name = #{userNickName}
+                ,user_nick_name = #{userNickName}
             </if>
             <if test="userPhoneNum !=null and userPhoneNum != &quot;&quot;">
-                user_phone_num = #{userPhoneNum}
+                ,user_phone_num = #{userPhoneNum}
             </if>
             <if test="userName !=null and userName != &quot;&quot;">
-                user_name = #{userName}
+                ,user_name = #{userName}
             </if>
             <if test="userImageName !=null and userImageName != &quot;&quot;">
-                user_image_name = #{userImageName}
+                ,user_image_name = #{userImageName}
             </if>
             <if test="userSex !=null and userSex != &quot;&quot;">
-                user_sex = #{userSex}
+                ,user_sex = #{userSex}
             </if>
             <if test="userAge !=null">
-                user_age = #{userAge}
+                ,user_age = #{userAge}
             </if>
             <if test="email !=null and email != &quot;&quot;">
-                email = #{email}
+                ,email = #{email}
             </if>
         </set>
         where id = #{id}
     </update>
 
     <insert id="addUser" parameterType="com.hm.travel.pojo.UserInfo">
-        insert into userInfo(user_name,user_sex,user_age,email,user_nick_name,user_phone_num,user_image_name)
-        values(#{userName},#{userSex},#{userAge},#{email},#{userNickName},#{userPhoneNum},#{userImageName})
+        insert into userInfo(id,user_name,user_sex,user_age,email,user_nick_name,user_phone_num,user_image_name)
+        values(#{id},#{userName},#{userSex},#{userAge},#{email},#{userNickName},#{userPhoneNum},#{userImageName})
     </insert>
 </mapper>

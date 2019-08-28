@@ -62,12 +62,12 @@
                         <div class="pull-left">
                             <div class="form-group form-inline">
                                 <div class="btn-group">
-                                    <button type="button" class="btn btn-default" title="刷新">
+                                    <button type="button" class="btn btn-default" title="刷新" @click="findAll">
                                         <i class="fa fa-refresh"></i> 刷新
                                     </button>
-                                    <button type="button" class="btn btn-default" title="删除">
-                                        <i class="fa fa-trash-o"></i> 删除
-                                    </button>
+                                    <!--<button type="button" class="btn btn-default" title="删除">-->
+                                        <!--<i class="fa fa-trash-o"></i> 删除-->
+                                    <!--</button>-->
                                 </div>
                             </div>
                         </div>
@@ -100,7 +100,7 @@
                             </thead>
                             <tbody>
 
-                            <tr v-for="(tl,index) in travelLogs">
+                            <tr v-for="(tl,index) in travelLogList">
                                 <td><input name="ids" type="checkbox"></td>
                                 <td>{{tl.id}}</td>
                                 <td>{{tl.tlTitle}}</td>
@@ -112,12 +112,12 @@
                                 <td>{{tl.tlFavoriteCount}}</td>
                                 <td>{{tl.tlStatus}}</td>
                                 <td>
-                                    <button @click="findById(u.id)" type="button" class="btn bg-olive btn-xs"
+                                    <button @click="findById(tl.id)" type="button" class="btn bg-olive btn-xs"
                                             data-toggle="modal" data-target="#myModal">编辑
                                     </button>
-                                    <button @click="deleteById(u.id,index)" type="button" class="btn btn-danger btn-xs">
-                                        删除
-                                    </button>
+                                    <!--<button @click="deleteById(tl.id,index)" type="button" class="btn btn-danger btn-xs">-->
+                                        <!--删除-->
+                                    <!--</button>-->
                                 </td>
                             </tr>
 
@@ -139,39 +139,42 @@
                                                     <div class="form-group">
                                                         <label for="edit-id" class="control-label">id</label>
                                                         <input type="text" class="form-control" id="edit-id"
-                                                               v-model="user.id"
+                                                               v-model="travelLog.id"
                                                                disabled="disabled">
                                                     </div>
+
                                                     <div class="form-group">
-                                                        <label for="edit-userNickName" class="control-label">昵称</label>
-                                                        <input type="text" class="form-control" id="edit-userNickName"
-                                                               v-model="user.userNickName">
-                                                    </div>
-                                                    <div class="form-group">
-                                                        <label for="edit-userPhoneNum" class="control-label">电话</label>
-                                                        <input type="text" class="form-control" id="edit-userPhoneNum"
-                                                               v-model="user.userPhoneNum">
-                                                    </div>
-                                                    <div class="form-group">
-                                                        <label for="edit-userName" class="control-label">姓名</label>
+                                                        <label for="edit-userName" class="control-label">作者</label>
                                                         <input type="text" class="form-control" id="edit-userName"
-                                                               v-model="user.userName">
+                                                               v-model="travelLog.userInfo.userName">
                                                     </div>
                                                     <div class="form-group">
-                                                        <label for="edit-userSex" class="control-label">性别</label>
-                                                        <input type="text" class="form-control" id="edit-userSex"
-                                                               v-model="user.userSex">
+                                                        <label for="edit-city" class="control-label">城市</label>
+                                                        <input type="text" class="form-control" id="edit-city"
+                                                               v-model="travelLog.tlCityName">
                                                     </div>
                                                     <div class="form-group">
-                                                        <label for="edit-userAge" class="control-label">年龄</label>
-                                                        <input type="text" class="form-control" id="edit-userAge"
-                                                               v-model="user.userAge">
+                                                        <label for="edit-tlKeyWord" class="control-label">关键字</label>
+                                                        <input type="text" class="form-control" id="edit-tlKeyWord"
+                                                               v-model="travelLog.tlKeyWord">
                                                     </div>
                                                     <div class="form-group">
-                                                        <label for="edit-email" class="control-label">邮箱</label>
-                                                        <input type="text" class="form-control" id="edit-email"
-                                                               v-model="user.email">
+                                                        <label for="edit-tlStatus" class="control-label">状态</label>
+                                                        <input type="text" class="form-control" id="edit-tlStatus"
+                                                               v-model="travelLog.tlStatus">
                                                     </div>
+
+
+                                                    <!--<div class="form-group">-->
+                                                        <!--<label for="edit-userAge" class="control-label">年龄</label>-->
+                                                        <!--<input type="text" class="form-control" id="edit-userAge"-->
+                                                               <!--v-model="user.userAge">-->
+                                                    <!--</div>-->
+                                                    <!--<div class="form-group">-->
+                                                        <!--<label for="edit-email" class="control-label">邮箱</label>-->
+                                                        <!--<input type="text" class="form-control" id="edit-email"-->
+                                                               <!--v-model="user.email">-->
+                                                    <!--</div>-->
                                                 </div>
                                             </div>
                                         </div>
@@ -209,25 +212,25 @@
                     <div class="box-tools pull-right">
                         <ul class="pagination">
                             <li :class="{ disabled: pageInfo.pageNum==1 }">
-                                <a href="#nowhere" @click="jump('first')">首页</a>
+                                <a  @click="jump('first')">首页</a>
                             </li>
                             <li :class="{ disabled: !pageInfo.hasPreviousPage }">
-                                <a href="#nowhere" @click="jump('pre')" aria-label="Previous">
+                                <a @click="jump('pre')" aria-label="Previous">
                                     <span aria-hidden="true">&laquo;</span>
                                 </a>
                             </li>
                             <li :class="{disabled:pageInfo.pageNum==i}" v-for="i in pageInfo.navigatepageNums">
-                                <a href="#nowhere" @click="jumpByNumber(i)">
+                                <a @click="jumpByNumber(i)">
                                     {{i}}
                                 </a>
                             </li>
                             <li :class="{ disabled: !pageInfo.hasNextPage }">
-                                <a href="#nowhere" @click="jump('next')" aria-label="Next">
+                                <a @click="jump('next')" aria-label="Next">
                                     <span aria-hidden="true">&raquo;</span>
                                 </a>
                             </li>
                             <li :class="{ disabled: pageInfo.pageNum==pageInfo.pages }">
-                                <a href="#nowhere" @click="jump('last')">尾页</a>
+                                <a @click="jump('last')">尾页</a>
                             </li>
                         </ul>
                     </div>
@@ -252,6 +255,10 @@
 </div>
 
 <div th:replace="adminPage/common/js::js"></div>
+
+<script th:src="@{/js/vue.min.js}"></script>
+<script th:src="@{/js/axios.min.js}"></script>
+
 
 <script>
     $(document).ready(function () {
@@ -301,38 +308,13 @@
 <script>
     var dataVue = {
         travelLog: {
-            id: "",
-            tlTitle: "",
-            tlReleaseDate: "",
-            tlKeyWord: "",
-            tlClickCount: "",
-            tlLikeCount: "",
-            tlFavoriteCount: "",
-            userInfo: "",
-            tlStatus:""
+           userInfo:{
+               userName:""
+           },
+
         },
-        travelLogList: [{
-            id: "",
-            tlTitle: "",
-            tlReleaseDate: "",
-            tlKeyWord: "",
-            tlClickCount: "",
-            tlLikeCount: "",
-            tlFavoriteCount: "",
-            userInfo: "",
-            tlStatus:""
-        }],
-        pageInfo: {
-            // pageNum: "",//当前页
-            // pageSize: "",//每页的数量
-            // size: "",//当前页的数量
-            // pages: "",//总页数
-            // prePage: "",//前一页
-            // nextPage: "",//下一页
-            // navigatepageNums: [],//所有导航页号
-            // hasPreviousPage: "",//是否有前一页
-            // hasNextPage: ""//是否有下一页
-        }
+        travelLogList: [],
+        pageInfo: {}
     };
     new Vue({
         el: "#app",
@@ -343,7 +325,7 @@
         methods: {
             findAll: function (start) {//查询所有
                 var _this = this;//在当前方法中定义一个对象,表明是vue对象
-                axios.get('travelLog/getAllTravelLog', {
+                axios.get('travelLog/getAnyTravelLog', {
                     params: {
                         start: start
                     }
@@ -351,16 +333,17 @@
                     .then(function (response) {
                         _this.travelLogList = response.data.list;//响应数据给userList赋值
                         _this.pageInfo = response.data;
+                        console.log(response.data);
                     })
                     .catch(function (error) {//出现异常则打印
                         console.log(error);
                     })
             },
-            findLikeTitle: function (tlTitle) {//根据标题查询
+            findById: function (tlId) {
                 var _this = this;
-                axios.get('travelLog/selectTravelLogLikeTitle', {
+                axios.get('travelLog/selectTravelLogById', {
                     params: {//这是get请求参数的写法
-                        tlTitle: tlTitle
+                        id: tlId
                     }
                 })
                     .then(function (response) {
@@ -370,21 +353,23 @@
                         console.log(error);
                     })
             },
-            addUser: function () {//新增
-                var _this = this;
-                axios.post('user/addUser', _this.user)//这是post请求参数的写法
-                    .then(function () {//无返回值,所以无response
-                        _this.findAll(1);
-                        _this.user.username = "";
-                        _this.user.password = "";
-                    })
-                    .catch(function (error) {
-                        console.log(error);
-                    })
-            },
+            // findLikeTitle: function (tlTitle) {//根据标题查询
+            //     var _this = this;
+            //     axios.get('travelLog/selectTravelLogLikeTitle', {
+            //         params: {//这是get请求参数的写法
+            //             tlTitle: tlTitle
+            //         }
+            //     })
+            //         .then(function (response) {
+            //             _this.travelLog = response.data;
+            //         })
+            //         .catch(function (error) {
+            //             console.log(error);
+            //         })
+            // },
             update: function () {//更新
                 var _this = this;
-                axios.post('user/updateUser', _this.user)//这是post请求参数的写法
+                axios.post('travelLog/updateTravelLog',_this.travelLog)
                     .then(function () {//无返回值,所以无response
                         _this.findAll(_this.pageInfo.pageNum);
                     })
@@ -392,19 +377,19 @@
                         console.log(error);
                     })
             },
-            deleteById: function (userid, index) {//根据ID删除
-                var _this = this;
-                var param = new URLSearchParams();
-                param.append('id', userid);//解决后端接收不到参数的问题
-                axios.post('user/deleteById', param)
-                    .then(function () {
-                        _this.userList.splice(index, 1);//根据id删除userList中的数据
-                        // _this.findAll();
-                    })
-                    .catch(function (error) {
-                        console.log(error);
-                    })
-            },
+            // deleteById: function (userid, index) {//根据ID删除
+            //     var _this = this;
+            //     var param = new URLSearchParams();
+            //     param.append('id', userid);//解决后端接收不到参数的问题
+            //     axios.post('user/deleteById', param)
+            //         .then(function () {
+            //             _this.userList.splice(index, 1);//根据id删除userList中的数据
+            //             // _this.findAll();
+            //         })
+            //         .catch(function (error) {
+            //             console.log(error);
+            //         })
+            // },
             jump: function (page) {//跳转首页,尾页,上一页,下一页
                 if ('first' == page && 1 != this.pageInfo.pageNum)
                     this.findAll(1);

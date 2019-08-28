@@ -1606,7 +1606,7 @@ ul#additional_links li:after {
   font-size: 0.75rem;
   margin: 0;
   font-weight: 500;
-  /*-moz-appearance: window;*/
+  /* -moz-appearance: window; */
   -webkit-appearance: none;
   cursor: pointer;
   outline: none;
@@ -5624,7 +5624,7 @@ ul.cart_details li span {
 }
 #confirm p {
   font-size: 16px !important;
-  font-size: 16px !important;
+  font-size: 16px !important/16pxrem;
   margin-bottom: 0;
 }
 

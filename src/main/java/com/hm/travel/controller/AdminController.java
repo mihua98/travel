@@ -62,9 +62,9 @@ public class AdminController {
      */
     @RequestMapping("/getAllAdmin")
     @ResponseBody
-    public PageInfo<Admin> selectAdmin(@RequestParam(value = "start", defaultValue = "0") int start,
+    public PageInfo<Admin> selectAdmin(@RequestParam(value = "start", defaultValue = "1") int start,
                                        @RequestParam(value = "size", defaultValue = "7") int size){
-        PageHelper.startPage(start, size, "id desc");
+        PageHelper.startPage(start, size);
         List<Admin> admins = adminService.getAllAdmin();
         PageInfo<Admin> page = new PageInfo<>(admins);
         return page;

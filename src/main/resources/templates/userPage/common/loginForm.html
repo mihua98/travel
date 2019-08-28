@@ -3,12 +3,12 @@
     <div class="small-dialog-header">
         <h3>登录账号</h3>
     </div>
-    <form>
+    <form action="/user/login" method="post">
         <div class="sign-in-wrapper">
             <div class="form-group">
-                <label>邮箱</label>
-                <input type="email" class="form-control" name="email" id="email">
-                <i class="icon_mail_alt"></i>
+                <label>账号</label>
+                <input type="text" class="form-control" name="accountNumber" id="accountNumber">
+                <i class="ti-user"></i>
             </div>
             <div class="form-group">
                 <label>密码</label>

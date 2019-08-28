@@ -21,5 +21,5 @@ public class TourOrder {
 
     private Traveller traveller;
 
-
+    private int travellerPrice;
 }

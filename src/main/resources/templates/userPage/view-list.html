@@ -51,6 +51,9 @@
         </div>
         <!-- /filters -->
 
+        <!--其他页面传过来的搜索内容-->
+        <input id="searchView" type="hidden" th:value="${search}">
+
         <!--搜索栏-->
         <div class="search_container">
             <div class="container">
@@ -105,147 +108,148 @@
             </div>
             <!-- /box_list -->
 
-           <!-- <div class="box_list">
-                <div class="row no-gutters">
-                    <div class="col-lg-5">
-                        <figure>
-                            <small>Paris Centre</small>
-                            <a th:href="@{/restaurant-detail.html}"><img th:src="@{/img/restaurant_2.jpg}"
-                                                                         class="img-fluid" alt=""
-                                                                         width="800" height="533">
-                                <div class="read_more"><span>Read more</span></div>
-                            </a>
-                        </figure>
-                    </div>
-                    <div class="col-lg-7">
-                        <div class="wrapper">
-                            <a href="#0" class="wish_bt"></a>
-                            <h3><a th:href="@{/restaurant-detail.html}">Catrine</a></h3>
-                            <p>Dicam diceret ut ius, no epicuri dissentiet philosophia vix. Id usu zril tacimates
-                                neglegentur. Eam id
-                                legimus torquatos cotidieque, usu decore percipitur definitiones ex, nihil utinam
-                                recusabo mel no.</p>
-                            <span class="price">From <strong>$124</strong> /per person</span>
-                        </div>
-                        <ul>
-                            <li><i class="ti-eye"></i> 164 views</li>
-                            <li>
-                                <div class="score"><span>Good<em>350 Reviews</em></span><strong>7.0</strong></div>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-            &lt;!&ndash; /box_list &ndash;&gt;
-            <div class="box_list">
-                <div class="row no-gutters">
-                    <div class="col-lg-5">
-                        <figure>
-                            <small>Paris Centre</small>
-                            <a th:href="@{/restaurant-detail.html}"><img th:src="@{/img/restaurant_3.jpg}"
-                                                                         class="img-fluid" alt=""
-                                                                         width="800" height="533">
-                                <div class="read_more"><span>Read more</span></div>
-                            </a>
-                        </figure>
-                    </div>
-                    <div class="col-lg-7">
-                        <div class="wrapper">
-                            <a href="#0" class="wish_bt"></a>
-                            <h3><a th:href="@{/restaurant-detail.html}">Bella Napoli</a></h3>
-                            <p>Dicam diceret ut ius, no epicuri dissentiet philosophia vix. Id usu zril tacimates
-                                neglegentur. Eam id
-                                legimus torquatos cotidieque, usu decore percipitur definitiones ex, nihil utinam
-                                recusabo mel no.</p>
-                            <span class="price">From <strong>$45</strong> /per person</span>
-                        </div>
-                        <ul>
-                            <li><i class="ti-eye"></i> 164 views</li>
-                            <li>
-                                <div class="score"><span>Good<em>350 Reviews</em></span><strong>7.0</strong></div>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-            &lt;!&ndash; /box_list &ndash;&gt;
-            <div class="box_list">
-                <div class="row no-gutters">
-                    <div class="col-lg-5">
-                        <figure>
-                            <small>Paris Centre</small>
-                            <a th:href="@{/restaurant-detail.html}"><img th:src="@{/img/restaurant_4.jpg}"
-                                                                         class="img-fluid" alt=""
-                                                                         width="800" height="533">
-                                <div class="read_more"><span>Read more</span></div>
-                            </a>
-                        </figure>
-                    </div>
-                    <div class="col-lg-7">
-                        <div class="wrapper">
-                            <a href="#0" class="wish_bt"></a>
-                            <h3><a th:href="@{/restaurant-detail.html}">Slow Food</a></h3>
-                            <p>Dicam diceret ut ius, no epicuri dissentiet philosophia vix. Id usu zril tacimates
-                                neglegentur. Eam id
-                                legimus torquatos cotidieque, usu decore percipitur definitiones ex, nihil utinam
-                                recusabo mel no.</p>
-                            <span class="price">From <strong>$25</strong> /per person</span>
-                        </div>
-                        <ul>
-                            <li><i class="ti-eye"></i> 164 views</li>
-                            <li>
-                                <div class="score"><span>Superb<em>350 Reviews</em></span><strong>9.0</strong></div>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-            &lt;!&ndash; /box_list &ndash;&gt;
-            <div class="box_list">
-                <div class="row no-gutters">
-                    <div class="col-lg-5">
-                        <figure>
-                            <small>Paris Centre</small>
-                            <a th:href="@{/restaurant-detail.html}"><img th:src="@{/img/restaurant_5.jpg}"
-                                                                         class="img-fluid" alt=""
-                                                                         width="800" height="533">
-                                <div class="read_more"><span>Read more</span></div>
-                            </a>
-                        </figure>
-                    </div>
-                    <div class="col-lg-7">
-                        <div class="wrapper">
-                            <a href="#0" class="wish_bt"></a>
-                            <h3><a th:href="@{/restaurant-detail.html}">Andrew Fish</a></h3>
-                            <p>Dicam diceret ut ius, no epicuri dissentiet philosophia vix. Id usu zril tacimates
-                                neglegentur. Eam id
-                                legimus torquatos cotidieque, usu decore percipitur definitiones ex, nihil utinam
-                                recusabo mel no.</p>
-                            <span class="price">From <strong>$65</strong> /per person</span>
-                        </div>
-                        <ul>
-                            <li><i class="ti-eye"></i> 164 views</li>
-                            <li>
-                                <div class="score"><span>Superb<em>350 Reviews</em></span><strong>9.0</strong></div>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-            </div>-->
+            <!-- <div class="box_list">
+                 <div class="row no-gutters">
+                     <div class="col-lg-5">
+                         <figure>
+                             <small>Paris Centre</small>
+                             <a th:href="@{/restaurant-detail.html}"><img th:src="@{/img/restaurant_2.jpg}"
+                                                                          class="img-fluid" alt=""
+                                                                          width="800" height="533">
+                                 <div class="read_more"><span>Read more</span></div>
+                             </a>
+                         </figure>
+                     </div>
+                     <div class="col-lg-7">
+                         <div class="wrapper">
+                             <a href="#0" class="wish_bt"></a>
+                             <h3><a th:href="@{/restaurant-detail.html}">Catrine</a></h3>
+                             <p>Dicam diceret ut ius, no epicuri dissentiet philosophia vix. Id usu zril tacimates
+                                 neglegentur. Eam id
+                                 legimus torquatos cotidieque, usu decore percipitur definitiones ex, nihil utinam
+                                 recusabo mel no.</p>
+                             <span class="price">From <strong>$124</strong> /per person</span>
+                         </div>
+                         <ul>
+                             <li><i class="ti-eye"></i> 164 views</li>
+                             <li>
+                                 <div class="score"><span>Good<em>350 Reviews</em></span><strong>7.0</strong></div>
+                             </li>
+                         </ul>
+                     </div>
+                 </div>
+             </div>
+             &lt;!&ndash; /box_list &ndash;&gt;
+             <div class="box_list">
+                 <div class="row no-gutters">
+                     <div class="col-lg-5">
+                         <figure>
+                             <small>Paris Centre</small>
+                             <a th:href="@{/restaurant-detail.html}"><img th:src="@{/img/restaurant_3.jpg}"
+                                                                          class="img-fluid" alt=""
+                                                                          width="800" height="533">
+                                 <div class="read_more"><span>Read more</span></div>
+                             </a>
+                         </figure>
+                     </div>
+                     <div class="col-lg-7">
+                         <div class="wrapper">
+                             <a href="#0" class="wish_bt"></a>
+                             <h3><a th:href="@{/restaurant-detail.html}">Bella Napoli</a></h3>
+                             <p>Dicam diceret ut ius, no epicuri dissentiet philosophia vix. Id usu zril tacimates
+                                 neglegentur. Eam id
+                                 legimus torquatos cotidieque, usu decore percipitur definitiones ex, nihil utinam
+                                 recusabo mel no.</p>
+                             <span class="price">From <strong>$45</strong> /per person</span>
+                         </div>
+                         <ul>
+                             <li><i class="ti-eye"></i> 164 views</li>
+                             <li>
+                                 <div class="score"><span>Good<em>350 Reviews</em></span><strong>7.0</strong></div>
+                             </li>
+                         </ul>
+                     </div>
+                 </div>
+             </div>
+             &lt;!&ndash; /box_list &ndash;&gt;
+             <div class="box_list">
+                 <div class="row no-gutters">
+                     <div class="col-lg-5">
+                         <figure>
+                             <small>Paris Centre</small>
+                             <a th:href="@{/restaurant-detail.html}"><img th:src="@{/img/restaurant_4.jpg}"
+                                                                          class="img-fluid" alt=""
+                                                                          width="800" height="533">
+                                 <div class="read_more"><span>Read more</span></div>
+                             </a>
+                         </figure>
+                     </div>
+                     <div class="col-lg-7">
+                         <div class="wrapper">
+                             <a href="#0" class="wish_bt"></a>
+                             <h3><a th:href="@{/restaurant-detail.html}">Slow Food</a></h3>
+                             <p>Dicam diceret ut ius, no epicuri dissentiet philosophia vix. Id usu zril tacimates
+                                 neglegentur. Eam id
+                                 legimus torquatos cotidieque, usu decore percipitur definitiones ex, nihil utinam
+                                 recusabo mel no.</p>
+                             <span class="price">From <strong>$25</strong> /per person</span>
+                         </div>
+                         <ul>
+                             <li><i class="ti-eye"></i> 164 views</li>
+                             <li>
+                                 <div class="score"><span>Superb<em>350 Reviews</em></span><strong>9.0</strong></div>
+                             </li>
+                         </ul>
+                     </div>
+                 </div>
+             </div>
+             &lt;!&ndash; /box_list &ndash;&gt;
+             <div class="box_list">
+                 <div class="row no-gutters">
+                     <div class="col-lg-5">
+                         <figure>
+                             <small>Paris Centre</small>
+                             <a th:href="@{/restaurant-detail.html}"><img th:src="@{/img/restaurant_5.jpg}"
+                                                                          class="img-fluid" alt=""
+                                                                          width="800" height="533">
+                                 <div class="read_more"><span>Read more</span></div>
+                             </a>
+                         </figure>
+                     </div>
+                     <div class="col-lg-7">
+                         <div class="wrapper">
+                             <a href="#0" class="wish_bt"></a>
+                             <h3><a th:href="@{/restaurant-detail.html}">Andrew Fish</a></h3>
+                             <p>Dicam diceret ut ius, no epicuri dissentiet philosophia vix. Id usu zril tacimates
+                                 neglegentur. Eam id
+                                 legimus torquatos cotidieque, usu decore percipitur definitiones ex, nihil utinam
+                                 recusabo mel no.</p>
+                             <span class="price">From <strong>$65</strong> /per person</span>
+                         </div>
+                         <ul>
+                             <li><i class="ti-eye"></i> 164 views</li>
+                             <li>
+                                 <div class="score"><span>Superb<em>350 Reviews</em></span><strong>9.0</strong></div>
+                             </li>
+                         </ul>
+                     </div>
+                 </div>
+             </div>-->
             <!-- /box_list -->
 
             <div class="row">
-                <div class="offset-lg-5 col-lg-3">
+                <div class="offset-lg-4 col-lg-3">
                     <nav aria-label="...">
                         <ul class="pagination pagination-sm">
-                            <li class="page-item disabled">
-                                <a class="page-link" href="#" tabindex="-1">上一页</a>
+                            <li :class="{ disabled: !pageInfo.hasPreviousPage }">
+                                <a class="page-link" @click="jump('pre')">上一页</a>
                             </li>
-                            <li class="page-item"><a class="page-link" href="#">1</a></li>
-                            <li class="page-item"><a class="page-link" href="#">2</a></li>
-                            <li class="page-item"><a class="page-link" href="#">3</a></li>
-                            <li class="page-item">
-                                <a class="page-link" href="#">下一页</a>
+                            <li :class="{ disabled:pageInfo.pageNum==i }"
+                                v-for="i in pageInfo.navigatepageNums">
+                                <a class="page-link" @click="jumpByNumber(i)">{{i}}</a>
+                            </li>
+                            <li :class="{ disabled: !pageInfo.hasNextPage }">
+                                <a class="page-link" @click="jump('next')">下一页</a>
                             </li>
                         </ul>
                     </nav>
@@ -279,43 +283,51 @@
 <script th:src="@{/js/vue.min.js}"></script>
 <script th:src="@{/js/axios.min.js}"></script>
 
-<!-- Map 插件 -->
-<!-- <script src="http://maps.googleapis.com/maps/api/js"></script>
-<script src="js/markerclusterer.js"></script>
-<script src="js/map_restaurants.js"></script>
-<script src="js/infobox.js"></script> -->
-
-
 </body>
+
 <script>
     new Vue({
-        el:"#page",
-        data:{
-            Views:[],
-            pageInfo:{}
+        el: "#page",
+        data: {
+            Views: [],
+            pageInfo: {}
         },
-
-        methods:{
-            findView:function () {
+        methods: {
+            findAll: function (start) {
                 var _this = this;
-                axios.get('/pageInfoViews')
+                var searchView = $("#searchView").val();
+                console.log(searchView);
+                axios.get('/searchByWord', {// 统一用模糊查询
+                    params: {
+                        start: start,
+                        search: searchView
+                    }
+                })
                     .then(function (response) {
                         _this.Views = response.data.list;
-                        _this.pageInfo=response.data;
+                        _this.pageInfo = response.data;
                         console.log(response);
                     })
                     .catch(function (error) {
                         // handle error
                         console.log(error);
                     })
+            },
+            jump: function (page) {//跳转上一页,下一页
+                if ('pre' == page && this.pageInfo.hasPreviousPage)
+                    this.findAll(this.pageInfo.prePage);
+
+                else if ('next' == page && this.pageInfo.hasNextPage)
+                    this.findAll(this.pageInfo.nextPage);
+            },
+            jumpByNumber: function (start) {//跳转到指定页面
+                if (start != this.pageInfo.pageNum)
+                    this.findAll(start);
             }
         },
-
-        created:function (){
-
-            this.findView();
-        },
+        created: function () {
+            this.findAll();
+        }
     });
-
 </script>
 </html>

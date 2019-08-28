@@ -48,7 +48,7 @@
                                 <li><a href="#" th:text="${travelLog.tlCityName}"><i class="icon_folder-alt"></i> 杭州</a></li>
                                 <li><a href="#" th:text="${travelLog.tlReleaseDate}"><i class="icon_clock_alt"></i> 2019.8.24</a></li>
                                 <li><a href="#" th:text="${travelLog.userInfo.userName}"><i class="icon_pencil-edit" ></i> 蒋良志</a></li>
-                                <li><a href="#"><i class="icon_comment_alt"></i> (14) 个评论</a></li>
+                                <li><a href="#"><i class="icon_comment_alt"></i> 14 个人觉得很赞</a></li>
                             </ul>
                         </div>
                         <!-- /post meta -->
@@ -190,7 +190,7 @@
                 <!--右侧列表区-->
                 <aside class="col-lg-3">
                     <div class="widget">
-                        <form>
+                        <form action="/travelLogList" method="get">
                             <div class="form-group">
                                 <input type="text" name="search" id="search" class="form-control"
                                        placeholder="搜索游记攻略...">
@@ -201,30 +201,33 @@
                     <!-- /widget -->
                     <div class="widget">
                         <div class="widget-title">
-                            <h4>相关游记攻略</h4>
+                            <h4>热门游记推荐</h4>
                         </div>
-                        <ul class="comments-list">
+                        <ul class="comments-list" v-for="hotLog in HotTravelLogs">
+
                             <li>
+
                                 <div class="alignleft">
-                                    <a href="/travelLogDetail"><img th:src="@{/img/blog-5.jpg}" alt=""></a>
+                                    <a :href="'travelLog/selectTravellogById?id='+hotLog.id"><img :src="hotLog.tlPhoto" alt=""></a>
                                 </div>
-                                <small>2019.8.24</small>
-                                <h3><a href="/travelLogDetail" title="">【杭州】江南忆最忆是杭州&不止西湖春夏秋冬&小众打卡攻略...</a></h3>
+                                <small>{{hotLog.tlReleaseDate}}</small>
+                                <h3><a :href="'travelLog/selectTravellogById?id='+hotLog.id" title="">{{hotLog.tlTitle}}</a></h3>
+
                             </li>
-                            <li>
-                                <div class="alignleft">
-                                    <a href="/travelLogDetail"><img th:src="@{/img/blog-6.jpg}" alt=""></a>
-                                </div>
-                                <small>2019.8.23</small>
-                                <h3><a href="/travelLogDetail" title="">炎热夏日—长沙游</a></h3>
-                            </li>
-                            <li>
-                                <div class="alignleft">
-                                    <a href="/travelLogDetail"><img th:src="@{/img/blog-4.jpg}" alt=""></a>
-                                </div>
-                                <small>2019.8.22</small>
-                                <h3><a href="/travelLogDetail" title="">这一世一定要相遇的西藏之行</a></h3>
-                            </li>
+                            <!--<li>-->
+                                <!--<div class="alignleft">-->
+                                    <!--<a href="/travelLogDetail"><img th:src="@{/img/blog-6.jpg}" alt=""></a>-->
+                                <!--</div>-->
+                                <!--<small>2019.8.23</small>-->
+                                <!--<h3><a href="/travelLogDetail" title="">炎热夏日—长沙游</a></h3>-->
+                            <!--</li>-->
+                            <!--<li>-->
+                                <!--<div class="alignleft">-->
+                                    <!--<a href="/travelLogDetail"><img th:src="@{/img/blog-4.jpg}" alt=""></a>-->
+                                <!--</div>-->
+                                <!--<small>2019.8.22</small>-->
+                                <!--<h3><a href="/travelLogDetail" title="">这一世一定要相遇的西藏之行</a></h3>-->
+                            <!--</li>-->
                         </ul>
                     </div>
                     <!-- /widget -->
@@ -269,7 +272,34 @@
 <script th:src="@{/js/common_scripts.js}"></script>
 <script th:src="@{/js/main.js}"></script>
 <script th:src="@{/js/validate.js}"></script>
-
+<script th:src="@{/js/vue.min.js}"></script>
+<script th:src="@{/js/axios.min.js}"></script>
 
 </body>
+<script>
+    new Vue({
+        el:"#page",
+        data:{
+            HotTravelLogs:[]
+        },
+        methods:{
+            findHot:function () {
+                var _this = this;
+                axios.get('/travelLog/HotTravelLog')
+                    .then(function (response) {
+                        _this.HotTravelLogs = response.data;
+                        console.log(response);
+                    })
+                    .catch(function (error) {
+                        // handle error
+                        console.log(error);
+                    })
+            }
+        },
+        created:function () {
+            this.findHot();
+        }
+    });
+</script>
+
 </html>

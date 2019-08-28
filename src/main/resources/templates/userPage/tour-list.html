@@ -51,6 +51,9 @@
         </div>
         <!-- /filters -->
 
+        <!--其他页面传过来的搜索内容-->
+        <input id="searchTour" type="hidden" th:value="${search}">
+
         <!--搜索栏-->
         <div class="search_container">
             <div class="container">
@@ -235,17 +238,18 @@
             <!-- /box_list -->
 
             <div class="row">
-                <div class="offset-lg-5 col-lg-3">
+                <div class="offset-lg-4 col-lg-3">
                     <nav aria-label="...">
                         <ul class="pagination pagination-sm">
-                            <li class="page-item disabled">
-                                <a class="page-link" href="#" tabindex="-1">上一页</a>
+                            <li :class="{ disabled: !pageInfo.hasPreviousPage }">
+                                <a class="page-link" @click="jump('pre')">上一页</a>
                             </li>
-                            <li class="page-item"><a class="page-link" href="#">1</a></li>
-                            <li class="page-item"><a class="page-link" href="#">2</a></li>
-                            <li class="page-item"><a class="page-link" href="#">3</a></li>
-                            <li class="page-item">
-                                <a class="page-link" href="#">下一页</a>
+                            <li :class="{ disabled:pageInfo.pageNum==i }"
+                                v-for="i in pageInfo.navigatepageNums">
+                                <a class="page-link" @click="jumpByNumber(i)">{{i}}</a>
+                            </li>
+                            <li :class="{ disabled: !pageInfo.hasNextPage }">
+                                <a class="page-link" @click="jump('next')">下一页</a>
                             </li>
                         </ul>
                     </nav>
@@ -276,12 +280,8 @@
 <script th:src="@{/js/common_scripts.js}"></script>
 <script th:src="@{/js/main.js}"></script>
 <script th:src="@{/js/validate.js}"></script>
-
-<!-- Map 插件 -->
-<!-- <script src="http://maps.googleapis.com/maps/api/js"></script>
-<script src="js/markerclusterer.js"></script>
-<script src="js/map_restaurants.js"></script>
-<script src="js/infobox.js"></script> -->
+<script th:src="@{/js/vue.min.js}"></script>
+<script th:src="@{/js/axios.min.js}"></script>
 
 
 </body>

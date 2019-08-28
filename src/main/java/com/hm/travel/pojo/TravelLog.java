@@ -33,4 +33,5 @@ public class TravelLog {
 
     private String tlCityName;
 
+
     }

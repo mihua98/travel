@@ -4,14 +4,15 @@
         <div data-loader="circle-side"></div>
     </div><!-- /Page Preload -->
     <div id="logo">
-        <a href="index.html">
+        <a href="/index">
             <img src="img/logo.png" width="150" height="36" data-retina="true" alt="" class="logo_normal">
             <img src="img/logo_sticky.png" width="150" height="36" data-retina="true" alt="" class="logo_sticky">
         </a>
     </div>
     <ul id="top_menu">
-        <li><a href="#sign-in-dialog" id="sign-in" class="login" title="登录">登录</a></li>
-        <li><a href="wishlist.html" class="wishlist_bt_top" title="我的收藏">我的收藏</a></li>
+        <li th:if="${session.user == null}"><a href="#sign-in-dialog" id="sign-in" class="login" title="登录">登录</a></li>
+        <li th:if="${session.user != null}"><a href="/user/logout" id="sign-out" class="login" title="注销">注销</a></li>
+        <li th:if="${session.user != null}"><a href="wishlist.html" class="wishlist_bt_top" title="我的收藏">我的收藏</a></li>
     </ul>
     <!-- /top_menu -->
     <a href="#menu" class="btn_mobile">
@@ -33,7 +34,9 @@
             </li>
             <li><span><a href="/travelLogList">游记攻略</a></span>
             </li>
-            <li><span><a href="#0">个人中心</a></span>
+            <li><span><a href="/travelLogEdit">写游记</a></span>
+            </li>
+            <li th:if="${session.user != null}"><span><a href="#0">个人中心</a></span>
             </li>
         </ul>
     </nav>

@@ -15,6 +15,17 @@ public class AccountServiceImpl implements AccountService {
     @Autowired
     private AccountMapper accountMapper;
 
+    /**
+     * 注册时查询账号ID
+     *
+     * @param account
+     * @return
+     */
+    @Override
+    public Account getAccountId(Account account) {
+        return accountMapper.getAccountId(account);
+    }
+
     @Override
     public int updateUserPassword(String password, String email) {
         return accountMapper.updateUserPassword(password, email);
