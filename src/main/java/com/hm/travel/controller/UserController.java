@@ -12,6 +12,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.util.List;
 import java.util.Map;
@@ -26,7 +27,6 @@ public class UserController {
 
     @Autowired
     private UserService userService;
-
 
     @Autowired
     private AccountService accountService;
@@ -120,7 +120,6 @@ public class UserController {
     public String updateUser(@RequestBody UserInfo userInfo) {
         System.out.println(userInfo);
         int i = userService.updateUserInfo(userInfo);
-
         if (i > 0) {
             return "修改成功";
         } else {
@@ -150,7 +149,7 @@ public class UserController {
     @RequestMapping("/updateUserPassword")
     @ResponseBody
     public String updateUserPassword(String password, HttpServletRequest request) {
-        UserInfo user = (UserInfo) request.getSession().getAttribute("USER");
+        UserInfo user = (UserInfo) request.getSession().getAttribute("user");
         String email = user.getEmail();
 
         int i = accountService.updateUserPassword(password, email);
@@ -200,13 +199,24 @@ public class UserController {
         Account account1 = accountService.selectAccount(account);
         System.out.println("反回对象" + account1);
         if (null != account1) {
-            request.getSession().setAttribute("USER", account1.getUserInfo());
-           return "userPage/index";
-           // return "adminPage/all-admin-index";
+            request.getSession().setAttribute("user", account1.getUserInfo());
+            return "userPage/index";
         } else {
             // TODO: 2019/8/22 404!!!!!!!!!!!!!!!!!!!
             return "redirect:/404.html";
         }
+    }
+
+    /**
+     * 用户注销
+     *
+     * @param session
+     * @return
+     */
+    @RequestMapping("/logout")
+    public String logout(HttpSession session) {
+        session.removeAttribute("user");
+        return "redirect:/login.html";
     }
 
 

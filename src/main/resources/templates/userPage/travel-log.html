@@ -5,6 +5,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <base href="/">
     <title>游记攻略</title>
 
     <!-- 网页图标-->
@@ -54,12 +55,15 @@
 
         <div class="container margin_60_35">
             <div class="row">
-                <div class="col-lg-9" >
+                <div class="col-lg-9">
+
+                    <!--游记循环列表-->
                     <article class="blog wow fadeIn" v-for="travelLog in travelLogs">
                         <div class="row no-gutters">
                             <div class="col-lg-7">
                                 <figure>
-                                    <a :href="'travelLog/selectTravellogById?id='+travelLog.id"><img :src="travelLog.tlPhoto" alt="">
+                                    <a :href="'travelLog/selectTravellogById?id='+travelLog.id"><img
+                                            :src="travelLog.tlPhoto" alt="">
                                         <div class="preview"><span>查看更多</span></div>
                                     </a>
                                 </figure>
@@ -67,7 +71,8 @@
                             <div class="col-lg-5">
                                 <div class="post_info">
                                     <small>{{travelLog.tlReleaseDate}}</small>
-                                    <h3><a :href="'travelLog/selectTravellogById?id='+travelLog.id" >{{travelLog.tlTitle}}</a></h3>
+                                    <h3><a :href="'travelLog/selectTravellogById?id='+travelLog.id">{{travelLog.tlTitle}}</a>
+                                    </h3>
                                     <p>{{travelLog.tlSummary}}</p>
                                     <ul>
                                         <li>
@@ -80,107 +85,39 @@
                             </div>
                         </div>
                     </article>
-                    <!-- /article -->
+                    <!--/游记循环列表-->
 
-                    <!--<article class="blog wow fadeIn">-->
-                        <!--<div class="row no-gutters">-->
-                            <!--<div class="col-lg-7">-->
-                                <!--<figure>-->
-                                    <!--<a href="/travelLogDetail"><img src="img/blog-2.jpg" alt="">-->
-                                        <!--<div class="preview"><span>查看更多</span></div>-->
-                                    <!--</a>-->
-                                <!--</figure>-->
-                            <!--</div>-->
-                            <!--<div class="col-lg-5">-->
-                                <!--<div class="post_info">-->
-                                    <!--<small>2019.8.23</small>-->
-                                    <!--<h3><a href="/travelLogDetail">炎热夏日—长沙游</a></h3>-->
-                                    <!--<p>虽说暑假天气炎热，但还是选择了 长沙 这个城市。听过四天三夜的旅行，对这个城市有了初步的了解。</p>-->
-                                    <!--<ul>-->
-                                        <!--<li>-->
-                                            <!--<div class="thumb"><img src="img/thumb_blog.jpg" alt=""></div>-->
-                                            <!--陈敏华-->
-                                        <!--</li>-->
-                                        <!--<li><i class="icon_comment_alt"></i> 20</li>-->
-                                    <!--</ul>-->
-                                <!--</div>-->
-                            <!--</div>-->
-                        <!--</div>-->
-                    <!--</article>-->
-                    <!--&lt;!&ndash; /article &ndash;&gt;-->
+                    <!--分页-->
+                    <div class="row">
+                        <div class="offset-lg-4 col-lg-3">
+                            <nav aria-label="...">
+                                <ul class="pagination pagination-sm">
+                                    <li :class="{ disabled: !pageInfo.hasPreviousPage }">
+                                        <a class="page-link" @click="jump('pre')">上一页</a>
+                                    </li>
+                                    <li :class="{ disabled:pageInfo.pageNum==i }"
+                                        v-for="i in pageInfo.navigatepageNums">
+                                        <a class="page-link" @click="jumpByNumber(i)">{{i}}</a>
+                                    </li>
+                                    <li :class="{ disabled: !pageInfo.hasNextPage }">
+                                        <a class="page-link" @click="jump('next')">下一页</a>
+                                    </li>
+                                </ul>
+                            </nav>
+                        </div>
+                    </div>
+                    <!-- /分页 -->
 
-                    <!--<article class="blog wow fadeIn">-->
-                        <!--<div class="row no-gutters">-->
-                            <!--<div class="col-lg-7">-->
-                                <!--<figure>-->
-                                    <!--<a href="/travelLogDetail"><img src="img/blog-3.jpg" alt="">-->
-                                        <!--<div class="preview"><span>查看更多</span></div>-->
-                                    <!--</a>-->
-                                <!--</figure>-->
-                            <!--</div>-->
-                            <!--<div class="col-lg-5">-->
-                                <!--<div class="post_info">-->
-                                    <!--<small>2019.8.22</small>-->
-                                    <!--<h3><a href="/travelLogDetail">这一世一定要相遇的西藏之行</a></h3>-->
-                                    <!--<p>七月底时候苦苦哀求加入了爸爸的中间旅行团，终于圆了我去 西藏 的一场 “说走就走的旅行”</p>-->
-                                    <!--<ul>-->
-                                        <!--<li>-->
-                                            <!--<div class="thumb"><img src="img/thumb_blog.jpg" alt=""></div>-->
-                                            <!--余文强-->
-                                        <!--</li>-->
-                                        <!--<li><i class="icon_comment_alt"></i> 20</li>-->
-                                    <!--</ul>-->
-                                <!--</div>-->
-                            <!--</div>-->
-                        <!--</div>-->
-                    <!--</article>-->
-                    <!--&lt;!&ndash; /article &ndash;&gt;-->
-
-                    <!--<article class="blog wow fadeIn">-->
-                        <!--<div class="row no-gutters">-->
-                            <!--<div class="col-lg-7">-->
-                                <!--<figure>-->
-                                    <!--<a href="/travelLogDetail"><img src="img/blog-4.jpg" alt="">-->
-                                        <!--<div class="preview"><span>查看更多</span></div>-->
-                                    <!--</a>-->
-                                <!--</figure>-->
-                            <!--</div>-->
-                            <!--<div class="col-lg-5">-->
-                                <!--<div class="post_info">-->
-                                    <!--<small>2019.8.21</small>-->
-                                    <!--<h3><a href="/travelLogDetail">桂林阳朔四天自由行</a></h3>-->
-                                    <!--<p>当不知道去哪个地方的时候，跟着孩子的语文课本走是个不错的选择。四下第二课即是 桂林 山水。所以，这一站，毫不犹豫地选择了 桂林 。</p>-->
-                                    <!--<ul>-->
-                                        <!--<li>-->
-                                            <!--<div class="thumb"><img src="img/thumb_blog.jpg" alt=""></div>-->
-                                            <!--吕友情-->
-                                        <!--</li>-->
-                                        <!--<li><i class="icon_comment_alt"></i> 20</li>-->
-                                    <!--</ul>-->
-                                <!--</div>-->
-                            <!--</div>-->
-                        <!--</div>-->
-                    <!--</article>-->
-                    <!-- /article -->
-
-                    <nav aria-label="...">
-                        <ul class="pagination pagination-sm">
-                            <li class="page-item disabled">
-                                <a class="page-link" href="#" tabindex="-1">上一页</a>
-                            </li>
-                            <li class="page-item"><a class="page-link" href="#">1</a></li>
-                            <li class="page-item"><a class="page-link" href="#">2</a></li>
-                            <li class="page-item"><a class="page-link" href="#">3</a></li>
-                            <li class="page-item">
-                                <a class="page-link" href="#">下一页</a>
-                            </li>
-                        </ul>
-                    </nav>
-                    <!-- /pagination -->
                 </div>
                 <!-- /col -->
 
+                <!--其他页面传过来的搜索内容-->
+                <input id="searchTravelLog" type="hidden" th:value="${search}">
+
+                <!--右侧-->
                 <aside class="col-lg-3">
+
+                    <!--右侧搜索-->
                     <div class="widget">
                         <form>
                             <div class="form-group">
@@ -190,7 +127,9 @@
                             <button type="submit" id="submit" class="btn_1 rounded"> 搜索</button>
                         </form>
                     </div>
-                    <!-- /widget -->
+                    <!-- /右侧搜索 -->
+
+                    <!--右侧推荐-->
                     <div class="widget">
                         <div class="widget-title">
                             <h4>游记攻略推荐</h4>
@@ -206,25 +145,11 @@
                                 <h3><a :href="'travelLog/selectTravellogById?id='+hotLog.id" title="">{{hotLog.tlTitle}}</a></h3>
 
                             </li>
-
-                            <!--<li>-->
-                                <!--<div class="alignleft">-->
-                                    <!--<a href="/travelLogDetail"><img src="img/blog-6.jpg" alt=""></a>-->
-                                <!--</div>-->
-                                <!--<small>2019.8.23</small>-->
-                                <!--<h3><a href="/travelLogDetail" title="">炎热夏日—长沙游</a></h3>-->
-                            <!--</li>-->
-                            <!--<li>-->
-                                <!--<div class="alignleft">-->
-                                    <!--<a href="/travelLogDetail"><img src="img/blog-4.jpg" alt=""></a>-->
-                                <!--</div>-->
-                                <!--<small>2019.8.22</small>-->
-                                <!--<h3><a href="/travelLogDetail" title="">这一世一定要相遇的西藏之行</a></h3>-->
-                            <!--</li>-->
                         </ul>
                     </div>
-                    <!-- /widget -->
+                    <!-- /右侧推荐 -->
 
+                    <!--右侧标签-->
                     <div class="widget">
                         <div class="widget-title">
                             <h4>热门标签</h4>
@@ -238,9 +163,10 @@
                             <a href="/travelLogList">民宿</a>
                         </div>
                     </div>
-                    <!-- /widget -->
+                    <!-- /右侧标签 -->
                 </aside>
-                <!-- /aside -->
+                <!-- /右侧 -->
+
             </div>
             <!-- /row -->
         </div>
@@ -278,10 +204,17 @@
             pageInfo:{}
 
         },
-        methods:{
-            findAll:function () {
+        methods: {
+            findAll: function (start) {
                 var _this = this;
-                axios.get('/travelLog/getAnyTravelLog')
+                var searchTravelLog = $("#searchTravelLog").val();
+                console.log(searchTravelLog);
+                axios.get('/travelLog/selectTravelLogLikeTitle', {
+                    params: {
+                        start: start,
+                        search: searchTravelLog
+                    }
+                })
                     .then(function (response) {
                         _this.travelLogs = response.data.list;
                         _this.pageInfo = response.data;
@@ -291,6 +224,17 @@
                         // handle error
                         console.log(error);
                     })
+            },
+            jump: function (page) {//跳转上一页,下一页
+                if ('pre' == page && this.pageInfo.hasPreviousPage)
+                    this.findAll(this.pageInfo.prePage);
+
+                else if ('next' == page && this.pageInfo.hasNextPage)
+                    this.findAll(this.pageInfo.nextPage);
+            },
+            jumpByNumber: function (start) {//跳转到指定页面
+                if (start != this.pageInfo.pageNum)
+                    this.findAll(start);
             },
             findHot:function () {
                 var _this = this;
@@ -305,7 +249,7 @@
                     })
             }
         },
-        created:function () {
+        created: function () {
             this.findAll();
             this.findHot();
         }

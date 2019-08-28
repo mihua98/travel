@@ -29,7 +29,7 @@
 
     <main>
 
-        <!--开屏页-->
+        <!--轮播图-->
         <section class="slider">
             <div id="slider" class="flexslider">
                 <ul class="slides">
@@ -128,25 +128,25 @@
                 </div>
             </div>
         </section>
+        <!--/轮播图-->
 
         <!--搜索栏-->
         <div class="search_container">
             <div class="container">
-                <div class="col-lg-12">
+                <form class="col-lg-12" action="/search" method="get">
                     <div class="row no-gutters custom-search-input-2 inner">
                         <div class="col-lg-7">
                             <div class="form-group">
-                                <input class="form-control" type="text" placeholder="搜目的地/攻略/旅行特价">
+                                <input class="form-control" name="search" type="text" placeholder="搜目的地/攻略/旅行特价">
                                 <i class="icon_search"></i>
                             </div>
                         </div>
                         <div class="col-lg-3">
-                            <select class="wide">
-                                <option>全部</option>
-                                <option>跟团游</option>
-                                <option>城市</option>
-                                <option>景点</option>
-                                <option>游记</option>
+                            <select class="wide" name="searchType">
+                                <option selected value="tour">跟团游</option>
+                                <option value="city">城市</option>
+                                <option value="view">景点</option>
+                                <option value="travelLog">游记</option>
                             </select>
                         </div>
                         <div class="col-lg-2">
@@ -154,34 +154,37 @@
                         </div>
                     </div>
                     <!-- /row -->
-                </div>
+                </form>
                 <!-- /custom-search-input-2 -->
             </div>
         </div>
-        <!-- /search_container -->
+        <!-- /搜索栏 -->
 
         <!--旅游线路列表-->
         <div class="container-fluid margin_60_0">
+
             <div class="main_title_2">
                 <span><em></em></span>
                 <h2>热门旅游线路</h2>
                 <p>行程透明省心游</p>
             </div>
+
             <div id="reccomended" class="owl-carousel owl-theme">
-                <div class="item">
+
+                <div class="item" th:each="tour:${tours}">
                     <div class="box_grid">
                         <figure>
-                            <a href="#" class="wish_bt"></a>
-                            <a href="/tourDetail"><img src="img/tour_1.jpg" class="img-fluid" alt="" width="800"
-                                                            height="533">
+                            <a href="#" class="wish_bt"></a><!-- 收藏 -->
+                            <a th:href="'selectTourById?id='+${tour.id}"><img th:src="${tour.tourPhoto}" class="img-fluid" alt="" width="800"
+                                                       height="533">
                                 <div class="read_more"><span>查看更多</span></div>
                             </a>
-                            <small>历史</small>
+                            <small th:text="${tour.cityName}"></small>
                         </figure>
                         <div class="wrapper">
-                            <h3><a href="/tourDetail">凯旋门</a></h3>
-                            <p>Id placerat tacimates definitionem sea, prima quidam vim no. Duo nobis persecuti cu.</p>
-                            <span class="price">最低 <strong>￥5499</strong> / 人</span>
+                            <h3><a th:href="'selectTourById?id='+${tour.id}" th:text="${tour.tourName}"></a></h3>
+                            <p th:text="${tour.tourDesc}"></p>
+                            <span class="price">最低 <strong th:text="'￥'+${tour.tourPrice}"></strong> / 人</span>
                         </div>
                         <ul>
                             <li><i class="icon_clock_alt"></i> 已售34</li>
@@ -191,126 +194,7 @@
                         </ul>
                     </div>
                 </div>
-                <!-- /item -->
-                <div class="item">
-                    <div class="box_grid">
-                        <figure>
-                            <a href="#" class="wish_bt"></a>
-                            <a href="/tourDetail"><img src="img/tour_2.jpg" class="img-fluid" alt="" width="800"
-                                                            height="533">
-                                <div class="read_more"><span>查看更多</span></div>
-                            </a>
-                            <small>教堂</small>
-                        </figure>
-                        <div class="wrapper">
-                            <h3><a href="/tourDetail">Notredam</a></h3>
-                            <p>Id placerat tacimates definitionem sea, prima quidam vim no. Duo nobis persecuti cu.</p>
-                            <span class="price">最低 <strong>￥124</strong> / 人</span>
-                        </div>
-                        <ul>
-                            <li><i class="icon_clock_alt"></i> 1h 30min</li>
-                            <li>
-                                <div class="score"><span>Good<em>350 Reviews</em></span><strong>7.0</strong></div>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-                <!-- /item -->
-                <div class="item">
-                    <div class="box_grid">
-                        <figure>
-                            <a href="#" class="wish_bt"></a>
-                            <a href="/tourDetail"><img src="img/tour_3.jpg" class="img-fluid" alt="" width="800"
-                                                            height="533">
-                                <div class="read_more"><span>查看更多</span></div>
-                            </a>
-                            <small>历史</small>
-                        </figure>
-                        <div class="wrapper">
-                            <h3><a href="/tourDetail">凡尔赛</a></h3>
-                            <p>Id placerat tacimates definitionem sea, prima quidam vim no. Duo nobis persecuti cu.</p>
-                            <span class="price">最低 <strong>￥25</strong> / 人</span>
-                        </div>
-                        <ul>
-                            <li><i class="icon_clock_alt"></i> 1h 30min</li>
-                            <li>
-                                <div class="score"><span>Good<em>350 Reviews</em></span><strong>7.0</strong></div>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-                <!-- /item -->
-                <div class="item">
-                    <div class="box_grid">
-                        <figure>
-                            <a href="#" class="wish_bt"></a>
-                            <a href="/tourDetail"><img src="img/tour_3.jpg" class="img-fluid" alt="" width="800"
-                                                            height="533">
-                                <div class="read_more"><span>查看更多</span></div>
-                            </a>
-                            <small>历史</small>
-                        </figure>
-                        <div class="wrapper">
-                            <h3><a href="/tourDetail">Versailles</a></h3>
-                            <p>Id placerat tacimates definitionem sea, prima quidam vim no. Duo nobis persecuti cu.</p>
-                            <span class="price">最低 <strong>￥25</strong> / 人</span>
-                        </div>
-                        <ul>
-                            <li><i class="icon_clock_alt"></i> 1h 30min</li>
-                            <li>
-                                <div class="score"><span>Good<em>350 Reviews</em></span><strong>7.0</strong></div>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-                <!-- /item -->
-                <div class="item">
-                    <div class="box_grid">
-                        <figure>
-                            <a href="#" class="wish_bt"></a>
-                            <a href="/tourDetail"><img src="img/tour_4.jpg" class="img-fluid" alt="" width="800"
-                                                            height="533">
-                                <div class="read_more"><span>查看更多</span></div>
-                            </a>
-                            <small>博物馆</small>
-                        </figure>
-                        <div class="wrapper">
-                            <h3><a href="/tourDetail">Pompidue Museum</a></h3>
-                            <p>Id placerat tacimates definitionem sea, prima quidam vim no. Duo nobis persecuti cu.</p>
-                            <span class="price">最低 <strong>￥45</strong> / 人</span>
-                        </div>
-                        <ul>
-                            <li><i class="icon_clock_alt"></i> 2h 30min</li>
-                            <li>
-                                <div class="score"><span>Superb<em>350 Reviews</em></span><strong>9.0</strong></div>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-                <!-- /item -->
-                <div class="item">
-                    <div class="box_grid">
-                        <figure>
-                            <a href="#" class="wish_bt"></a>
-                            <a href="/tourDetail"><img src="img/tour_5.jpg" class="img-fluid" alt="" width="800"
-                                                            height="533">
-                                <div class="read_more"><span>查看更多</span></div>
-                            </a>
-                            <small>徒步游</small>
-                        </figure>
-                        <div class="wrapper">
-                            <h3><a href="/tourDetail">Tour Eiffel</a></h3>
-                            <p>Id placerat tacimates definitionem sea, prima quidam vim no. Duo nobis persecuti cu.</p>
-                            <span class="price">最低 <strong>￥65</strong> / 人</span>
-                        </div>
-                        <ul>
-                            <li><i class="icon_clock_alt"></i> 1h 30min</li>
-                            <li>
-                                <div class="score"><span>Good<em>350 Reviews</em></span><strong>7.5</strong></div>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
+
                 <!-- /item -->
             </div>
             <!-- /carousel -->
@@ -332,57 +216,16 @@
                     <p>Cum doctus civibus efficiantur in imperdiet deterruisset.</p>
                 </div>
                 <div class="row">
-                    <div class="col-xl-3 col-lg-6 col-md-6">
-                        <a href="/cityDetail" class="grid_item">
+
+                    <div class="col-xl-3 col-lg-6 col-md-6" th:each="city:${cities}">
+                        <a th:href="'selectCityById?id='+${city.id}" class="grid_item">
                             <figure>
-                                <div class="score"><strong>8.9</strong></div>
-                                <img src="img/hotel_1.jpg" class="img-fluid" alt="">
+                                <div class="score"><strong th:text="${city.cityClickCount}"></strong></div>
+                                <img th:src="${city.cityPhoto}" class="img-fluid" alt="">
                                 <div class="info">
                                     <div class="cat_star"><i class="icon_star"></i><i class="icon_star"></i><i
                                             class="icon_star"></i><i class="icon_star"></i></div>
-                                    <h3>长沙</h3>
-                                </div>
-                            </figure>
-                        </a>
-                    </div>
-                    <!-- /grid_item -->
-                    <div class="col-xl-3 col-lg-6 col-md-6">
-                        <a href="/cityDetail" class="grid_item">
-                            <figure>
-                                <div class="score"><strong>7.9</strong></div>
-                                <img src="img/hotel_2.jpg" class="img-fluid" alt="">
-                                <div class="info">
-                                    <div class="cat_star"><i class="icon_star"></i><i class="icon_star"></i><i
-                                            class="icon_star"></i><i class="icon_star"></i></div>
-                                    <h3>北京</h3>
-                                </div>
-                            </figure>
-                        </a>
-                    </div>
-                    <!-- /grid_item -->
-                    <div class="col-xl-3 col-lg-6 col-md-6">
-                        <a href="/cityDetail" class="grid_item">
-                            <figure>
-                                <div class="score"><strong>7.0</strong></div>
-                                <img src="img/hotel_3.jpg" class="img-fluid" alt="">
-                                <div class="info">
-                                    <div class="cat_star"><i class="icon_star"></i><i class="icon_star"></i><i
-                                            class="icon_star"></i><i class="icon_star"></i></div>
-                                    <h3>重庆</h3>
-                                </div>
-                            </figure>
-                        </a>
-                    </div>
-                    <!-- /grid_item -->
-                    <div class="col-xl-3 col-lg-6 col-md-6">
-                        <a href="/cityDetail" class="grid_item">
-                            <figure>
-                                <div class="score"><strong>8.9</strong></div>
-                                <img src="img/hotel_4.jpg" class="img-fluid" alt="">
-                                <div class="info">
-                                    <div class="cat_star"><i class="icon_star"></i><i class="icon_star"></i><i
-                                            class="icon_star"></i><i class="icon_star"></i></div>
-                                    <h3>成都</h3>
+                                    <h3 th:text="${city.cityName}"></h3>
                                 </div>
                             </figure>
                         </a>
@@ -402,57 +245,20 @@
                     <p>Cum doctus civibus efficiantur in imperdiet deterruisset.</p>
                 </div>
                 <div class="row">
-                    <div class="col-xl-3 col-lg-6 col-md-6">
-                        <a href="/viewDetail" class="grid_item">
+
+                    <div class="col-xl-3 col-lg-6 col-md-6" th:each="view:${views}">
+                        <a th:href="'selectViewById?id='+${view.id}" class="grid_item">
                             <figure>
-                                <div class="score"><strong>8.5</strong></div>
-                                <img src="http://b2-q.mafengwo.net/s11/M00/5E/72/wKgBEFsx6MuAV_WGABHEAuTGhzs37.jpeg?imageMogr2%2Fthumbnail%2F%21690x370r%2Fgravity%2FCenter%2Fcrop%2F%21690x370%2Fquality%2F100"
+                                <div class="score"><strong th:text="${view.viewClickCount}"></strong></div>
+                                <img th:src="${view.viewImage}"
                                      class="img-fluid" alt="">
                                 <div class="info">
-                                    <h3>岳麓山风景名胜区</h3>
+                                    <h3 th:text="${view.viewName}"></h3>
                                 </div>
                             </figure>
                         </a>
                     </div>
-                    <!-- /grid_item -->
-                    <div class="col-xl-3 col-lg-6 col-md-6">
-                        <a href="/viewDetail" class="grid_item">
-                            <figure>
-                                <div class="score"><strong>7.9</strong></div>
-                                <img src="http://n4-q.mafengwo.net/s1/M00/6F/50/wKgIC1xWmuKAIRc8ABvON1lfBS461.jpeg?imageMogr2%2Fthumbnail%2F%21690x370r%2Fgravity%2FCenter%2Fcrop%2F%21690x370%2Fquality%2F100"
-                                     class="img-fluid" alt="">
-                                <div class="info">
-                                    <h3>故宫</h3>
-                                </div>
-                            </figure>
-                        </a>
-                    </div>
-                    <!-- /grid_item -->
-                    <div class="col-xl-3 col-lg-6 col-md-6">
-                        <a href="/viewDetail" class="grid_item">
-                            <figure>
-                                <div class="score"><strong>7.5</strong></div>
-                                <img src="http://p2-q.mafengwo.net/s8/M00/AB/51/wKgBpVWShIyAZLSuABHhv3DxJlE21.jpeg?imageMogr2%2Fthumbnail%2F%21690x370r%2Fgravity%2FCenter%2Fcrop%2F%21690x370%2Fquality%2F100"
-                                     class="img-fluid" alt="">
-                                <div class="info">
-                                    <h3>洪崖洞</h3>
-                                </div>
-                            </figure>
-                        </a>
-                    </div>
-                    <!-- /grid_item -->
-                    <div class="col-xl-3 col-lg-6 col-md-6">
-                        <a href="/viewDetail" class="grid_item">
-                            <figure>
-                                <div class="score"><strong>9.0</strong></div>
-                                <img src="http://p1-q.mafengwo.net/s12/M00/4D/19/wKgED1v9TRKASz4hAA06iNX8sfM17.jpeg?imageMogr2%2Fthumbnail%2F%21690x370r%2Fgravity%2FCenter%2Fcrop%2F%21690x370%2Fquality%2F100"
-                                     class="img-fluid" alt="">
-                                <div class="info">
-                                    <h3>宽窄巷子</h3>
-                                </div>
-                            </figure>
-                        </a>
-                    </div>
+
                     <!-- /grid_item -->
                 </div>
                 <!-- /row -->
@@ -471,58 +277,20 @@
                     <p>Cum doctus civibus efficiantur in imperdiet deterruisset.</p>
                 </div>
                 <div class="row" >
-                    <div class="col-lg-6" v-for="travelLog in travelLogs">
-                        <a class="box_news" :href="'travelLog/selectTravellogById?id='+travelLog.id">
-                            <figure><img :src="travelLog.tlPhoto" alt="">
+
+                    <div class="col-lg-6" th:each="travelLog:${travelLogs}">
+                        <a class="box_news" th:href="'travelLog/selectTravellogById?id='+${travelLog.id}">
+                            <figure><img th:src="${travelLog.tlPhoto}" alt="">
                             </figure>
                             <ul>
-                                <li>{{travelLog.userInfo.userName}}</li>
-                                <li>{{travelLog.tlReleaseDate}}</li>
+                                <li th:text="${travelLog.userInfo.userName}"></li>
+                                <li th:text="${travelLog.tlReleaseDate}"></li>
                             </ul>
-                            <h4>{{travelLog.tlTitle}}</h4>
-                            <p>{{travelLog.tlSummary}}</p>
+                            <h4 th:text="${travelLog.tlTitle}"></h4>
+                            <p th:text="${travelLog.tlSummary}"></p>
                         </a>
                     </div>
-                    <!--&lt;!&ndash; /box_news &ndash;&gt;-->
-                    <!--<div class="col-lg-6">-->
-                        <!--<a class="box_news" href="/travelLogDetail">-->
-                            <!--<figure><img src="img/news_home_2.jpg" alt="">-->
-                            <!--</figure>-->
-                            <!--<ul>-->
-                                <!--<li>陈敏华</li>-->
-                                <!--<li>2019.8.23</li>-->
-                            <!--</ul>-->
-                            <!--<h4>炎热夏日—长沙游</h4>-->
-                            <!--<p>虽说暑假天气炎热，但还是选择了 长沙 这个城市。听过四天三夜的旅行，对这个城市有了初步的了解。</p>-->
-                        <!--</a>-->
-                    <!--</div>-->
-                    <!--&lt;!&ndash; /box_news &ndash;&gt;-->
-                    <!--<div class="col-lg-6">-->
-                        <!--<a class="box_news" href="/travelLogDetail">-->
-                            <!--<figure><img src="img/news_home_3.jpg" alt="">-->
-                            <!--</figure>-->
-                            <!--<ul>-->
-                                <!--<li>余文强</li>-->
-                                <!--<li>2019.8.22</li>-->
-                            <!--</ul>-->
-                            <!--<h4>这一世一定要相遇的西藏之行</h4>-->
-                            <!--<p>七月底时候苦苦哀求加入了爸爸的中间旅行团，终于圆了我去 西藏 的一场 “说走就走的旅行”</p>-->
-                        <!--</a>-->
-                    <!--</div>-->
-                    <!--&lt;!&ndash; /box_news &ndash;&gt;-->
-                    <!--<div class="col-lg-6">-->
-                        <!--<a class="box_news" href="/travelLogDetail">-->
-                            <!--<figure><img src="img/news_home_4.jpg" alt="">-->
-                            <!--</figure>-->
-                            <!--<ul>-->
-                                <!--<li>吕友情</li>-->
-                                <!--<li>2019.8.21</li>-->
-                            <!--</ul>-->
-                            <!--<h4>桂林阳朔四天自由行</h4>-->
-                            <!--<p>当不知道去哪个地方的时候，跟着孩子的语文课本走是个不错的选择。四下第二课即是 桂林 山水。所以，这一站，毫不犹豫地选择了 桂林 。</p>-->
-                        <!--</a>-->
-                    <!--</div>-->
-                    <!-- /box_news -->
+
                 </div>
                 <!-- /row -->
                 <p class="btn_home_align"><a href="/travelLogList" class="btn_1 rounded">查看更多游记攻略</a></p>
@@ -570,10 +338,6 @@
 <script th:src="@{/js/common_scripts.js}"></script>
 <script th:src="@{/js/main.js}"></script>
 <script th:src="@{/js/validate.js}"></script>
-<script th:src="@{/js/vue.min.js}"></script>
-<script th:src="@{/js/axios.min.js}"></script>
-
-
 
 <!-- FlexSlider -->
 <script defer th:src="@{/js/jquery.flexslider.js}"></script>
@@ -609,29 +373,5 @@
 <script defer th:src="@{/js/weather_home.js}"></script>
 
 </body>
-<script>
-    new Vue({
-        el:"#page",
-        data:{
-            travelLogs:[]
-        },
-        methods:{
-            findTravelLogs:function () {
-                var _this = this;
-                axios.get('/travelLog/indexTravelLog')
-                    .then(function (response) {
-                        _this.travelLogs = response.data;
-                        console.log(response);
-                    })
-                    .catch(function (error) {
-                        // handle error
-                        console.log(error);
-                    })
-            }
-        },
-        created:function () {
-            this.findTravelLogs();
-        },
-    });
-</script>
+
 </html>

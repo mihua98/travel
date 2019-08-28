@@ -7,6 +7,7 @@ import com.hm.travel.pojo.UserInfo;
 import com.hm.travel.service.TravelLogService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -57,11 +58,12 @@ public class TravelLogController {
 
     /**
      * 首页展示,查询4条数据
+     *
      * @return 游记集合
      */
     @RequestMapping("/indexTravelLog")
     @ResponseBody
-    public  List<TravelLog> getIndexTravelLog(){
+    public List<TravelLog> getIndexTravelLog() {
         List<TravelLog> list = travelLogService.getIndexTravelLog();
         return list;
     }
@@ -98,14 +100,15 @@ public class TravelLogController {
 
     /**
      * 根据ID删除游记
+     *
      * @param id
      * @return
      */
     @RequestMapping("/deleteTravelLog")
     @ResponseBody
-    public String deleteTravelLog(@RequestParam("id") Integer id ){
+    public String deleteTravelLog(@RequestParam("id") Integer id) {
         int i = travelLogService.deleteTravellogById(id);
-        if(i>0){
+        if (i > 0) {
             return "删除成功";
         }
         return "删除失败";
@@ -114,16 +117,17 @@ public class TravelLogController {
 
     /**
      * 根据标题模糊查询游记
-     * @param tlTitle
+     *
+     * @param search
      * @return 游记集合
      */
     @RequestMapping("/selectTravelLogLikeTitle")
     @ResponseBody
-    public PageInfo<TravelLog> selectTravelLogLikeTitle(@RequestParam(value = "start", defaultValue = "0") int start,
-                                                    @RequestParam(value = "size", defaultValue = "7") int size,
-                                                    @RequestParam("tlTitle")String tlTitle){
+    public PageInfo<TravelLog> selectTravelLogLikeTitle(@RequestParam(value = "start", defaultValue = "1") int start,
+                                                        @RequestParam(value = "size", defaultValue = "4") int size,
+                                                        @RequestParam("search") String search) {
         PageHelper.startPage(start, size);
-        List<TravelLog> list = travelLogService.selectTravelLogLikeTitle(tlTitle);
+        List<TravelLog> list = travelLogService.selectTravelLogLikeTitle(search);
         PageInfo<TravelLog> page = new PageInfo<>(list);
         return page;
     }
@@ -150,8 +154,8 @@ public class TravelLogController {
      */
     @RequestMapping("/getAllTravelLog")
     @ResponseBody
-    public PageInfo<TravelLog> getAllTravelLog(@RequestParam(value = "start", defaultValue = "0") int start,
-                                               @RequestParam(value = "size", defaultValue = "7") int size){
+    public PageInfo<TravelLog> getAllTravelLog(@RequestParam(value = "start", defaultValue = "1") int start,
+                                               @RequestParam(value = "size", defaultValue = "4") int size) {
         PageHelper.startPage(start, size);
         List<TravelLog> list = travelLogService.getAllTravelLog();
         PageInfo<TravelLog> page = new PageInfo<>(list);
@@ -160,14 +164,15 @@ public class TravelLogController {
 
     /**
      * 用户对游记收藏
+     *
      * @param id 被收藏的游记ID
      * @return
      */
     @RequestMapping("/lowerFavoriteCountNum")
     @ResponseBody
-    public String lowerFavoriteCountNum(@RequestParam("id") Integer id){
+    public String lowerFavoriteCountNum(@RequestParam("id") Integer id) {
         int i = travelLogService.lowerFavoriteCountNum(id);
-        if(i>0){
+        if (i > 0) {
             return "取消收藏成功";
         }
         return "取消收藏失败";
@@ -175,14 +180,15 @@ public class TravelLogController {
 
     /**
      * 用户对游记收藏
+     *
      * @param id 被收藏的游记ID
      * @return
      */
     @RequestMapping("/addFavoriteCountNum")
     @ResponseBody
-    public String addFavoriteCountNum(@RequestParam("id") Integer id){
+    public String addFavoriteCountNum(@RequestParam("id") Integer id) {
         int i = travelLogService.addFavoriteCountNum(id);
-        if(i>0){
+        if (i > 0) {
             return "收藏成功";
         }
         return "收藏失败";
@@ -190,30 +196,31 @@ public class TravelLogController {
 
     /**
      * 用户查看游记,该游记点击量+1,转发至游记详情页
-     * @param id 游记id
-     * @param map 将查询到的游记存于map中
+     *
+     * @param id  游记id
+     * @param model 将查询到的游记存于model中
      * @return 游记详情页
      */
     @RequestMapping("/selectTravellogById")
-    public String selectTravellogById(Integer id, Map<String,Object> map){
+    public String selectTravellogById(Integer id, Model model) {
         travelLogService.clickCount(id);
         TravelLog travelLog = travelLogService.selectTravellogById(id);
-        map.put("travelLog",travelLog);
-        // TODO: 2019/8/24  转发至游记详情页
+        model.addAttribute("travelLog", travelLog);
         return "userPage/travel-log-detail";
     }
 
 
     /**
      * 用户对游记取消赞
+     *
      * @param id 被取消赞的游记ID
      * @return
      */
     @RequestMapping("/lowerLikeCountNum")
     @ResponseBody
-    public String lowerLikeCountNum(@RequestParam("id") Integer id){
+    public String lowerLikeCountNum(@RequestParam("id") Integer id) {
         int i = travelLogService.lowerLikeCountNum(id);
-        if(i>0){
+        if (i > 0) {
             return "取消赞成功";
         }
         return "取消赞失败";
@@ -221,32 +228,34 @@ public class TravelLogController {
 
     /**
      * 用户对游记点赞
+     *
      * @param id 被点赞的游记ID
      * @return
      */
     @RequestMapping("/addLikeCountNum")
     @ResponseBody
-    public String addLikeCountNum(@RequestParam("id") Integer id){
+    public String addLikeCountNum(@RequestParam("id") Integer id) {
         int i = travelLogService.addLikeCountNum(id);
-        if(i>0){
+        if (i > 0) {
             return "点赞成功";
         }
-             return "点赞失败";
+        return "点赞失败";
     }
 
 
     /**
      * 用户提交游记,不需要用户写发布时间和ID
+     *
      * @param travelLog
      * @return
      */
-    @RequestMapping
-    @ResponseBody
-    public String addTravelLog(TravelLog travelLog){
+    @RequestMapping("/addTravelLog")
+    public String addTravelLog(TravelLog travelLog) {
+        System.out.println(travelLog);
         int i = travelLogService.addTravelLog(travelLog);
-        if(i>0){
-            // TODO: 2019/8/24  转发至个人主页
-            return "添加成功";
+        if (i > 0) {
+            // TODO: 2019/8/24  转发至游记列表页
+            return "userPage/travel-log";
         }
         return "添加失败";
     }
