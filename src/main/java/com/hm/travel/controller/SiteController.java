@@ -39,6 +39,7 @@ public class SiteController {
 
     @Autowired
     private TourService tourService;
+
     /**
      * 跳转到首页,加并载首页数据
      *
@@ -68,7 +69,8 @@ public class SiteController {
     }
 
     @RequestMapping("tourList")
-    public String tourList() {
+    public String tourList(Model model, @RequestParam(value = "search", required = false) String search) {
+        model.addAttribute("search", search == null ? "" : search);
         System.out.println("跳转到跟团游列表页面");
         return "userPage/tour-list";
     }
@@ -80,7 +82,8 @@ public class SiteController {
     }
 
     @RequestMapping("viewList")
-    public String viewList() {
+    public String viewList(Model model, @RequestParam(value = "search", required = false) String search) {
+        model.addAttribute("search", search == null ? "" : search);
         System.out.println("跳转到景点列表页面");
         return "userPage/view-list";
     }
@@ -105,7 +108,8 @@ public class SiteController {
     }
 
     @RequestMapping("cityList")
-    public String cityList() {
+    public String cityList(Model model, @RequestParam(value = "search", required = false) String search) {
+        model.addAttribute("search", search == null ? "" : search);
         System.out.println("跳转到城市列表页面");
         return "userPage/city-list";
     }
