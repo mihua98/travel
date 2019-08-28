@@ -57,11 +57,11 @@
         <!--搜索栏-->
         <div class="search_container">
             <div class="container">
-                <div class="col-lg-12">
+                <form class="col-lg-12" action="/tourList" method="get">
                     <div class="row no-gutters custom-search-input-2 inner">
                         <div class="col-lg-10">
                             <div class="form-group">
-                                <input class="form-control" type="text" placeholder="搜索路线...">
+                                <input class="form-control" type="text" name="search" placeholder="搜索路线...">
                                 <i class="icon_search"></i>
                             </div>
                         </div>
@@ -70,7 +70,7 @@
                         </div>
                     </div>
                     <!-- /row -->
-                </div>
+                </form>
                 <!-- /custom-search-input-2 -->
             </div>
         </div>
@@ -79,13 +79,13 @@
         <!--列表区-->
         <div class="container margin_60_35">
 
-            <div class="box_list">
+            <div class="box_list" v-for="tour in tours">
                 <div class="row no-gutters">
                     <div class="col-lg-5">
                         <figure>
-                            <small>昆明大理丽江6日轻奢游</small>
-                            <a href="tourDetail">
-                                <img th:src="@{/img/restaurant_1.jpg}" class="img-fluid" width="800" height="533">
+                            <small>{{tour.cityName}}</small>
+                            <a :href="'selectTourById?id='+tour.id">
+                                <img :src="tour.tourPhoto" class="img-fluid" width="800" height="533">
                                 <div class="read_more"><span>更多</span></div>
                             </a>
                         </figure>
@@ -93,12 +93,12 @@
                     <div class="col-lg-7">
                         <div class="wrapper">
                             <a href="#0" class="wish_bt"></a><!-- 收藏按钮 -->
-                            <h3><a href="tourDetail">昆明大理丽江6日轻奢游</a></h3>
-                            <p>昆明大理丽江6日轻奢游（国际五星酒店+温泉酒店+敞篷吉普环洱海+VIP私人游船+网红拍照打卡+玉龙雪山大索道+丽水金沙表演+双古城)</p>
-                            <span class="price">最低 <strong>2220元</strong> /人</span>
+                            <h3><a :href="'selectTourById?id='+tour.id">{{tour.tourName}}</a></h3>
+                            <p>{{tour.tourDesc}}</p>
+                            <span class="price">最低 <strong>{{tour.tourPrice}}元</strong> /人</span>
                         </div>
                         <ul>
-                            <li><i class="ti-eye"></i> 164 次浏览</li>
+                            <li><i class="ti-eye"></i> {{tour.tourHead}} 次浏览</li>
                             <li>
                                 <div class="score"><span>人气推荐<em>350 个评价</em></span><strong>8.9</strong></div>
                             </li>
@@ -108,134 +108,6 @@
             </div>
             <!-- /box_list -->
 
-            <div class="box_list">
-                <div class="row no-gutters">
-                    <div class="col-lg-5">
-                        <figure>
-                            <small>Paris Centre</small>
-                            <a th:href="@{/restaurant-detail.html}"><img th:src="@{/img/restaurant_2.jpg}"
-                                                                         class="img-fluid" alt=""
-                                                                         width="800" height="533">
-                                <div class="read_more"><span>Read more</span></div>
-                            </a>
-                        </figure>
-                    </div>
-                    <div class="col-lg-7">
-                        <div class="wrapper">
-                            <a href="#0" class="wish_bt"></a>
-                            <h3><a th:href="@{/restaurant-detail.html}">Catrine</a></h3>
-                            <p>Dicam diceret ut ius, no epicuri dissentiet philosophia vix. Id usu zril tacimates
-                                neglegentur. Eam id
-                                legimus torquatos cotidieque, usu decore percipitur definitiones ex, nihil utinam
-                                recusabo mel no.</p>
-                            <span class="price">From <strong>$124</strong> /per person</span>
-                        </div>
-                        <ul>
-                            <li><i class="ti-eye"></i> 164 views</li>
-                            <li>
-                                <div class="score"><span>Good<em>350 Reviews</em></span><strong>7.0</strong></div>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-            <!-- /box_list -->
-            <div class="box_list">
-                <div class="row no-gutters">
-                    <div class="col-lg-5">
-                        <figure>
-                            <small>Paris Centre</small>
-                            <a th:href="@{/restaurant-detail.html}"><img th:src="@{/img/restaurant_3.jpg}"
-                                                                         class="img-fluid" alt=""
-                                                                         width="800" height="533">
-                                <div class="read_more"><span>Read more</span></div>
-                            </a>
-                        </figure>
-                    </div>
-                    <div class="col-lg-7">
-                        <div class="wrapper">
-                            <a href="#0" class="wish_bt"></a>
-                            <h3><a th:href="@{/restaurant-detail.html}">Bella Napoli</a></h3>
-                            <p>Dicam diceret ut ius, no epicuri dissentiet philosophia vix. Id usu zril tacimates
-                                neglegentur. Eam id
-                                legimus torquatos cotidieque, usu decore percipitur definitiones ex, nihil utinam
-                                recusabo mel no.</p>
-                            <span class="price">From <strong>$45</strong> /per person</span>
-                        </div>
-                        <ul>
-                            <li><i class="ti-eye"></i> 164 views</li>
-                            <li>
-                                <div class="score"><span>Good<em>350 Reviews</em></span><strong>7.0</strong></div>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-            <!-- /box_list -->
-            <div class="box_list">
-                <div class="row no-gutters">
-                    <div class="col-lg-5">
-                        <figure>
-                            <small>Paris Centre</small>
-                            <a th:href="@{/restaurant-detail.html}"><img th:src="@{/img/restaurant_4.jpg}"
-                                                                         class="img-fluid" alt=""
-                                                                         width="800" height="533">
-                                <div class="read_more"><span>Read more</span></div>
-                            </a>
-                        </figure>
-                    </div>
-                    <div class="col-lg-7">
-                        <div class="wrapper">
-                            <a href="#0" class="wish_bt"></a>
-                            <h3><a th:href="@{/restaurant-detail.html}">Slow Food</a></h3>
-                            <p>Dicam diceret ut ius, no epicuri dissentiet philosophia vix. Id usu zril tacimates
-                                neglegentur. Eam id
-                                legimus torquatos cotidieque, usu decore percipitur definitiones ex, nihil utinam
-                                recusabo mel no.</p>
-                            <span class="price">From <strong>$25</strong> /per person</span>
-                        </div>
-                        <ul>
-                            <li><i class="ti-eye"></i> 164 views</li>
-                            <li>
-                                <div class="score"><span>Superb<em>350 Reviews</em></span><strong>9.0</strong></div>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-            <!-- /box_list -->
-            <div class="box_list">
-                <div class="row no-gutters">
-                    <div class="col-lg-5">
-                        <figure>
-                            <small>Paris Centre</small>
-                            <a th:href="@{/restaurant-detail.html}"><img th:src="@{/img/restaurant_5.jpg}"
-                                                                         class="img-fluid" alt=""
-                                                                         width="800" height="533">
-                                <div class="read_more"><span>Read more</span></div>
-                            </a>
-                        </figure>
-                    </div>
-                    <div class="col-lg-7">
-                        <div class="wrapper">
-                            <a href="#0" class="wish_bt"></a>
-                            <h3><a th:href="@{/restaurant-detail.html}">Andrew Fish</a></h3>
-                            <p>Dicam diceret ut ius, no epicuri dissentiet philosophia vix. Id usu zril tacimates
-                                neglegentur. Eam id
-                                legimus torquatos cotidieque, usu decore percipitur definitiones ex, nihil utinam
-                                recusabo mel no.</p>
-                            <span class="price">From <strong>$65</strong> /per person</span>
-                        </div>
-                        <ul>
-                            <li><i class="ti-eye"></i> 164 views</li>
-                            <li>
-                                <div class="score"><span>Superb<em>350 Reviews</em></span><strong>9.0</strong></div>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-            <!-- /box_list -->
 
             <div class="row">
                 <div class="offset-lg-4 col-lg-3">
@@ -282,6 +154,54 @@
 <script th:src="@{/js/validate.js}"></script>
 <script th:src="@{/js/vue.min.js}"></script>
 <script th:src="@{/js/axios.min.js}"></script>
+
+<script>
+    new Vue({
+        el:"#page",
+        data:{
+            tours:[],
+            pageInfo:{}
+        },
+
+        methods:{
+            findAll:function (start) {
+                var _this = this;
+                var searchTour = $("#searchTour").val();
+                axios.get('/selectTourLikeTitle',{// 统一用模糊查询
+                    params: {
+                        start: start,
+                        search: searchTour
+                    }
+                })
+                    .then(function (response) {
+                        _this.tours = response.data.list;
+                        _this.pageInfo=response.data;
+                        console.log(response);
+                    })
+                    .catch(function (error) {
+                        // handle error
+                        console.log(error);
+                    })
+            }
+        },
+        jump: function (page) {//跳转上一页,下一页
+            if ('pre' == page && this.pageInfo.hasPreviousPage)
+                this.findAll(this.pageInfo.prePage);
+
+            else if ('next' == page && this.pageInfo.hasNextPage)
+                this.findAll(this.pageInfo.nextPage);
+        },
+        jumpByNumber: function (start) {//跳转到指定页面
+            if (start != this.pageInfo.pageNum)
+                this.findAll(start);
+        },
+        created:function (){
+
+            this.findAll(1);
+        },
+    });
+
+</script>
 
 
 </body>

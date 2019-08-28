@@ -96,4 +96,9 @@ public class TourServiceImpl implements TourService {
     public Tour selectTourByHeadOne() {
         return tourMapper.selectTourByHeadOne();
     }
+
+    @Override
+    public List<Tour> selectTourLikeTitle(String search) {
+        return tourMapper.selectTourLikeTitle(search);
+    }
 }

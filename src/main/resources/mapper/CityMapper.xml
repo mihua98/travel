@@ -4,32 +4,29 @@
 <mapper namespace="com.hm.travel.mapper.CityMapper">
 
     <resultMap type="com.hm.travel.pojo.City" id="myCity">
-        <result column="id" property="id" />
-        <result column="city_Name" property="cityName" />
-        <result column="city_Introduce" property="cityIntroduce" />
-        <result column="city_Photo" property="cityPhoto" />
-        <result column="city_Click_Count" property="cityClickCount" />
+        <result column="id" property="id"/>
+        <result column="city_Name" property="cityName"/>
+        <result column="city_Introduce" property="cityIntroduce"/>
+        <result column="city_Photo" property="cityPhoto"/>
+        <result column="city_Click_Count" property="cityClickCount"/>
 
-
-
-        <result column="view_introduce" property="view.viewIntroduce" />
-        <result column="view_image" property="view.viewImage" />
-        <result column="view_name" property="view.viewName" />
-        <result column="view_Click_Count" property="view.viewClickCount" />
+        <result column="view_introduce" property="view.viewIntroduce"/>
+        <result column="view_image" property="view.viewImage"/>
+        <result column="view_name" property="view.viewName"/>
+        <result column="view_Click_Count" property="view.viewClickCount"/>
     </resultMap>
 
     <delete id="removeCityById" parameterType="int">
-                   delete from city where id=#{id}
+                   delete from city where id = #{id}
          </delete>
 
-    <select id="searchByWord3"  resultMap="myCity">
+    <select id="searchByWord3" resultMap="myCity">
          select
              view.view_name,view.view_image,view.view_introduce,city.city_Name,city.city_Introduce,city.city_photo
 		from view ,city
-		where city_Name like '%${word}%' and view.city_Id=city.id
+		where city_Name like concat('%',#{word},'%') and view.city_Id = city.id
 
      </select>
-
 
     <update id="clickCount" parameterType="int">
         update city set city_Click_Count = city_Click_Count+1 where id = #{id}
@@ -40,7 +37,7 @@
     </select>
 
     <select id="getCityById" resultType="com.hm.travel.pojo.City" parameterType="int">
-              select * from city where id=#{id}
+              select * from city where id = #{id}
     </select>
 
     <select id="searchCityByName" resultType="com.hm.travel.pojo.City">
@@ -49,11 +46,10 @@
 
     <select id="searchHotCity" resultType="com.hm.travel.pojo.City">
         select * from (select * from city order by city_Click_Count desc) c limit 4
-
     </select>
 
     <select id="searchById" resultType="com.hm.travel.pojo.City">
-              select * from city where id=#{id}
+              select * from city where id = #{id}
     </select>
 
     <insert id="addCity" parameterType="com.hm.travel.pojo.City">
@@ -61,8 +57,7 @@
     </insert>
 
     <update id="updateCityById" parameterType="com.hm.travel.pojo.City">
-    update city  set city_Introduce=#{cityIntroduce},city_photo=#{cityPhoto},city_name =#{cityName}  where id = #{id}
-
+    update city set city_Introduce=#{cityIntroduce},city_photo=#{cityPhoto},city_name =#{cityName}  where id = #{id}
     </update>
 
 </mapper>

@@ -94,8 +94,9 @@ public class CityController {
 
     /**
      * 用户查询城市,转发至城市详情页
+     * 用PageHelper封装
      *
-     * @param  城市名字模糊
+     * @param search 城市名字模糊
      * @return
      */
     @ResponseBody
@@ -104,9 +105,8 @@ public class CityController {
                                            @RequestParam(value = "size", defaultValue = "4") int size,
                                            @RequestParam("search") String search) {
         PageHelper.startPage(start, size);
-        List<City> citys = cityService.searchCityByName(search);
-        System.out.println(citys);
-        PageInfo<City> page = new PageInfo<>(citys);
+        List<City> list = cityService.searchCityByName(search);
+        PageInfo<City> page = new PageInfo<>(list);
         return page;
     }
 

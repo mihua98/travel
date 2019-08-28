@@ -107,7 +107,7 @@ public class ViewServiceImpl implements ViewService {
      * 根据城市id找出3个景点
      */
     @Override
-    public List<View> searchHotViewByCityId(int id) {
+    public List<View> searchHotViewByCityId(Integer id) {
         return viewMapper.searchHotViewByCityId(id);
     }
 

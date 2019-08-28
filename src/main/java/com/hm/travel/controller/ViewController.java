@@ -184,11 +184,9 @@ public class ViewController {
      */
     @ResponseBody
     @RequestMapping("/searchHotViewByCityId")
-    public Map searchHotViewByCityId(int id) {
-        List<View> views = viewService.searchHotViewByCityId(id);
-        Map<String, Object> map = new HashMap<>();
-        map.put("search", views);
-        return map;
+    public List<View> searchHotViewByCityId(Integer id) {
+        List<View> list = viewService.searchHotViewByCityId(id);
+        return list;
     }
 
     /**
