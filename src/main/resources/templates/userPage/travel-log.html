@@ -134,27 +134,16 @@
                         <div class="widget-title">
                             <h4>游记攻略推荐</h4>
                         </div>
-                        <ul class="comments-list">
+                        <ul class="comments-list" v-for="hotLog in HotTravelLogs">
+
                             <li>
+
                                 <div class="alignleft">
-                                    <a href="/travelLogDetail"><img src="img/blog-5.jpg" alt=""></a>
+                                    <a :href="'travelLog/selectTravellogById?id='+hotLog.id"><img :src="hotLog.tlPhoto" alt=""></a>
                                 </div>
-                                <small>2019.8.24</small>
-                                <h3><a href="/travelLogDetail" title="">【杭州】江南忆最忆是杭州&不止西湖春夏秋冬&小众打卡攻略...</a></h3>
-                            </li>
-                            <li>
-                                <div class="alignleft">
-                                    <a href="/travelLogDetail"><img src="img/blog-6.jpg" alt=""></a>
-                                </div>
-                                <small>2019.8.23</small>
-                                <h3><a href="/travelLogDetail" title="">炎热夏日—长沙游</a></h3>
-                            </li>
-                            <li>
-                                <div class="alignleft">
-                                    <a href="/travelLogDetail"><img src="img/blog-4.jpg" alt=""></a>
-                                </div>
-                                <small>2019.8.22</small>
-                                <h3><a href="/travelLogDetail" title="">这一世一定要相遇的西藏之行</a></h3>
+                                <small>{{hotLog.tlReleaseDate}}</small>
+                                <h3><a :href="'travelLog/selectTravellogById?id='+hotLog.id" title="">{{hotLog.tlTitle}}</a></h3>
+
                             </li>
                         </ul>
                     </div>
@@ -208,10 +197,12 @@
 </body>
 <script>
     new Vue({
-        el: "#page",
-        data: {
-            travelLogs: [],
-            pageInfo: {}
+        el:"#page",
+        data:{
+            travelLogs:[],
+            HotTravelLogs:[],
+            pageInfo:{}
+
         },
         methods: {
             findAll: function (start) {
@@ -244,10 +235,23 @@
             jumpByNumber: function (start) {//跳转到指定页面
                 if (start != this.pageInfo.pageNum)
                     this.findAll(start);
+            },
+            findHot:function () {
+                var _this = this;
+                axios.get('/travelLog/HotTravelLog')
+                    .then(function (response) {
+                        _this.HotTravelLogs = response.data;
+                        console.log(response);
+                    })
+                    .catch(function (error) {
+                        // handle error
+                        console.log(error);
+                    })
             }
         },
         created: function () {
             this.findAll();
+            this.findHot();
         }
     });
 </script>

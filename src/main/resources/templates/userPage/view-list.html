@@ -79,13 +79,13 @@
         <!--列表区-->
         <div class="container margin_60_35">
 
-            <div class="box_list">
+            <div class="box_list" v-for="view in Views">
                 <div class="row no-gutters">
                     <div class="col-lg-5">
                         <figure>
-                            <small>天安门</small>
-                            <a href="viewDetail">
-                                <img th:src="@{/img/restaurant_1.jpg}" class="img-fluid" width="800" height="533">
+                            <small>{{view.viewName}}</small>
+                            <a :href="'selectViewById?id='+view.id">
+                                <img :src="view.viewImage" class="img-fluid" width="800" height="533">
                                 <div class="read_more"><span>更多</span></div>
                             </a>
                         </figure>
@@ -93,15 +93,12 @@
                     <div class="col-lg-7">
                         <div class="wrapper">
                             <a href="#0" class="wish_bt"></a><!-- 收藏按钮 -->
-                            <h3><a href="viewDetail">天安门</a></h3>
-                            <p>Dicam diceret ut ius, no epicuri dissentiet philosophia vix. Id usu zril tacimates
-                                neglegentur. Eam id
-                                legimus torquatos cotidieque, usu decore percipitur definitiones ex, nihil utinam
-                                recusabo mel no.</p>
-                            <span class="price">最低 <strong>54元</strong> /人</span>
+                            <h3><a href="viewDetail">{{view.viewName}}</a></h3>
+                            <p>{{view.viewIntroduce}}</p>
+
                         </div>
                         <ul>
-                            <li><i class="ti-eye"></i> 164 次浏览</li>
+                            <li><i class="ti-eye"></i>{{view.viewClickCount}}</li>
                             <li>
                                 <div class="score"><span>热门景点<em>350 个评价</em></span><strong>8.9</strong></div>
                             </li>
@@ -111,133 +108,133 @@
             </div>
             <!-- /box_list -->
 
-            <div class="box_list">
-                <div class="row no-gutters">
-                    <div class="col-lg-5">
-                        <figure>
-                            <small>Paris Centre</small>
-                            <a th:href="@{/restaurant-detail.html}"><img th:src="@{/img/restaurant_2.jpg}"
-                                                                         class="img-fluid" alt=""
-                                                                         width="800" height="533">
-                                <div class="read_more"><span>Read more</span></div>
-                            </a>
-                        </figure>
-                    </div>
-                    <div class="col-lg-7">
-                        <div class="wrapper">
-                            <a href="#0" class="wish_bt"></a>
-                            <h3><a th:href="@{/restaurant-detail.html}">Catrine</a></h3>
-                            <p>Dicam diceret ut ius, no epicuri dissentiet philosophia vix. Id usu zril tacimates
-                                neglegentur. Eam id
-                                legimus torquatos cotidieque, usu decore percipitur definitiones ex, nihil utinam
-                                recusabo mel no.</p>
-                            <span class="price">From <strong>$124</strong> /per person</span>
-                        </div>
-                        <ul>
-                            <li><i class="ti-eye"></i> 164 views</li>
-                            <li>
-                                <div class="score"><span>Good<em>350 Reviews</em></span><strong>7.0</strong></div>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-            <!-- /box_list -->
-            <div class="box_list">
-                <div class="row no-gutters">
-                    <div class="col-lg-5">
-                        <figure>
-                            <small>Paris Centre</small>
-                            <a th:href="@{/restaurant-detail.html}"><img th:src="@{/img/restaurant_3.jpg}"
-                                                                         class="img-fluid" alt=""
-                                                                         width="800" height="533">
-                                <div class="read_more"><span>Read more</span></div>
-                            </a>
-                        </figure>
-                    </div>
-                    <div class="col-lg-7">
-                        <div class="wrapper">
-                            <a href="#0" class="wish_bt"></a>
-                            <h3><a th:href="@{/restaurant-detail.html}">Bella Napoli</a></h3>
-                            <p>Dicam diceret ut ius, no epicuri dissentiet philosophia vix. Id usu zril tacimates
-                                neglegentur. Eam id
-                                legimus torquatos cotidieque, usu decore percipitur definitiones ex, nihil utinam
-                                recusabo mel no.</p>
-                            <span class="price">From <strong>$45</strong> /per person</span>
-                        </div>
-                        <ul>
-                            <li><i class="ti-eye"></i> 164 views</li>
-                            <li>
-                                <div class="score"><span>Good<em>350 Reviews</em></span><strong>7.0</strong></div>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-            <!-- /box_list -->
-            <div class="box_list">
-                <div class="row no-gutters">
-                    <div class="col-lg-5">
-                        <figure>
-                            <small>Paris Centre</small>
-                            <a th:href="@{/restaurant-detail.html}"><img th:src="@{/img/restaurant_4.jpg}"
-                                                                         class="img-fluid" alt=""
-                                                                         width="800" height="533">
-                                <div class="read_more"><span>Read more</span></div>
-                            </a>
-                        </figure>
-                    </div>
-                    <div class="col-lg-7">
-                        <div class="wrapper">
-                            <a href="#0" class="wish_bt"></a>
-                            <h3><a th:href="@{/restaurant-detail.html}">Slow Food</a></h3>
-                            <p>Dicam diceret ut ius, no epicuri dissentiet philosophia vix. Id usu zril tacimates
-                                neglegentur. Eam id
-                                legimus torquatos cotidieque, usu decore percipitur definitiones ex, nihil utinam
-                                recusabo mel no.</p>
-                            <span class="price">From <strong>$25</strong> /per person</span>
-                        </div>
-                        <ul>
-                            <li><i class="ti-eye"></i> 164 views</li>
-                            <li>
-                                <div class="score"><span>Superb<em>350 Reviews</em></span><strong>9.0</strong></div>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-            <!-- /box_list -->
-            <div class="box_list">
-                <div class="row no-gutters">
-                    <div class="col-lg-5">
-                        <figure>
-                            <small>Paris Centre</small>
-                            <a th:href="@{/restaurant-detail.html}"><img th:src="@{/img/restaurant_5.jpg}"
-                                                                         class="img-fluid" alt=""
-                                                                         width="800" height="533">
-                                <div class="read_more"><span>Read more</span></div>
-                            </a>
-                        </figure>
-                    </div>
-                    <div class="col-lg-7">
-                        <div class="wrapper">
-                            <a href="#0" class="wish_bt"></a>
-                            <h3><a th:href="@{/restaurant-detail.html}">Andrew Fish</a></h3>
-                            <p>Dicam diceret ut ius, no epicuri dissentiet philosophia vix. Id usu zril tacimates
-                                neglegentur. Eam id
-                                legimus torquatos cotidieque, usu decore percipitur definitiones ex, nihil utinam
-                                recusabo mel no.</p>
-                            <span class="price">From <strong>$65</strong> /per person</span>
-                        </div>
-                        <ul>
-                            <li><i class="ti-eye"></i> 164 views</li>
-                            <li>
-                                <div class="score"><span>Superb<em>350 Reviews</em></span><strong>9.0</strong></div>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
+            <!-- <div class="box_list">
+                 <div class="row no-gutters">
+                     <div class="col-lg-5">
+                         <figure>
+                             <small>Paris Centre</small>
+                             <a th:href="@{/restaurant-detail.html}"><img th:src="@{/img/restaurant_2.jpg}"
+                                                                          class="img-fluid" alt=""
+                                                                          width="800" height="533">
+                                 <div class="read_more"><span>Read more</span></div>
+                             </a>
+                         </figure>
+                     </div>
+                     <div class="col-lg-7">
+                         <div class="wrapper">
+                             <a href="#0" class="wish_bt"></a>
+                             <h3><a th:href="@{/restaurant-detail.html}">Catrine</a></h3>
+                             <p>Dicam diceret ut ius, no epicuri dissentiet philosophia vix. Id usu zril tacimates
+                                 neglegentur. Eam id
+                                 legimus torquatos cotidieque, usu decore percipitur definitiones ex, nihil utinam
+                                 recusabo mel no.</p>
+                             <span class="price">From <strong>$124</strong> /per person</span>
+                         </div>
+                         <ul>
+                             <li><i class="ti-eye"></i> 164 views</li>
+                             <li>
+                                 <div class="score"><span>Good<em>350 Reviews</em></span><strong>7.0</strong></div>
+                             </li>
+                         </ul>
+                     </div>
+                 </div>
+             </div>
+             &lt;!&ndash; /box_list &ndash;&gt;
+             <div class="box_list">
+                 <div class="row no-gutters">
+                     <div class="col-lg-5">
+                         <figure>
+                             <small>Paris Centre</small>
+                             <a th:href="@{/restaurant-detail.html}"><img th:src="@{/img/restaurant_3.jpg}"
+                                                                          class="img-fluid" alt=""
+                                                                          width="800" height="533">
+                                 <div class="read_more"><span>Read more</span></div>
+                             </a>
+                         </figure>
+                     </div>
+                     <div class="col-lg-7">
+                         <div class="wrapper">
+                             <a href="#0" class="wish_bt"></a>
+                             <h3><a th:href="@{/restaurant-detail.html}">Bella Napoli</a></h3>
+                             <p>Dicam diceret ut ius, no epicuri dissentiet philosophia vix. Id usu zril tacimates
+                                 neglegentur. Eam id
+                                 legimus torquatos cotidieque, usu decore percipitur definitiones ex, nihil utinam
+                                 recusabo mel no.</p>
+                             <span class="price">From <strong>$45</strong> /per person</span>
+                         </div>
+                         <ul>
+                             <li><i class="ti-eye"></i> 164 views</li>
+                             <li>
+                                 <div class="score"><span>Good<em>350 Reviews</em></span><strong>7.0</strong></div>
+                             </li>
+                         </ul>
+                     </div>
+                 </div>
+             </div>
+             &lt;!&ndash; /box_list &ndash;&gt;
+             <div class="box_list">
+                 <div class="row no-gutters">
+                     <div class="col-lg-5">
+                         <figure>
+                             <small>Paris Centre</small>
+                             <a th:href="@{/restaurant-detail.html}"><img th:src="@{/img/restaurant_4.jpg}"
+                                                                          class="img-fluid" alt=""
+                                                                          width="800" height="533">
+                                 <div class="read_more"><span>Read more</span></div>
+                             </a>
+                         </figure>
+                     </div>
+                     <div class="col-lg-7">
+                         <div class="wrapper">
+                             <a href="#0" class="wish_bt"></a>
+                             <h3><a th:href="@{/restaurant-detail.html}">Slow Food</a></h3>
+                             <p>Dicam diceret ut ius, no epicuri dissentiet philosophia vix. Id usu zril tacimates
+                                 neglegentur. Eam id
+                                 legimus torquatos cotidieque, usu decore percipitur definitiones ex, nihil utinam
+                                 recusabo mel no.</p>
+                             <span class="price">From <strong>$25</strong> /per person</span>
+                         </div>
+                         <ul>
+                             <li><i class="ti-eye"></i> 164 views</li>
+                             <li>
+                                 <div class="score"><span>Superb<em>350 Reviews</em></span><strong>9.0</strong></div>
+                             </li>
+                         </ul>
+                     </div>
+                 </div>
+             </div>
+             &lt;!&ndash; /box_list &ndash;&gt;
+             <div class="box_list">
+                 <div class="row no-gutters">
+                     <div class="col-lg-5">
+                         <figure>
+                             <small>Paris Centre</small>
+                             <a th:href="@{/restaurant-detail.html}"><img th:src="@{/img/restaurant_5.jpg}"
+                                                                          class="img-fluid" alt=""
+                                                                          width="800" height="533">
+                                 <div class="read_more"><span>Read more</span></div>
+                             </a>
+                         </figure>
+                     </div>
+                     <div class="col-lg-7">
+                         <div class="wrapper">
+                             <a href="#0" class="wish_bt"></a>
+                             <h3><a th:href="@{/restaurant-detail.html}">Andrew Fish</a></h3>
+                             <p>Dicam diceret ut ius, no epicuri dissentiet philosophia vix. Id usu zril tacimates
+                                 neglegentur. Eam id
+                                 legimus torquatos cotidieque, usu decore percipitur definitiones ex, nihil utinam
+                                 recusabo mel no.</p>
+                             <span class="price">From <strong>$65</strong> /per person</span>
+                         </div>
+                         <ul>
+                             <li><i class="ti-eye"></i> 164 views</li>
+                             <li>
+                                 <div class="score"><span>Superb<em>350 Reviews</em></span><strong>9.0</strong></div>
+                             </li>
+                         </ul>
+                     </div>
+                 </div>
+             </div>-->
             <!-- /box_list -->
 
             <div class="row">
@@ -292,7 +289,7 @@
     new Vue({
         el: "#page",
         data: {
-            views: [],
+            Views: [],
             pageInfo: {}
         },
         methods: {
@@ -303,11 +300,11 @@
                 axios.get('/searchByWord', {// 统一用模糊查询
                     params: {
                         start: start,
-                        search:searchView
+                        search: searchView
                     }
                 })
                     .then(function (response) {
-                        _this.views = response.data.list;
+                        _this.Views = response.data.list;
                         _this.pageInfo = response.data;
                         console.log(response);
                     })

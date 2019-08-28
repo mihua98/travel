@@ -77,15 +77,14 @@
         <!-- /search_container -->
 
         <!--列表区-->
-        <div class="container margin_60_35">
-
-            <div class="box_list">
+        <div class="container margin_60_35" >
+            <div class="box_list" v-for="city in Citys">
                 <div class="row no-gutters">
                     <div class="col-lg-5">
                         <figure>
-                            <small>北京</small>
-                            <a href="cityDetail">
-                                <img th:src="@{/img/restaurant_1.jpg}" class="img-fluid" width="800" height="533">
+                            <small>{{city.cityName}}</small>
+                            <a :href="'selectCityById?id='+city.id">
+                                <img :src="city.cityPhoto" class="img-fluid" width="800" height="533">
                                 <div class="read_more"><span>更多</span></div>
                             </a>
                         </figure>
@@ -93,15 +92,11 @@
                     <div class="col-lg-7">
                         <div class="wrapper">
                             <a href="#0" class="wish_bt"></a><!-- 收藏按钮 -->
-                            <h3><a href="cityDetail">北京</a></h3>
-                            <p>Dicam diceret ut ius, no epicuri dissentiet philosophia vix. Id usu zril tacimates
-                                neglegentur. Eam id
-                                legimus torquatos cotidieque, usu decore percipitur definitiones ex, nihil utinam
-                                recusabo mel no.</p>
-                            <span class="price">最低 <strong>54元</strong> /人</span>
+                            <h3><a href="cityDetail">{{city.cityName}}</a></h3>
+                            <p>{{city.cityIntroduce}}</p>
                         </div>
                         <ul>
-                            <li><i class="ti-eye"></i> 164 次浏览</li>
+                            <li><i class="ti-eye"></i>{{city.cityClickCount}}</li>
                             <li>
                                 <div class="score"><span>人气推荐<em>350 个评价</em></span><strong>8.9</strong></div>
                             </li>
@@ -110,8 +105,7 @@
                 </div>
             </div>
             <!-- /box_list -->
-
-            <div class="box_list">
+       <!--     <div class="box_list">
                 <div class="row no-gutters">
                     <div class="col-lg-5">
                         <figure>
@@ -142,7 +136,7 @@
                     </div>
                 </div>
             </div>
-            <!-- /box_list -->
+            &lt;!&ndash; /box_list &ndash;&gt;
             <div class="box_list">
                 <div class="row no-gutters">
                     <div class="col-lg-5">
@@ -174,7 +168,7 @@
                     </div>
                 </div>
             </div>
-            <!-- /box_list -->
+            &lt;!&ndash; /box_list &ndash;&gt;
             <div class="box_list">
                 <div class="row no-gutters">
                     <div class="col-lg-5">
@@ -206,7 +200,7 @@
                     </div>
                 </div>
             </div>
-            <!-- /box_list -->
+            &lt;!&ndash; /box_list &ndash;&gt;
             <div class="box_list">
                 <div class="row no-gutters">
                     <div class="col-lg-5">
@@ -237,7 +231,7 @@
                         </ul>
                     </div>
                 </div>
-            </div>
+            </div>-->
             <!-- /box_list -->
 
             <div class="row">
@@ -258,6 +252,7 @@
                     </nav>
                 </div>
             </div>
+
 
 
         </div>
@@ -287,4 +282,35 @@
 <script th:src="@{/js/vue.min.js}"></script>
 <script th:src="@{/js/axios.min.js}"></script>
 </body>
+<script>
+    new Vue({
+        el:"#page",
+        data:{
+            Citys:[],
+            pageInfo:{}
+        },
+
+        methods:{
+            findCity:function () {
+                var _this = this;
+                axios.get('/pageInfoCitys')
+                    .then(function (response) {
+                        _this.Citys = response.data.list;
+                        _this.pageInfo=response.data;
+                        console.log(response);
+                    })
+                    .catch(function (error) {
+                        // handle error
+                        console.log(error);
+                    })
+            }
+        },
+
+        created:function (){
+
+            this.findCity();
+        },
+    });
+
+</script>
 </html>

@@ -69,5 +69,23 @@ public class CityServiceImpl implements CityService {
         return cityMapper.searchHotCity();
     }
 
+    @Override
+    public City searchById(int id) {
+        return cityMapper.searchById(id);
+    }
+
+    /**
+     * 新增view
+     */
+    public  void  addCity(City city){
+        cityMapper.addCity(city);
+    }
+
+    /**
+     * 修改city
+     */
+    public void  updateCity(City city){
+        cityMapper.updateCityById(city);
+    }
 
 }

@@ -27,7 +27,11 @@
         </association>
     </resultMap>
     <select id="getAllTravelLog" resultMap="Travellog">
-          select * from travellog t, userInfo u where t.userInfo_id = u.id
+          select * from travellog t, userInfo u where t.userInfo_id = u.id and t.tl_ststus = 0
+    </select>
+
+    <select id="getAnyTravelLog" resultMap="Travellog">
+        select * from travellog t, userInfo u where t.userInfo_id = u.id
     </select>
 
     <select id="selectTravelLogLikeTitle" resultMap="Travellog">
@@ -40,5 +44,9 @@
 
     <select id="getIndexTravelLog" resultMap="Travellog">
         select * from travelLog t,userInfo u where t.userInfo_id = u.id and t.tl_status =0  limit 4
+    </select>
+
+    <select id="getHotTravelLog" resultMap="Travellog">
+        select * from (select * from travelLog order by tl_click_count desc) t limit 3
     </select>
 </mapper>

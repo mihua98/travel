@@ -8,6 +8,7 @@ import com.hm.travel.service.TravelLogService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -30,6 +31,31 @@ public class TravelLogController {
     private TravelLogService travelLogService;
 
 
+
+    /**
+     * 游记推荐调用,查询点击量前三的游记
+     * @return 游记集合
+     */
+    @RequestMapping("/HotTravelLog")
+    @ResponseBody
+    public  List<TravelLog> getHotTravelLog(){
+        List<TravelLog> list = travelLogService.getHotTravelLog();
+        return list;
+    }
+
+    /**
+     * 根据ID查询
+     * @param id
+     * @return
+     */
+    @RequestMapping("/selectTravelLogById")
+    @ResponseBody
+    public TravelLog selectTravelLogById(@RequestParam("id") Integer id){
+        TravelLog travelLog = travelLogService.selectTravellogById(id);
+        return travelLog;
+    }
+
+
     /**
      * 首页展示,查询4条数据
      *
@@ -41,8 +67,6 @@ public class TravelLogController {
         List<TravelLog> list = travelLogService.getIndexTravelLog();
         return list;
     }
-
-    ;
 
     /**
      * 得到总用户数量
@@ -59,16 +83,16 @@ public class TravelLogController {
 
     /**
      * 更改游记状态  0可读  1 不可读
-     *
-     * @param id       游记ID
-     * @param tlStatus 状态码
+     * @param travelLog 游记
      * @return
      */
     @RequestMapping("/updateTravelLog")
     @ResponseBody
-    public String updateTravelLog(@RequestParam("id") Integer id, Integer tlStatus) {
-        int i = travelLogService.updateTravellogStatus(id, tlStatus);
-        if (i > 0) {
+    public String updateTravelLog(@RequestBody TravelLog travelLog){
+        Integer id = travelLog.getId();
+        Integer tlStatus = travelLog.getTlStatus();
+        int i = travelLogService.updateTravellogStatus(travelLog);
+        if(i>0){
             return "更改状态成功";
         }
         return "更改状态失败";
@@ -105,14 +129,27 @@ public class TravelLogController {
         PageHelper.startPage(start, size);
         List<TravelLog> list = travelLogService.selectTravelLogLikeTitle(search);
         PageInfo<TravelLog> page = new PageInfo<>(list);
-        System.out.println(page);
+        return page;
+    }
+
+    /**
+     * 查询所有游记(包括不可读)   管理员调用!!!!!!!!
+     * @return travelLogs 游记集合
+     */
+    @RequestMapping("/getAnyTravelLog")
+    @ResponseBody
+    public PageInfo<TravelLog> getAnyTravelLog(@RequestParam(value = "start", defaultValue = "0") int start,
+                                               @RequestParam(value = "size", defaultValue = "3") int size){
+        PageHelper.startPage(start, size);
+        List<TravelLog> list = travelLogService.getAnyTravelLog();
+        PageInfo<TravelLog> page = new PageInfo<>(list);
         return page;
     }
 
 
+
     /**
-     * 查询所有游记
-     *
+     * 查询所有可读游记   用户调用!!!!!!!!
      * @return travelLogs 游记集合
      */
     @RequestMapping("/getAllTravelLog")

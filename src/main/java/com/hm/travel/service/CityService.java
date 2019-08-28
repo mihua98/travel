@@ -51,4 +51,21 @@ public interface CityService {
      */
     List<City> searchHotCity();
 
+    /**
+     * 根据id查询city
+     * @param id
+     * @return
+     */
+    public City searchById(int id);
+
+    /**
+     * 新增city
+     */
+    public  void  addCity(City city);
+
+    /**
+     * 修改city
+     */
+    public void  updateCity(City city);
+
 }

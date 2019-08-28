@@ -19,6 +19,11 @@ public interface TravelLogMapper {
     //面向用户:新增游记,点击,点赞,收藏,查询所有游记,根据标题模糊查询
     //面向管理员:更改游记状态,查询所有游记,删除游记,根据标题模糊查询
 
+    /**
+     * 游记推荐调用,根据点击量查询前三条游记
+     * @return
+     */
+    List<TravelLog> getHotTravelLog();
 
     /**
      *
@@ -45,12 +50,11 @@ public interface TravelLogMapper {
 
     /**
      * 管理员更新游记状态
-     * @param id
-     * @param tlStatus
+     *
      * @return
      */
-    @Update("update travellog set tl_Status = #{tlStatus} where id = #{id}")
-    int updateTravellogStatus(Integer id,Integer tlStatus);
+    @Update("update travelLog set TL_Status = #{tlStatus} where id = #{id}")
+    int updateTravellogStatus(TravelLog travelLog);
 
 
     /**
@@ -70,10 +74,16 @@ public interface TravelLogMapper {
     List<TravelLog> selectTravelLogLikeTitle(String tlTitle);
 
     /**
-     * 查询所有游记
+     * 查询所有可读游记
      * @return 游记集合
      */
     List<TravelLog> getAllTravelLog();
+
+    /**
+     * 查询所有游记(包含不可读游记,管理员调用)
+     * @return
+     */
+    List<TravelLog> getAnyTravelLog();
 
     /**
      * 用户新增游记
