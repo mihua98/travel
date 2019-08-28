@@ -17,6 +17,7 @@
 
     <!-- SPECIFIC CSS -->
     <link th:href="@{/css/travel-log.css}" rel="stylesheet">
+    <link th:href="@{/css/editormd.preview.css}" rel="stylesheet">
 </head>
 
 <body>
@@ -55,12 +56,13 @@
 
                         <div class="post-content">
                             <div class="dropcaps">
-                                <p th:text="${travelLog.tlSummary}">这可能是你见过最全的 杭州 游记攻略了。这是大学这几年在杭州走过地方的感悟，其实还有很多包括酒吧打卡等还是没写到。很抱歉，没有 杭州 小 冰岛
-                                    。不过其中提及的小众打卡地和网红打卡地同样不在少数。全篇以西湖，京杭大运河，钱塘江，湘湖为主线，以三大世界遗产，三泉，三西为支线。内附较为详细的 杭州
-                                    博物馆一览以及拍照打卡地详解。</p>
+                                <p th:text="${travelLog.tlSummary}"></p>
                             </div>
 
-                            <div th:utext="${travelLog.tlContent}"></div>
+                            <div id="travelLogContent">
+                                <textarea style="display: none;" th:text="${travelLog.tlContent}"></textarea>
+
+                            </div>
                         </div>
                         <!-- /post -->
                     </div>
@@ -214,20 +216,6 @@
                                 <h3><a :href="'travelLog/selectTravellogById?id='+hotLog.id" title="">{{hotLog.tlTitle}}</a></h3>
 
                             </li>
-                            <!--<li>-->
-                                <!--<div class="alignleft">-->
-                                    <!--<a href="/travelLogDetail"><img th:src="@{/img/blog-6.jpg}" alt=""></a>-->
-                                <!--</div>-->
-                                <!--<small>2019.8.23</small>-->
-                                <!--<h3><a href="/travelLogDetail" title="">炎热夏日—长沙游</a></h3>-->
-                            <!--</li>-->
-                            <!--<li>-->
-                                <!--<div class="alignleft">-->
-                                    <!--<a href="/travelLogDetail"><img th:src="@{/img/blog-4.jpg}" alt=""></a>-->
-                                <!--</div>-->
-                                <!--<small>2019.8.22</small>-->
-                                <!--<h3><a href="/travelLogDetail" title="">这一世一定要相遇的西藏之行</a></h3>-->
-                            <!--</li>-->
                         </ul>
                     </div>
                     <!-- /widget -->
@@ -274,6 +262,16 @@
 <script th:src="@{/js/validate.js}"></script>
 <script th:src="@{/js/vue.min.js}"></script>
 <script th:src="@{/js/axios.min.js}"></script>
+
+<script th:src="@{/js/editormd.js}"></script>
+<script th:src="@{/js/lib/marked.min.js}"></script>
+<script th:src="@{/js/lib/prettify.min.js}"></script>
+
+<script type="text/javascript">
+    $(function () {
+        editormd.markdownToHTML("travelLogContent");
+    })
+</script>
 
 </body>
 <script>
