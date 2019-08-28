@@ -7,6 +7,7 @@ import com.hm.travel.pojo.UserInfo;
 import com.hm.travel.service.TravelLogService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -41,6 +42,17 @@ public class TravelLogController {
         return list;
     }
 
+    /**
+     * 根据ID查询
+     * @param id
+     * @return
+     */
+    @RequestMapping("/selectTravelLogById")
+    @ResponseBody
+    public TravelLog selectTravelLogById(@RequestParam("id") Integer id){
+        TravelLog travelLog = travelLogService.selectTravellogById(id);
+        return travelLog;
+    }
 
 
     /**
@@ -69,15 +81,15 @@ public class TravelLogController {
 
     /**
      * 更改游记状态  0可读  1 不可读
-     * @param id 游记ID
-     * @param tlStatus 状态码
+     * @param travelLog 游记
      * @return
      */
     @RequestMapping("/updateTravelLog")
     @ResponseBody
-    public String updateTravelLog(@RequestParam("id") Integer id,
-                                  @RequestParam("tlStatus") Integer tlStatus){
-        int i = travelLogService.updateTravellogStatus(id, tlStatus);
+    public String updateTravelLog(@RequestBody TravelLog travelLog){
+        Integer id = travelLog.getId();
+        Integer tlStatus = travelLog.getTlStatus();
+        int i = travelLogService.updateTravellogStatus(travelLog);
         if(i>0){
             return "更改状态成功";
         }
@@ -123,7 +135,7 @@ public class TravelLogController {
     @RequestMapping("/getAnyTravelLog")
     @ResponseBody
     public PageInfo<TravelLog> getAnyTravelLog(@RequestParam(value = "start", defaultValue = "0") int start,
-                                               @RequestParam(value = "size", defaultValue = "7") int size){
+                                               @RequestParam(value = "size", defaultValue = "3") int size){
         PageHelper.startPage(start, size);
         List<TravelLog> list = travelLogService.getAnyTravelLog();
         PageInfo<TravelLog> page = new PageInfo<>(list);

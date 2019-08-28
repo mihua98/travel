@@ -23,7 +23,7 @@
                 user_age = #{userAge},
             </if>
             <if test="email !=null and email != &quot;&quot;">
-                email = #{email}
+                email = #{email},
             </if>
         </set>
         where id = #{id}

@@ -9,10 +9,7 @@ import com.hm.travel.service.AccountService;
 import com.hm.travel.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
@@ -42,8 +39,8 @@ public class UserController {
      */
     @RequestMapping("/getUserList")
     @ResponseBody
-    public PageInfo<UserInfo> getAllUser(@RequestParam(value = "start", defaultValue = "0") int start,
-                                         @RequestParam(value = "size", defaultValue = "7") int size) throws IOException {
+    public PageInfo<UserInfo> getAllUser(@RequestParam(value = "start", defaultValue = "1") int start,
+                                         @RequestParam(value = "size", defaultValue = "4") int size) throws IOException {
         PageHelper.startPage(start, size, "id desc");
         List<UserInfo> list = userService.getAllUser();
         PageInfo<UserInfo> page = new PageInfo<>(list);
@@ -88,8 +85,8 @@ public class UserController {
      */
     @RequestMapping("/selectUserLikeName")
     @ResponseBody
-    public PageInfo<UserInfo> selectUserLikeName(@RequestParam(value = "start", defaultValue = "0") int start,
-                                             @RequestParam(value = "size", defaultValue = "7") int size,
+    public PageInfo<UserInfo> selectUserLikeName(@RequestParam(value = "start", defaultValue = "1") int start,
+                                             @RequestParam(value = "size", defaultValue = "4") int size,
                                              @RequestParam("userName")    String userName) {
         System.out.println(userName);
         PageHelper.startPage(start, size, "id desc");
@@ -120,7 +117,7 @@ public class UserController {
      */
     @RequestMapping("/updateUser")
     @ResponseBody
-    public String updateUser(UserInfo userInfo) {
+    public String updateUser(@RequestBody UserInfo userInfo) {
         System.out.println(userInfo);
         int i = userService.updateUserInfo(userInfo);
 

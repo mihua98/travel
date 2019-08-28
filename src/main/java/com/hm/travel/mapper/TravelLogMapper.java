@@ -50,12 +50,11 @@ public interface TravelLogMapper {
 
     /**
      * 管理员更新游记状态
-     * @param id
-     * @param tlStatus
+     *
      * @return
      */
-    @Update("update travellog set tl_Status = #{tlStatus} where id = #{id}")
-    int updateTravellogStatus(Integer id,Integer tlStatus);
+    @Update("update travelLog set TL_Status = #{tlStatus} where id = #{id}")
+    int updateTravellogStatus(TravelLog travelLog);
 
 
     /**

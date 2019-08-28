@@ -52,7 +52,7 @@ public interface TravelLogService {
      * @param tlStatus
      * @return
      */
-    int updateTravellogStatus(Integer id,Integer tlStatus);
+    int updateTravellogStatus(TravelLog travelLog);
 
 
     /**

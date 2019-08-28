@@ -76,8 +76,8 @@ public class TravelLogServiceImpl implements TravelLogService {
      * @return
      */
     @Override
-    public int updateTravellogStatus(Integer id, Integer tlStatus) {
-        return travelLogMapper.updateTravellogStatus(id, tlStatus);
+    public int updateTravellogStatus(TravelLog travelLog) {
+        return travelLogMapper.updateTravellogStatus(travelLog);
     }
 
     /**
