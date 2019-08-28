@@ -83,7 +83,7 @@ public class TourServiceImpl implements TourService {
      * @return 前6
      */
     @Override
-    public Tour selectTourByHead() {
+    public List<Tour> selectTourByHead() {
         return tourMapper.selectTourByHead();
     }
 

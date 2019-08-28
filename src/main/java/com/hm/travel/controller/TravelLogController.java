@@ -7,6 +7,7 @@ import com.hm.travel.pojo.UserInfo;
 import com.hm.travel.service.TravelLogService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -160,15 +161,14 @@ public class TravelLogController {
      * 用户查看游记,该游记点击量+1,转发至游记详情页
      *
      * @param id  游记id
-     * @param map 将查询到的游记存于map中
+     * @param model 将查询到的游记存于model中
      * @return 游记详情页
      */
     @RequestMapping("/selectTravellogById")
-    public String selectTravellogById(Integer id, Map<String, Object> map) {
+    public String selectTravellogById(Integer id, Model model) {
         travelLogService.clickCount(id);
         TravelLog travelLog = travelLogService.selectTravellogById(id);
-        map.put("travelLog", travelLog);
-        // TODO: 2019/8/24  转发至游记详情页
+        model.addAttribute("travelLog", travelLog);
         return "userPage/travel-log-detail";
     }
 

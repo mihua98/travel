@@ -52,7 +52,7 @@ public interface TourService {
      * @param
      * @return 前6
      */
-    Tour selectTourByHead();
+    List<Tour> selectTourByHead();
     /**
      * 通过tourHead获得Tour
      * @param

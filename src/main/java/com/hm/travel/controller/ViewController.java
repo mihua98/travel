@@ -7,6 +7,7 @@ import com.hm.travel.pojo.View;
 import com.hm.travel.service.ViewService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -22,8 +23,8 @@ public class ViewController {
     ViewService viewService;
 
     @ResponseBody
-    @RequestMapping("/getView/{id}")
-    public View sesrchById(@PathVariable("id") int id) {
+    @RequestMapping("/getView")
+    public View sesrchById(@RequestParam("id") int id) {
         View view = viewService.searchById(id);
         return view;
     }
@@ -141,16 +142,15 @@ public class ViewController {
     /**
      * 用户查看景点,该游记点击量+1,转发至景点详情页
      *
-     * @param id  景点id
-     * @param map 将查询到的景点存于map中
+     * @param id    景点id
+     * @param model 将查询到的景点存于model中
      * @return 景点详情页
      */
     @RequestMapping("/selectViewById")
-    public String selectViewById(Integer id, Map<String, Object> map) {
+    public String selectViewById(@RequestParam("id") Integer id, Model model) {
         viewService.clickCount(id);
         View view = viewService.searchById(id);
-        map.put("view", view);
-        // TODO: 2019/8/24  转发至景点详情页
+        model.addAttribute("view", view);
         return "userPage/view-detail";
     }
 

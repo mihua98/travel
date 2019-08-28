@@ -60,7 +60,7 @@ public interface TourMapper {
      * @return 前6
      */
     @Select("select * from (SELECT *from tour order by tour_Head desc) t LIMIT 6")
-    Tour selectTourByHead();
+    List<Tour> selectTourByHead();
     /**
      * 通过tourHead获得Tour
      * @param

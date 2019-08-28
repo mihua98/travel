@@ -1,7 +1,13 @@
 package com.hm.travel.controller;
 
+import com.hm.travel.pojo.City;
+import com.hm.travel.pojo.Tour;
 import com.hm.travel.pojo.TravelLog;
+import com.hm.travel.pojo.View;
+import com.hm.travel.service.CityService;
+import com.hm.travel.service.TourService;
 import com.hm.travel.service.TravelLogService;
+import com.hm.travel.service.ViewService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -24,6 +30,15 @@ import java.util.UUID;
 public class SiteController {
     @Autowired
     private TravelLogService travelLogService;
+
+    @Autowired
+    private ViewService viewService;
+
+    @Autowired
+    private CityService cityService;
+
+    @Autowired
+    private TourService tourService;
     /**
      * 跳转到首页,加并载首页数据
      *
@@ -32,9 +47,22 @@ public class SiteController {
      */
     @RequestMapping("index")
     public String index(Model model) {
+        //加载跟团游
+        List<Tour> tours = tourService.selectTourByHead();
+        model.addAttribute("tours",tours);
+
+        //加载城市
+        List<City> cities = cityService.searchHotCity();
+        model.addAttribute("cities",cities);
+
+        //加载景点
+        List<View> views = viewService.searchHotView();
+        model.addAttribute("views",views);
+
         //加载游记
-        List<TravelLog> travelLog = travelLogService.getIndexTravelLog();
-        model.addAttribute("travelLogs",travelLog);
+        List<TravelLog> travelLogs = travelLogService.getIndexTravelLog();
+        model.addAttribute("travelLogs",travelLogs);
+
         System.out.println("跳转到首页");
         return "userPage/index";
     }
