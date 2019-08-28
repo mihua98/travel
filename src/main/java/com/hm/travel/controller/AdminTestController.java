@@ -20,4 +20,14 @@ public class AdminTestController {
         return "adminPage/all-travellog-manage-list";
     }
 
+    /**
+     * 跳转至游记详情页
+     * @return
+     */
+    @RequestMapping("/AllTravelLogData")
+    public String AllTravelLogData(){
+        System.out.println("游记详情页");
+        return "adminPage/all-travellog-data-list";
+    }
+
 }

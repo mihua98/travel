@@ -172,9 +172,9 @@ public class UserController {
         account.setPassword(md5Code);
         int i = accountService.addAccount(account);
         Account account1 = accountService.getAccountId(account);
-        System.out.println(account1);
         //这里原来的写法有问题,改了,再把userInfo表的主键自增关了 @author:cmh
         UserInfo userInfo = new UserInfo();
+        userInfo.setEmail(account.getEmail());
         userInfo.setId(account1.getId());
         userService.addUser(userInfo);
         if (i > 0) {

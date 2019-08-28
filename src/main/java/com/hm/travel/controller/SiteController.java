@@ -126,6 +126,12 @@ public class SiteController {
         return "userPage/travel-log-edit";
     }
 
+    @RequestMapping("wishlist")
+    public String wishlistPage(){
+        System.out.println("跳转到收藏页面");
+        return "userPage/wishlist";
+    }
+
     /**
      * 首页搜索跳转
      *
