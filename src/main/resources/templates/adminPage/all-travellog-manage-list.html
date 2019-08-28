@@ -212,25 +212,25 @@
                     <div class="box-tools pull-right">
                         <ul class="pagination">
                             <li :class="{ disabled: pageInfo.pageNum==1 }">
-                                <a href="#nowhere" @click="jump('first')">首页</a>
+                                <a  @click="jump('first')">首页</a>
                             </li>
                             <li :class="{ disabled: !pageInfo.hasPreviousPage }">
-                                <a href="#nowhere" @click="jump('pre')" aria-label="Previous">
+                                <a @click="jump('pre')" aria-label="Previous">
                                     <span aria-hidden="true">&laquo;</span>
                                 </a>
                             </li>
                             <li :class="{disabled:pageInfo.pageNum==i}" v-for="i in pageInfo.navigatepageNums">
-                                <a href="#nowhere" @click="jumpByNumber(i)">
+                                <a @click="jumpByNumber(i)">
                                     {{i}}
                                 </a>
                             </li>
                             <li :class="{ disabled: !pageInfo.hasNextPage }">
-                                <a href="#nowhere" @click="jump('next')" aria-label="Next">
+                                <a @click="jump('next')" aria-label="Next">
                                     <span aria-hidden="true">&raquo;</span>
                                 </a>
                             </li>
                             <li :class="{ disabled: pageInfo.pageNum==pageInfo.pages }">
-                                <a href="#nowhere" @click="jump('last')">尾页</a>
+                                <a @click="jump('last')">尾页</a>
                             </li>
                         </ul>
                     </div>
