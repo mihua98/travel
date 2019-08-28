@@ -84,7 +84,7 @@
                     <div class="col-lg-5">
                         <figure>
                             <small>{{tour.cityName}}</small>
-                            <a :href="'tourDetail?id='+tour.id">
+                            <a :href="'selectTourById?id='+tour.id">
                                 <img :src="tour.tourPhoto" class="img-fluid" width="800" height="533">
                                 <div class="read_more"><span>更多</span></div>
                             </a>
@@ -93,7 +93,7 @@
                     <div class="col-lg-7">
                         <div class="wrapper">
                             <a href="#0" class="wish_bt"></a><!-- 收藏按钮 -->
-                            <h3><a :href="'tourDetail?id='+tour.id">{{tour.tourName}}</a></h3>
+                            <h3><a :href="'selectTourById?id='+tour.id">{{tour.tourName}}</a></h3>
                             <p>{{tour.tourDesc}}</p>
                             <span class="price">最低 <strong>{{tour.tourPrice}}元</strong> /人</span>
                         </div>
