@@ -64,6 +64,6 @@
     </select>
 
     <select id="searchHotViewByCityId" resultType="com.hm.travel.pojo.View">
-         select * from (select * from view order by view_Click_Count desc) v where city_id =#{id} limit 3
+         select * from (select * from view where city_Id = #{id} order by view_Click_Count desc) v limit 3
      </select>
 </mapper>

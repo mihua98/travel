@@ -1,6 +1,7 @@
 package com.hm.travel.mapper;
 
 import com.hm.travel.pojo.View;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -80,8 +81,8 @@ public interface ViewMapper {
     /**
      * 根据城市id查询3个景点
      *
-     * @param id
+     * @param cid
      * @return
      */
-    List<View> searchHotViewByCityId(int id);
+    List<View> searchHotViewByCityId(Integer id);
 }

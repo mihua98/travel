@@ -57,11 +57,11 @@
         <!--搜索栏-->
         <div class="search_container">
             <div class="container">
-                <div class="col-lg-12">
+                <form class="col-lg-12" action="/viewList" method="get">
                     <div class="row no-gutters custom-search-input-2 inner">
                         <div class="col-lg-10">
                             <div class="form-group">
-                                <input class="form-control" type="text" placeholder="搜索景点...">
+                                <input class="form-control" type="text" name="search" placeholder="搜索景点...">
                                 <i class="icon_search"></i>
                             </div>
                         </div>
@@ -70,7 +70,7 @@
                         </div>
                     </div>
                     <!-- /row -->
-                </div>
+                </form>
                 <!-- /custom-search-input-2 -->
             </div>
         </div>
@@ -326,7 +326,7 @@
             }
         },
         created: function () {
-            this.findAll();
+            this.findAll(1);
         }
     });
 </script>

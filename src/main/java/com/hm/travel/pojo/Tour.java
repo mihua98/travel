@@ -22,7 +22,9 @@ public class Tour {
     private Integer tourStatus;
 
     private String tourPhoto;
-
+    /**
+     * 浏览量
+     */
     private int tourHead;
 
 

@@ -63,8 +63,7 @@ public class CityController {
      */
     @ResponseBody
     @RequestMapping("/pageInfoCitys")
-    public PageInfo getpageInfoViews(
-            @RequestParam(value = "pn", defaultValue = "1") Integer pn) {
+    public PageInfo getpageInfoViews(@RequestParam(value = "pn", defaultValue = "1") Integer pn) {
 
         PageHelper.startPage(pn, 5);
 
@@ -85,7 +84,7 @@ public class CityController {
      */
 
     @RequestMapping("/selectCityById")
-    public String selectCityById(Integer id, Model model) {
+    public String selectCityById(@RequestParam("id") Integer id, Model model) {
         cityService.clickCount(id);
         City city = cityService.getCityById(id);
         model.addAttribute("city", city);
@@ -94,19 +93,20 @@ public class CityController {
 
     /**
      * 用户查询城市,转发至城市详情页
+     * 用PageHelper封装
      *
-     * @param word 城市名字模糊
+     * @param search 城市名字模糊
      * @return
      */
     @ResponseBody
     @RequestMapping("/searchCityByName")
-    public Map searchCityByName(@RequestParam("search") String word) {
-
-        List<City> citys = cityService.searchCityByName(word);
-        System.out.println(citys);
-        Map<String, Object> map = new HashMap<>();
-        map.put("search", citys);
-        return map;
+    public PageInfo<City> searchCityByName(@RequestParam(value = "start", defaultValue = "1") int start,
+                                           @RequestParam(value = "size", defaultValue = "4") int size,
+                                           @RequestParam("search") String search) {
+        PageHelper.startPage(start, size);
+        List<City> list = cityService.searchCityByName(search);
+        PageInfo<City> page = new PageInfo<>(list);
+        return page;
     }
 
     /**

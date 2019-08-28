@@ -119,7 +119,7 @@
 
                     <!--右侧搜索-->
                     <div class="widget">
-                        <form>
+                        <form action="/travelLogList" method="get">
                             <div class="form-group">
                                 <input type="text" name="search" id="search" class="form-control"
                                        placeholder="搜索游记攻略...">
@@ -250,7 +250,7 @@
             }
         },
         created: function () {
-            this.findAll();
+            this.findAll(1);
             this.findHot();
         }
     });
