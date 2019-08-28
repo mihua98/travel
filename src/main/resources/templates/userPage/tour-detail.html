@@ -48,14 +48,15 @@
                     </ul>
                 </div>
             </nav>
-            <div class="container margin_60_35">
+            <div class="container margin_60_35" >
                 <div class="row">
                     <div class="col-lg-8">
 
                         <!--跟团游详情区-->
+
                         <section id="description">
-                            <h2>昆明大理丽江6日轻奢游</h2>
-                            <p>昆明大理丽江6日轻奢游（国际五星酒店+温泉酒店+敞篷吉普环洱海+VIP私人游船+网红拍照打卡+玉龙雪山大索道+丽水金沙表演+双古城)<strong>temporibus vim</strong>, ad sumo
+                            <h2 th:text="tour.tourName"></h2>
+                            <p th:text="tour.tourDesc">昆明大理丽江6日轻奢游（国际五星酒店+温泉酒店+敞篷吉普环洱海+VIP私人游船+网红拍照打卡+玉龙雪山大索道+丽水金沙表演+双古城)<strong>temporibus vim</strong>, ad sumo
                                 viris eloquentiam sed. Mea appareat omittantur eloquentiam ad, nam ei quas oportere
                                 democritum. Prima causae admodum id est, ei timeam inimicus sed. Sit an meis aliquam,
                                 cetero inermis vel ut. An sit illum euismod facilisis, tamquam vulputate pertinacia eum
@@ -284,14 +285,19 @@
                     <!-- /col -->
 
                     <aside class="col-lg-4" id="sidebar">
-                        <div class="box_detail booking">
+                        <form action="/topay">
+                            <input type='hidden'  id='travellerOneprice' value='${tour.tourPrice}'/>
+                            <input type='hidden'  id='userInfoId' value='${UserInfo.id}'/>
+                            <input type='hidden'  id='userInfoName' value='${UserInfo.userName}'/>
+
+                            <div class="box_detail booking">
                             <div class="price">
-                                <span>2220元<small>/人</small></span>
-                                <div class="score"><span>人气推荐<em>已售350</em></span><strong>9.0</strong></div>
+                                <span th:text="${tour.tourPrice}+'元'"><small>/人</small></span>
+                                <div class="score"><span>人气推荐<em th:text="tour.tourHead">已售350</em></span><strong>9.0</strong></div>
                             </div>
 
                             <div class="form-group" id="input_date">
-                                <input class="form-control" type="text" name="dates" placeholder="When..">
+                                <input class="form-control" type="text" name="tourOrderTime" placeholder="When..">
                                 <i class="icon_calendar"></i>
                             </div>
 
@@ -300,7 +306,7 @@
                                 <div class="panel-dropdown-content right">
                                     <div class="qtyButtons">
                                         <label>成人</label>
-                                        <input type="text" name="qtyInput" value="1">
+                                        <input type="text" name="tourOrderTime" value="1">
                                     </div>
                                     <div class="qtyButtons">
                                         <label>儿童</label>
@@ -326,6 +332,7 @@
                                 <small>此步骤不收取任何费用</small>
                             </div>
                         </div>
+                        </form>
                         <ul class="share-buttons">
                             <li><a class="fb-share" href="#0"><i class="social_facebook"></i> 分享</a></li>
                             <li><a class="twitter-share" href="#0"><i class="social_twitter"></i> 分享</a></li>
