@@ -9,12 +9,14 @@ public interface TourService {
 
     /**
      * 查询所有跟团游
+     *
      * @return所有跟团游集合
      */
     List<Tour> findAll();
 
     /**
      * 添加tour
+     *
      * @param tour
      * @return
      */
@@ -22,6 +24,7 @@ public interface TourService {
 
     /**
      * 修改tour
+     *
      * @param id
      * @return
      */
@@ -29,19 +32,23 @@ public interface TourService {
 
     /**
      * 删除
+     *
      * @param id
      * @return
      */
     int deleteTour(Integer id);
+
     /**
      * 按条件查询
+     *
      * @param district
      * @return
      */
     List<Tour> findTourByCondition(String district);
 
     /**
-     *通过id获得Tour
+     * 通过id获得Tour
+     *
      * @param id
      * @return
      */
@@ -49,14 +56,25 @@ public interface TourService {
 
     /**
      * 通过tourHead获得Tour
+     *
      * @param
      * @return 前6
      */
     List<Tour> selectTourByHead();
+
     /**
      * 通过tourHead获得Tour
+     *
      * @param
      * @return 前1
      */
     Tour selectTourByHeadOne();
+
+    /**
+     * 根据名字模糊查询
+     *
+     * @param search
+     * @return
+     */
+    List<Tour> selectTourLikeTitle(String search);
 }

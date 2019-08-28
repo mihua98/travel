@@ -15,13 +15,15 @@ public interface TourMapper {
 
     /**
      * 查询所有跟团游
+     *
      * @return所有跟团游集合
      */
-    @Select ("select * from tour")
+    @Select("select * from tour")
     List<Tour> findAll();
 
     /**
      * 添加tour
+     *
      * @param tour
      * @return
      */
@@ -31,6 +33,7 @@ public interface TourMapper {
 
     /**
      * 修改tour
+     *
      * @param id
      * @return
      */
@@ -41,6 +44,7 @@ public interface TourMapper {
 
     /**
      * 按条件查询
+     *
      * @param district
      * @return
      */
@@ -48,32 +52,48 @@ public interface TourMapper {
     List<Tour> findTourByCondition(String district);
 
     /**
-     *通过id获得Tour
+     * 通过id获得Tour
+     *
      * @param id
      * @return
      */
     @Select("select * from tour where id =#{id}")
     Tour selectTourById(Integer id);
+
     /**
      * 通过tourHead获得Tour
+     *
      * @param
      * @return 前6
      */
     @Select("select * from (SELECT *from tour order by tour_Head desc) t LIMIT 6")
     List<Tour> selectTourByHead();
+
     /**
      * 通过tourHead获得Tour
+     *
      * @param
      * @return 前1
      */
-    @Select("select * from (SELECT *from tour order by tour_Head desc) t LIMIT 1")
+    @Select("select * from (SELECT * from tour order by tour_Head desc) t LIMIT 1")
     Tour selectTourByHeadOne();
+
     /**
      * 删除
+     *
      * @param id
      * @return
      */
     @Delete("delete from tour where id=#{id}")
     int deleteTour(Integer id);
+
+    /**
+     * 根据名字模糊查询
+     *
+     * @param search
+     * @return
+     */
+    @Select("select * from tour where tour_Name like CONCAT('%',#{search},'%')")
+    List<Tour> selectTourLikeTitle(String search);
 }
 

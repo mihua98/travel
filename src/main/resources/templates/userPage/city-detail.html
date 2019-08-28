@@ -14,7 +14,7 @@
     <link th:href="@{/css/userStyle.css}" rel="stylesheet">
     <link th:href="@{/css/vendors.css}" rel="stylesheet">
 
-<!--    <link rel="stylesheet" href="https://a.amap.com/jsapi_demos/static/demo-center/css/demo-center.css" />-->
+    <!--    <link rel="stylesheet" href="https://a.amap.com/jsapi_demos/static/demo-center/css/demo-center.css" />-->
     <link rel="stylesheet" href="https://cache.amap.com/lbs/static/main1119.css"/>
     <link rel="stylesheet" href="https://cache.amap.com/lbs/static/AMap.PlaceSearchRender1120.css"/>
 
@@ -41,12 +41,14 @@
         <!--/hero_in-->
 
         <div class="container margin_60_35">
+            <input type="hidden" id="cityId" th:value="${city.id}"/>
             <div class="row">
                 <div class="col-lg-9">
                     <!--城市详情区-->
                     <section id="description">
-                        <h2>详情</h2>
-                        <p>Per consequat adolescens ex, cu nibh commune <strong>temporibus vim</strong>, ad sumo
+                        <h2><img alt="" class="img-fluid" th:src="${city.cityPhoto}"></h2>
+                        <p th:text="${city.cityIntroduce}">Per consequat adolescens ex, cu nibh commune <strong>temporibus
+                            vim</strong>, ad sumo
                             viris eloquentiam sed. Mea appareat omittantur eloquentiam ad, nam ei quas oportere
                             democritum. Prima causae admodum id est, ei timeam inimicus sed. Sit an meis aliquam,
                             cetero inermis vel ut. An sit illum euismod facilisis, tamquam vulputate pertinacia eum
@@ -54,7 +56,7 @@
                         <p>Cum et probo menandri. Officiis consulatu pro et, ne sea sale invidunt, sed ut sint
                             <strong>blandit</strong> efficiendi. Atomorum explicari eu qui, est enim quaerendum te.
                             Quo harum viris id. Per ne quando dolore evertitur, pro ad cibo commune.</p>
-                        <div class="row">
+                       <!-- <div class="row">
                             <div class="col-lg-6">
                                 <ul class="bullets">
                                     <li>Dolorem mediocritatem</li>
@@ -71,7 +73,7 @@
                                     <li>Pertinacia eum</li>
                                 </ul>
                             </div>
-                        </div>
+                        </div>-->
                         <!-- /row -->
                         <hr>
                         <h3>地图</h3>
@@ -85,7 +87,7 @@
                 <!--右侧列表区-->
                 <aside class="col-lg-3">
                     <div class="widget">
-                        <form>
+                        <form action="/cityList" method="get">
                             <div class="form-group">
                                 <input type="text" name="search" id="search" class="form-control"
                                        placeholder="搜索城市...">
@@ -99,24 +101,14 @@
                             <h4>相关景点</h4>
                         </div>
                         <ul class="comments-list">
-                            <li>
+
+                            <li v-for="view in Views">
                                 <div class="alignleft">
-                                    <a href="/viewDetail"><img src="img/blog-5.jpg" alt=""></a>
+                                    <a :href="'/selectViewById?id='+view.id"><img :src="view.viewImage" alt=""></a>
                                 </div>
-                                <h3><a href="/viewDetail" title="">岳麓山风景名胜区</a></h3>
+                                <h3><a :href="'/selectViewById?id='+view.id" title="">{{view.viewName}}</a></h3>
                             </li>
-                            <li>
-                                <div class="alignleft">
-                                    <a href="/viewDetail"><img src="img/blog-6.jpg" alt=""></a>
-                                </div>
-                                <h3><a href="/viewDetail" title="">故宫</a></h3>
-                            </li>
-                            <li>
-                                <div class="alignleft">
-                                    <a href="/viewDetail"><img src="img/blog-4.jpg" alt=""></a>
-                                </div>
-                                <h3><a href="/viewDetail" title="">洪崖洞</a></h3>
-                            </li>
+
                         </ul>
                     </div>
                     <!-- /widget -->
@@ -145,8 +137,44 @@
 <script th:src="@{/js/common_scripts.js}"></script>
 <script th:src="@{/js/main.js}"></script>
 <script th:src="@{/js/validate.js}"></script>
+<script th:src="@{/js/vue.min.js}"></script>
+<script th:src="@{/js/axios.min.js}"></script>
 
-<script type="text/javascript" src="https://webapi.amap.com/maps?v=1.4.15&key=f6dd1aad71d0b9691e66ff98044ef517&plugin=AMap.PlaceSearch"></script>
+
+<
+<script>
+    new Vue({
+        el: "#page",
+        data: {
+            Views: []
+        },
+        methods: {
+            findHotView: function () {
+                var _this = this;
+                var cid = $("#cityId").val();
+                axios.get('/searchHotViewByCityId', {
+                    params: {
+                        id: cid
+                    }
+                })
+                    .then(function (response) {
+                        _this.Views = response.data;
+                    })
+                    .catch(function (error) {
+                        // handle error
+                        console.log(error);
+                    })
+            }
+        },
+        created: function () {
+            this.findHotView();
+        }
+    });
+
+</script>
+
+<script type="text/javascript"
+        src="https://webapi.amap.com/maps?v=1.4.15&key=f6dd1aad71d0b9691e66ff98044ef517&plugin=AMap.PlaceSearch"></script>
 <script type="text/javascript" src="https://cache.amap.com/lbs/static/PlaceSearchRender.js"></script>
 <script type="text/javascript" src="https://cache.amap.com/lbs/static/addToolbar.js"></script>
 
@@ -156,14 +184,14 @@
     });
     var placeSearch = new AMap.PlaceSearch({
         // city 指定搜索所在城市，支持传入格式有：城市名、citycode和adcode
-        city:'长沙'
+        city: '长沙'
     })
 
     placeSearch.search('湖南虹猫信息科技有限公司', function (status, result) {
         // 查询成功时，result即对应匹配的POI信息
         console.log(result)
         var pois = result.poiList.pois;
-        for(var i = 0; i < pois.length; i++){
+        for (var i = 0; i < pois.length; i++) {
             var poi = pois[i];
             var marker = [];
             marker[i] = new AMap.Marker({
@@ -181,4 +209,6 @@
 
 
 </body>
+
+
 </html>

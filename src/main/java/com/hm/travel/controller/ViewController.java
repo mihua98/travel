@@ -8,10 +8,7 @@ import com.hm.travel.service.ViewService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
 import java.util.List;
@@ -23,8 +20,8 @@ public class ViewController {
     ViewService viewService;
 
     @ResponseBody
-    @RequestMapping("/getView")
-    public View sesrchById(@RequestParam("id") int id) {
+    @RequestMapping("/getView/{id}")
+    public View sesrchById(@PathVariable("id") int id) {
         View view = viewService.searchById(id);
         return view;
     }
@@ -129,7 +126,7 @@ public class ViewController {
     public PageInfo getpageInfoViews(
             @RequestParam(value = "pn", defaultValue = "1") Integer pn) {
 
-        PageHelper.startPage(pn, 2);
+        PageHelper.startPage(pn, 5);
 
         List<View> views = viewService.getAllView();
 
@@ -187,11 +184,21 @@ public class ViewController {
      */
     @ResponseBody
     @RequestMapping("/searchHotViewByCityId")
-    public Map searchHotViewByCityId(int id) {
-        List<View> views = viewService.searchHotViewByCityId(id);
-        Map<String, Object> map = new HashMap<>();
-        map.put("search", views);
-        return map;
+    public List<View> searchHotViewByCityId(Integer id) {
+        List<View> list = viewService.searchHotViewByCityId(id);
+        return list;
     }
+
+    /**
+     * 跳转到景点列表页面
+     *
+     * @return
+     */
+    @RequestMapping("/viewListPage")
+    public String viewListPage() {
+        System.out.println("跳转页面");
+        return "adminPage/viewListPage";
+    }
+
 
 }

@@ -22,6 +22,19 @@ public class CityController {
     @Autowired
     private CityService cityService;
 
+    /**
+     * 根据id查询城市
+     *
+     * @param id
+     * @return
+     */
+    @ResponseBody
+    @RequestMapping("/getCity/{id}")
+    public City sesrchById(@PathVariable("id") int id) {
+        City city = cityService.searchById(id);
+        return city;
+    }
+
     @ResponseBody
     @RequestMapping("/delete")
     public String removeCityById(@RequestParam("delete") int id) {
@@ -53,7 +66,7 @@ public class CityController {
     public PageInfo getpageInfoViews(
             @RequestParam(value = "pn", defaultValue = "1") Integer pn) {
 
-        PageHelper.startPage(pn, 2);
+        PageHelper.startPage(pn, 5);
 
         List<City> citys = cityService.getAllCity();
 
@@ -81,19 +94,20 @@ public class CityController {
 
     /**
      * 用户查询城市,转发至城市详情页
+     * 用PageHelper封装
      *
-     * @param word 城市名字模糊
+     * @param search 城市名字模糊
      * @return
      */
     @ResponseBody
     @RequestMapping("/searchCityByName")
-    public Map searchCityByName(@RequestParam("search") String word) {
-
-        List<City> citys = cityService.searchCityByName(word);
-        System.out.println(citys);
-        Map<String, Object> map = new HashMap<>();
-        map.put("search", citys);
-        return map;
+    public PageInfo<City> searchCityByName(@RequestParam(value = "start", defaultValue = "1") int start,
+                                           @RequestParam(value = "size", defaultValue = "4") int size,
+                                           @RequestParam("search") String search) {
+        PageHelper.startPage(start, size);
+        List<City> list = cityService.searchCityByName(search);
+        PageInfo<City> page = new PageInfo<>(list);
+        return page;
     }
 
     /**
@@ -106,6 +120,43 @@ public class CityController {
         Map<String, Object> map = new HashMap<>();
         map.put("search", citys);
         return map;
+    }
+
+
+    /**
+     * 跳转到城市列表页面
+     *
+     * @return
+     */
+    @RequestMapping("/cityListPage")
+    public String cityListPage() {
+        System.out.println("跳转页面");
+        return "adminPage/cityListPage";
+    }
+
+    /**
+     * 添加city
+     *
+     * @return
+     */
+    @ResponseBody
+    @RequestMapping("/addCity")
+    public String addCity(City city) {
+        System.out.println(city);
+        cityService.addCity(city);
+        return "成功";
+    }
+
+    /**
+     * 修改city
+     *
+     * @return
+     */
+    @ResponseBody
+    @RequestMapping("/updateCity/{Id}")
+    public String updateCity(City city) {
+        cityService.updateCity(city);
+        return "成功";
     }
 
 }

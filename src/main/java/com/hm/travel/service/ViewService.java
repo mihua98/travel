@@ -78,6 +78,6 @@ public interface ViewService {
     /**
      * 根据城市id找出3个景点
      */
-    List<View> searchHotViewByCityId(int id);
+    List<View> searchHotViewByCityId(Integer id);
 
 }

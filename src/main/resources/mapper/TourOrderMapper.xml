@@ -12,7 +12,7 @@
             <id column="userInfo_Name" property="userInfoName" />
             <id column="traveller_Id" property="travellerId" />
             <id column="traveller_Price" property="travellerPrice" />
-
+            <id column="traveller_Oneprice" property="travellerOneprice" />
         </resultMap>
 
 

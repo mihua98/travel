@@ -175,8 +175,9 @@
                     <div class="box_grid">
                         <figure>
                             <a href="#" class="wish_bt"></a><!-- 收藏 -->
-                            <a th:href="'selectTourById?id='+${tour.id}"><img th:src="${tour.tourPhoto}" class="img-fluid" alt="" width="800"
-                                                       height="533">
+                            <a th:href="'selectTourById?id='+${tour.id}"><img th:src="${tour.tourPhoto}"
+                                                                              class="img-fluid" alt="" width="800"
+                                                                              height="533">
                                 <div class="read_more"><span>查看更多</span></div>
                             </a>
                             <small th:text="${tour.cityName}"></small>
@@ -213,7 +214,7 @@
                 <div class="main_title_3">
                     <span><em></em></span>
                     <h2>热门城市</h2>
-                    <p>Cum doctus civibus efficiantur in imperdiet deterruisset.</p>
+                    <p>你想要的城市这里都有</p>
                 </div>
                 <div class="row">
 
@@ -242,7 +243,7 @@
                 <div class="main_title_3">
                     <span><em></em></span>
                     <h2>热门景点</h2>
-                    <p>Cum doctus civibus efficiantur in imperdiet deterruisset.</p>
+                    <p>你想要的景点这里也有</p>
                 </div>
                 <div class="row">
 
@@ -276,7 +277,7 @@
                     <h3>游记攻略</h3>
                     <p>Cum doctus civibus efficiantur in imperdiet deterruisset.</p>
                 </div>
-                <div class="row" >
+                <div class="row">
 
                     <div class="col-lg-6" th:each="travelLog:${travelLogs}">
                         <a class="box_news" th:href="'travelLog/selectTravellogById?id='+${travelLog.id}">
