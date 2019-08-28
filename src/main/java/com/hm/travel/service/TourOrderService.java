@@ -22,10 +22,10 @@ public interface TourOrderService {
 
     /**
      * 修改TourOrder
-     * @param TourOrder
+     * @param id
      * @return
      */
-    int updateTourOrder(TourOrder TourOrder);
+    int updateTourOrder(Integer id);
     /**
      * 删除
      * @param id
@@ -46,11 +46,6 @@ public interface TourOrderService {
      */
     TourOrder selectTourOrderById(Integer id);
 
-    /**
-     * 通过travellerPrice
-     * @param travellerPrice
-     * @return前6
-     */
-    TourOrder selectTourOrderBytravellerPrice(int travellerPrice);
+
 }
 

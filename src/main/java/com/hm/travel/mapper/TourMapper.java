@@ -1,6 +1,7 @@
 package com.hm.travel.mapper;
 
 import com.hm.travel.pojo.Tour;
+import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
@@ -43,7 +44,7 @@ public interface TourMapper {
      * @param district
      * @return
      */
-    @Select("select * from tour where tour_Name like '%${district}%'")
+    @Select("select * from tour where tour_Name like '%#{district}%'")
     List<Tour> findTourByCondition(String district);
 
     /**
@@ -67,5 +68,12 @@ public interface TourMapper {
      */
     @Select("select * from (SELECT *from tour order by tour_Head desc) t LIMIT 1")
     Tour selectTourByHeadOne();
+    /**
+     * 删除
+     * @param id
+     * @return
+     */
+    @Delete("delete from tour where id=#{id}")
+    int deleteTour(Integer id);
 }
 
