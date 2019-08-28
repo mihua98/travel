@@ -104,9 +104,9 @@
 
                             <li v-for="view in Views">
                                 <div class="alignleft">
-                                    <a :href="'/viewDetail?id='+view.id"><img :src="view.viewImage" alt=""></a>
+                                    <a :href="'/selectViewById?id='+view.id"><img :src="view.viewImage" alt=""></a>
                                 </div>
-                                <h3><a href="/viewDetail" title="">{{view.viewName}}</a></h3>
+                                <h3><a :href="'/selectViewById?id='+view.id" title="">{{view.viewName}}</a></h3>
                             </li>
 
                         </ul>
