@@ -95,18 +95,19 @@ public class CityController {
     /**
      * 用户查询城市,转发至城市详情页
      *
-     * @param word 城市名字模糊
+     * @param  城市名字模糊
      * @return
      */
     @ResponseBody
     @RequestMapping("/searchCityByName")
-    public Map searchCityByName(@RequestParam("search") String word) {
-
-        List<City> citys = cityService.searchCityByName(word);
+    public PageInfo<City> searchCityByName(@RequestParam(value = "start", defaultValue = "1") int start,
+                                           @RequestParam(value = "size", defaultValue = "4") int size,
+                                           @RequestParam("search") String search) {
+        PageHelper.startPage(start, size);
+        List<City> citys = cityService.searchCityByName(search);
         System.out.println(citys);
-        Map<String, Object> map = new HashMap<>();
-        map.put("search", citys);
-        return map;
+        PageInfo<City> page = new PageInfo<>(citys);
+        return page;
     }
 
     /**

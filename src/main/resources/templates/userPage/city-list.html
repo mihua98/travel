@@ -235,7 +235,7 @@
             <!-- /box_list -->
 
             <div class="row">
-                <div class="offset-lg-4 col-lg-3">
+                <div class="offset-lg-4 col-lg-5">
                     <nav aria-label="...">
                         <ul class="pagination pagination-sm">
                             <li :class="{ disabled: !pageInfo.hasPreviousPage }">
@@ -290,26 +290,42 @@
             pageInfo:{}
         },
 
-        methods:{
-            findCity:function () {
+        methods: {
+            findAll: function (start) {
                 var _this = this;
-                axios.get('/pageInfoCitys')
+                var searchCity = $("#searchCity").val();
+                console.log(searchCity);
+                axios.get('/searchCityByName', {// 统一用模糊查询
+                    params: {
+                        start: start,
+                        search: searchCity
+                    }
+                })
                     .then(function (response) {
                         _this.Citys = response.data.list;
-                        _this.pageInfo=response.data;
+                        _this.pageInfo = response.data;
                         console.log(response);
                     })
                     .catch(function (error) {
                         // handle error
                         console.log(error);
                     })
+            },
+            jump: function (page) {//跳转上一页,下一页
+                if ('pre' == page && this.pageInfo.hasPreviousPage)
+                    this.findAll(this.pageInfo.prePage);
+
+                else if ('next' == page && this.pageInfo.hasNextPage)
+                    this.findAll(this.pageInfo.nextPage);
+            },
+            jumpByNumber: function (start) {//跳转到指定页面
+                if (start != this.pageInfo.pageNum)
+                    this.findAll(start);
             }
         },
-
-        created:function (){
-
-            this.findCity();
-        },
+        created: function () {
+            this.findAll();
+        }
     });
 
 </script>

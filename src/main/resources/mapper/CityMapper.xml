@@ -44,7 +44,7 @@
     </select>
 
     <select id="searchCityByName" resultType="com.hm.travel.pojo.City">
-          select * from city where city_Name like '%${word}%'
+          select * from city where city_Name like concat('%',#{word},'%')
     </select>
 
     <select id="searchHotCity" resultType="com.hm.travel.pojo.City">
