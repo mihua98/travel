@@ -53,10 +53,14 @@ public class SiteController {
         model.addAttribute("tours",tours);
         System.out.println("跟团游---"+tours);
 
-        //加载城市
+        //加载四个城市
         List<City> cities = cityService.searchHotCity();
         model.addAttribute("cities",cities);
-        System.out.println("城市---"+cities);
+        System.out.println("4城市---"+cities);
+
+        List<City> sixCity = cityService.searchHotSixCity();
+        model.addAttribute("sixCity",sixCity);
+        System.out.println("6城市---"+sixCity);
 
         //加载景点
         List<View> views = viewService.searchHotView();

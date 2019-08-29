@@ -22,7 +22,7 @@ public class TourOrder {
 
     private String tourOrderNum;
 
-    private Date tourOrderTime;
+    private String tourOrderTime;
 
     private Integer peopleCount;
 

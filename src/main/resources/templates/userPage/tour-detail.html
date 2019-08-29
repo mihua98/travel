@@ -26,7 +26,7 @@
         <section class="hero_in restaurants_detail">
             <div class="wrapper">
                 <div class="container">
-                    <h1 class="fadeInUp"><span></span>跟团游详细信息页面</h1>
+                    <h1 class="fadeInUp"><span></span>TRAVEL AND TRAVEL</h1>
                 </div>
                 <span class="magnific-gallery">
 					<a th:href="@{/img/gallery/restaurant_list_1.jpg}" class="btn_photos" title="Photo title"
@@ -57,8 +57,8 @@
                         <!--跟团游详情区-->
 
                         <section id="description">
-                            <h2 th:text="${tour.tourName}"></h2>
-                            <p th:text="${tour.tourDesc}">
+                            <h2 th:text="${tour.tourName}" style="color: red"></h2>
+                            <p th:text="${tour.tourDesc}" style="font-size: 18px">
                                 昆明大理丽江6日轻奢游（国际五星酒店+温泉酒店+敞篷吉普环洱海+VIP私人游船+网红拍照打卡+玉龙雪山大索道+丽水金沙表演+双古城)<strong>temporibus
                                 vim</strong>, ad sumo
                                 viris eloquentiam sed. Mea appareat omittantur eloquentiam ad, nam ei quas oportere
@@ -100,9 +100,9 @@
                                 <div class="row">
                                     <div class="col-lg-3">
                                         <div id="review_summary">
-                                            <strong>8.5</strong>
+                                            <strong th:text="${tour.tourScore}">8.5</strong>
                                             <em>人气推荐</em>
-                                            <small>来自4个用户的评价</small>
+                                            <small th:text="'来自'+${tour.tourComment}+'个用户的评价'"></small>
                                         </div>
                                     </div>
                                     <div class="col-lg-9">
