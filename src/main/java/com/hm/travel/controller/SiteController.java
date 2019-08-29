@@ -1,22 +1,26 @@
 package com.hm.travel.controller;
 
-import com.hm.travel.pojo.City;
-import com.hm.travel.pojo.Tour;
-import com.hm.travel.pojo.TravelLog;
-import com.hm.travel.pojo.View;
+import com.hm.travel.pojo.*;
 import com.hm.travel.service.CityService;
 import com.hm.travel.service.TourService;
 import com.hm.travel.service.TravelLogService;
 import com.hm.travel.service.ViewService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.ClassPathResource;
+import org.springframework.core.io.FileSystemResource;
+import org.springframework.core.io.Resource;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.util.FileCopyUtils;
+import org.springframework.util.ResourceUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletRequest;
 import java.io.File;
+import java.io.FileOutputStream;
 import java.util.List;
 import java.util.UUID;
 
@@ -167,24 +171,34 @@ public class SiteController {
 
 
     /**
-     * springMVC文件上传
+     * 文件上传
      *
      * @param request
      * @return
      * @throws Exception
      */
     @RequestMapping("/fileUpLoad")
-    public String fileUpLoad2(HttpServletRequest request, MultipartFile upload) throws Exception {
-        System.out.println("springMVC文件上传...");
+    @ResponseBody
+    public FileUpLoad fileUpLoad(HttpServletRequest request, @RequestParam("editormd-image-file") MultipartFile upload) throws Exception {
+        if (upload.isEmpty()) {
+            FileUpLoad fileUpLoad = new FileUpLoad();
+            fileUpLoad.setSuccess(0);
+            fileUpLoad.setMessage("上传失败!");
+            return fileUpLoad;
+        }
 
-        //使用fileupload组件完成文件上传
-        //上传的位置
-        String path = request.getSession().getServletContext().getRealPath("/uploads/");
-        //判断该路径是否存在
-        File file = new File(path);
-        if (!file.exists()) {
-            //创建该文件夹
-            file.mkdirs();
+        File rootdir = new File(ResourceUtils.getURL("classpath:").getPath());
+        if (!rootdir.exists()) {
+            rootdir = new File("");
+        }
+
+        File path = new File(rootdir.getAbsolutePath(), "src/main/resources/static/upload/");
+        if (!path.exists()) {
+            path.mkdirs();
+        }
+        File targetPath = new File(rootdir.getAbsolutePath(), "target/classes/static/upload/");
+        if (!targetPath.exists()) {
+            targetPath.mkdirs();
         }
 
         //获取上传文件名称
@@ -194,8 +208,21 @@ public class SiteController {
         filename = uuid + "_" + filename;
 
         //完成文件上传
-        upload.transferTo(new File(path, filename));
-        //TODO 未完成...
-        return null;
+        File out = new File(targetPath, filename);
+        upload.transferTo(out);
+
+        //文件复制
+        try (FileOutputStream os = new FileOutputStream(new File(path,filename))) {
+            FileSystemResource resource=new FileSystemResource(out);
+            FileCopyUtils.copy(resource.getInputStream(),os);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        FileUpLoad fileUpLoad = new FileUpLoad();
+        fileUpLoad.setSuccess(1);
+        fileUpLoad.setMessage("上传成功!");
+        fileUpLoad.setUrl("/upload/" + filename);
+        return fileUpLoad;
     }
 }

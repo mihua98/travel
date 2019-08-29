@@ -5,6 +5,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <base href="/">
     <title>写游记</title>
 
     <!-- 网页图标-->
@@ -38,11 +39,22 @@
         <!--列表区-->
         <div class="container margin_30_95">
             <div class="row">
+                <form action="/fileUpLoad" method="post" id="formTag" enctype="multipart/form-data">
+                    <input class="form-control" type="file" id="uploadImg" name="editormd-image-file" value="添加图片">
+                </form>
                 <form action="/travelLog/addTravelLog" method="post" class="col-lg-12">
                     <input type="hidden" name="userInfo.id" th:value="${session.user.getId()}">
                     <div class="form-group">
+                        <label for="tlPhoto">封面图地址:</label>
+                        <input class="form-control" type="text" id="tlPhoto" name="tlPhoto">
+                    </div>
+                    <div class="form-group">
                         <label for="title">标题:</label>
                         <input class="form-control" type="text" id="title" name="tlTitle">
+                    </div>
+                    <div class="form-group">
+                        <label for="tlSummary">摘要:</label>
+                        <input class="form-control" type="text" id="tlSummary" name="tlSummary">
                     </div>
                     <div id="travelLog-editor">
                         <label for="travelLog">游记正文:</label>
@@ -80,7 +92,10 @@
 <script th:src="@{/js/validate.js}"></script>
 <script th:src="@{/js/vue.min.js}"></script>
 <script th:src="@{/js/axios.min.js}"></script>
+<script th:src="@{/js/jquery.form.js}"></script>
+
 <script th:src="@{/js/editormd.min.js}"></script>
+<script th:src="@{/js/plugins/image-dialog/image-dialog.js}"></script>
 <script type="text/javascript">
     $(function () {
         var editor = editormd("travelLog-editor", {
@@ -89,10 +104,11 @@
             path: "js/lib/",
             placeholder: "开始写游记吧!...",
             saveHTMLToTextarea: true,
+            emoji:true,
 
             imageUpload: true,          // Enable/disable upload
             imageFormats: ["jpg", "jpeg", "gif", "png", "bmp", "webp"],
-            imageUploadURL: ""             // Upload url
+            imageUploadURL: "/fileUpLoad"             // Upload url
         });
     });
 </script>
@@ -124,6 +140,34 @@
             }
         }
     })
+</script>
+
+<script>
+    $(document).ready(function(){
+        $("#uploadImg").on("change", upload );
+    })
+    function upload(){
+
+        var self = this;
+        $.ajax({
+            url: "/fileUpLoad",
+            type: "post",
+            dataType: "json",
+            cache: false,
+            data: new FormData($("#formTag")[0]),
+            processData: false,// 不处理数据
+            contentType: false, // 不设置内容类型
+            success: function(data){
+                console.log(data.url);
+                $("#tlPhoto").attr("value",data.url);
+                /*
+                图片显示路径出错，没解决：反斜杠转义
+                $(self).parent().css({
+                     "background-image": "url("+data.path+")"
+                 })*/;
+            }
+        })
+    }
 </script>
 </body>
 </html>
