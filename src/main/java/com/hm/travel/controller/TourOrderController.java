@@ -45,6 +45,7 @@ public class TourOrderController {
             if(null == tourOrder.getTourOrderNum()) {
                 tourOrder.setTourOrderNum(getOrderIdByTime()) ;
             }
+//            tourOrderService.addTourOrder(tourOrder);
            request.getSession().setAttribute("TourOrder",tourOrder);
             return "redirect:/alipay/pay";
 

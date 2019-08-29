@@ -6,8 +6,8 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <base href="/">
     <title>用户管理</title>
-    <meta name="description" content="旅游管理系统-用户管理">
-    <meta name="keywords" content="旅游管理系统-用户管理">
+    <meta name="description" content="旅游管理系统-游记管理">
+    <meta name="keywords" content="旅游管理系统-游记管理">
     <!-- 导入css文件   -->
     <div th:replace="adminPage/common/head::head"></div>
 </head>
@@ -33,13 +33,13 @@
         <!-- 内容头部 -->
         <section class="content-header">
             <h1>
-                tour管理
-                <small>tour列表</small>
+                游记管理
+                <small>游记列表</small>
             </h1>
             <ol class="breadcrumb">
                 <li><a href="#"><i class="fa fa-dashboard"></i> 首页</a></li>
-                <li><a href="#">tour管理</a></li>
-                <li class="active">tour列表</li>
+                <li><a href="#">游记管理</a></li>
+                <li class="active">游记列表</li>
             </ol>
         </section>
         <!-- 内容头部 /-->
@@ -62,12 +62,12 @@
                         <div class="pull-left">
                             <div class="form-group form-inline">
                                 <div class="btn-group">
-                                    <button type="button" class="btn btn-default" title="刷新">
+                                    <button type="button" class="btn btn-default" title="刷新" @click="findAll">
                                         <i class="fa fa-refresh"></i> 刷新
                                     </button>
-                                    <button type="button" class="btn btn-default" title="删除">
-                                        <i class="fa fa-trash-o"></i> 删除
-                                    </button>
+                                    <!--<button type="button" class="btn btn-default" title="删除">-->
+                                    <!--<i class="fa fa-trash-o"></i> 删除-->
+                                    <!--</button>-->
                                 </div>
                             </div>
                         </div>
@@ -79,48 +79,115 @@
                         </div>
                         <!--工具栏/-->
 
-                        <!--用户列表-->
+                        <!--游记列表-->
                         <table id="dataList" class="table table-bordered table-striped table-hover dataTable">
                             <thead>
                             <tr>
                                 <th class="" style="padding-right:0px;">
                                     <input id="selall" type="checkbox" class="icheckbox_square-blue">
                                 </th>
+                                <th>ID</th>
                                 <th>产品编号</th>
-                                <th>产品图片</th>
                                 <th>产品名称</th>
-                                <th>产品价格</th>
+                                <th>主玩城市</th>
+                                <th>价格</th>
+                                <th>已售</th>
+                                <th>评论数</th>
+                                <th>评分</th>
                                 <th>状态</th>
-                                <th>出发城市</th>
-                                <th>出发时间</th>
-
                                 <th class="text-center">操作</th>
                             </tr>
                             </thead>
                             <tbody>
 
-                            <tr th:each="l:${page.list}">
+                            <tr v-for="(tl,index) in tourList">
                                 <td><input name="ids" type="checkbox"></td>
-                                <td th:text="${l.id}">{{u.id}}</td>
-                                <td><img : th:src="${l.tourPhoto}" style="height: 40px"></td>
-                                <td th:text="${l.tourName}">{{u.userNickName}}</td>
-                                <td th:text="${l.tourPrice}">{{u.userPhoneNum}}</td>
-                                <td th:text="${l.tourStatus}"">{{u.userName}}</td>
-                                <td th:text="${l.cityName}">{{u.userSex}}</td>
-                                <td th:text="${l.departureTime}">{{u.userAge}}</td>
-
+                                <td>{{tl.id}}</td>
+                                <td>{{tl.tourNum}}</td>
+                                <td>{{tl.tourName}}</td>
+                                <td>{{tl.cityName}}</td>
+                                <td>{{tl.tourPrice}}</td>
+                                <td>{{tl.tourHead}}</td>
+                                <td>{{tl.tourComment}}</td>
+                                <td>{{tl.tourScore}}</td>
+                                <td>{{tl.tourStatus}}</td>
                                 <td>
-                                    <a th:href="@{/updateTourpage(id=${l.id})}">
-                                        <button  type="button" class="btn bg-olive btn-xs"
-                                                 data-toggle="modal" data-target="#myModal">编辑
-                                        </button></a>
-                                    <a th:href="@{/deleteTourpage(id=${l.id})}">
-                                        <button  type="button" class="btn btn-danger btn-xs">
-                                            删除
-                                        </button></a>
+                                    <button @click="findById(tl.id)" type="button" class="btn bg-olive btn-xs"
+                                            data-toggle="modal" data-target="#myModal">编辑
+                                    </button>
+                                    <!--<button @click="deleteById(tl.id,index)" type="button" class="btn btn-danger btn-xs">-->
+                                    <!--删除-->
+                                    <!--</button>-->
                                 </td>
                             </tr>
 
+                            <div class="modal fade" id="myModal" tabindex="-1" role="dialog"
+                                 aria-labelledby="myModalLabel">
+                                <div class="modal-dialog">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <button data-dismiss="modal" class="close" type="button"><span
+                                                    aria-hidden="true">×</span><span
+                                                    class="sr-only">Close</span></button>
+                                            <h4 class="modal-title">编辑用户信息</h4>
+                                        </div>
+                                        <div class="modal-body">
+
+                                            <div class="box-body">
+                                                <div class="form-horizontal">
+
+                                                    <div class="form-group">
+                                                        <label for="edit-id" class="control-label">id</label>
+                                                        <input type="text" class="form-control" id="edit-id"
+                                                               v-model="tour.id"
+                                                               disabled="disabled">
+                                                    </div>
+
+                                                    <div class="form-group">
+                                                        <label for="edit-userName" class="control-label">产品名称</label>
+                                                        <input type="text" class="form-control" id="edit-userName"
+                                                               v-model="tour.tourName">
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label for="edit-city" class="control-label">产品价格</label>
+                                                        <input type="text" class="form-control" id="edit-city"
+                                                               v-model="tour.tourPrice">
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label for="edit-tlKeyWord" class="control-label">评分</label>
+                                                        <input type="text" class="form-control" id="edit-tlKeyWord"
+                                                               v-model="tour.tourScore">
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label for="edit-tlStatus" class="control-label">状态</label>
+                                                        <input type="text" class="form-control" id="edit-tlStatus"
+                                                               v-model="tour.tourStatus">
+                                                    </div>
+
+
+                                                    <!--<div class="form-group">-->
+                                                    <!--<label for="edit-userAge" class="control-label">年龄</label>-->
+                                                    <!--<input type="text" class="form-control" id="edit-userAge"-->
+                                                    <!--v-model="user.userAge">-->
+                                                    <!--</div>-->
+                                                    <!--<div class="form-group">-->
+                                                    <!--<label for="edit-email" class="control-label">邮箱</label>-->
+                                                    <!--<input type="text" class="form-control" id="edit-email"-->
+                                                    <!--v-model="user.email">-->
+                                                    <!--</div>-->
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button class="btn btn-default" type="button" data-dismiss="modal">关闭
+                                            </button>
+                                            <button class="btn btn-primary" type="button" data-dismiss="modal"
+                                                    @click="update">保存
+                                            </button>
+                                        </div>
+                                    </div><!-- /.modal-content -->
+                                </div><!-- /.modal-dialog -->
+                            </div>
 
 
                             </tbody>
@@ -133,13 +200,43 @@
 
                 </div>
                 <!-- /.box-body -->
-                <div>
-                    <a th:href="@{/TourListPage(start=0)}">[首  页]</a>
-                    <a th:href="@{/TourListPage(start=${page.pageNum-1})}">[上一页]</a>
-                    <a th:href="@{/TourListPage(start=${page.pageNum+1})}">[下一页]</a>
-                    <a th:href="@{/TourListPage(start=${page.pages})}">[末  页]</a>
-                </div>
 
+                <!-- .box-footer-->
+                <div class="box-footer">
+                    <div class="pull-left">
+                        <div class="form-group form-inline">
+                            总共{{pageInfo.pages}}页，共{{pageInfo.total}}条数据。
+                        </div>
+                    </div>
+
+                    <div class="box-tools pull-right">
+                        <ul class="pagination">
+                            <li :class="{ disabled: pageInfo.pageNum==1 }">
+                                <a  @click="jump('first')">首页</a>
+                            </li>
+                            <li :class="{ disabled: !pageInfo.hasPreviousPage }">
+                                <a @click="jump('pre')" aria-label="Previous">
+                                    <span aria-hidden="true">&laquo;</span>
+                                </a>
+                            </li>
+                            <li :class="{disabled:pageInfo.pageNum==i}" v-for="i in pageInfo.navigatepageNums">
+                                <a @click="jumpByNumber(i)">
+                                    {{i}}
+                                </a>
+                            </li>
+                            <li :class="{ disabled: !pageInfo.hasNextPage }">
+                                <a @click="jump('next')" aria-label="Next">
+                                    <span aria-hidden="true">&raquo;</span>
+                                </a>
+                            </li>
+                            <li :class="{ disabled: pageInfo.pageNum==pageInfo.pages }">
+                                <a @click="jump('last')">尾页</a>
+                            </li>
+                        </ul>
+                    </div>
+
+                </div>
+                <!-- /.box-footer-->
 
 
             </div>
@@ -159,7 +256,159 @@
 
 <div th:replace="adminPage/common/js::js"></div>
 
+<script th:src="@{/js/vue.min.js}"></script>
+<script th:src="@{/js/axios.min.js}"></script>
 
+
+<script>
+    $(document).ready(function () {
+        // 选择框
+        $(".select2").select2();
+
+        // WYSIHTML5编辑器
+        $(".textarea").wysihtml5({
+            locale: 'zh-CN'
+        });
+    });
+
+
+    // 设置激活菜单
+    function setSidebarActive(tagUri) {
+        var liObj = $("#" + tagUri);
+        if (liObj.length > 0) {
+            liObj.parent().parent().addClass("active");
+            liObj.addClass("active");
+        }
+    }
+
+
+    $(document).ready(function () {
+
+        // 激活导航位置
+        setSidebarActive("admin-datalist");
+
+        // 列表按钮
+        $("#dataList td input[type='checkbox']").iCheck({
+            checkboxClass: 'icheckbox_square-blue',
+            increaseArea: '20%'
+        });
+        // 全选操作
+        $("#selall").click(function () {
+            var clicks = $(this).is(':checked');
+            if (!clicks) {
+                $("#dataList td input[type='checkbox']").iCheck("uncheck");
+            } else {
+                $("#dataList td input[type='checkbox']").iCheck("check");
+            }
+            $(this).data("clicks", !clicks);
+        });
+    });
+</script>
+
+<script>
+    var dataVue = {
+        tourList:[],
+        tour:"",
+        pageInfo: {}
+    };
+    new Vue({
+        el: "#app",
+        data: dataVue,
+        created: function () {//当页面加载的时候触发请求,查询所有
+            this.findAll(1);
+        },
+        methods: {
+            findAll: function (start) {//查询所有
+                var _this = this;//在当前方法中定义一个对象,表明是vue对象
+                axios.get('/TourListPage', {
+                    params: {
+                        start: start
+                    }
+                })
+                    .then(function (response) {
+                        _this.tourList = response.data.list;//响应数据给userList赋值
+                        _this.pageInfo = response.data;
+                        console.log(response.data);
+                    })
+                    .catch(function (error) {//出现异常则打印
+                        console.log(error);
+                    })
+            },
+            findById: function (Id) {
+                var _this = this;
+                axios.get('/updateTourpage', {
+                    params: {//这是get请求参数的写法
+                        id: Id
+                    }
+                })
+                    .then(function (response) {
+                        _this.tour = response.data;
+                    })
+                    .catch(function (error) {
+                        console.log(error);
+                    })
+            },
+            // findLikeTitle: function (tlTitle) {//根据标题查询
+            //     var _this = this;
+            //     axios.get('travelLog/selectTravelLogLikeTitle', {
+            //         params: {//这是get请求参数的写法
+            //             tlTitle: tlTitle
+            //         }
+            //     })
+            //         .then(function (response) {
+            //             _this.travelLog = response.data;
+            //         })
+            //         .catch(function (error) {
+            //             console.log(error);
+            //         })
+            // },
+            update: function () {//更新
+                var _this = this;
+                axios.post('/updateTourById',_this.tour)
+                    .then(function () {//无返回值,所以无response
+                        _this.findAll(_this.pageInfo.pageNum);
+                    })
+                    .catch(function (error) {
+                        console.log(error);
+                    })
+            },
+            // deleteById: function (userid, index) {//根据ID删除
+            //     var _this = this;
+            //     var param = new URLSearchParams();
+            //     param.append('id', userid);//解决后端接收不到参数的问题
+            //     axios.post('user/deleteById', param)
+            //         .then(function () {
+            //             _this.userList.splice(index, 1);//根据id删除userList中的数据
+            //             // _this.findAll();
+            //         })
+            //         .catch(function (error) {
+            //             console.log(error);
+            //         })
+            // },
+            jump: function (page) {//跳转首页,尾页,上一页,下一页
+                if ('first' == page && 1 != this.pageInfo.pageNum)
+                    this.findAll(1);
+
+                else if ('pre' == page && this.pageInfo.hasPreviousPage)
+                    this.findAll(this.pageInfo.prePage);
+
+                else if ('next' == page && this.pageInfo.hasNextPage)
+                    this.findAll(this.pageInfo.nextPage);
+
+                else if ('last' == page && this.pageInfo.pageNum != this.pageInfo.pages)
+                    this.findAll(this.pageInfo.pages);
+
+            },
+            jumpByNumber: function (start) {//跳转到指定页面
+                if (start != this.pageInfo.pageNum)
+                    this.findAll(start);
+            },
+            refresh: function () {//刷新当前页面
+                this.findAll(this.pageInfo.pageNum);
+            }
+        }
+    });
+</script>
 </body>
 
 </html>

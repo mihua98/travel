@@ -25,8 +25,8 @@ public interface TourOrderMapper {
      * @param TourOrder
      * @return
      */
-    @Insert("INSERT INTO `travel`.`tourorder`( `tour_Order_Num`, `tour_Order_Time`, `people_Count`, `tour_Order_Status`, `tour_Id`, `userInfo_Id`, `userInfo_Name`, `traveller_Id`,`traveller_Price`,`traveller_Oneprice`) VALUES " +
-            "( #{tourOrderNum}, #{tourOrderTime}, #{peopleCount}, #{tourOrderStatus}, #{tourId}, #{userInfoId}, #{userInfoName}, #{travellerId}, #{travellerPrice},#{travellerOnerice})")
+    @Insert("INSERT INTO `tourorder`( `tour_Order_Num`, `tour_Order_Time`, `people_Count`, `tour_Order_Status`, `tour_Id`, `userInfo_Id`, `userInfo_Name`, `traveller_Id`,`traveller_Price`,`traveller_Oneprice`) VALUES " +
+            "( #{tourOrderNum}, #{tourOrderTime}, #{peopleCount}, #{tourOrderStatus}, #{tour.tourId}, #{userInfoId}, #{userInfoName}, #{travellerId}, #{travellerPrice},#{travellerOnerice})")
     int addTourOrder(TourOrder TourOrder);
 
     /**

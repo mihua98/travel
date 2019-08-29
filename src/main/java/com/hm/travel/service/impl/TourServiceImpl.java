@@ -36,12 +36,11 @@ public class TourServiceImpl implements TourService {
     /**
      * 修改tour
      *
-     * @param id
      * @return
      */
     @Override
-    public int updateTour(Integer id) {
-        return tourMapper.updateTour(id);
+    public int updateTour(Tour tour) {
+        return tourMapper.updateTour(tour);
     }
 
     /**

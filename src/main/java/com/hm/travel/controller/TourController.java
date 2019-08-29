@@ -7,10 +7,7 @@ import com.hm.travel.service.TourService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -18,6 +15,25 @@ import java.util.List;
 public class TourController {
     @Autowired
     TourService tourService;
+
+    /**
+     * 管理员修改跟团游,  根据ID修改
+     * @param tour
+     * @return
+     */
+    @RequestMapping("/updateTourById")
+    @ResponseBody
+    public String updateTourById(@RequestBody Tour tour){
+        System.out.println("状态--------"+tour.getTourStatus());
+        int i = tourService.updateTour(tour);
+        if (i > 0) {
+            return "修改成功";
+        } else {
+            return "修改失败";
+        }
+    }
+
+
 
     @GetMapping("getAllTour")
     public String Tourlist(Model model) {
@@ -59,33 +75,32 @@ public class TourController {
 
     /**
      * 后台分页查询
-     * @param m
      * @param start
      * @param size
      * @return TourListPage
      */
     @RequestMapping("/TourListPage")
-    public String  TourListPage(Model m,
-                                @RequestParam(value = "start",defaultValue = "0")int start,
-                                @RequestParam(value = "size",defaultValue = "5")int size) {
+    @ResponseBody
+    public PageInfo<Tour>  TourListPage(@RequestParam(value = "start",defaultValue = "0")int start,
+                                        @RequestParam(value = "size",defaultValue = "5")int size) {
         List<Tour> list = tourService.findAll();
         // 将查询的数据以分页的形式展示
-        PageHelper.startPage(start, size, "id desc");
+        PageHelper.startPage(start, size);
         PageInfo<Tour> page = new PageInfo<>(list);
-        m.addAttribute("page", page);
-        return "adminPage/TourListPage";
+
+        return page;
     }
     /**
-     * page更新
+     * page更新   根据ID查询
      * @param id
-     * @param m
      * @return
      */
     @RequestMapping("updateTourpage")
-    public String updateTourpage(Integer id,Model m){
+    @ResponseBody
+    public Tour updateTourpage(Integer id){
         Tour tour = tourService.selectTourById(id);
-        m.addAttribute("tour",tour);
-        return "adminPage/updateTourOrder";
+
+        return tour;
     }
 
     /**

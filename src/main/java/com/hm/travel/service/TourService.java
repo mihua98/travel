@@ -25,10 +25,9 @@ public interface TourService {
     /**
      * 修改tour
      *
-     * @param id
      * @return
      */
-    int updateTour(Integer id);
+    int updateTour(Tour tour);
 
     /**
      * 删除

@@ -13,6 +13,13 @@
     <link th:href="@{/css/bootstrap.min.css}" rel="stylesheet">
     <link th:href="@{/css/userStyle.css}" rel="stylesheet">
     <link th:href="@{/css/vendors.css}" rel="stylesheet">
+
+   <!-- <style>
+        #content{
+            height: 9999px;
+        }
+
+    </style>-->
 </head>
 
 <body>
@@ -53,7 +60,8 @@
 
         <!--其他页面传过来的搜索内容-->
         <input id="searchView" type="hidden" th:value="${search}">
-
+        <!--添加锚点，返回顶部-->
+        <a name="top"></a>
         <!--搜索栏-->
         <div class="search_container">
             <div class="container">
@@ -77,9 +85,9 @@
         <!-- /search_container -->
 
         <!--列表区-->
-        <div class="container margin_60_35">
+        <div id="content" class="container margin_60_35">
 
-            <div class="box_list" v-for="view in Views">
+            <div  class="box_list" v-for="view in Views">
                 <div class="row no-gutters">
                     <div class="col-lg-5">
                         <figure>
@@ -112,14 +120,14 @@
                     <nav aria-label="...">
                         <ul class="pagination pagination-sm">
                             <li :class="{ disabled: !pageInfo.hasPreviousPage }">
-                                <a class="page-link" @click="jump('pre')">上一页</a>
+                                <a  class="page-link" @click="jump('pre')">上一页</a>
                             </li>
                             <li :class="{ disabled:pageInfo.pageNum==i }"
                                 v-for="i in pageInfo.navigatepageNums">
-                                <a class="page-link" @click="jumpByNumber(i)">{{i}}</a>
+                                <a href="#top" class="page-link" @click="jumpByNumber(i)">{{i}}</a>
                             </li>
                             <li :class="{ disabled: !pageInfo.hasNextPage }">
-                                <a class="page-link" @click="jump('next')">下一页</a>
+                                <a  class="page-link" @click="jump('next')">下一页</a>
                             </li>
                         </ul>
                     </nav>
@@ -199,5 +207,35 @@
             this.findAll(1);
         }
     });
+
+    <!-- 返回顶部-->
+    $(function(){
+
+        <!-- 返回顶部开始 -->
+
+        $(window).scroll(function(){
+
+            if($(window).scrollTop() >= 200){
+
+                $('.page-link').fadeIn(1500); //1000指时间，淡入效果来显示
+
+            }else{
+
+                $('.page-link').fadeOut(1500);//1000指时间，淡入效果来隐藏
+
+            }
+
+        });
+
+        $('.page-link').click(function(){
+
+            $('html,body').animate({scrollTop: '400px'});//800滑动的速度
+
+        });
+
+        <!-- 返回顶部结束 -->
+
+    })
+
 </script>
 </html>

@@ -89,7 +89,7 @@
 
                     <!--分页-->
                     <div class="row">
-                        <div class="offset-lg-4 col-lg-3">
+                        <div class="offset-lg-4 col-lg-6">
                             <nav aria-label="...">
                                 <ul class="pagination pagination-sm">
                                     <li :class="{ disabled: !pageInfo.hasPreviousPage }">
@@ -97,7 +97,7 @@
                                     </li>
                                     <li :class="{ disabled:pageInfo.pageNum==i }"
                                         v-for="i in pageInfo.navigatepageNums">
-                                        <a class="page-link" @click="jumpByNumber(i)">{{i}}</a>
+                                        <a href="#top" class="page-link" @click="jumpByNumber(i)">{{i}}</a>
                                     </li>
                                     <li :class="{ disabled: !pageInfo.hasNextPage }">
                                         <a class="page-link" @click="jump('next')">下一页</a>
@@ -113,7 +113,8 @@
 
                 <!--其他页面传过来的搜索内容-->
                 <input id="searchTravelLog" type="hidden" th:value="${search}">
-
+                <!--添加锚点,实现分页时回顶部-->
+                <a name="top"></a>
                 <!--右侧-->
                 <aside class="col-lg-3">
 
@@ -254,5 +255,35 @@
             this.findHot();
         }
     });
+
+    <!-- 返回顶部-->
+
+    $(function(){
+
+        <!-- 返回顶部开始 -->
+
+        $(window).scroll(function(){
+
+            if($(window).scrollTop() >= 200){
+
+                $('.page-link').fadeIn(1500); //1000指时间，淡入效果来显示
+
+            }else{
+
+                $('.page-link').fadeOut(1500);//1000指时间，淡入效果来隐藏
+
+            }
+
+        });
+
+        $('.page-link').click(function(){
+
+            $('html,body').animate({scrollTop: '400px'});//800滑动的速度
+
+        });
+
+        <!-- 返回顶部结束 -->
+
+    })
 </script>
 </html>

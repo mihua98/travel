@@ -40,6 +40,7 @@
         <!--/hero_in-->
 
         <div class="container margin_60_35">
+            <input type="hidden" id="cityId" th:value="${view.cityId}"/>
             <div class="row">
                 <div class="col-lg-9">
                     <!--景点详情区-->
@@ -77,24 +78,14 @@
                             <h4>相关景点</h4>
                         </div>
                         <ul class="comments-list">
-                            <li>
+
+                            <li v-for="view in Views">
                                 <div class="alignleft">
-                                    <a href="/viewDetail"><img src="img/blog-5.jpg" alt=""></a>
+                                    <a :href="'/selectViewById?id='+view.id"><img :src="view.viewImage" alt=""></a>
                                 </div>
-                                <h3><a href="/viewDetail" title="">岳麓山风景名胜区</a></h3>
+                                <h3><a :href="'/selectViewById?id='+view.id" title="">{{view.viewName}}</a></h3>
                             </li>
-                            <li>
-                                <div class="alignleft">
-                                    <a href="/viewDetail"><img src="img/blog-6.jpg" alt=""></a>
-                                </div>
-                                <h3><a href="/viewDetail" title="">故宫</a></h3>
-                            </li>
-                            <li>
-                                <div class="alignleft">
-                                    <a href="/viewDetail"><img src="img/blog-4.jpg" alt=""></a>
-                                </div>
-                                <h3><a href="/viewDetail" title="">洪崖洞</a></h3>
-                            </li>
+
                         </ul>
                     </div>
                     <!-- /widget -->
@@ -123,6 +114,39 @@
 <script th:src="@{/js/common_scripts.js}"></script>
 <script th:src="@{/js/main.js}"></script>
 <script th:src="@{/js/validate.js}"></script>
+<script th:src="@{/js/vue.min.js}"></script>
+<script th:src="@{/js/axios.min.js}"></script>
+
+<script>
+    new Vue({
+        el: "#page",
+        data: {
+            Views: []
+        },
+        methods: {
+            findHotView: function () {
+                var _this = this;
+                var cid = $("#cityId").val();
+                axios.get('/searchHotViewByCityId', {
+                    params: {
+                        id: cid
+                    }
+                })
+                    .then(function (response) {
+                        _this.Views = response.data;
+                    })
+                    .catch(function (error) {
+                        // handle error
+                        console.log(error);
+                    })
+            }
+        },
+        created: function () {
+            this.findHotView();
+        }
+    });
+
+</script>
 
 <script type="text/javascript"
         src="https://webapi.amap.com/maps?v=1.4.15&key=f6dd1aad71d0b9691e66ff98044ef517&plugin=AMap.PlaceSearch"></script>
