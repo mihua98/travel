@@ -30,11 +30,12 @@ public class EmailController {
     @ResponseBody
     public String sendEmail1(@RequestParam("email") String email, HttpServletRequest request){
         System.out.println("11111111111111111111111");
-        String substring = UUID.randomUUID().toString().substring(0, 5).toUpperCase();
+        System.out.println(email);
+        String substring = UUID.randomUUID().toString().substring(0, 5).toLowerCase();
         System.out.println(substring);
         request.getSession().setAttribute("VerCode",substring);
        EmailConfig.sendEmail(email,"您的验证码为",substring);
-        return "1";
+        return substring;
     }
 
 
@@ -45,14 +46,14 @@ public class EmailController {
      * @return
      */
     @RequestMapping("/verifyVerCode")
-    @ResponseBody
     public String VerifyEmail(@RequestParam("verCode") String verCode,HttpServletRequest request){
         String verCode1 = (String)request.getSession().getAttribute("VerCode");
+        System.out.println("验证:"+verCode1);
         String s = verCode1.toUpperCase();
         if (s.equals(verCode)){
-            return "验证码正确";
+            return "forward:/user/createAccount";
         }else{
-            return "验证码错误";
+            return "redirect:register.html";
         }
     }
 

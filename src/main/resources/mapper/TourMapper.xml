@@ -12,5 +12,22 @@
         <result column="tour_Photo" property="tourPhoto"/>
         <result column="tour_Head" property="tourHead"/>
     </resultMap>
-
+    <update id="updateTour" parameterType="com.hm.travel.pojo.Tour">
+        update tour
+        <set>
+            <if test="tourName !=null and tourName != &quot;&quot;">
+                ,tour_name = #{tourName}
+            </if>
+            <if test="tourPrice !=null and tourPrice != &quot;&quot;">
+                ,tour_Price = #{tourPrice}
+            </if>
+            <if test="tourScore !=null and tourScore != &quot;&quot;">
+                ,tour_Score = #{tourScore}
+            </if>
+            <if test="tourStatus !=null">
+                ,tour_Status = #{tourStatus}
+            </if>
+        </set>
+        where id = #{id}
+    </update>
 </mapper>

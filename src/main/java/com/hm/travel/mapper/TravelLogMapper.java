@@ -92,9 +92,9 @@ public interface TravelLogMapper {
      */
     @Insert("insert into " +
             "travellog(tl_Title,tl_Summary,tl_Key_Word," +
-            "tl_Click_Count,tl_Like_Count,tl_Favorite_Count,userInfo_Id,tl_Status,tl_Content) " +
+            "tl_Click_Count,tl_Like_Count,tl_Favorite_Count,userInfo_Id,tl_Status,tl_Content,tl_Photo) " +
             "values(#{tlTitle},#{tlSummary},#{tlKeyWord},#{tlClickCount}," +
-            "#{tlLikeCount},#{tlFavoriteCount},#{userInfo.id},#{tlStatus},#{tlContent}) ")
+            "#{tlLikeCount},#{tlFavoriteCount},#{userInfo.id},#{tlStatus},#{tlContent},#{tlPhoto}) ")
     int addTravelLog(TravelLog travelLog);
 
 

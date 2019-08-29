@@ -39,5 +39,14 @@ public class Tour {
      */
     private int tourHead;
 
+    /**
+     * 评论数
+     */
+    private int tourComment;
+
+    /**
+     * 评分
+     */
+    private double tourScore;
 
    }

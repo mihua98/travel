@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>订单完成</title>
+    <!-- 网页图标-->
+    <link rel="shortcut icon" th:href="@{/img/favicon.ico}" type="image/x-icon">
+    <!-- BASE CSS -->
+    <link th:href="@{/css/bootstrap.min.css}" rel="stylesheet">
+    <link th:href="@{/css/userStyle.css}" rel="stylesheet">
+    <link th:href="@{/css/vendors.css}" rel="stylesheet">
+
+</head>
+
+<body>
+
+<div id="page">
+
+    <!-- 导入顶部 -->
+    <div th:replace="userPage/common/header::header"></div>
+    <!-- /header -->
+
+    <main>
+        <div class="hero_in cart_section last">
+            <div class="wrapper">
+                <div class="container">
+
+                    <!-- End bs-wizard -->
+                    <div id="confirm">
+                        <h4>订单已完成!</h4>
+                        <p>工作人员会在一到两个工作日内联系您</p>
+                        <a href="/index">回到首页</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--/hero_in-->
+    </main>
+    <!--/main-->
+
+    <!--导入底部-->
+    <div th:replace="userPage/common/footer::footer"></div>
+    <!--/footer-->
+
+</div>
+<!-- page -->
+
+<!-- Sign In Popup -->
+<div th:replace="userPage/common/loginForm::loginForm"></div>
+<!-- /Sign In Popup  -->
+
+<div id="toTop"></div><!-- Back to top button -->
+
+<!-- COMMON SCRIPTS -->
+<script th:src="@{/plugins/jQuery/jquery-2.2.3.min.js}"></script>
+<script th:src="@{/js/common_scripts.js}"></script>
+<script th:src="@{/js/main.js}"></script>
+<script th:src="@{/js/validate.js}"></script>
+
+
+</body>
+</html>

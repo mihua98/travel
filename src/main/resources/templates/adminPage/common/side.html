@@ -90,7 +90,7 @@
                 <ul class="treeview-menu">
 
                     <li id="tour-manage">
-                        <a th:href="all-admin-index.html">
+                        <a href="/TourMangList">
                             <i class="fa fa-circle-o"></i> 路线列表
                         </a>
                     </li>
@@ -109,69 +109,15 @@
                 <ul class="treeview-menu">
 
                     <li id="order-manage">
-                        <a th:href="all-order-manage-list.html">
+                        <a href="/TourOrderPage">
                             <i class="fa fa-circle-o"></i> 全部订单
                         </a>
                     </li>
 
-                    <li id="order-cancel">
-                        <a th:href="all-order-cancel-list.html">
-                            <i class="fa fa-circle-o"></i> 退款
-                        </a>
-                    </li>
-
                 </ul>
             </li>
 
-            <!-- 酒店信息管理 -->
-            <li class="treeview">
-                <a th:href="all-admin-index.html">
-                    <i class="fa fa-cube"></i> <span>酒店信息管理</span>
-                    <span class="pull-right-container">
-									<i class="fa fa-angle-left pull-right"></i>
-								</span>
-                </a>
-                <ul class="treeview-menu">
 
-                    <li id="hotle-manage">
-                        <a th:href="all-admin-index.html">
-                            <i class="fa fa-circle-o"></i> 酒店信息列表
-                        </a>
-                    </li>
-
-                    <li id="hotleRoom-manage">
-                        <a th:href="all-admin-index.html">
-                            <i class="fa fa-circle-o"></i> 酒店房间信息列表
-                        </a>
-                    </li>
-
-                </ul>
-            </li>
-
-            <!-- 酒店订单管理 -->
-            <li class="treeview">
-                <a th:href="all-admin-index.html">
-                    <i class="fa fa-cube"></i> <span>酒店订单管理</span>
-                    <span class="pull-right-container">
-									<i class="fa fa-angle-left pull-right"></i>
-								</span>
-                </a>
-                <ul class="treeview-menu">
-
-                    <li id="hotle-order-manage">
-                        <a th:href="all-admin-index.html">
-                            <i class="fa fa-circle-o"></i> 全部酒店订单
-                        </a>
-                    </li>
-
-                    <li id="hotle-order-cancel">
-                        <a th:href="all-admin-index.html">
-                            <i class="fa fa-circle-o"></i> 退款
-                        </a>
-                    </li>
-
-                </ul>
-            </li>
 
             <!-- 游记管理 -->
             <li class="treeview">
@@ -190,8 +136,8 @@
                     </li>
 
                     <li id="travellog-review">
-                        <a th:href="all-travellog-review-list.html">
-                            <i class="fa fa-circle-o"></i> 游记点评
+                        <a href="/AllTravelLogData">
+                            <i class="fa fa-circle-o"></i> 游记详情
                         </a>
                     </li>
 

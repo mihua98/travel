@@ -1,6 +1,6 @@
 // Quantity buttons
 	function qtySum(){
-    var arr = document.getElementsByName('qtyInput');
+    var arr = document.getElementsByName('peopleCount');
     var tot=0;
     for(var i=0;i<arr.length;i++){
         if(parseInt(arr[i].value))
@@ -36,6 +36,11 @@
 		  qtySum();
 		  $(".qtyTotal").addClass("rotate-x");
 
+           var price = $("#price").val();
+           var peopleCount = $("#peopleCount").val();
+           var totalPrice = price * peopleCount;
+           $("#priceEdit").html(totalPrice+".0元");
+           $("#travelPrice").attr("value",totalPrice);
 	   });
 
 	   function removeAnimation() { $(".qtyTotal").removeClass("rotate-x"); }

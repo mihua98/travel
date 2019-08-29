@@ -70,6 +70,11 @@ public class CityServiceImpl implements CityService {
     }
 
     @Override
+    public List<City> searchHotSixCity() {
+        return cityMapper.searchHotSixCity();
+    }
+
+    @Override
     public City searchById(int id) {
         return cityMapper.searchById(id);
     }

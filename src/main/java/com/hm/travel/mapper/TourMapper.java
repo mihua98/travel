@@ -34,13 +34,11 @@ public interface TourMapper {
     /**
      * 修改tour
      *
-     * @param id
+     * @param
      * @return
      */
-    @Update("UPDATE `travel`.`tour` SET `tour_Num` = #{tourNum}, `tour_Name` = #{tourName}, `city_Name` = #{cityName}," +
-            " `departure_Time` = #{departureTime}, `tour_Price` = #{tourPrice}, `tour_Desc` = #{tourDesc}, `tour_Status` = #{tourStatus}, `tour_Photo` = #{tourPhoto} " +
-            "WHERE `id` = #{id}")
-    int updateTour(Integer id);
+
+    int updateTour(Tour tour);
 
     /**
      * 按条件查询
