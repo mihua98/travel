@@ -10,6 +10,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 public class AdminTestController {
 
+    @RequestMapping("/TourMangList")
+    public String TourManageList(){
+        System.out.println("跟团游列表页");
+        return "adminPage/TourListPage";
+    }
+
     /**
      * 跳转至游记列表页
      * @return
