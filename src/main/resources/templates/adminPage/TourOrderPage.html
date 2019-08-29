@@ -1,0 +1,178 @@
+
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <!-- 页面meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <base href="/">
+    <title>tourorder管理</title>
+    <meta name="description" content="旅游管理系用户统-管理">
+    <meta name="keywords" content="旅游管理系统-用户管理">
+    <!-- 导入css文件   -->
+    <div th:replace="adminPage/common/head::head"></div>
+</head>
+
+<body class="hold-transition skin-purple sidebar-mini">
+
+<div id="app" class="wrapper">
+
+    <!-- 页面头部 -->
+    <div th:replace="adminPage/common/header::header"></div>
+    <!-- 页面头部 /-->
+
+    <!-- 导航侧栏 -->
+    <div th:replace="adminPage/common/side::side"></div>
+    <!-- 导航侧栏 /-->
+
+    <!-- 内容区域 -->
+    <!-- @@master = admin-layout.html-->
+    <!-- @@block = content -->
+
+    <div class="content-wrapper">
+
+        <!-- 内容头部 -->
+        <section class="content-header">
+            <h1>
+                tourorder管理
+                <small>tourorder列表</small>
+            </h1>
+            <ol class="breadcrumb">
+                <li><a href="#"><i class="fa fa-dashboard"></i> 首页</a></li>
+                <li><a href="#">tourorder管理</a></li>
+                <li class="active">tourorder列表</li>
+            </ol>
+        </section>
+        <!-- 内容头部 /-->
+
+        <!-- 正文区域 -->
+        <section class="content">
+
+            <!-- .box-body -->
+            <div class="box box-primary">
+                <div class="box-header with-border">
+                    <h3 class="box-title">列表</h3>
+                </div>
+
+                <div class="box-body">
+
+                    <!-- 数据表格 -->
+                    <div class="table-box">
+
+                        <!--工具栏-->
+                        <div class="pull-left">
+                            <div class="form-group form-inline">
+                                <div class="btn-group">
+                                    <button type="button" class="btn btn-default" title="刷新">
+                                        <i class="fa fa-refresh"></i> 刷新
+                                    </button>
+                                    <button type="button" class="btn btn-default" title="删除">
+                                        <i class="fa fa-trash-o"></i> 删除
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="box-tools pull-right">
+                            <div class="has-feedback">
+                                <input type="text" class="form-control input-sm" placeholder="搜索">
+                                <span class="glyphicon glyphicon-search form-control-feedback"></span>
+                            </div>
+                        </div>
+                        <!--工具栏/-->
+
+                        <!--tourorder列表-->
+                        <table id="dataList" class="table table-bordered table-striped table-hover dataTable">
+                            <thead>
+                            <tr>
+                                <th class="" style="padding-right:0px;">
+                                    <input id="selall" type="checkbox" class="icheckbox_square-blue">
+                                </th>
+                                <th>订单编号</th>
+                                <th>订单图片</th>
+                                <th>订单单价</th>
+                                <th>订单总价格</th>
+                                <th>状态</th>
+                                <th>tourorder名</th>
+                                <th>出发时间</th>
+
+                                <th class="text-center">操作</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+
+                            <tr th:each="l:${page.list}">
+                                <td><input name="ids" type="checkbox"></td>
+                                <td th:text="${l.tourOrderNum}">{{u.id}}</td>
+                                <td><img : th:src="${l.tourOrderPhoto}" style="height: 40px"></td>
+                                <td th:text="${l.tourOrderTime}">{{u.userNickName}}</td>
+                                <td th:text="${l.tourpOrderOnerice}">{{u.userPhoneNum}}</td> 
+                                <td th:text="${l.tourpOrderOneprice}">{{u.userPhoneNum}}</td> 
+                                <td th:text="${l.tourOrderStatus}"">{{u.userName}}</td>
+                                <td th:text="${l.traveller}">{{u.userSex}}</td>
+                                <td th:text="${l.departureTime}">{{u.userAge}}</td>
+
+                                <td>
+                                    <a th:href="@{/updateTourOrder(id=${l.id})}">
+                                    <button  type="button" class="btn bg-olive btn-xs"
+                                            data-toggle="modal" data-target="#myModal">编辑
+                                    </button></a>
+                                    <a th:href="@{/deleteTourOrder(id=${l.id})}">
+                                    <button  type="button" class="btn btn-danger btn-xs">
+                                        删除
+                                    </button></a>
+                                </td>
+                            </tr>
+
+                            <div class="modal fade" id="myModal" tabindex="-1" role="dialog"
+                                 aria-labelledby="myModalLabel">
+                                <div class="modal-dialog">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <button data-dismiss="modal" class="close" type="button"><span
+                                                    aria-hidden="true">×</span><span
+                                                    class="sr-only">Close</span></button>
+                                            <h4 class="modal-title">编辑tourorder信息</h4>
+                                        </div>
+
+
+
+                            </tbody>
+                        </table>
+                        <!--数据列表/-->
+
+                    </div>
+                    <!-- 数据表格 /-->
+
+
+                </div>
+                <!-- /.box-body -->
+                <div>
+                    <a th:href="@{/TourOrderPage.html(start=0)}">[首  页]</a>
+                    <a th:href="@{/TourOrderPage.html(start=${page.pageNum-1})}">[上一页]</a>
+                    <a th:href="@{/TourOrderPage.html(start=${page.pageNum+1})}">[下一页]</a>
+                    <a th:href="@{/TourOrderPage.html(start=${page.pages})}">[末  页]</a>
+                </div>
+
+
+
+            </div>
+
+        </section>
+        <!-- 正文区域 /-->
+
+    </div>
+    <!-- @@close -->
+    <!-- 内容区域 /-->
+
+    <!-- 底部导航 -->
+    <div th:replace="adminPage/common/footer::footer"></div>
+    <!-- 底部导航 /-->
+
+</div>
+
+<div th:replace="adminPage/common/js::js"></div>
+
+
+</body>
+
+</html>
