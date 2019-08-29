@@ -144,6 +144,12 @@ public class SiteController {
         return "userPage/wishlist";
     }
 
+    @RequestMapping("orderComplete")
+    public String orderComplete(){
+        System.out.println("跳转到订单完成页面");
+        return "userPage/order-complete";
+    }
+
     /**
      * 首页搜索跳转
      *

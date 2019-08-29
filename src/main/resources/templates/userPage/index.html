@@ -93,7 +93,7 @@
                     <ul class="slides">
 
                         <li th:each="scity:${sixCity}">
-                            <img th:src="${scity.cityPhoto}" alt="">
+                            <img th:src="${scity.cityPhoto}" style="width: 280px;height: 140px;" alt="">
                             <div class="caption">
                                 <h3 th:text="${scity.cityName}"> <span>中国</span></h3>
                                 <small th:text="'人气值:'+${scity.cityClickCount}"><strong id="weather" class="weather"></strong></small>
