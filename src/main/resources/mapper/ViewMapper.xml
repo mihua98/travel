@@ -4,17 +4,19 @@
 <mapper namespace="com.hm.travel.mapper.ViewMapper">
 
     <resultMap type="com.hm.travel.pojo.View" id="myView">
+        <id column="id" property="id"/>
         <result column="view_Introduce" property="viewIntroduce"/>
         <result column="view_Image" property="viewImage"/>
-        <result column="city_Id" property="cityId"/>
         <result column="view_Name" property="viewName"/>
         <result column="view_Click_Count" property="viewClickCount"/>
-
-        <result column="id" property="city.id"/>
-        <result column="city_Name" property="city.cityName"/>
-        <result column="city_Introduce" property="city.cityIntroduce"/>
-        <result column="city_photo" property="city.cityPhoto"/>
-        <result column="city_Click_Count" property="city.cityClickCount"/>
+        <result column="city_Id" property="cityId"/>
+        <association property="city" javaType="com.hm.travel.pojo.City">
+            <result column="id" property="id"/>
+            <result column="city_Name" property="cityName"/>
+            <result column="city_Introduce" property="cityIntroduce"/>
+            <result column="city_photo" property="cityPhoto"/>
+            <result column="city_Click_Count" property="cityClickCount"/>
+        </association>
     </resultMap>
 
     <delete id="removeViewById" parameterType="int">
@@ -51,8 +53,8 @@
 
      </select>
 
-    <select id="searchById" resultType="com.hm.travel.pojo.View">
-              select * from view where id=#{id}
+    <select id="searchById" resultMap="myView">
+              select * from view,city where view.id= #{id} and view.city_Id = city.id
     </select>
 
     <update id="cilckCount" parameterType="int">
