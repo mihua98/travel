@@ -63,7 +63,8 @@ public class CityController {
      */
     @ResponseBody
     @RequestMapping("/pageInfoCitys")
-    public PageInfo getpageInfoViews(@RequestParam(value = "pn", defaultValue = "1") Integer pn) {
+    public PageInfo getpageInfoViews(
+            @RequestParam(value = "pn", defaultValue = "1") Integer pn) {
 
         PageHelper.startPage(pn, 5);
 
@@ -84,7 +85,7 @@ public class CityController {
      */
 
     @RequestMapping("/selectCityById")
-    public String selectCityById(@RequestParam("id") Integer id, Model model) {
+    public String selectCityById(Integer id, Model model) {
         cityService.clickCount(id);
         City city = cityService.getCityById(id);
         model.addAttribute("city", city);

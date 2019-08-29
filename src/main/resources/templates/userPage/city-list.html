@@ -77,7 +77,7 @@
         <!-- /search_container -->
 
         <!--列表区-->
-        <div class="container margin_60_35" >
+        <div class="container margin_60_35">
 
             <div class="box_list" v-for="city in Citys">
                 <div class="row no-gutters">
@@ -107,7 +107,7 @@
             </div>
 
             <div class="row">
-                <div class="offset-lg-4 col-lg-3">
+                <div class="offset-lg-4 col-lg-5">
                     <nav aria-label="...">
                         <ul class="pagination pagination-sm">
                             <li :class="{ disabled: !pageInfo.hasPreviousPage }">
@@ -124,7 +124,6 @@
                     </nav>
                 </div>
             </div>
-
 
 
         </div>
@@ -156,17 +155,17 @@
 </body>
 <script>
     new Vue({
-        el:"#page",
-        data:{
-            Citys:[],
-            pageInfo:{}
+        el: "#page",
+        data: {
+            Citys: [],
+            pageInfo: {}
         },
 
-        methods:{
-            findAll:function (start) {
+        methods: {
+            findAll: function (start) {
                 var _this = this;
                 var searchCity = $("#searchCity").val();
-                axios.get('/searchCityByName',{// 统一用模糊查询
+                axios.get('/searchCityByName', {// 统一用模糊查询
                     params: {
                         start: start,
                         search: searchCity
@@ -174,31 +173,28 @@
                 })
                     .then(function (response) {
                         _this.Citys = response.data.list;
-                        _this.pageInfo=response.data;
+                        _this.pageInfo = response.data;
                         console.log(response);
                     })
                     .catch(function (error) {
                         // handle error
                         console.log(error);
                     })
+            }, jump: function (page) {//跳转上一页,下一页
+                if ('pre' == page && this.pageInfo.hasPreviousPage)
+                    this.findAll(this.pageInfo.prePage);
+                else if ('next' == page && this.pageInfo.hasNextPage)
+                    this.findAll(this.pageInfo.nextPage);
+            }, jumpByNumber: function (start) {//跳转到指定页面
+                if (start != this.pageInfo.pageNum)
+                    this.findAll(start);
             }
         },
-        jump: function (page) {//跳转上一页,下一页
-            if ('pre' == page && this.pageInfo.hasPreviousPage)
-                this.findAll(this.pageInfo.prePage);
-
-            else if ('next' == page && this.pageInfo.hasNextPage)
-                this.findAll(this.pageInfo.nextPage);
-        },
-        jumpByNumber: function (start) {//跳转到指定页面
-            if (start != this.pageInfo.pageNum)
-                this.findAll(start);
-        },
-        created:function (){
-
+        created: function () {
             this.findAll(1);
-        },
-    });
+        }
+    })
+    ;
 
 </script>
 </html>
