@@ -63,7 +63,7 @@ public class TourOrderController {
                                 @RequestParam(value = "size",defaultValue = "5")int size) {
         List<TourOrder> list = tourOrderService.findAll();
         // 将查询的数据以分页的形式展示
-        PageHelper.startPage(start, size, "id desc");
+        PageHelper.startPage(start, size);
         PageInfo<TourOrder> page = new PageInfo<>(list);
         m.addAttribute("page", page);
         return "TourOrderPage";

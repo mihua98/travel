@@ -192,7 +192,7 @@
                             <span class="price">最低 <strong th:text="'￥'+${tour.tourPrice}"></strong> / 人</span>
                         </div>
                         <ul>
-                            <li><i class="icon_clock_alt"></i> 已售34</li>
+                            <li th:text="'已售'+${tour.tourHead}"><i class="icon_clock_alt"></i> 34</li>
                             <li>
                                 <div class="score"><span>人气推荐<em th:text="${tour.tourComment}+'个评论'"></em></span><strong th:text="${tour.tourScore}"></strong></div>
                             </li>

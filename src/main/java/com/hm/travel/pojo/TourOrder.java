@@ -34,9 +34,9 @@ public class TourOrder {
 
     private Traveller traveller;
 
-    private int travellerPrice;
+    private double travellerPrice;
     /**
      * 产品单价
      */
-    private int travellerOneprice;
+    private double travellerOneprice;
 }
