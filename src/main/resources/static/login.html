@@ -16,7 +16,6 @@
     <link href="css/bootstrap.min.css" rel="stylesheet">
     <link href="css/userStyle.css" rel="stylesheet">
     <link href="css/vendors.css" rel="stylesheet">
-    <script src="/follow.js" type="text/javascript"></script>
 </head>
 
 <body id="login_bg">
@@ -35,7 +34,7 @@
             <a href="index.html"><img src="img/logo_sticky.png" width="155" height="36" data-retina="true" alt=""
                                       class="logo_sticky"></a>
         </figure>
-        <form action="/user/login" method="post" @submit="checkForm">
+        <form action="/user/login" method="post" id="loginForm">
             <div class="form-group">
                 <label>账号</label>
                 <input type="text" class="form-control" name="accountNumber" id="accountNumber">
@@ -56,10 +55,9 @@
                 <div  class="float-right mt-1"><a id="forgot" href="javascript:void(0);">忘记密码?</a></div>
             </div>
 
-            <div id="mpanel4" style="margin-top:40px;">
-                <input id="aaa" type="text" v-model="code">
+            <div id="mpanel4" style="margin-top:40px;display: none">
             </div>
-            <input type="submit" class="btn_1 rounded full-width" value="登 录">
+            <input type="button" class="btn_1 rounded full-width" value="登 录" onclick="checkForm()">
             <div class="text-center add_top_10">没有账号? <strong><a href="register.html">立即注册!</a></strong>
             </div>
         </form>
@@ -77,28 +75,42 @@
 <script src="js/verify.js" ></script>
 <script src="js/vue.min.js"></script>
 
-<script>
-    new Vue({
-        el:"#login",
-        data:{
-            code:""
-        },
-        methods:{
-            checkForm: function (e) {
-                // 进行验证 验证通过就返回 true
-                console.log(this.code);
-                if(this.code == "true"){
-                    return true;
-                }
-                e.preventDefault();
-            }
-        },
-        created:function () {
-            this.code="false";
-        }
-    });
-</script>
+<!--<script>-->
+    <!--new Vue({-->
+        <!--el:"#login",-->
+        <!--data:{-->
+            <!--code:""-->
+        <!--},-->
+        <!--methods:{-->
+            <!--checkForm: function () {-->
+                <!--// 进行验证 验证通过就返回 true-->
+                <!--console.log(this.code);-->
+
+                <!--return true;-->
+
+
+            <!--}-->
+        <!--},-->
+        <!--created:function () {-->
+            <!--this.code="false";-->
+        <!--}-->
+    <!--});-->
+<!--</script>-->
 <script type="text/javascript">
+    var loginForm = $("#loginForm");
+    function checkForm() {
+        var accountNumber = $("#accountNumber").val();
+        var password = $("#password").val();
+        if(accountNumber == null || accountNumber == ""){
+            alert("账号不能为空!");
+            return;
+        }
+        if(password == null || password == ""){
+            alert("密码不能为空!");
+            return;
+        }
+        $("#mpanel4").attr("style","display:block");
+    }
     $('#mpanel4').slideVerify({
         type : 2,		//类型
         vOffset : 5,	//误差量，根据需求自行调整
@@ -120,11 +132,11 @@
         },
         success : function() {
             alert('验证成功！');
+            loginForm.submit();
             //......后续操作
-            $("#aaa").append().val("true");
         },
         error : function() {
-//		        	alert('验证失败！');
+//		 alert('验证失败！');
         }
 
     });
