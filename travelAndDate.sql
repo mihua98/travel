@@ -176,8 +176,8 @@ CREATE TABLE `travellog` (
   `TL_Favorite_Count` int(11) DEFAULT '0' COMMENT '收藏数',
   `UserInfo_Id` int(11) DEFAULT NULL COMMENT '发布用户id(外键)',
   `TL_Status` int(1) DEFAULT '1' COMMENT '--状态(0可读,1不可读)',
-  `TL_photo` varchar(50) DEFAULT NULL,
-  `TL_BG_photo` varchar(50) DEFAULT NULL,
+  `TL_photo` varchar(100) DEFAULT NULL,
+  `TL_BG_photo` varchar(100) DEFAULT NULL,
   `TL_city_name` varchar(20) DEFAULT NULL,
   PRIMARY KEY (`Id`)
 ) ENGINE=MyISAM AUTO_INCREMENT=13 DEFAULT CHARSET=utf8;
