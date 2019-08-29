@@ -11,9 +11,12 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RequestMapping;
 
+import javax.servlet.http.HttpServletRequest;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Map;
 import java.util.List;
 import java.util.Random;
 
@@ -37,11 +40,13 @@ public class TourOrderController {
     }
 
     @PostMapping("topay")
-    public String Tourtopay(TourOrder tourOrder){
+    public String Tourtopay(TourOrder tourOrder, HttpServletRequest request){
+        System.out.println("tourOrde:   "+ tourOrder);
             if(null == tourOrder.getTourOrderNum()) {
                 tourOrder.setTourOrderNum(getOrderIdByTime()) ;
             }
-            return "支付宝支付";
+           request.getSession().setAttribute("TourOrder",tourOrder);
+            return "redirect:/alipay/pay";
 
     }
 
@@ -58,7 +63,7 @@ public class TourOrderController {
                                 @RequestParam(value = "size",defaultValue = "5")int size) {
         List<TourOrder> list = tourOrderService.findAll();
         // 将查询的数据以分页的形式展示
-        PageHelper.startPage(start, size, "id desc");
+        PageHelper.startPage(start, size);
         PageInfo<TourOrder> page = new PageInfo<>(list);
         m.addAttribute("page", page);
         return "TourOrderPage";

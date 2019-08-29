@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
@@ -59,13 +60,13 @@ public class AlipayController {
 
     /**
      * 支付,付款
-     * @param tourOrder 订单(订单号,付款金额,订单名称)
+     * @param
      * @return 付款页面
      * @throws IOException
      */
     @RequestMapping("/pay")
     @ResponseBody
-    public String Alipay(TourOrder tourOrder)throws IOException{
+    public String Alipay(HttpServletRequest request)throws IOException{
         //获得初始化的AlipayClient
         AlipayClient alipayClient = new DefaultAlipayClient(AlipayConfig.gatewayUrl, AlipayConfig.app_id, AlipayConfig.merchant_private_key, "json", AlipayConfig.charset, AlipayConfig.alipay_public_key, AlipayConfig.sign_type);
 
@@ -74,13 +75,15 @@ public class AlipayController {
         alipayRequest.setReturnUrl(AlipayConfig.return_url);
         alipayRequest.setNotifyUrl(AlipayConfig.notify_url);
 
+        TourOrder tourOrder = (TourOrder)request.getSession().getAttribute("TourOrder");
+        System.out.println("alipay  tourOrder :"+ tourOrder);
         //商户订单号，商户网站订单系统中唯一订单号，必填
         String out_trade_no = new String(tourOrder.getTourOrderNum().getBytes("ISO-8859-1"),"UTF-8");
         //付款金额，必填
-        // TODO: 2019/8/24 付款金额不能写死 
-        String total_amount = new String("100".getBytes("ISO-8859-1"),"UTF-8");
+        // TODO: 2019/8/24 付款金额不能写死
+        String total_amount = new String((tourOrder.getTravellerOneprice()+"").getBytes("ISO-8859-1"),"UTF-8");
         //订单名称，必填
-        String subject = new String(tourOrder.getTour().getTourName().getBytes("ISO-8859-1"),"UTF-8");
+        String subject = new String(tourOrder.getTour().getTourName().getBytes("ISO-8859-1"),"GBK");
         //商品描述，可空
 
         String body = new String("aa".getBytes("ISO-8859-1"),"UTF-8");

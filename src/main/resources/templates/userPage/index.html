@@ -33,97 +33,101 @@
         <section class="slider">
             <div id="slider" class="flexslider">
                 <ul class="slides">
-                    <li>
-                        <img src="img/flex_slides/slide_1.jpg" alt="">
+
+                    <li th:each="scity:${sixCity}">
+                        <img th:src="${scity.cityPhoto}" alt="">
                         <div class="meta">
-                            <h3>曼谷，一个永远不会一成不变的城市</h3>
+                            <h3 th:text="${scity.cityName}"></h3>
                             <div class="info">
-                                <p><strong>22</strong> 景点 - <strong>150</strong> 游记</p>
+                                <p><strong>14</strong> 景点 - <strong>75</strong> 游记</p>
                             </div>
-                            <a href="/cityDetail" class="btn_1">查看更多</a>
+                            <a th:href="'/selectCityById?id='+${scity.id}" class="btn_1">查看更多</a>
                         </div>
                     </li>
-                    <li>
-                        <img src="img/flex_slides/slide_2.jpg" alt="">
-                        <div class="meta">
-                            <h3>迪拜，最具吸引力的旅游目的地</h3>
-                            <div class="info">
-                                <p><strong>220</strong> 景点 - <strong>150</strong> 游记</p>
-                            </div>
-                            <a href="/cityDetail" class="btn_1">查看更多</a>
-                        </div>
-                    </li>
-                    <li>
-                        <img src="img/flex_slides/slide_3.jpg" alt="">
-                        <div class="meta">
-                            <h3>开罗，传统和文化</h3>
-                            <div class="info">
-                                <p><strong>220</strong> 景点 - <strong>150</strong> 游记</p>
-                            </div>
-                            <a href="/cityDetail" class="btn_1">查看更多</a>
-                        </div>
-                    </li>
-                    <li>
-                        <img src="img/flex_slides/slide_4.jpg" alt="">
-                        <div class="meta">
-                            <h3>拿索，独特的海滩和视野</h3>
-                            <div class="info">
-                                <p><strong>220</strong> 景点 - <strong>150</strong> 游记</p>
-                            </div>
-                            <a href="/cityDetail" class="btn_1">查看更多</a>
-                        </div>
-                    </li>
-                    <li>
-                        <img src="img/flex_slides/slide_5.jpg" alt="">
-                        <div class="meta">
-                            <h3>罗马，永恒之城</h3>
-                            <div class="info">
-                                <p><strong>220</strong> 景点 - <strong>150</strong> 游记</p>
-                            </div>
-                            <a href="/cityDetail" class="btn_1">查看更多</a>
-                        </div>
-                    </li>
+
+                    <!--<li>-->
+                        <!--<img src="img/flex_slides/slide_2.jpg" alt="">-->
+                        <!--<div class="meta">-->
+                            <!--<h3>迪拜，最具吸引力的旅游目的地</h3>-->
+                            <!--<div class="info">-->
+                                <!--<p><strong>220</strong> 景点 - <strong>150</strong> 游记</p>-->
+                            <!--</div>-->
+                            <!--<a href="/cityDetail" class="btn_1">查看更多</a>-->
+                        <!--</div>-->
+                    <!--</li>-->
+                    <!--<li>-->
+                        <!--<img src="img/flex_slides/slide_3.jpg" alt="">-->
+                        <!--<div class="meta">-->
+                            <!--<h3>开罗，传统和文化</h3>-->
+                            <!--<div class="info">-->
+                                <!--<p><strong>220</strong> 景点 - <strong>150</strong> 游记</p>-->
+                            <!--</div>-->
+                            <!--<a href="/cityDetail" class="btn_1">查看更多</a>-->
+                        <!--</div>-->
+                    <!--</li>-->
+                    <!--<li>-->
+                        <!--<img src="img/flex_slides/slide_4.jpg" alt="">-->
+                        <!--<div class="meta">-->
+                            <!--<h3>拿索，独特的海滩和视野</h3>-->
+                            <!--<div class="info">-->
+                                <!--<p><strong>220</strong> 景点 - <strong>150</strong> 游记</p>-->
+                            <!--</div>-->
+                            <!--<a href="/cityDetail" class="btn_1">查看更多</a>-->
+                        <!--</div>-->
+                    <!--</li>-->
+                    <!--<li>-->
+                        <!--<img src="img/flex_slides/slide_5.jpg" alt="">-->
+                        <!--<div class="meta">-->
+                            <!--<h3>罗马，永恒之城</h3>-->
+                            <!--<div class="info">-->
+                                <!--<p><strong>220</strong> 景点 - <strong>150</strong> 游记</p>-->
+                            <!--</div>-->
+                            <!--<a href="/cityDetail" class="btn_1">查看更多</a>-->
+                        <!--</div>-->
+                    <!--</li>-->
                 </ul>
                 <div id="icon_drag_mobile"></div>
             </div>
             <div id="carousel_slider_wp">
                 <div id="carousel_slider" class="flexslider">
                     <ul class="slides">
-                        <li>
-                            <img src="img/flex_slides/slide_1_thumb.jpg" alt="">
+
+                        <li th:each="scity:${sixCity}">
+                            <img th:src="${scity.cityPhoto}" alt="">
                             <div class="caption">
-                                <h3>曼谷 <span>泰国</span></h3>
-                                <small>最低 ￥3999 / 人 <strong id="weather" class="weather"></strong></small>
+                                <h3 th:text="${scity.cityName}"> <span>中国</span></h3>
+                                <small th:text="'人气值:'+${scity.cityClickCount}"><strong id="weather" class="weather"></strong></small>
                             </div>
                         </li>
-                        <li>
-                            <img src="img/flex_slides/slide_2_thumb.jpg" alt="">
-                            <div class="caption">
-                                <h3>迪拜 <span>阿联酋</span></h3>
-                                <small>最低 ￥3999 / 人 <strong id="weather_2" class="weather"></strong></small>
-                            </div>
-                        </li>
-                        <li>
-                            <img src="img/flex_slides/slide_3_thumb.jpg" alt="">
-                            <div class="caption">
-                                <h3>开罗 <span>埃及</span></h3>
-                                <small>最低 ￥3999 / 人 <strong id="weather_3" class="weather"></strong></small>
-                            </div>
-                        </li>
-                        <li>
-                            <img src="img/flex_slides/slide_4_thumb.jpg" alt="">
-                            <div class="caption">
-                                <h3>拿索 <span>巴哈马群岛</span></h3>
-                                <small>最低 ￥3999 / 人 <strong id="weather_4" class="weather"></strong></small>
-                            </div>
-                        </li>
-                        <li>
-                            <img src="img/flex_slides/slide_5_thumb.jpg" alt="">
-                            <div class="caption">
-                                <h3>罗马 <span>意大利</span></h3>
-                                <small>最低 ￥3999 / 人 <strong id="weather_5" class="weather"></strong></small>
-                            </div>
-                        </li>
+
+                        <!--<li>-->
+                            <!--<img src="img/flex_slides/slide_2_thumb.jpg" alt="">-->
+                            <!--<div class="caption">-->
+                                <!--<h3>迪拜 <span>阿联酋</span></h3>-->
+                                <!--<small>最低 ￥3999 / 人 <strong id="weather_2" class="weather"></strong></small>-->
+                            <!--</div>-->
+                        <!--</li>-->
+                        <!--<li>-->
+                            <!--<img src="img/flex_slides/slide_3_thumb.jpg" alt="">-->
+                            <!--<div class="caption">-->
+                                <!--<h3>开罗 <span>埃及</span></h3>-->
+                                <!--<small>最低 ￥3999 / 人 <strong id="weather_3" class="weather"></strong></small>-->
+                            <!--</div>-->
+                        <!--</li>-->
+                        <!--<li>-->
+                            <!--<img src="img/flex_slides/slide_4_thumb.jpg" alt="">-->
+                            <!--<div class="caption">-->
+                                <!--<h3>拿索 <span>巴哈马群岛</span></h3>-->
+                                <!--<small>最低 ￥3999 / 人 <strong id="weather_4" class="weather"></strong></small>-->
+                            <!--</div>-->
+                        <!--</li>-->
+                        <!--<li>-->
+                            <!--<img src="img/flex_slides/slide_5_thumb.jpg" alt="">-->
+                            <!--<div class="caption">-->
+                                <!--<h3>罗马 <span>意大利</span></h3>-->
+                                <!--<small>最低 ￥3999 / 人 <strong id="weather_5" class="weather"></strong></small>-->
+                            <!--</div>-->
+                        <!--</li>-->
                     </ul>
                 </div>
             </div>
@@ -184,13 +188,13 @@
                         </figure>
                         <div class="wrapper">
                             <h3><a th:href="'selectTourById?id='+${tour.id}" th:text="${tour.tourName}"></a></h3>
-                            <p th:text="${tour.tourDesc}"></p>
+                            <!--<p th:text="${tour.tourDesc}"></p>-->
                             <span class="price">最低 <strong th:text="'￥'+${tour.tourPrice}"></strong> / 人</span>
                         </div>
                         <ul>
-                            <li><i class="icon_clock_alt"></i> 已售34</li>
+                            <li th:text="'已售'+${tour.tourHead}"><i class="icon_clock_alt"></i> 34</li>
                             <li>
-                                <div class="score"><span>人气推荐<em>350 个评论</em></span><strong>8.9</strong></div>
+                                <div class="score"><span>人气推荐<em th:text="${tour.tourComment}+'个评论'"></em></span><strong th:text="${tour.tourScore}"></strong></div>
                             </li>
                         </ul>
                     </div>

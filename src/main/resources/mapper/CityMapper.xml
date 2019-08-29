@@ -48,6 +48,10 @@
         select * from (select * from city order by city_Click_Count desc) c limit 4
     </select>
 
+    <select id="searchHotSixCity" resultType="com.hm.travel.pojo.City">
+        select * from (select * from city order by city_Click_Count desc) c limit 6
+    </select>
+
     <select id="searchById" resultType="com.hm.travel.pojo.City">
               select * from city where id = #{id}
     </select>

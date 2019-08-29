@@ -25,8 +25,11 @@ public interface CityMapper {
     //根据城市名字模糊查询城市
     public List<City> searchCityByName(String word);
 
-    //查询最热门的六个城市
+    //查询最热门的四个城市
     public List<City> searchHotCity();
+
+    //查询最热门的六个城市
+    List<City> searchHotSixCity();
 
     //根据id查询city
     public City searchById(int id);

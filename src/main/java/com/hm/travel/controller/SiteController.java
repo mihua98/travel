@@ -54,23 +54,27 @@ public class SiteController {
     public String index(Model model) {
         //加载跟团游
         List<Tour> tours = tourService.selectTourByHead();
-        model.addAttribute("tours", tours);
-        System.out.println("跟团游---" + tours);
+        model.addAttribute("tours",tours);
+        System.out.println("跟团游---"+tours);
 
-        //加载城市
+        //加载四个城市
         List<City> cities = cityService.searchHotCity();
-        model.addAttribute("cities", cities);
-        System.out.println("城市---" + cities);
+        model.addAttribute("cities",cities);
+        System.out.println("4城市---"+cities);
+
+        List<City> sixCity = cityService.searchHotSixCity();
+        model.addAttribute("sixCity",sixCity);
+        System.out.println("6城市---"+sixCity);
 
         //加载景点
         List<View> views = viewService.searchHotView();
-        model.addAttribute("views", views);
-        System.out.println("景点---" + views);
+        model.addAttribute("views",views);
+        System.out.println("景点---"+views);
 
         //加载游记
         List<TravelLog> travelLogs = travelLogService.getIndexTravelLog();
-        model.addAttribute("travelLogs", travelLogs);
-        System.out.println("游记---" + travelLogs);
+        model.addAttribute("travelLogs",travelLogs);
+        System.out.println("游记---"+travelLogs);
 
         System.out.println("跳转到首页");
         return "userPage/index";
@@ -132,6 +136,12 @@ public class SiteController {
     public String travelLogEdit() {
         System.out.println("跳转到写游记页面");
         return "userPage/travel-log-edit";
+    }
+
+    @RequestMapping("wishlist")
+    public String wishlistPage(){
+        System.out.println("跳转到收藏页面");
+        return "userPage/wishlist";
     }
 
     /**

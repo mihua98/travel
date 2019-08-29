@@ -47,9 +47,15 @@ public interface CityService {
     List<City> searchCityByName(String word);
 
     /**
-     * 查询最热门的六个城市
+     * 查询最热门的四个城市
      */
     List<City> searchHotCity();
+
+    /**
+     * 查询最热门的六个城市
+     * @return
+     */
+    List<City> searchHotSixCity();
 
     /**
      * 根据id查询city
