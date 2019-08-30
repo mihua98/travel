@@ -280,9 +280,10 @@
                             <div th:if="${session.user != null}">
                                 <input type='hidden' name='travellerOneprice' id="travelPrice"
                                        th:value="${tour.tourPrice}"/>
-                                <input type='hidden' name='userInfoId' th:value='${session.user.id}'/>
-                                <input type='hidden' name='userInfoName' th:value='${session.user.userName}'/>
+                                <input type='hidden' name='userInfo.id' th:value='${session.user.id}'/>
+                                <input type='hidden' name='userInfo.userName' th:value='${session.user.userName}'/>
                                 <input type="hidden" name="tour.tourName" th:value="${tour.tourName}">
+                                <input type="hidden" name="tour.id" th:value="${tour.id}">
                             </div>
                             <div class="box_detail booking">
                                 <div class="price">
