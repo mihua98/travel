@@ -81,9 +81,9 @@ public class AlipayController {
         String out_trade_no = new String(tourOrder.getTourOrderNum().getBytes("ISO-8859-1"),"UTF-8");
         //付款金额，必填
         // TODO: 2019/8/24 付款金额不能写死
-        String total_amount = new String((tourOrder.getTravellerOneprice()+"").getBytes("ISO-8859-1"),"UTF-8");
+        String total_amount = new String((tourOrder.getTourOrderPrice()+"").getBytes("ISO-8859-1"),"UTF-8");
         //订单名称，必填
-        String subject = new String("悦游跟团游产品".getBytes("ISO-8859-1"),"UTF-8");
+        String subject = new String("travelCommodity".getBytes("ISO-8859-1"),"UTF-8");
         //商品描述，可空
 
         String body = new String("aa".getBytes("ISO-8859-1"),"UTF-8");

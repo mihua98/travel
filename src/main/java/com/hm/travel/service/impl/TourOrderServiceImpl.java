@@ -36,12 +36,12 @@ public class TourOrderServiceImpl implements TourOrderService {
     /**
      * 修改TourOrder
      *
-     * @param id
+     * @param
      * @return
      */
     @Override
-    public int updateTourOrder(Integer id) {
-        return tourOrderMapper.updateTourOrder(id);
+    public int updateTourOrder(TourOrder tourOrder) {
+        return tourOrderMapper.updateTourOrder(tourOrder);
     }
 
     /**

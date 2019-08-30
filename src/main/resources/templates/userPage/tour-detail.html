@@ -286,7 +286,7 @@
                             </div>
                             <div class="box_detail booking">
                                 <div class="price">
-                                    <input type="hidden" id="price" th:value="${tour.tourPrice}">
+                                    <input type="hidden" id="price" name="tourOrderPrice" th:value="${tour.tourPrice}">
                                     <span id="priceEdit" th:text="${tour.tourPrice}+'元'"><small>/人</small></span>
                                     <div class="score"><span>人气推荐<em
                                             th:text="'阅读量  '+${tour.tourHead}"></em></span><strong>9.0</strong>

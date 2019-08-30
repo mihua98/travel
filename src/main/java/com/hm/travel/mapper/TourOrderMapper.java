@@ -15,31 +15,34 @@ public interface TourOrderMapper {
 
     /**
      * 查询所有跟团游
+     *
      * @return所有跟团游集合
      */
-    @Select("select * from tourOrder")
     List<TourOrder> findAll();
 
     /**
      * 添加TourOrder
+     *
      * @param TourOrder
      * @return
      */
-    @Insert("INSERT INTO `tourorder`( `tour_Order_Num`, `tour_Order_Time`, `people_Count`, `tour_Order_Status`, `tour_Id`, `userInfo_Id`, `userInfo_Name`, `traveller_Id`,`traveller_Price`,`traveller_Oneprice`) VALUES " +
-            "( #{tourOrderNum}, #{tourOrderTime}, #{peopleCount}, #{tourOrderStatus}, #{tour.tourId}, #{userInfoId}, #{userInfoName}, #{travellerId}, #{travellerPrice},#{travellerOnerice})")
+    //@Insert("INSERT INTO `tourorder`( `tour_Order_Num`, `tour_Order_Time`, `people_Count`, `tour_Order_Status`, `tour_Id`, `userInfo_Id`, `userInfo_Name`, `traveller_Id`,`traveller_Price`,`traveller_Oneprice`) VALUES " +
+    //        "( #{tourOrderNum}, #{tourOrderTime}, #{peopleCount}, #{tourOrderStatus}, #{tour.tourId}, #{userInfoId}, #{userInfoName}, #{travellerId}, #{travellerPrice},#{travellerOnerice})")
     int addTourOrder(TourOrder TourOrder);
 
     /**
      * 修改TourOrder
-     * @param id
+     *
+     * @param
      * @return
      */
-    @Update("UPDATE `travel`.`tourorder` SET `tour_Order_Num` = #{tourOrderNum}, `tour_Order_Time` = #{tourOrderTime}, `people_Count` = #{peopleCount}, `tour_Order_Status` =#{tourOrderStatus}, `tour_Id` = #{tourId}, `userInfo_Id` =#{userInfoId}, `userInfo_Name` = #{userInfo_Name},`traveller_Price` = #{travellerPrice} ,`traveller_Oneprice` = #{travellerOneprice},`traveller_Id` = #{travellerId}" +
+    @Update("UPDATE `travel`.`tourorder` SET `tour_Order_Num` = #{tourOrderNum}, `tour_Order_Time` = #{tourOrderTime}, `people_Count` = #{peopleCount}, `tour_Order_Status` =#{tourOrderStatus},tour_Order_Price = #{tourOrderPrice}" +
             " WHERE `Id` = #{id}")
-    int updateTourOrder(Integer id);
+    int updateTourOrder(TourOrder tourOrder);
 
     /**
      * 按条件查询
+     *
      * @param district
      * @return
      */
@@ -47,14 +50,17 @@ public interface TourOrderMapper {
     List<TourOrder> findTourOrderByCondition(String district);
 
     /**
-     *通过id获得TourOrder
+     * 通过id获得TourOrder
+     *
      * @param id
      * @return
      */
-    @Select("select * from tourOrder where id =#{id}")
+
     TourOrder selectTourOrderById(Integer id);
+
     /**
      * 删除
+     *
      * @param id
      * @return
      */

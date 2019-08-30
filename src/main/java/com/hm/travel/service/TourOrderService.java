@@ -22,10 +22,10 @@ public interface TourOrderService {
 
     /**
      * 修改TourOrder
-     * @param id
+     * @param
      * @return
      */
-    int updateTourOrder(Integer id);
+    int updateTourOrder(TourOrder tourOrder);
     /**
      * 删除
      * @param id

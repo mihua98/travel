@@ -32,11 +32,5 @@ public class TourOrder {
 
     private UserInfo userInfo;
 
-    private Traveller traveller;
-
-    private double travellerPrice;
-    /**
-     * 产品单价
-     */
-    private double travellerOneprice;
+    private double tourOrderPrice;
 }
