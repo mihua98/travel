@@ -53,8 +53,7 @@
 
         <!--其他页面传过来的搜索内容-->
         <input id="searchTour" type="hidden" th:value="${search}">
-        <!--添加锚点,实现分页时回顶部-->
-        <a name="top"></a>
+
         <!--搜索栏-->
         <div class="search_container">
             <div class="container">
@@ -119,7 +118,7 @@
                             </li>
                             <li :class="{ disabled:pageInfo.pageNum==i }"
                                 v-for="i in pageInfo.navigatepageNums">
-                                <a href="#top" class="page-link" @click="jumpByNumber(i)">{{i}}</a>
+                                <a class="page-link" @click="jumpByNumber(i)">{{i}}</a>
                             </li>
                             <li :class="{ disabled: !pageInfo.hasNextPage }">
                                 <a class="page-link" @click="jump('next')">下一页</a>
@@ -163,7 +162,6 @@
             tours:[],
             pageInfo:{}
         },
-
         methods:{
             findAll:function (start) {
                 var _this = this;
@@ -183,23 +181,21 @@
                         // handle error
                         console.log(error);
                     })
+            },jump: function (page) {//跳转上一页,下一页
+                if ('pre' == page && this.pageInfo.hasPreviousPage)
+                    this.findAll(this.pageInfo.prePage);
+
+                else if ('next' == page && this.pageInfo.hasNextPage)
+                    this.findAll(this.pageInfo.nextPage);
+            },
+            jumpByNumber: function (start) {//跳转到指定页面
+                if (start != this.pageInfo.pageNum)
+                    this.findAll(start);
             }
         },
-        jump: function (page) {//跳转上一页,下一页
-            if ('pre' == page && this.pageInfo.hasPreviousPage)
-                this.findAll(this.pageInfo.prePage);
-
-            else if ('next' == page && this.pageInfo.hasNextPage)
-                this.findAll(this.pageInfo.nextPage);
-        },
-        jumpByNumber: function (start) {//跳转到指定页面
-            if (start != this.pageInfo.pageNum)
-                this.findAll(start);
-        },
         created:function (){
-
             this.findAll(1);
-        },
+        }
     });
 
     <!-- 返回顶部-->
