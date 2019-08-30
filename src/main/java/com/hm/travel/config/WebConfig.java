@@ -24,7 +24,7 @@ public class WebConfig implements WebMvcConfigurer {
     public void addInterceptors(InterceptorRegistry registry) {
         // addPathPatterns("/**") 表示拦截的请求，
         // excludePathPatterns("/login", "/register") 排除的请求
-        registry.addInterceptor(loginInterceptor).addPathPatterns("/travelLogEdit","/topay");
+        registry.addInterceptor(loginInterceptor).addPathPatterns("/travelLogEdit","/topay","/alipay/**");
 
     }
 }
