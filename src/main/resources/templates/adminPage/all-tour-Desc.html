@@ -33,13 +33,13 @@
         <!-- 内容头部 -->
         <section class="content-header">
             <h1>
-                订单管理
-                <small>订单列表</small>
+                游记详情管理
+                <small>游记详情列表</small>
             </h1>
             <ol class="breadcrumb">
                 <li><a href="#"><i class="fa fa-dashboard"></i> 首页</a></li>
-                <li><a href="#">订单管理</a></li>
-                <li class="active">订单列表</li>
+                <li><a href="#">游记详情管理</a></li>
+                <li class="active">游记详情列表</li>
             </ol>
         </section>
         <!-- 内容头部 /-->
@@ -79,7 +79,7 @@
                         </div>
                         <!--工具栏/-->
 
-                        <!--订单列表-->
+                        <!--游记详情列表-->
                         <table id="dataList" class="table table-bordered table-striped table-hover dataTable">
                             <thead>
                             <tr>
@@ -87,26 +87,26 @@
                                     <input id="selall" type="checkbox" class="icheckbox_square-blue">
                                 </th>
                                 <th>ID</th>
-                                <th>订单编号</th>
+
                                 <th>产品名称</th>
-                                <th>下单时间</th>
-                                <th>下单用户姓名</th>
-                                <th>总价</th>
-                                <th>订单状态</th>
+
+                                <th>详情</th>
+
+                                <th>状态</th>
                                 <th class="text-center">操作</th>
                             </tr>
                             </thead>
                             <tbody>
 
-                            <tr v-for="(tl,index) in tourOrderList">
+                            <tr v-for="(tl,index) in tourList">
                                 <td><input name="ids" type="checkbox"></td>
                                 <td>{{tl.id}}</td>
-                                <td>{{tl.tourOrderNum}}</td>
-                                <td>{{tl.tour.tourName}}</td>
-                                <td>{{tl.tourOrderTime}}</td>
-                                <td>{{tl.userInfo.userName}}</td>
-                                <td>{{tl.tourOrderPrice}}</td>
-                                <td>{{tl.tourOrderStatus}}</td>
+
+                                <td>{{tl.tourName}}</td>
+                                <td>{{tl.tourDesc}}</td>
+
+
+                                <td>{{tl.tourStatus}}</td>
                                 <td>
                                     <button @click="findById(tl.id)" type="button" class="btn bg-olive btn-xs"
                                             data-toggle="modal" data-target="#myModal">编辑
@@ -125,7 +125,7 @@
                                             <button data-dismiss="modal" class="close" type="button"><span
                                                     aria-hidden="true">×</span><span
                                                     class="sr-only">Close</span></button>
-                                            <h4 class="modal-title">编辑订单信息</h4>
+                                            <h4 class="modal-title">编辑信息</h4>
                                         </div>
                                         <div class="modal-body">
 
@@ -135,25 +135,19 @@
                                                     <div class="form-group">
                                                         <label for="edit-id" class="control-label">id</label>
                                                         <input type="text" class="form-control" id="edit-id"
-                                                               v-model="tourOrder.id"
+                                                               v-model="tour.id"
                                                                disabled="disabled">
                                                     </div>
 
                                                     <div class="form-group">
                                                         <label for="edit-userName" class="control-label">产品名称</label>
                                                         <input type="text" class="form-control" id="edit-userName"
-                                                               v-model="tourOrder.tour.tourName">
+                                                               v-model="tour.tourName">
                                                     </div>
-                                                    <div class="form-group">
-                                                        <label for="edit-city" class="control-label">产品总价格</label>
-                                                        <input type="text" class="form-control" id="edit-city"
-                                                               v-model="tourOrder.tourOrderPrice">
-                                                    </div>
-
                                                     <div class="form-group">
                                                         <label for="edit-tlStatus" class="control-label">状态</label>
                                                         <input type="text" class="form-control" id="edit-tlStatus"
-                                                               v-model="tourOrder.tourOrderStatus">
+                                                               v-model="tour.tourStatus">
                                                     </div>
 
 
@@ -204,7 +198,7 @@
                     <div class="box-tools pull-right">
                         <ul class="pagination">
                             <li :class="{ disabled: pageInfo.pageNum==1 }">
-                                <a @click="jump('first')">首页</a>
+                                <a  @click="jump('first')">首页</a>
                             </li>
                             <li :class="{ disabled: !pageInfo.hasPreviousPage }">
                                 <a @click="jump('pre')" aria-label="Previous">
@@ -299,35 +293,9 @@
 
 <script>
     var dataVue = {
-        tourOrderList: [
-            {
-                tour:{
-                        tourName:""
-                    },
-                    userInfo:{
-                        userName:""
-                    }
-
-            }
-        ],
-        tourOrder: {
-            tour:{
-                tourName:""
-            },
-            userInfo:{
-                userName:""
-            }
-        },
-        pageInfo: {
-            list:[{
-                tour:{
-                    tourName:""
-                }
-            //     userInfo:{
-            //         userName:""
-            //     }
-            }]
-        }
+        tourList:[],
+        tour:"",
+        pageInfo: {}
     };
     new Vue({
         el: "#app",
@@ -338,15 +306,15 @@
         methods: {
             findAll: function (start) {//查询所有
                 var _this = this;//在当前方法中定义一个对象,表明是vue对象
-                axios.get('/TourOrderListPage', {
+                axios.get('/TourListPage', {
                     params: {
                         start: start
                     }
                 })
                     .then(function (response) {
-                        _this.tourOrderList = response.data.list;//响应数据给userList赋值
+                        _this.tourList = response.data.list;//响应数据给userList赋值
                         _this.pageInfo = response.data;
-
+                        console.log(response.data);
                     })
                     .catch(function (error) {//出现异常则打印
                         console.log(error);
@@ -354,13 +322,13 @@
             },
             findById: function (Id) {
                 var _this = this;
-                axios.get('/selectTourOrderById', {
+                axios.get('/updateTourpage', {
                     params: {//这是get请求参数的写法
                         id: Id
                     }
                 })
                     .then(function (response) {
-                        _this.tourOrder = response.data;
+                        _this.tour = response.data;
                     })
                     .catch(function (error) {
                         console.log(error);
@@ -382,8 +350,7 @@
             // },
             update: function () {//更新
                 var _this = this;
-                console.log(this.tourOrder);
-                axios.post('/updateTourOrderById', _this.tourOrder)
+                axios.post('/updateTourById',_this.tour)
                     .then(function () {//无返回值,所以无response
                         _this.findAll(_this.pageInfo.pageNum);
                     })

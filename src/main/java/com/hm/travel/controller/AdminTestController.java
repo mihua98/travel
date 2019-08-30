@@ -21,6 +21,11 @@ public class AdminTestController {
         System.out.println("跟团游列表页");
         return "adminPage/TourListPage";
     }
+    @RequestMapping("/TourOrderMangList")
+    public String TourOrderMangList(){
+        System.out.println("跟团游订单列表页");
+        return "adminPage/TourOrderPage";
+    }
 
     /**
      * 跳转至游记列表页
@@ -40,6 +45,15 @@ public class AdminTestController {
     public String AllTravelLogData(){
         System.out.println("游记详情页");
         return "adminPage/all-travellog-data-list";
+    }
+    /**
+     * 跳转至跟团游详情页
+     * @return
+     */
+    @RequestMapping("/AlltourDesc")
+    public String AlltourDesc(){
+        System.out.println("跟团游详情页");
+        return "adminPage/all-tour-Desc";
     }
 
 }
