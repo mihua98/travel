@@ -130,7 +130,7 @@ public class ViewController {
 
         List<View> views = viewService.getAllView();
 
-        PageInfo page = new PageInfo(views, 2);
+        PageInfo page = new PageInfo(views, 4);
         System.out.println(page.getList());
 
         return page;

@@ -70,7 +70,7 @@ public class CityController {
 
         List<City> citys = cityService.getAllCity();
 
-        PageInfo page = new PageInfo(citys, 2);
+        PageInfo page = new PageInfo(citys, 4);
         System.out.println(page.getList());
 
         return page;
