@@ -29,10 +29,7 @@ public class EmailController {
     @RequestMapping("/getVerCode")
     @ResponseBody
     public String sendEmail1(@RequestParam("email") String email, HttpServletRequest request){
-        System.out.println("11111111111111111111111");
-        System.out.println(email);
         String substring = UUID.randomUUID().toString().substring(0, 5).toLowerCase();
-        System.out.println(substring);
         request.getSession().setAttribute("VerCode",substring);
        EmailConfig.sendEmail(email,"您的验证码为",substring);
         return substring;

@@ -41,7 +41,7 @@ public class AlipayController {
         String out_trade_no = new String(orderNum.getBytes("ISO-8859-1"),"UTF-8");
         //支付宝交易号
         String trade_no = new String(alipayNum.getBytes("ISO-8859-1"),"UTF-8");
-        //请二选一设置
+        //二选一设置
 
         alipayRequest.setBizContent("{\"out_trade_no\":\""+ out_trade_no +"\","+"\"trade_no\":\""+ trade_no +"\"}");
 
@@ -80,7 +80,6 @@ public class AlipayController {
         //商户订单号，商户网站订单系统中唯一订单号，必填
         String out_trade_no = new String(tourOrder.getTourOrderNum().getBytes("ISO-8859-1"),"UTF-8");
         //付款金额，必填
-        // TODO: 2019/8/24 付款金额不能写死
         String total_amount = new String((tourOrder.getTourOrderPrice()+"").getBytes("ISO-8859-1"),"UTF-8");
         //订单名称，必填
         String subject = new String("travelCommodity".getBytes("ISO-8859-1"),"UTF-8");
@@ -93,15 +92,6 @@ public class AlipayController {
                 + "\"subject\":\""+ subject +"\","
                 + "\"body\":\""+ body +"\","
                 + "\"product_code\":\"FAST_INSTANT_TRADE_PAY\"}");
-
-        //若想给BizContent增加其他可选请求参数，以增加自定义超时时间参数timeout_express来举例说明
-        //alipayRequest.setBizContent("{\"out_trade_no\":\""+ out_trade_no +"\","
-        //		+ "\"total_amount\":\""+ total_amount +"\","
-        //		+ "\"subject\":\""+ subject +"\","
-        //		+ "\"body\":\""+ body +"\","
-        //		+ "\"timeout_express\":\"10m\","
-        //		+ "\"product_code\":\"FAST_INSTANT_TRADE_PAY\"}");
-        //请求参数可查阅【电脑网站支付的API文档-alipay.trade.page.pay-请求参数】章节
 
         //请求
         String result = null;

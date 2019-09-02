@@ -56,19 +56,6 @@ public class TourOrderController {
 
 
     /**
-     * 更新
-     * @param id
-     * @param m
-     * @return
-     */
-//    @RequestMapping("updateTourOrderpage")
-//    public String updateTourOrderpage(Integer id,Model m){
-//        TourOrder tourOrder = tourOrderService.selectTourOrderById(id);
-//        m.addAttribute("tourOrder",tourOrder);
-//        return "adminPage/updateTourOrder";
-//    }
-
-    /**
      * 删除
      *
      * @param id
@@ -116,7 +103,7 @@ public class TourOrderController {
     /**
      * 后台更新 通过id获得tourOrder
      *
-     * @param id
+     * @param
      * @return
      */
     @RequestMapping("/updateTourOrderById")
