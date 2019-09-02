@@ -40,18 +40,23 @@ public class FileController {
             fileUpLoad.setMessage("上传失败!");
             return fileUpLoad;
         }
-        //获取项目路径
-        File rootdir = new File(ResourceUtils.getURL("classpath:").getPath());
-        if (!rootdir.exists()) {
-            rootdir = new File("");
+
+        File classPathDir = new File(ResourceUtils.getURL("classpath:").getPath());
+        if (!classPathDir.exists()) {
+            classPathDir = new File("");
         }
+
+        //获取项目根路径
+        String rootdir = classPathDir.getAbsolutePath();
+        rootdir = rootdir.replace("\\target\\classes","");
+
         //获取上传的资源文件路径
-        File path = new File(rootdir.getAbsolutePath(), "src/main/resources/static/upload/");
+        File path = new File(rootdir, "src/main/resources/static/upload/");
         if (!path.exists()) {
             path.mkdirs();
         }
         //获取字节码文件路径
-        File targetPath = new File(rootdir.getAbsolutePath(), "target/classes/static/upload/");
+        File targetPath = new File(rootdir, "target/classes/static/upload/");
         if (!targetPath.exists()) {
             targetPath.mkdirs();
         }
