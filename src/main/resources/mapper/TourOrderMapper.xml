@@ -10,7 +10,7 @@
         <result column="tour_Order_Status" property="tourOrderStatus"/>
         <result column="tour_Order_Price" property="tourOrderPrice"/>
         <association property="tour" javaType="com.hm.travel.pojo.Tour">
-            <result column="id" property="id"/>
+            <id column="id" property="id"/>
             <result column="tour_Name" property="tourName"/>
             <result column="city_Name" property="cityName"/>
         </association>
