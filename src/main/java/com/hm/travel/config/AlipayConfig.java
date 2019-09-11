@@ -16,8 +16,10 @@ public class AlipayConfig {
 
     public static String alipay_public_key = "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAkh5cxJplwt5mHTaKUZoEQ+F+ocI6rJ9yS/r5FBab92fGPcm8+Z7FkSOg8z7+7W7wVCgVtHzEzk2xpTxyndnysTGSDOF8PYZiiBtOCYsS31Gz6UsCr01iIb2qmAIjkcu1tcAugcsqNiz6JN/o/r7swarFTAFCSL/+lhlOVuUvDubImz0XJRdWSjpjJhVg2J0el4iffcQ4XmbF9J2gfIyr71hzMetYVIBw6jJSKolHjwUOtq08bS9ykBMr2Ba1eSWzTHYDIHO9dtYvq9wYFD/bH4UmKUgXd7R/6E5GA1kGuSTqT2A/sdt4HOgX5SvrUoeiygN9VKrcfFl5JqCsP7lg9wIDAQAB";
 
+//    public static String notify_url = "http://192.168.217.128:8080/notify_url.jsp";
     public static String notify_url = "http://localhost:8080/notify_url.jsp";
 
+//    public static String return_url = "http://192.168.217.128:8080/orderComplete";
     public static String return_url = "http://localhost:8080/orderComplete";
     /**
      * 签名方式
